@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ tool.name }} - Details</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; background-color: #f4f4f9; color: #333; }
+        .container { max-width: 900px; margin: auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1, h2 { color: #444; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .data-section { margin-bottom: 2em; }
+        .data-grid { display: grid; grid-template-columns: 200px 1fr; gap: 10px; }
+        .data-label { font-weight: bold; color: #555; }
+        .data-value { background-color: #f9f9f9; padding: 5px; border-radius: 3px; }
+        pre { background-color: #222; color: #eee; padding: 1em; border-radius: 4px; white-space: pre-wrap; word-wrap: break-word; }
+        a { color: #007BFF; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/">&larr; Back to Tool List</a>
+        <h1>{{ tool.name }}</h1>
+
+        {% if snapshot %}
+            <p><strong>Snapshot Date:</strong> {{ snapshot.snapshot_date.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+
+            <div class="data-section">
+                <h2>Basic Information</h2>
+                <div class="data-grid">
+                    <div class="data-label">Description</div>
+                    <div class="data-value">{{ snapshot.basic_info.description }}</div>
+                </div>
+            </div>
+
+            <div class="data-section">
+                <h2>Technical Details</h2>
+                <div class="data-grid">
+                    <div class="data-label">Feature List</div>
+                    <div class="data-value">{{ snapshot.technical_details.feature_list | join(', ') }}</div>
+                    <div class="data-label">Pricing Model</div>
+                    <div class="data-value">{{ snapshot.technical_details.pricing_model.tier }} - {{ snapshot.technical_details.pricing_model.cost }}</div>
+                </div>
+            </div>
+
+            <div class="data-section">
+                <h2>Community Metrics</h2>
+                <div class="data-grid">
+                    <div class="data-label">GitHub Stars</div>
+                    <div class="data-value">{{ snapshot.community_metrics.github_stars }}</div>
+                    <div class="data-label">Reddit Mentions</div>
+                    <div class="data-value">{{ snapshot.community_metrics.reddit_mentions }}</div>
+                </div>
+            </div>
+            
+            <div class="data-section">
+                <h2>Curation</h2>
+                <form action="/curate/{{ snapshot.id }}" method="POST">
+                    <div class="data-grid">
+                        <div class="data-label">Curator Notes</div>
+                        <textarea name="curator_notes" rows="5" style="width: 100%; grid-column: span 2;"></textarea>
+                        
+                        <div class="data-label">Enterprise Position</div>
+                        <textarea name="enterprise_position" rows="3" style="width: 100%; grid-column: span 2;"></textarea>
+
+                        <div class="data-label"></div>
+                        <button type="submit">Save Curation</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="data-section">
+                <h2>Raw Data</h2>
+                <pre>{{ snapshot.raw_data | tojson(indent=4) }}</pre>
+            </div>
+
+        {% else %}
+            <p>No snapshots found for this tool yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
