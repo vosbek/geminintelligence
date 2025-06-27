@@ -288,6 +288,38 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
         # Search Medium articles
         raw_data_payload['medium_data'] = self.medium_searcher(tool_name=tool_record['name'])
 
+        # --- Company Intelligence Collection ---
+        # Extract company name from tool record or derive from tool name
+        company_name = tool_record.get('company_name', tool_record['name'])
+        
+        # LinkedIn company scraping for employee counts
+        raw_data_payload['linkedin_company_data'] = self.linkedin_company_scraper(
+            company_name=company_name,
+            website_url=tool_record.get('website_url')
+        )
+        
+        # Company About page scraping  
+        if tool_record.get('website_url'):
+            raw_data_payload['company_about_data'] = self.company_about_page_scraper(
+                website_url=tool_record['website_url']
+            )
+        
+        # AngelList/Wellfound startup information
+        raw_data_payload['angellist_data'] = self.angellist_company_scraper(
+            company_name=company_name
+        )
+        
+        # Enhanced news scraping with funding/partnership extraction
+        raw_data_payload['enhanced_news_data'] = self.enhanced_news_scraper(
+            tool_name=tool_record['name'],
+            company_name=company_name
+        )
+        
+        # Glassdoor company information
+        raw_data_payload['glassdoor_data'] = self.glassdoor_company_scraper(
+            company_name=company_name
+        )
+
         # --- AI-Powered Analysis ---
         logging.info("Sending data to Strands AI for analysis...")
         main_prompt = self._create_prompt(tool_record, raw_data_payload)

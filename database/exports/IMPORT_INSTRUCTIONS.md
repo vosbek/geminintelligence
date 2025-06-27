@@ -1,11 +1,16 @@
 # AI Intelligence Platform - Data Import Instructions
 
+## ⚠️ UPGRADE NOTICE: Enhanced Company Intelligence Features Added
+
+This export contains data from the **enhanced system** with new company intelligence capabilities.
+If upgrading from a previous version, see the **Upgrade Instructions** section below.
+
 ## Files Exported
 
 1. **intelligence_analysis.json** - Complete analysis-ready dataset
    - All tools and their snapshots
    - Summary statistics  
-   - Raw data from all 11 sources
+   - Raw data from all **17 sources** (5 new company intelligence sources added)
    - Processing status information
 
 2. **ai_tools.json** - Tool configuration data
@@ -13,12 +18,59 @@
    - Processing status and timestamps
 
 3. **tool_snapshots.json** - All snapshot data
-   - Complete raw and processed data
+   - Complete raw and processed data with **enhanced company fields**
    - Timestamps and processing status
 
 4. **raw_data_samples.json** - Sample data from each source
    - 3 examples per data source
-   - Useful for understanding data structure
+   - **NEW**: Company intelligence data samples from LinkedIn, About pages, AngelList, etc.
+
+## 🚀 Upgrade Instructions (From Previous Version)
+
+### Step 1: Update Codebase
+Pull the latest code changes that include:
+- Enhanced data models with new company fields
+- 5 new FREE company intelligence scrapers
+- Updated main processing pipeline
+
+### Step 2: Environment Variables (Optional - All New Sources Are FREE)
+No new paid API keys required! All company intelligence uses free public data.
+
+### Step 3: Database Migration
+The enhanced system uses the same database schema with JSON fields, so **no database migration needed**.
+Import will work with existing data structure.
+
+### Step 4: Validate Enhanced Features
+After import, test the new company intelligence data:
+
+```python
+# Check for new company intelligence fields
+latest_snapshot = data['tools']['Cursor']['snapshots'][0]
+company_info = latest_snapshot['company_info']
+
+# New fields to validate:
+print("Employee Count:", company_info.get('employee_count'))
+print("Employee Source:", company_info.get('employee_count_source'))
+print("Strategic Partnerships:", company_info.get('strategic_partnerships'))
+print("Company Stage:", company_info.get('company_stage'))
+print("Headquarters:", company_info.get('headquarters_location'))
+
+# Check new raw data sources:
+raw_data = latest_snapshot['raw_data']
+new_sources = [
+    'linkedin_company_data',
+    'company_about_data', 
+    'angellist_data',
+    'enhanced_news_data',
+    'glassdoor_data'
+]
+
+for source in new_sources:
+    if source in raw_data:
+        print(f"✅ {source}: Available")
+    else:
+        print(f"❌ {source}: Missing")
+```
 
 ## Recommended Analysis Workflow
 

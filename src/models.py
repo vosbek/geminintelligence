@@ -31,10 +31,19 @@ class CompanyInfo(BaseModel):
     funding_rounds: List[dict] = Field([])
     valuation: Optional[str] = Field(None)
     employee_count: Optional[int] = Field(None)
+    employee_count_source: Optional[str] = Field(None, description="Source of employee count (LinkedIn, About page, etc.)")
     founding_date: Optional[str] = Field(None)
     key_executives: List[str] = Field([])
     parent_company: Optional[str] = Field(None)
     major_investors: Optional[List[str]] = Field([])
+    strategic_partnerships: List[str] = Field([], description="Key strategic partnerships and integrations")
+    headquarters_location: Optional[str] = Field(None)
+    company_stage: Optional[str] = Field(None, description="Startup stage: seed, series A, B, C, etc.")
+    total_funding_amount: Optional[str] = Field(None)
+    last_funding_date: Optional[str] = Field(None)
+    revenue_estimate: Optional[str] = Field(None)
+    website_traffic_rank: Optional[int] = Field(None, description="Website ranking/traffic estimate")
+    business_model: Optional[str] = Field(None, description="SaaS, freemium, enterprise, etc.")
 
 
 class CommunityMetrics(BaseModel):

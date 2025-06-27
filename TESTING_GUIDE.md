@@ -74,13 +74,13 @@ LIMIT 3;
 - [ ] Pydantic model validation succeeds
 
 ### **Test 2: Data Source Coverage** ✅  
-**Goal**: Confirm all 11 data sources provide data to Claude
+**Goal**: Confirm all 17 data sources provide data to Claude (12 original + 5 new company intelligence)
 
 **Steps**:
 1. Check logs for sections: "Scraped Content", "Github Data", "Reddit Data", etc.
-2. Verify prompt includes all data sources
+2. Verify prompt includes all data sources including new company intelligence sources
 
-**Success Criteria**:
+**Success Criteria - Original Sources**:
 - [ ] Scraped Content: Website content extracted
 - [ ] Github Data: Stars, forks, contributors visible
 - [ ] Reddit Data: Posts from AI subreddits  
@@ -92,6 +92,14 @@ LIMIT 3;
 - [ ] NPM Data: Relevant packages only
 - [ ] PyPI Data: Relevant packages only  
 - [ ] Stock Data: Price info (if applicable)
+- [ ] Medium Data: Articles from tech publications
+
+**🆕 Success Criteria - New Company Intelligence Sources**:
+- [ ] LinkedIn Company Data: Employee counts and headquarters info
+- [ ] Company About Data: Employee counts from About/Team pages
+- [ ] AngelList Data: Startup metrics and funding stage
+- [ ] Enhanced News Data: Funding amounts, partnerships, investors extracted
+- [ ] Glassdoor Data: Employee estimates and company ratings
 
 ### **Test 3: Package Relevance Validation** ✅
 **Goal**: Verify package searches return relevant results only
@@ -113,12 +121,59 @@ LIMIT 3;
 1. Check database for populated fields
 2. Verify descriptions contain actual tool information
 3. Confirm metrics match known values (e.g., GitHub stars)
+4. **NEW**: Validate enhanced company intelligence fields
 
-**Success Criteria**:
+**Success Criteria - Core Data**:
 - [ ] `basic_info.description` has real tool description
 - [ ] `community_metrics.github_stars` matches actual repo
 - [ ] `technical_details.feature_list` contains real features
 - [ ] `company_info` has relevant business data
+
+**🆕 Success Criteria - Enhanced Company Intelligence**:
+- [ ] `company_info.employee_count` contains estimated employee numbers
+- [ ] `company_info.employee_count_source` indicates data source (LinkedIn, About page, etc.)
+- [ ] `company_info.strategic_partnerships` lists integrations/partnerships
+- [ ] `company_info.company_stage` shows funding stage (seed, series A/B/C, etc.)
+- [ ] `company_info.headquarters_location` contains HQ location
+- [ ] Raw data contains funding amounts and investor information
+
+### **🆕 Test 5: Enhanced Company Intelligence Validation** ✅
+**Goal**: Validate the new FREE company intelligence scrapers are working
+
+**Steps**:
+1. Run the system and check logs for company intelligence sections
+2. Verify raw data contains new company sources
+3. Check structured output includes enhanced company fields
+
+**What to Look For in Logs**:
+```
+Scraping LinkedIn company data for: [Company]
+Scraping company About page: [URL]
+Scraping AngelList/Wellfound for: [Company]
+Enhanced news search for: [Tool]
+Scraping Glassdoor for: [Company]
+```
+
+**What to Look For in Raw Data**:
+- `linkedin_company_data`: Should contain employee counts, HQ location
+- `company_about_data`: Should contain founding dates, team size info
+- `angellist_data`: Should contain startup stage, employee ranges
+- `enhanced_news_data`: Should contain funding_mentions, partnership_mentions
+- `glassdoor_data`: Should contain employee estimates, ratings
+
+**Expected Company Intelligence for Cursor** (Reference):
+- Employee Count: ~125-150 (from various sources)
+- Company Stage: Series C
+- Headquarters: San Francisco, CA
+- Strategic Partnerships: OpenAI, Claude integrations
+- Funding: $900M Series C mentioned in enhanced news data
+
+**Success Criteria**:
+- [ ] At least 3 of 5 company intelligence sources return data (not errors)
+- [ ] Employee count estimates are reasonable (>10, <10000 for most startups)
+- [ ] Funding information includes dollar amounts and round types
+- [ ] Partnership mentions include real integrations/collaborations
+- [ ] Glassdoor ratings are between 1.0-5.0 if present
 
 ---
 
@@ -288,5 +343,54 @@ pip install --upgrade strands-agents firecrawl-py praw psycopg2
 3. ✅ Package searches return relevant results only
 4. ✅ GitHub metrics match actual repository data
 5. ✅ Tool descriptions contain real information about the tools
+6. **🆕 Enhanced company intelligence data is collected and processed**
+
+**🆕 Additional Success Criteria for Enhanced Version:**
+7. ✅ At least 3 of 5 company intelligence sources provide data
+8. ✅ Employee count estimates are reasonable and sourced
+9. ✅ Funding information includes amounts and investors
+10. ✅ Strategic partnerships and integrations are identified
+11. ✅ Company stage and headquarters information is captured
 
 **If any of these fail, provide the logs and data for debugging!**
+
+---
+
+## 🔍 Quick Validation Commands
+
+**After running the enhanced system, use these commands to quickly validate:**
+
+```sql
+-- Check if enhanced company data is present
+SELECT 
+    t.name,
+    s.company_info->>'employee_count' as employees,
+    s.company_info->>'employee_count_source' as emp_source,
+    s.company_info->>'company_stage' as stage,
+    s.company_info->>'headquarters_location' as hq
+FROM tool_snapshots s 
+JOIN ai_tools t ON s.tool_id = t.id 
+WHERE s.snapshot_date > NOW() - INTERVAL '1 day'
+ORDER BY s.snapshot_date DESC;
+```
+
+```python
+# Check raw data sources for company intelligence
+import json
+with open('exports/intelligence_analysis.json', 'r') as f:
+    data = json.load(f)
+
+tool_data = data['tools']['Cursor']['snapshots'][0]
+company_sources = [
+    'linkedin_company_data',
+    'company_about_data', 
+    'angellist_data',
+    'enhanced_news_data',
+    'glassdoor_data'
+]
+
+print("🆕 Enhanced Company Intelligence Sources:")
+for source in company_sources:
+    status = "✅ Available" if source in tool_data['raw_data'] else "❌ Missing"
+    print(f"- {source}: {status}")
+```
