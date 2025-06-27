@@ -52,8 +52,8 @@ This document outlines the current status and future roadmap for the AI Intellig
 
 **Objective:** Build a web application for viewing, analyzing, and curating collected intelligence.
 
-### 🌐 Flask Web Application - Complete
-- [x] **Web Framework:** Flask-based application with templating
+### 🌐 React Web Application - Complete
+- [x] **Web Framework:** React-based application with modern components
 - [x] **Tool Overview:** Main dashboard listing all tracked tools
 - [x] **Detailed Views:** Comprehensive tool snapshots with all data sources
 - [x] **Data Visualization:** Structured presentation of intelligence data
@@ -65,7 +65,7 @@ This document outlines the current status and future roadmap for the AI Intellig
 
 ### ✅ What's Working
 - **Complete Data Pipeline:** 11 sources → LLM processing → structured storage
-- **Web Interface:** Functional curation application  
+- **React Interface:** Modern web application for data curation  
 - **Robust Architecture:** Modular, maintainable codebase
 - **Comprehensive Documentation:** Updated README with full system overview
 

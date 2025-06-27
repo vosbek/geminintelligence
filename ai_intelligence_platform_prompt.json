@@ -1,0 +1,385 @@
+{
+  "system_prompt": {
+    "title": "AI Intelligence Platform - Comprehensive System Overview",
+    "description": "A production-ready, database-driven system that automatically collects, processes, and curates intelligence about AI developer tools from 11 different data sources using advanced LLM processing",
+    "version": "2.0",
+    "status": "Production Ready"
+  },
+  "system_architecture": {
+    "overview": "Sophisticated Python-based intelligence collection and analysis platform powered by AWS Strands agent using Claude 3.5 Sonnet (Latest) with optimized configuration for maximum detail extraction. The system orchestrates data collection from 11 comprehensive sources and processes everything through an LLM to generate structured intelligence snapshots stored in PostgreSQL.",
+    "core_components": {
+      "data_collection_engine": {
+        "description": "11 specialized scrapers that collect comprehensive intelligence from web, community, package ecosystem, media, and financial sources",
+        "technology": "Python with requests, praw, firecrawl-py, and direct API integrations",
+        "processing_model": "Claude 3.5 Sonnet (anthropic.claude-3-5-sonnet-20241022-v2:0)",
+        "configuration": {
+          "max_tokens": 8192,
+          "temperature": 0.1,
+          "optimization": "Configured for comprehensive analysis and maximum detail extraction"
+        }
+      },
+      "database_layer": {
+        "description": "PostgreSQL database with JSONB support for flexible intelligence storage",
+        "schema": "ai_tools, tool_snapshots, curated_snapshots, data_sources tables",
+        "features": "JSONB storage for raw data and structured intelligence, audit trail with timestamps"
+      },
+      "web_interface": {
+        "description": "React-based web application for data curation and visualization",
+        "features": "Tool overview dashboard, detailed snapshot views, curation interface, modern SPA experience",
+        "technology": "React, modern JavaScript/TypeScript, RESTful API integration with PostgreSQL backend"
+      }
+    }
+  },
+  "data_sources": {
+    "total_sources": 11,
+    "categories": {
+      "web_and_community_intelligence": {
+        "website_content": {
+          "technology": "Firecrawl API",
+          "description": "Primary website scraping with markdown conversion",
+          "data_extracted": "Main content, features, pricing, company information"
+        },
+        "github_analytics": {
+          "technology": "GitHub API v3",
+          "description": "Repository metrics and development activity",
+          "data_extracted": "Stars, forks, issues, commit activity, topics, description"
+        },
+        "reddit_discussions": {
+          "technology": "PRAW (Python Reddit API Wrapper)",
+          "description": "Community sentiment and mentions across AI subreddits",
+          "subreddits": ["AI_Agents", "mcp", "ClaudeAI", "ChatGPTCoding", "cursor", "ArtificialIntelligence", "PromptEngineering"],
+          "data_extracted": "Post titles, scores, URLs, self-text, community sentiment"
+        },
+        "hackernews": {
+          "technology": "Algolia HN Search API",
+          "description": "Technical community discussions and trending stories",
+          "data_extracted": "Story titles, points, comments, URLs, author, creation date"
+        },
+        "stackoverflow": {
+          "technology": "Stack Exchange API",
+          "description": "Developer questions and technical adoption metrics",
+          "data_extracted": "Question titles, scores, view counts, answer counts, tags"
+        },
+        "devto": {
+          "technology": "Dev.to Public API",
+          "description": "Technical articles and tutorials from developer community",
+          "data_extracted": "Article titles, URLs, reactions, comments, reading time, tags"
+        }
+      },
+      "package_ecosystem_intelligence": {
+        "npm_registry": {
+          "technology": "NPM Registry API",
+          "description": "JavaScript/Node.js package adoption and download metrics",
+          "data_extracted": "Package names, versions, descriptions, weekly downloads, maintainers"
+        },
+        "pypi_registry": {
+          "technology": "PyPI JSON API",
+          "description": "Python package ecosystem and library usage",
+          "data_extracted": "Package info, versions, descriptions, authors, classifiers, upload times"
+        }
+      },
+      "media_and_market_intelligence": {
+        "news_articles": {
+          "technology": "NewsAPI.org",
+          "description": "Comprehensive news coverage and media mentions",
+          "data_extracted": "Article titles, sources, URLs, publication dates, content previews"
+        },
+        "medium": {
+          "technology": "RSS feed analysis",
+          "description": "Technical thought leadership and company blog content",
+          "note": "Limited access - requires API partnership for full functionality",
+          "data_extracted": "Article mentions from major tech publications"
+        },
+        "producthunt": {
+          "technology": "ProductHunt GraphQL API",
+          "description": "Product launches, community voting, and market reception",
+          "data_extracted": "Product names, taglines, votes, comments, topics, launch dates"
+        }
+      },
+      "financial_and_business_intelligence": {
+        "stock_data": {
+          "technology": "Alpha Vantage API",
+          "description": "Financial metrics for publicly traded companies",
+          "data_extracted": "Stock prices, volumes, trading days, change percentages"
+        }
+      }
+    }
+  },
+  "ai_processing_pipeline": {
+    "agent_architecture": {
+      "class_name": "ToolIntelligenceAgent",
+      "base_class": "Strands Agent",
+      "model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
+      "aws_region": "us-west-2 (configurable)",
+      "optimization": "Configured for maximum detail and quality since runs are infrequent"
+    },
+    "processing_workflow": {
+      "step_1": "Data Collection - Execute all 11 scrapers in parallel for target tool",
+      "step_2": "Raw Data Compilation - Aggregate all source data into comprehensive payload",
+      "step_3": "LLM Analysis - Process through Claude with detailed prompt for intelligence extraction",
+      "step_4": "Structured Output - Parse JSON response into Pydantic models",
+      "step_5": "Database Storage - Save both raw data and structured intelligence"
+    },
+    "output_structure": {
+      "basic_info": {
+        "description": "Comprehensive tool description and categorization",
+        "category_classification": "Specific category (AI_IDE, CODE_COMPLETION, etc.)"
+      },
+      "technical_details": {
+        "feature_list": "Exhaustive list of all features found across sources",
+        "technology_stack": "Specific technologies, frameworks, languages with versions",
+        "pricing_model": "Free tier, paid tiers, enterprise pricing details",
+        "enterprise_capabilities": "Enterprise features, SSO, admin controls",
+        "security_features": "All security measures mentioned",
+        "integration_capabilities": "APIs, webhooks, third-party integrations",
+        "scalability_features": "Performance limits, scaling options",
+        "compliance_certifications": "SOC2, GDPR, ISO certifications",
+        "comparable_tools": "Direct competitors mentioned",
+        "unique_differentiators": "Specific advantages over competitors",
+        "pros_and_cons": "User-reported benefits and limitations",
+        "market_positioning": "Position relative to competitors",
+        "update_frequency": "Release cadence based on version history",
+        "version_history": "Recent versions and release dates",
+        "roadmap_information": "Future plans mentioned in sources"
+      },
+      "company_info": {
+        "stock_price": "Current stock price if publicly traded",
+        "market_cap": "Market capitalization",
+        "news_mentions": "Count of news articles mentioning company",
+        "annual_recurring_revenue": "ARR from company reports",
+        "funding_rounds": "Series information with amounts and dates",
+        "valuation": "Most recent company valuation",
+        "employee_count": "Number of employees",
+        "founding_date": "Company founding date",
+        "key_executives": "Leadership team names and titles",
+        "parent_company": "Parent organization if applicable",
+        "major_investors": "Key investors and VCs"
+      },
+      "community_metrics": {
+        "github_stars": "Repository star count",
+        "github_forks": "Repository fork count",
+        "reddit_mentions": "Count of Reddit discussions",
+        "reddit_sentiment_score": "Calculated sentiment from scores",
+        "hacker_news_mentions_count": "HN story count",
+        "stackoverflow_questions_count": "SO question count",
+        "producthunt_ranking": "PH votes and ranking",
+        "devto_articles_count": "Dev.to article mentions",
+        "npm_packages_count": "Related NPM packages",
+        "npm_weekly_downloads": "Total weekly downloads",
+        "pypi_packages_count": "Related Python packages",
+        "medium_articles_count": "Medium article mentions",
+        "list_of_companies_using_tool": "Companies using the tool",
+        "case_studies": "URLs and titles of case studies",
+        "testimonials": "User quotes and testimonials"
+      }
+    }
+  },
+  "database_schema": {
+    "ai_tools": {
+      "description": "Master table of AI tools to track",
+      "key_fields": ["name", "website_url", "github_url", "stock_symbol", "category", "run_status"],
+      "features": "Tracks processing status and last run times"
+    },
+    "tool_snapshots": {
+      "description": "Point-in-time intelligence snapshots for each tool",
+      "key_fields": ["tool_id", "snapshot_date", "basic_info", "technical_details", "company_info", "community_metrics", "raw_data"],
+      "storage": "JSONB fields for flexible structured data storage"
+    },
+    "curated_snapshots": {
+      "description": "Analyst curation and notes on top of snapshots",
+      "key_fields": ["snapshot_id", "curator_notes", "enterprise_position", "strategic_alignment"],
+      "purpose": "Human curation layer for executive review"
+    },
+    "data_sources": {
+      "description": "Configuration for various data collection sources",
+      "key_fields": ["source_type", "source_name", "api_endpoint", "configuration"],
+      "purpose": "Centralized source configuration management"
+    }
+  },
+  "technology_stack": {
+    "backend": {
+      "language": "Python 3.11+",
+      "api_framework": "FastAPI for RESTful API",
+      "ai_agent": "AWS Strands SDK",
+      "database": "PostgreSQL with JSONB support",
+      "orm": "psycopg2 for direct database access"
+    },
+    "frontend": {
+      "framework": "React",
+      "language": "JavaScript/TypeScript",
+      "build_tools": "Vite or Create React App",
+      "styling": "CSS Modules, Tailwind CSS, or Styled Components",
+      "state_management": "React Context, Redux, or Zustand",
+      "api_integration": "Axios or Fetch API for REST calls"
+    },
+    "ai_integration": {
+      "platform": "AWS Bedrock",
+      "model": "Claude 3.5 Sonnet (Latest)",
+      "sdk": "strands-agents",
+      "configuration": "Optimized for comprehensive analysis"
+    },
+    "data_collection": {
+      "web_scraping": "firecrawl-py",
+      "reddit_api": "praw",
+      "http_requests": "requests",
+      "apis": "Direct REST and GraphQL integrations"
+    },
+    "data_validation": {
+      "schema_validation": "Pydantic models",
+      "type_checking": "Python type hints",
+      "error_handling": "Comprehensive exception handling"
+    }
+  },
+  "api_integrations": {
+    "firecrawl": {
+      "purpose": "Web scraping with markdown conversion",
+      "authentication": "API key",
+      "rate_limits": "Varies by plan"
+    },
+    "github": {
+      "purpose": "Repository analytics and metrics",
+      "authentication": "Personal Access Token",
+      "rate_limits": "5000 requests/hour authenticated"
+    },
+    "reddit": {
+      "purpose": "Community discussions and sentiment",
+      "authentication": "OAuth2 with client credentials",
+      "rate_limits": "60 requests/minute"
+    },
+    "newsapi": {
+      "purpose": "News article aggregation",
+      "authentication": "API key",
+      "rate_limits": "1000 requests/day (free tier)"
+    },
+    "alpha_vantage": {
+      "purpose": "Financial and stock data",
+      "authentication": "API key",
+      "rate_limits": "5 API calls/minute, 500/day"
+    },
+    "producthunt": {
+      "purpose": "Product launch and community data",
+      "authentication": "Bearer token",
+      "api_type": "GraphQL"
+    },
+    "aws_bedrock": {
+      "purpose": "LLM processing via Strands agent",
+      "authentication": "AWS SSO or access keys",
+      "model_access": "Requires Bedrock model access"
+    }
+  },
+  "deployment_requirements": {
+    "system_requirements": {
+      "python": "3.11+",
+      "node": "18+ (for React frontend)",
+      "database": "PostgreSQL 12+",
+      "aws_access": "Configured AWS credentials for Bedrock",
+      "memory": "Minimum 4GB RAM recommended",
+      "storage": "SSD recommended for database performance"
+    },
+    "environment_variables": {
+      "database": ["DB_NAME", "DB_USER", "DB_PASSWORD", "DB_HOST", "DB_PORT"],
+      "apis": ["FIRECRAWL_API_KEY", "GITHUB_API_TOKEN", "NEWS_API_KEY", "ALPHA_VANTAGE_API_KEY", "PRODUCTHUNT_API_TOKEN"],
+      "reddit": ["REDDIT_CLIENT_ID", "REDDIT_CLIENT_SECRET", "REDDIT_USER_AGENT", "REDDIT_USERNAME", "REDDIT_PASSWORD"],
+      "aws": ["AWS_REGION (optional, defaults to us-west-2)"]
+    },
+    "python_dependencies": {
+      "core": ["strands-agent", "strands-sdk", "psycopg2", "fastapi", "pydantic"],
+      "apis": ["firecrawl-py", "praw", "requests", "boto3"],
+      "utilities": ["python-dotenv", "rich", "tqdm"]
+    },
+    "frontend_dependencies": {
+      "core": ["react", "react-dom", "@types/react"],
+      "api": ["axios"],
+      "routing": ["react-router-dom"],
+      "styling": ["tailwindcss", "styled-components", "or css-modules"],
+      "state": ["redux", "zustand", "or react-context"],
+      "build": ["vite", "typescript"]
+    }
+  },
+  "use_cases": {
+    "competitive_intelligence": {
+      "description": "Comprehensive analysis of competitor tools and market positioning",
+      "data_points": "Feature comparisons, pricing analysis, community adoption, financial metrics",
+      "output": "Strategic intelligence reports for decision-makers"
+    },
+    "market_research": {
+      "description": "Track emerging AI tools and market trends",
+      "data_points": "GitHub activity, community discussions, news coverage, funding rounds",
+      "output": "Market trend analysis and opportunity identification"
+    },
+    "due_diligence": {
+      "description": "In-depth analysis for investment or partnership decisions",
+      "data_points": "Financial data, community health, technical architecture, leadership",
+      "output": "Comprehensive due diligence reports"
+    },
+    "product_positioning": {
+      "description": "Understand competitive landscape for product strategy",
+      "data_points": "Feature gaps, pricing strategies, user sentiment, market positioning",
+      "output": "Strategic product recommendations"
+    }
+  },
+  "operational_workflow": {
+    "data_collection_process": {
+      "step_1": "Load tools from ai_tools table with run_status NULL or 'update'",
+      "step_2": "For each tool, execute all 11 scrapers in parallel",
+      "step_3": "Compile raw data from all sources into comprehensive payload",
+      "step_4": "Process through Claude 3.5 Sonnet with detailed analysis prompt",
+      "step_5": "Parse LLM response into structured Pydantic models",
+      "step_6": "Store both raw data and structured intelligence in database",
+      "step_7": "Update tool run_status to 'processed' with timestamp"
+    },
+    "curation_workflow": {
+      "step_1": "Access React web interface to view tool snapshots",
+      "step_2": "Review structured intelligence and raw data in interactive dashboard",
+      "step_3": "Add curator notes and strategic positioning through forms",
+      "step_4": "Save curation data to curated_snapshots table via API",
+      "step_5": "Export or share intelligence reports in multiple formats"
+    },
+    "monitoring_and_maintenance": {
+      "logging": "Comprehensive logging to timestamped files in logs/ directory",
+      "error_handling": "Graceful degradation when APIs are unavailable",
+      "status_tracking": "Database tracking of processing status for each tool",
+      "data_freshness": "Last run timestamps for identifying stale data"
+    }
+  },
+  "system_capabilities": {
+    "intelligence_depth": "11 comprehensive data sources providing 360-degree intelligence coverage",
+    "processing_power": "Advanced LLM analysis with Claude 3.5 Sonnet optimized for maximum detail extraction",
+    "data_flexibility": "JSONB storage supporting any data structure without schema changes",
+    "scalability": "Modular architecture enabling easy addition of new tools and data sources",
+    "automation": "Fully automated data collection and processing pipeline",
+    "curation": "Modern React-based interface for human analysis and strategic insights",
+    "audit_trail": "Complete history of all snapshots with timestamps",
+    "api_resilience": "Robust error handling and graceful degradation"
+  },
+  "success_metrics": {
+    "technical_kpis": {
+      "data_coverage": "11/11 data sources implemented and functional",
+      "system_reliability": "Robust error handling with graceful API failure recovery",
+      "code_quality": "Modular architecture with clean separation of concerns",
+      "performance": "Optimized LLM configuration for comprehensive analysis"
+    },
+    "business_kpis": {
+      "intelligence_quality": "Comprehensive data extraction maximizing insights from all sources",
+      "usability": "Modern React interface enabling efficient data exploration and analysis",
+      "scalability": "System architecture ready for additional tools and sources",
+      "maintainability": "Clean codebase enabling rapid feature development"
+    }
+  },
+  "security_and_compliance": {
+    "api_key_management": "Environment variable based configuration with .env files",
+    "data_privacy": "No personal data collection, focuses on public business intelligence",
+    "access_control": "Database-level access controls and connection security",
+    "audit_logging": "Comprehensive logging of all system activities",
+    "error_handling": "Secure error messages without exposing sensitive information"
+  },
+  "future_roadmap": {
+    "phase_3_enhancements": {
+      "advanced_analytics": ["Trend analysis", "Competitive intelligence", "Sentiment analysis", "Predictive insights"],
+      "automation": ["Scheduled runs", "Alert system", "Health monitoring", "Data freshness detection"],
+      "enterprise_features": ["User authentication", "Team collaboration", "Export capabilities", "Custom dashboards"],
+      "technical_improvements": ["API rate management", "Caching layer", "Data validation", "Backup system"],
+      "cloud_deployment": ["Containerization", "Cloud migration", "CI/CD pipeline", "Performance monitoring"]
+    }
+  }
+}

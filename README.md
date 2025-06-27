@@ -10,7 +10,7 @@ The system is composed of two main parts:
 
 1.  **Data Collection Engine (Phase 1 - Complete):** A sophisticated Python-based backend powered by AWS Strands agent using **Claude 3.5 Sonnet (Latest)** with optimized configuration for maximum detail extraction. The system orchestrates data collection from 11 comprehensive sources and processes everything through an LLM to generate structured intelligence snapshots stored in PostgreSQL.
 
-2.  **Curation Interface (Phase 2 - Complete):** A Flask-based web application that allows analysts to view collected data, add notes, and curate intelligence for executive review.
+2.  **Curation Interface (Phase 2 - Complete):** A React-based web application that allows analysts to view collected data, add notes, and curate intelligence for executive review.
 
 ### Comprehensive Data Sources (11 Total)
 
@@ -98,6 +98,18 @@ Before you begin, ensure you have the following installed on your Windows machin
 3.  **Monitor the output:** The script will log its progress to the console. It will process each tool from the `ai_tools` table one by one. You can also find detailed logs in the `logs/` directory.
 4.  **Verify the results:** After the script finishes, you can connect to your PostgreSQL database and inspect the `tool_snapshots` table to see the newly created data snapshots. See the "Querying the Data" section below for examples.
 
+### 4. Run the API Backend (Optional)
+
+To start the FastAPI backend for React frontend integration:
+```shell
+python src/api.py
+```
+Or using uvicorn directly:
+```shell
+uvicorn src.api:app --reload --host 0.0.0.0 --port 8000
+```
+The API will be available at `http://localhost:8000` with interactive docs at `http://localhost:8000/docs`.
+
 ---
 ## Querying the Data
 
@@ -161,8 +173,9 @@ ORDER BY s.snapshot_date DESC LIMIT 1;
     *   `models.py`: Pydantic data models for structured data validation
     *   `database.py`: Database connection and utility functions  
     *   `scrapers.py`: All 11 data scraper implementations in modular design
-    *   `app.py`: Flask web application for data curation interface
-    *   `templates/`: HTML templates for the web interface
+    *   `api.py`: FastAPI backend for React frontend integration
+    *   `app.py`: Legacy Flask app (to be removed)
+    *   `templates/`: Legacy templates (to be replaced by React frontend)
 
 ### Configuration & Setup  
 *   `database/`: SQL scripts for database setup.
