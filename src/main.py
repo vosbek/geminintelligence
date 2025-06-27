@@ -74,7 +74,7 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
         # API keys and configs are now part of the agent's state
         self.firecrawl_api_key = os.getenv("FIRECRAWL_API_KEY")
         self.github_api_token = os.getenv("GITHUB_API_TOKEN")
-        self.financialmodelingprep_api_key = os.getenv("FINANCIALMODELINGPREP_API_KEY", "19k4juXL0uTO2Pfh75aIIBjpsj8uz6pE")
+        self.alpha_vantage_api_key = os.getenv("ALPHA_VANTAGE_API_KEY", "XC3SOW4NY57QT9EG")
         self.news_api_key = os.getenv("NEWS_API_KEY")
 
         # Initialize Reddit (PRAW) client
@@ -260,9 +260,14 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
             subreddits=target_subreddits
         )
             
-        # Fetch Stock Data (if a stock symbol is provided)
-        if tool_record.get('stock_symbol'):
-            raw_data_payload['stock_data'] = self.stock_data_fetcher(stock_symbol=tool_record['stock_symbol'])
+        # Fetch Financial Data (public or private companies)
+        company_name = tool_record.get('company', tool_record.get('name', ''))
+        stock_symbol = tool_record.get('stock_symbol')
+        
+        raw_data_payload['financial_data'] = self.private_company_financial_data(
+            company_name=company_name,
+            stock_symbol=stock_symbol
+        )
 
         # Search Medium articles
         raw_data_payload['medium_data'] = self.medium_searcher(tool_name=tool_record['name'])

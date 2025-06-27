@@ -271,6 +271,256 @@ class ScraperMixin:
             return {"error": str(e)}
 
     @tool()
+    def techcrunch_funding_scraper(self, company_name: str) -> dict:
+        """
+        Scrapes TechCrunch for funding information about a company.
+        :param company_name: The name of the company to search for.
+        :return: A dictionary containing funding information.
+        """
+        logging.info(f"Scraping TechCrunch for funding info on {company_name}")
+        try:
+            search_url = f"https://techcrunch.com/?s={company_name.replace(' ', '+')}"
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+            
+            response = requests.get(search_url, headers=headers, timeout=15)
+            response.raise_for_status()
+            
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(response.content, 'html.parser')
+            
+            funding_articles = []
+            articles = soup.find_all('article', class_='post-block')[:5]  # Get first 5 articles
+            
+            for article in articles:
+                title_elem = article.find('h2', class_='post-block__title')
+                link_elem = article.find('a')
+                
+                if title_elem and link_elem:
+                    title = title_elem.get_text(strip=True)
+                    link = link_elem.get('href')
+                    
+                    # Look for funding keywords
+                    funding_keywords = ['funding', 'raises', 'series', 'investment', 'valuation', 'million', 'billion']
+                    if any(keyword in title.lower() for keyword in funding_keywords):
+                        funding_articles.append({
+                            'title': title,
+                            'url': link,
+                            'source': 'techcrunch'
+                        })
+            
+            return {
+                'funding_articles': funding_articles,
+                'articles_found': len(funding_articles),
+                'source': 'techcrunch'
+            }
+            
+        except Exception as e:
+            logging.error(f"Failed to scrape TechCrunch for {company_name}: {e}")
+            return {"error": str(e)}
+
+    @tool()
+    def venturebeat_funding_scraper(self, company_name: str) -> dict:
+        """
+        Scrapes VentureBeat for funding information about a company.
+        :param company_name: The name of the company to search for.
+        :return: A dictionary containing funding information.
+        """
+        logging.info(f"Scraping VentureBeat for funding info on {company_name}")
+        try:
+            search_url = f"https://venturebeat.com/?s={company_name.replace(' ', '+')}"
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+            
+            response = requests.get(search_url, headers=headers, timeout=15)
+            response.raise_for_status()
+            
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(response.content, 'html.parser')
+            
+            funding_articles = []
+            articles = soup.find_all('article')[:5]  # Get first 5 articles
+            
+            for article in articles:
+                title_elem = article.find('h2') or article.find('h3')
+                link_elem = article.find('a')
+                
+                if title_elem and link_elem:
+                    title = title_elem.get_text(strip=True)
+                    link = link_elem.get('href')
+                    
+                    # Look for funding keywords
+                    funding_keywords = ['funding', 'raises', 'series', 'investment', 'valuation', 'million', 'billion']
+                    if any(keyword in title.lower() for keyword in funding_keywords):
+                        funding_articles.append({
+                            'title': title,
+                            'url': link,
+                            'source': 'venturebeat'
+                        })
+            
+            return {
+                'funding_articles': funding_articles,
+                'articles_found': len(funding_articles),
+                'source': 'venturebeat'
+            }
+            
+        except Exception as e:
+            logging.error(f"Failed to scrape VentureBeat for {company_name}: {e}")
+            return {"error": str(e)}
+
+    @tool()
+    def angellist_scraper(self, company_name: str) -> dict:
+        """
+        Scrapes AngelList/Wellfound for company information.
+        :param company_name: The name of the company to search for.
+        :return: A dictionary containing company information.
+        """
+        logging.info(f"Scraping AngelList for {company_name}")
+        try:
+            # Search on Wellfound (formerly AngelList)
+            search_url = f"https://wellfound.com/company/{company_name.lower().replace(' ', '-')}"
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+            
+            response = requests.get(search_url, headers=headers, timeout=15)
+            
+            if response.status_code == 404:
+                # Try alternative search format
+                search_url = f"https://wellfound.com/companies/{company_name.lower().replace(' ', '-')}"
+                response = requests.get(search_url, headers=headers, timeout=15)
+            
+            if response.status_code == 200:
+                from bs4 import BeautifulSoup
+                soup = BeautifulSoup(response.content, 'html.parser')
+                
+                company_info = {}
+                
+                # Try to extract company size
+                size_elem = soup.find(text=lambda text: text and 'employees' in text.lower())
+                if size_elem:
+                    company_info['employee_range'] = size_elem.strip()
+                
+                # Try to extract funding stage
+                stage_elem = soup.find(text=lambda text: text and any(stage in text.lower() for stage in ['seed', 'series', 'pre-seed']))
+                if stage_elem:
+                    company_info['funding_stage'] = stage_elem.strip()
+                
+                return {
+                    'company_info': company_info,
+                    'profile_url': search_url,
+                    'source': 'angellist',
+                    'profile_found': True
+                }
+            else:
+                return {
+                    'company_info': {},
+                    'source': 'angellist',
+                    'profile_found': False,
+                    'error': f'Profile not found (HTTP {response.status_code})'
+                }
+                
+        except Exception as e:
+            logging.error(f"Failed to scrape AngelList for {company_name}: {e}")
+            return {"error": str(e)}
+
+    @tool()
+    def private_company_financial_data(self, company_name: str, stock_symbol: str = None) -> dict:
+        """
+        Comprehensive financial data collection for private companies using free sources.
+        :param company_name: The name of the company to research.
+        :param stock_symbol: Stock symbol if publicly traded (will use Alpha Vantage if provided).
+        :return: A dictionary containing comprehensive financial information.
+        """
+        logging.info(f"Collecting financial data for {company_name}")
+        
+        # If publicly traded, use existing stock data fetcher
+        if stock_symbol:
+            return self.stock_data_fetcher(stock_symbol)
+        
+        # For private companies, aggregate data from multiple sources
+        financial_data = {
+            "company_name": company_name,
+            "is_public": False,
+            "stock_price": None,
+            "market_cap": "Private Company",
+            "funding_info": {
+                "techcrunch_articles": [],
+                "venturebeat_articles": [],
+                "angellist_profile": {}
+            },
+            "data_sources": []
+        }
+        
+        try:
+            # Scrape TechCrunch for funding information
+            tc_data = self.techcrunch_funding_scraper(company_name)
+            if not tc_data.get("error"):
+                financial_data["funding_info"]["techcrunch_articles"] = tc_data.get("funding_articles", [])
+                financial_data["data_sources"].append("techcrunch")
+                
+                # Extract funding info from article titles
+                funding_amounts = []
+                for article in tc_data.get("funding_articles", []):
+                    title = article.get("title", "").lower()
+                    # Simple regex to find funding amounts
+                    import re
+                    amounts = re.findall(r'\$(\d+(?:\.\d+)?)\s*(million|billion|m|b)', title)
+                    for amount, unit in amounts:
+                        multiplier = 1000000 if unit.startswith('m') else 1000000000
+                        funding_amounts.append(float(amount) * multiplier)
+                
+                if funding_amounts:
+                    financial_data["estimated_latest_funding"] = f"${max(funding_amounts):,.0f}"
+            
+            # Scrape VentureBeat for funding information
+            vb_data = self.venturebeat_funding_scraper(company_name)
+            if not vb_data.get("error"):
+                financial_data["funding_info"]["venturebeat_articles"] = vb_data.get("funding_articles", [])
+                financial_data["data_sources"].append("venturebeat")
+            
+            # Scrape AngelList for company profile
+            al_data = self.angellist_scraper(company_name)
+            if not al_data.get("error"):
+                financial_data["funding_info"]["angellist_profile"] = al_data.get("company_info", {})
+                if al_data.get("profile_found"):
+                    financial_data["data_sources"].append("angellist")
+                    financial_data["angellist_url"] = al_data.get("profile_url")
+            
+            # Determine company stage and funding status
+            total_articles = len(financial_data["funding_info"]["techcrunch_articles"]) + len(financial_data["funding_info"]["venturebeat_articles"])
+            
+            if total_articles > 0:
+                financial_data["funding_status"] = "Funded (articles found)"
+                financial_data["news_coverage"] = f"{total_articles} funding-related articles"
+            else:
+                financial_data["funding_status"] = "Unknown (no funding articles found)"
+                financial_data["news_coverage"] = "Limited coverage"
+            
+            # Add Angel List stage info if available
+            al_profile = financial_data["funding_info"]["angellist_profile"]
+            if al_profile.get("funding_stage"):
+                financial_data["company_stage"] = al_profile["funding_stage"]
+            if al_profile.get("employee_range"):
+                financial_data["employee_estimate"] = al_profile["employee_range"]
+            
+            financial_data["source"] = "private_company_aggregator"
+            financial_data["last_updated"] = "2025-06-27"
+            
+            return financial_data
+            
+        except Exception as e:
+            logging.error(f"Failed to collect private company financial data for {company_name}: {e}")
+            return {
+                "error": str(e),
+                "company_name": company_name,
+                "is_public": False,
+                "source": "private_company_aggregator"
+            }
+
+    @tool()
     def news_aggregator(self, tool_name: str) -> dict:
         """
         Searches for news articles mentioning a specific tool name using NewsAPI.org.

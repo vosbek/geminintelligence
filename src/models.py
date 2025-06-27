@@ -24,6 +24,7 @@ class TechnicalDetails(BaseModel):
 
 
 class CompanyInfo(BaseModel):
+    company_website: Optional[str] = Field(None, description="Official company website URL")
     stock_price: Optional[float] = Field(None)
     market_cap: Optional[str] = Field(None)
     news_mentions: Optional[int] = Field(None)
