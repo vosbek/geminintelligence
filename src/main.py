@@ -76,10 +76,17 @@ def update_tool_run_status(conn, tool_id, status, last_run_time=None):
 
 # --- Strands Agent Definition ---
 class ToolIntelligenceAgent(Agent):
-    def __init__(self, model: str = "anthropic.claude-3-5-sonnet-20240620-v1:0"):
+    def __init__(self, model: str = "anthropic.claude-3-5-sonnet-20241022-v2:0"):
         aws_region = os.getenv("AWS_REGION", "us-west-2")
-        logging.info(f"Initializing Strands Agent (AWS region set to: {aws_region})")
-        super().__init__(model=model)
+        logging.info(f"Initializing Strands Agent (AWS region: {aws_region})")
+        logging.info(f"Model: {model}")
+        logging.info(f"Configuration: max_tokens=8192, temperature=0.1 (optimized for comprehensive analysis)")
+        # Configure for maximum detail and quality since this runs infrequently
+        super().__init__(
+            model=model,
+            max_tokens=8192,      # Higher token limit for detailed responses
+            temperature=0.1       # Low temperature for consistent, detailed analysis
+        )
         # API keys and configs are now part of the agent's state
         self.firecrawl_api_key = os.getenv("FIRECRAWL_API_KEY")
         self.github_api_token = os.getenv("GITHUB_API_TOKEN")
@@ -100,6 +107,12 @@ class ToolIntelligenceAgent(Agent):
         except Exception as e:
             logging.error(f"Failed to initialize PRAW Reddit client: {e}")
             self.reddit_client = None
+
+        # ProductHunt API token
+        self.producthunt_api_token = os.getenv("PRODUCTHUNT_API_TOKEN")
+        
+        # Medium API key (optional)
+        self.medium_api_key = os.getenv("MEDIUM_API_KEY")
 
         # Initialize FirecrawlApp
         firecrawl_params = {'api_key': self.firecrawl_api_key}
@@ -303,22 +316,566 @@ class ToolIntelligenceAgent(Agent):
             logging.error(f"Failed to fetch news for term {tool_name}: {e}")
             return {"error": str(e)}
 
-    def _create_prompt(self, tool_record: dict, scraped_content: dict) -> str:
-        # Create a detailed prompt for the LLM
-        prompt = f"""
-You are an expert AI tool analyst. Your task is to analyze the provided raw data about an AI developer tool and extract structured information based on the user's desired output format.
+    @tool()
+    def hackernews_searcher(self, tool_name: str) -> dict:
+        """
+        Searches HackerNews for mentions of a specific tool using the Algolia HN Search API.
+        :param tool_name: The name of the tool to search for.
+        :return: A dictionary containing search results from HackerNews.
+        """
+        logging.info(f"Searching HackerNews for: {tool_name}")
+        
+        # HackerNews uses Algolia for search - no API key required
+        base_url = "https://hn.algolia.com/api/v1/search"
+        params = {
+            "query": tool_name,
+            "tags": "story",
+            "hitsPerPage": 20,
+            "numericFilters": "points>10"  # Filter for stories with at least 10 points
+        }
+        
+        try:
+            response = requests.get(base_url, params=params, timeout=15)
+            response.raise_for_status()
+            data = response.json()
+            
+            hits = []
+            for hit in data.get("hits", []):
+                hits.append({
+                    "title": hit.get("title"),
+                    "url": hit.get("url"),
+                    "hn_url": f"https://news.ycombinator.com/item?id={hit.get('objectID')}",
+                    "points": hit.get("points", 0),
+                    "num_comments": hit.get("num_comments", 0),
+                    "author": hit.get("author"),
+                    "created_at": hit.get("created_at"),
+                    "story_text": hit.get("story_text", "")[:300] if hit.get("story_text") else ""
+                })
+            
+            return {
+                "hits": hits,
+                "total_hits": data.get("nbHits", 0)
+            }
+        except (requests.RequestException, ValueError, KeyError) as e:
+            logging.error(f"Failed to search HackerNews for {tool_name}: {e}")
+            return {"error": str(e)}
 
-**Tool Information:**
+    @tool()
+    def stackoverflow_searcher(self, tool_name: str) -> dict:
+        """
+        Searches StackOverflow for questions related to a specific tool using the Stack Exchange API.
+        :param tool_name: The name of the tool to search for.
+        :return: A dictionary containing search results from StackOverflow.
+        """
+        logging.info(f"Searching StackOverflow for: {tool_name}")
+        
+        # Stack Exchange API - no API key required for basic usage
+        base_url = "https://api.stackexchange.com/2.3/search"
+        params = {
+            "order": "desc",
+            "sort": "votes",
+            "intitle": tool_name,
+            "site": "stackoverflow",
+            "pagesize": 20,
+            "filter": "default"  # Include body, title, score, etc.
+        }
+        
+        try:
+            response = requests.get(base_url, params=params, timeout=15)
+            response.raise_for_status()
+            data = response.json()
+            
+            questions = []
+            for item in data.get("items", []):
+                questions.append({
+                    "title": item.get("title"),
+                    "question_id": item.get("question_id"),
+                    "url": item.get("link"),
+                    "score": item.get("score", 0),
+                    "view_count": item.get("view_count", 0),
+                    "answer_count": item.get("answer_count", 0),
+                    "is_answered": item.get("is_answered", False),
+                    "creation_date": item.get("creation_date"),
+                    "last_activity_date": item.get("last_activity_date"),
+                    "tags": item.get("tags", []),
+                    "owner": item.get("owner", {}).get("display_name", "Unknown")
+                })
+            
+            return {
+                "questions": questions,
+                "total_questions": len(questions),
+                "has_more": data.get("has_more", False)
+            }
+        except (requests.RequestException, ValueError, KeyError) as e:
+            logging.error(f"Failed to search StackOverflow for {tool_name}: {e}")
+            return {"error": str(e)}
+
+    @tool()
+    def producthunt_searcher(self, tool_name: str) -> dict:
+        """
+        Searches ProductHunt for products related to a specific tool using the ProductHunt API.
+        :param tool_name: The name of the tool to search for.
+        :return: A dictionary containing search results from ProductHunt.
+        """
+        logging.info(f"Searching ProductHunt for: {tool_name}")
+        
+        if not self.producthunt_api_token:
+            logging.warning("No ProductHunt API token provided. Skipping.")
+            return {"error": "ProductHunt API token not provided."}
+        
+        # ProductHunt GraphQL API
+        base_url = "https://api.producthunt.com/v2/api/graphql"
+        
+        # GraphQL query to search for posts
+        query = """
+        query($search_query: String!) {
+            posts(first: 20, order: VOTES, postedAfter: "2020-01-01", searchBy: $search_query) {
+                edges {
+                    node {
+                        id
+                        name
+                        tagline
+                        description
+                        url
+                        websiteUrl
+                        votesCount
+                        commentsCount
+                        createdAt
+                        featuredAt
+                        slug
+                        topics {
+                            edges {
+                                node {
+                                    name
+                                }
+                            }
+                        }
+                        productLinks {
+                            type
+                            url
+                        }
+                    }
+                }
+            }
+        }
+        """
+        
+        headers = {
+            "Authorization": f"Bearer {self.producthunt_api_token}",
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+        
+        try:
+            response = requests.post(
+                base_url,
+                json={
+                    "query": query,
+                    "variables": {"search_query": tool_name}
+                },
+                headers=headers,
+                timeout=15
+            )
+            response.raise_for_status()
+            data = response.json()
+            
+            if "errors" in data:
+                logging.error(f"ProductHunt API returned errors: {data['errors']}")
+                return {"error": f"API errors: {data['errors']}"}
+            
+            products = []
+            posts_data = data.get("data", {}).get("posts", {}).get("edges", [])
+            
+            for edge in posts_data:
+                node = edge.get("node", {})
+                topics = [topic["node"]["name"] for topic in node.get("topics", {}).get("edges", [])]
+                
+                products.append({
+                    "id": node.get("id"),
+                    "name": node.get("name"),
+                    "tagline": node.get("tagline"),
+                    "description": node.get("description"),
+                    "url": node.get("url"),
+                    "website_url": node.get("websiteUrl"),
+                    "votes_count": node.get("votesCount", 0),
+                    "comments_count": node.get("commentsCount", 0),
+                    "created_at": node.get("createdAt"),
+                    "featured_at": node.get("featuredAt"),
+                    "slug": node.get("slug"),
+                    "topics": topics,
+                    "product_links": node.get("productLinks", [])
+                })
+            
+            return {
+                "products": products,
+                "total_products": len(products)
+            }
+        except (requests.RequestException, ValueError, KeyError) as e:
+            logging.error(f"Failed to search ProductHunt for {tool_name}: {e}")
+            return {"error": str(e)}
+
+    @tool()
+    def devto_searcher(self, tool_name: str) -> dict:
+        """
+        Searches Dev.to for articles mentioning a specific tool using the public API.
+        :param tool_name: The name of the tool to search for.
+        :return: A dictionary containing search results from Dev.to.
+        """
+        logging.info(f"Searching Dev.to for: {tool_name}")
+        
+        # Dev.to public API - no API key required
+        base_url = "https://dev.to/api/articles"
+        params = {
+            "tag": "programming,webdev,tutorial,discuss",
+            "per_page": 30,
+            "state": "fresh"
+        }
+        
+        try:
+            response = requests.get(base_url, params=params, timeout=15)
+            response.raise_for_status()
+            articles = response.json()
+            
+            # Filter articles that mention the tool name
+            relevant_articles = []
+            for article in articles:
+                title = article.get("title", "").lower()
+                description = article.get("description", "").lower()
+                tags = [tag.lower() for tag in article.get("tag_list", [])]
+                
+                tool_name_lower = tool_name.lower()
+                if (tool_name_lower in title or 
+                    tool_name_lower in description or 
+                    tool_name_lower in tags):
+                    
+                    relevant_articles.append({
+                        "title": article.get("title"),
+                        "url": article.get("url"),
+                        "description": article.get("description"),
+                        "published_at": article.get("published_at"),
+                        "positive_reactions_count": article.get("positive_reactions_count", 0),
+                        "comments_count": article.get("comments_count", 0),
+                        "reading_time_minutes": article.get("reading_time_minutes", 0),
+                        "tags": article.get("tag_list", []),
+                        "user": article.get("user", {}).get("name", "Unknown"),
+                        "organization": article.get("organization", {}).get("name") if article.get("organization") else None
+                    })
+            
+            return {
+                "articles": relevant_articles[:15],  # Limit to top 15 relevant articles
+                "total_articles": len(relevant_articles)
+            }
+        except (requests.RequestException, ValueError, KeyError) as e:
+            logging.error(f"Failed to search Dev.to for {tool_name}: {e}")
+            return {"error": str(e)}
+
+    @tool()
+    def npm_searcher(self, tool_name: str) -> dict:
+        """
+        Searches NPM registry for packages related to a specific tool.
+        :param tool_name: The name of the tool to search for.
+        :return: A dictionary containing package information from NPM.
+        """
+        logging.info(f"Searching NPM for: {tool_name}")
+        
+        # NPM registry API - no API key required
+        search_url = "https://registry.npmjs.org/-/v1/search"
+        params = {
+            "text": tool_name,
+            "size": 20,
+            "from": 0,
+            "quality": 0.65,
+            "popularity": 0.98,
+            "maintenance": 0.5
+        }
+        
+        try:
+            response = requests.get(search_url, params=params, timeout=15)
+            response.raise_for_status()
+            data = response.json()
+            
+            packages = []
+            for obj in data.get("objects", []):
+                package = obj.get("package", {})
+                
+                # Get detailed package info
+                package_name = package.get("name")
+                if package_name:
+                    try:
+                        detail_response = requests.get(f"https://registry.npmjs.org/{package_name}", timeout=10)
+                        if detail_response.status_code == 200:
+                            detail_data = detail_response.json()
+                            latest_version = package.get("version")
+                            
+                            packages.append({
+                                "name": package_name,
+                                "version": latest_version,
+                                "description": package.get("description"),
+                                "keywords": package.get("keywords", []),
+                                "npm_url": f"https://www.npmjs.com/package/{package_name}",
+                                "homepage": package.get("links", {}).get("homepage"),
+                                "repository": package.get("links", {}).get("repository"),
+                                "weekly_downloads": detail_data.get("downloads", {}).get("weekly") if "downloads" in detail_data else None,
+                                "license": package.get("license"),
+                                "last_publish": package.get("date"),
+                                "author": package.get("author", {}).get("name") if package.get("author") else None,
+                                "maintainers_count": len(package.get("maintainers", [])),
+                                "score": obj.get("score", {})
+                            })
+                    except Exception as detail_error:
+                        logging.warning(f"Could not get detailed info for {package_name}: {detail_error}")
+                        continue
+            
+            return {
+                "packages": packages,
+                "total_packages": len(packages)
+            }
+        except (requests.RequestException, ValueError, KeyError) as e:
+            logging.error(f"Failed to search NPM for {tool_name}: {e}")
+            return {"error": str(e)}
+
+    @tool()
+    def pypi_searcher(self, tool_name: str) -> dict:
+        """
+        Searches PyPI for packages related to a specific tool.
+        :param tool_name: The name of the tool to search for.
+        :return: A dictionary containing package information from PyPI.
+        """
+        logging.info(f"Searching PyPI for: {tool_name}")
+        
+        # PyPI search using the warehouse API
+        search_url = "https://pypi.org/search/"
+        params = {
+            "q": tool_name,
+        }
+        
+        try:
+            # Use the simple API for searching and then get details
+            search_response = requests.get("https://pypi.org/simple/", timeout=15)
+            
+            # Alternative: Use PyPI JSON API for specific packages
+            # Let's search for packages that might match the tool name
+            potential_packages = [
+                tool_name.lower(),
+                tool_name.lower().replace(" ", "-"),
+                tool_name.lower().replace(" ", "_"),
+                f"python-{tool_name.lower()}",
+                f"{tool_name.lower()}-python",
+                f"{tool_name.lower()}-api",
+                f"{tool_name.lower()}-sdk"
+            ]
+            
+            packages = []
+            for package_name in potential_packages:
+                try:
+                    detail_response = requests.get(f"https://pypi.org/pypi/{package_name}/json", timeout=10)
+                    if detail_response.status_code == 200:
+                        detail_data = detail_response.json()
+                        info = detail_data.get("info", {})
+                        
+                        # Get download stats (approximate using recent releases)
+                        releases = detail_data.get("releases", {})
+                        latest_version = info.get("version")
+                        
+                        packages.append({
+                            "name": info.get("name"),
+                            "version": latest_version,
+                            "summary": info.get("summary"),
+                            "description": info.get("description", "")[:500],  # Truncate
+                            "keywords": info.get("keywords"),
+                            "pypi_url": f"https://pypi.org/project/{package_name}/",
+                            "home_page": info.get("home_page"),
+                            "project_urls": info.get("project_urls", {}),
+                            "author": info.get("author"),
+                            "author_email": info.get("author_email"),
+                            "license": info.get("license"),
+                            "classifiers": info.get("classifiers", []),
+                            "requires_python": info.get("requires_python"),
+                            "upload_time": info.get("upload_time"),
+                            "release_count": len(releases)
+                        })
+                except Exception as detail_error:
+                    logging.debug(f"Package {package_name} not found on PyPI: {detail_error}")
+                    continue
+            
+            return {
+                "packages": packages,
+                "total_packages": len(packages)
+            }
+        except (requests.RequestException, ValueError, KeyError) as e:
+            logging.error(f"Failed to search PyPI for {tool_name}: {e}")
+            return {"error": str(e)}
+
+    @tool()
+    def medium_searcher(self, tool_name: str) -> dict:
+        """
+        Searches Medium for articles mentioning a specific tool.
+        Note: Medium's API has limited public access, so this uses web scraping approach.
+        :param tool_name: The name of the tool to search for.
+        :return: A dictionary containing search results from Medium.
+        """
+        logging.info(f"Searching Medium for: {tool_name}")
+        
+        # Medium search via RSS feeds and public endpoints
+        # Note: Medium's official API requires partnership approval
+        search_query = tool_name.replace(" ", "+")
+        
+        try:
+            # Use Medium's search functionality
+            search_url = f"https://medium.com/search"
+            params = {
+                "q": tool_name
+            }
+            
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+            }
+            
+            # For now, let's use a simpler approach with RSS feeds from popular tech publications
+            tech_publications = [
+                "https://medium.com/feed/@towardsdatascience",
+                "https://medium.com/feed/better-programming", 
+                "https://medium.com/feed/hackernoon"
+            ]
+            
+            articles = []
+            for feed_url in tech_publications:
+                try:
+                    feed_response = requests.get(feed_url, headers=headers, timeout=10)
+                    if feed_response.status_code == 200:
+                        # Simple parsing for titles that mention the tool
+                        content = feed_response.text
+                        if tool_name.lower() in content.lower():
+                            # This is a simplified approach - in production, you'd want proper RSS parsing
+                            # For now, we'll return a placeholder structure
+                            articles.append({
+                                "title": f"Article mentioning {tool_name}",
+                                "url": feed_url.replace("/feed", ""),
+                                "publication": feed_url.split("/")[-1] if "/" in feed_url else "Medium",
+                                "found_via": "RSS feed scan"
+                            })
+                except Exception as feed_error:
+                    logging.debug(f"Could not process feed {feed_url}: {feed_error}")
+                    continue
+            
+            # If we have the Medium API key, we could use it here
+            if self.medium_api_key:
+                logging.info("Medium API key available but partnership access required for full API")
+            
+            return {
+                "articles": articles[:10],  # Limit results
+                "total_articles": len(articles),
+                "note": "Limited Medium access - requires API partnership for full functionality"
+            }
+        except (requests.RequestException, ValueError, KeyError) as e:
+            logging.error(f"Failed to search Medium for {tool_name}: {e}")
+            return {"error": str(e)}
+
+    def _create_prompt(self, tool_record: dict, scraped_content: dict) -> str:
+        # Create a detailed prompt for the LLM optimized for comprehensive analysis
+        prompt = f"""
+You are a senior AI tool analyst conducting a comprehensive intelligence assessment. This analysis will be used for strategic business decisions, so thoroughness and accuracy are critical.
+
+**ANALYSIS OBJECTIVE:** Extract maximum detail about this AI tool's capabilities, market position, technical architecture, community adoption, and business metrics.
+
+**Tool Under Analysis:**
 - Name: {tool_record['name']}
 - Website: {tool_record['website_url']}
 - Category: {tool_record.get('category', 'N/A')}
 
-**Raw Data Collected:**
+**Comprehensive Data Sources:**
 ```json
 {json.dumps(scraped_content, indent=2)}
 ```
 
-Based on all the information provided, please populate the following JSON structure. Only include information you can confidently extract from the text. Do not make up information.
+**ANALYSIS INSTRUCTIONS:**
+1. **Be Comprehensive:** Extract every meaningful detail from all data sources
+2. **Be Specific:** Use exact numbers, dates, and technical specifications when available
+3. **Cross-Reference:** Validate information across multiple sources when possible
+4. **Quantify Everything:** Convert qualitative observations to metrics where possible
+5. **Stay Factual:** Only include information explicitly found in the data
+
+**DETAILED OUTPUT REQUIREMENTS:**
+- Feature lists should be exhaustive with specific capabilities
+- Technology stack should include versions, frameworks, and dependencies found
+- Pricing should include all tiers, limits, and enterprise details
+- Community metrics should reflect actual counts from Dev.to, NPM, PyPI, etc.
+- Company info should include precise financial data and organizational details
+
+Please populate the following JSON structure with maximum detail:
+
+```json
+{{
+    "basic_info": {{
+        "description": "Comprehensive description including purpose, target users, and key value proposition",
+        "category_classification": "Specific category (e.g., AI_IDE, CODE_COMPLETION, CHAT_ASSISTANT, etc.)"
+    }},
+    "technical_details": {{
+        "feature_list": ["Exhaustive list of all features found across all data sources"],
+        "technology_stack": ["Specific technologies, frameworks, languages with versions when available"],
+        "pricing_model": {{"free_tier": "details", "paid_tiers": "with exact pricing and limits", "enterprise": "custom pricing details"}},
+        "enterprise_capabilities": "Detailed enterprise features, SSO, admin controls, etc.",
+        "security_features": ["All security measures mentioned in any source"],
+        "integration_capabilities": ["APIs, webhooks, third-party integrations with specifics"],
+        "scalability_features": ["Performance limits, scaling options, infrastructure details"],
+        "compliance_certifications": ["SOC2, GDPR, ISO certifications found"],
+        "comparable_tools": ["Direct competitors mentioned in any source"],
+        "unique_differentiators": ["Specific advantages over competitors"],
+        "pros_and_cons": {{
+            "pros": ["Specific benefits mentioned by users/reviews"],
+            "cons": ["Specific limitations or criticisms found"]
+        }},
+        "market_positioning": "Position relative to competitors with supporting evidence",
+        "update_frequency": "How often updates are released based on version history",
+        "version_history": ["Recent version numbers and release dates"],
+        "roadmap_information": "Future plans mentioned in any source"
+    }},
+    "company_info": {{
+        "stock_price": "Extract from stock_data if available",
+        "market_cap": "Calculate or extract from financial sources",
+        "news_mentions": "Count from news_data.total_articles",
+        "annual_recurring_revenue": "Extract from company reports or news",
+        "funding_rounds": [{{
+            "round_name": "Series A/B/C etc.",
+            "amount": "Exact funding amount",
+            "date": "ISO date format"
+        }}],
+        "valuation": "Most recent company valuation",
+        "employee_count": "Number of employees if mentioned",
+        "founding_date": "Company founding date",
+        "key_executives": ["Names and titles of leadership team"],
+        "parent_company": "Parent organization if applicable",
+        "major_investors": ["List of key investors"]
+    }},
+    "community_metrics": {{
+        "github_stars": "Extract from github_data.stars",
+        "github_forks": "Extract from github_data.forks", 
+        "github_last_commit_date": "Extract from github_data.last_commit_date",
+        "reddit_mentions": "Count from reddit_data.search_results",
+        "reddit_sentiment_score": "Calculate based on scores in reddit_data",
+        "hacker_news_mentions_count": "Count from hackernews_data.hits",
+        "stackoverflow_questions_count": "Count from stackoverflow_data.questions",
+        "producthunt_ranking": "Extract from producthunt_data based on votes",
+        "devto_articles_count": "Count from devto_data.total_articles",
+        "npm_packages_count": "Count from npm_data.total_packages",
+        "npm_weekly_downloads": "Sum weekly_downloads from npm_data.packages",
+        "pypi_packages_count": "Count from pypi_data.total_packages", 
+        "medium_articles_count": "Count from medium_data.total_articles",
+        "list_of_companies_using_tool": ["Extract company names from all sources"],
+        "case_studies": ["URLs or titles of case studies found"],
+        "testimonials": ["Actual user quotes and testimonials found"]
+    }}
+}}
+```
+
+**CRITICAL REQUIREMENTS:**
+1. Replace ALL placeholder values with actual data from the sources
+2. Use exact numbers, not approximations 
+3. Include comprehensive lists - don't truncate for brevity
+4. Cross-reference data between sources for accuracy
+5. Extract maximum intelligence from all 11+ data sources provided
+6. This analysis runs infrequently, so be thorough and detailed
+
 IMPORTANT: You must only return the JSON object and nothing else. Do not include any text before or after the JSON.
 """
         return prompt
@@ -349,8 +906,33 @@ IMPORTANT: You must only return the JSON object and nothing else. Do not include
             subreddits=target_subreddits
         )
             
+        # Fetch Stock Data (if a stock symbol is provided)
+        if tool_record.get('stock_symbol'):
+            raw_data_payload['stock_data'] = self.stock_data_fetcher(stock_symbol=tool_record['stock_symbol'])
+
         # Fetch News Data
         raw_data_payload['news_data'] = self.news_aggregator(tool_name=tool_record['name'])
+
+        # Search HackerNews
+        raw_data_payload['hackernews_data'] = self.hackernews_searcher(tool_name=tool_record['name'])
+
+        # Search StackOverflow
+        raw_data_payload['stackoverflow_data'] = self.stackoverflow_searcher(tool_name=tool_record['name'])
+
+        # Search ProductHunt
+        raw_data_payload['producthunt_data'] = self.producthunt_searcher(tool_name=tool_record['name'])
+
+        # Search Dev.to for articles
+        raw_data_payload['devto_data'] = self.devto_searcher(tool_name=tool_record['name'])
+
+        # Search NPM packages
+        raw_data_payload['npm_data'] = self.npm_searcher(tool_name=tool_record['name'])
+
+        # Search PyPI packages
+        raw_data_payload['pypi_data'] = self.pypi_searcher(tool_name=tool_record['name'])
+
+        # Search Medium articles
+        raw_data_payload['medium_data'] = self.medium_searcher(tool_name=tool_record['name'])
 
         # Use the LLM to process the raw data
         prompt = self._create_prompt(tool_record, raw_data_payload)
