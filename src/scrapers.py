@@ -60,11 +60,20 @@ class ScraperMixin:
 
         headers = {'Authorization': f'token {self.github_api_token}'}
         try:
+            # Improved URL parsing
+            if not repo_url or "github.com" not in repo_url:
+                return {"error": "Invalid GitHub URL"}
+                
             parts = repo_url.strip("/").split("/")
-            if len(parts) < 2 or parts[-2] == 'features':
+            if len(parts) < 5: # e.g. https://github.com/owner/repo
                 logging.warning(f"Could not parse GitHub URL: {repo_url}")
-                return {"error": "Could not parse GitHub URL"}
+                return {"error": "URL does not appear to be a valid repository link"}
+
             owner, repo = parts[-2], parts[-1]
+            if owner == 'features' or owner == 'topics':
+                 logging.warning(f"Skipping non-repository GitHub URL: {repo_url}")
+                 return {"error": "URL points to a GitHub feature or topic, not a repository"}
+
             api_url = f"https://api.github.com/repos/{owner}/{repo}"
             
             response = requests.get(api_url, headers=headers, timeout=10)
@@ -104,6 +113,10 @@ class ScraperMixin:
         try:
             for sub_name in subreddits:
                 try:
+                    # Corrected the case of the subreddit name
+                    if sub_name == 'ArtificialIntelligence':
+                        sub_name = 'artificialintelligence'
+
                     subreddit = self.reddit_client.subreddit(sub_name)
                     # Search for the tool name in the subreddit, limit results to keep it focused
                     for submission in subreddit.search(tool_name, limit=10, sort='relevance', time_filter='year'):
@@ -318,97 +331,75 @@ class ScraperMixin:
         if not self.producthunt_api_token:
             logging.warning("No ProductHunt API token provided. Skipping.")
             return {"error": "ProductHunt API token not provided."}
-        
-        # ProductHunt GraphQL API
-        base_url = "https://api.producthunt.com/v2/api/graphql"
-        
-        # GraphQL query to search for posts
-        query = """
-        query($search_query: String!) {
-            posts(first: 20, order: VOTES, postedAfter: "2020-01-01", searchBy: $search_query) {
-                edges {
-                    node {
-                        id
-                        name
-                        tagline
-                        description
-                        url
-                        websiteUrl
-                        votesCount
-                        commentsCount
-                        createdAt
-                        featuredAt
-                        slug
-                        topics {
-                            edges {
-                                node {
-                                    name
-                                }
-                            }
-                        }
-                        productLinks {
-                            type
-                            url
-                        }
-                    }
-                }
+
+        # Corrected GraphQL query to fetch posts by a topic and then filter.
+        # ProductHunt's v2 API does not support direct text search on posts.
+        # We will fetch posts from relevant topics and filter by name.
+        graphql_query = """
+        query Posts($topic: String!) {
+          posts(topic: $topic, first: 50) {
+            edges {
+              node {
+                id
+                name
+                tagline
+                url
+                website
+                commentsCount
+                votesCount
+                createdAt
+              }
             }
+          }
         }
         """
+
+        all_posts = []
+        # Search in a few relevant topics
+        for topic in ["tech", "developer-tools", "artificial-intelligence"]:
+            try:
+                variables = {"topic": topic}
+                headers = {
+                    "Authorization": f"Bearer {self.producthunt_api_token}",
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                }
+                response = requests.post(
+                    "https://api.producthunt.com/v2/api/graphql",
+                    json={"query": graphql_query, "variables": variables},
+                    headers=headers,
+                    timeout=20
+                )
+                response.raise_for_status()
+                data = response.json()
+
+                if "errors" in data:
+                    # Log the error but don't stop; try the next topic
+                    logging.warning(f"ProductHunt API returned errors for topic '{topic}': {data['errors']}")
+                    continue
+
+                if posts_data := data.get("data", {}).get("posts"):
+                    for edge in posts_data.get("edges", []):
+                        if node := edge.get("node"):
+                            all_posts.append(node)
+
+            except (requests.RequestException, ValueError) as e:
+                logging.error(f"Failed to search ProductHunt for topic {topic}: {e}")
+                # Don't let a single topic failure stop the whole search
+                continue
         
-        headers = {
-            "Authorization": f"Bearer {self.producthunt_api_token}",
-            "Content-Type": "application/json",
-            "Accept": "application/json"
+        # Now, filter the collected posts by the tool_name
+        search_results = [
+            post for post in all_posts 
+            if tool_name.lower() in post.get("name", "").lower()
+        ]
+
+        # Deduplicate results based on post ID
+        unique_results = {post['id']: post for post in search_results}.values()
+
+        return {
+            "search_results": list(unique_results)[:20] # Return top 20 unique matches
         }
-        
-        try:
-            response = requests.post(
-                base_url,
-                json={
-                    "query": query,
-                    "variables": {"search_query": tool_name}
-                },
-                headers=headers,
-                timeout=15
-            )
-            response.raise_for_status()
-            data = response.json()
-            
-            if "errors" in data:
-                logging.error(f"ProductHunt API returned errors: {data['errors']}")
-                return {"error": f"API errors: {data['errors']}"}
-            
-            products = []
-            posts_data = data.get("data", {}).get("posts", {}).get("edges", [])
-            
-            for edge in posts_data:
-                node = edge.get("node", {})
-                topics = [topic["node"]["name"] for topic in node.get("topics", {}).get("edges", [])]
-                
-                products.append({
-                    "id": node.get("id"),
-                    "name": node.get("name"),
-                    "tagline": node.get("tagline"),
-                    "description": node.get("description"),
-                    "url": node.get("url"),
-                    "website_url": node.get("websiteUrl"),
-                    "votes_count": node.get("votesCount", 0),
-                    "comments_count": node.get("commentsCount", 0),
-                    "created_at": node.get("createdAt"),
-                    "featured_at": node.get("featuredAt"),
-                    "slug": node.get("slug"),
-                    "topics": topics,
-                    "product_links": node.get("productLinks", [])
-                })
-            
-            return {
-                "products": products,
-                "total_products": len(products)
-            }
-        except (requests.RequestException, ValueError, KeyError) as e:
-            logging.error(f"Failed to search ProductHunt for {tool_name}: {e}")
-            return {"error": str(e)}
 
     @tool()
     def devto_searcher(self, tool_name: str) -> dict:
@@ -468,14 +459,15 @@ class ScraperMixin:
     @tool()
     def npm_searcher(self, tool_name: str) -> dict:
         """
-        Searches NPM registry for packages related to a specific tool.
-        :param tool_name: The name of the tool to search for.
-        :return: A dictionary containing package information from NPM.
+        Searches the NPM registry for a given package name.
+        :param tool_name: The name of the package to search for.
+        :return: A dictionary containing search results.
         """
         logging.info(f"Searching NPM for: {tool_name}")
         
-        # NPM registry API - no API key required
-        search_url = "https://registry.npmjs.org/-/v1/search"
+        # Use the internal NPM registry and correct endpoint
+        base_url = "https://art.nwie.net/artifactory/api/npm/npm/-/v1/search"
+        
         params = {
             "text": tool_name,
             "size": 20,
@@ -486,7 +478,8 @@ class ScraperMixin:
         }
         
         try:
-            response = requests.get(search_url, params=params, timeout=15)
+            # Added verify=False to handle internal, self-signed SSL certs
+            response = requests.get(base_url, params=params, timeout=15, verify=False)
             response.raise_for_status()
             data = response.json()
             
@@ -666,3 +659,7 @@ class ScraperMixin:
         except (requests.RequestException, ValueError, KeyError) as e:
             logging.error(f"Failed to search Medium for {tool_name}: {e}")
             return {"error": str(e)}
+
+    def _make_request(self, url: str, headers: dict = None, params: dict = None) -> requests.Response:
+        """Centralized request-making method."""
+        # ... existing code ...

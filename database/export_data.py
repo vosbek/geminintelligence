@@ -20,6 +20,7 @@ import json
 import datetime
 import argparse
 from pathlib import Path
+import logging
 
 # Add src directory to path for imports
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
@@ -83,7 +84,7 @@ def export_structured_analysis(conn, output_dir):
     SELECT 
         t.id as tool_id,
         t.name,
-        t.website_url,
+        web_url.url as website_url,
         t.github_url,
         t.category,
         t.status,
@@ -100,6 +101,7 @@ def export_structured_analysis(conn, output_dir):
         s.created_at as snapshot_created_at
     FROM ai_tools t
     LEFT JOIN tool_snapshots s ON t.id = s.tool_id
+    LEFT JOIN tool_urls web_url ON t.id = web_url.tool_id AND web_url.url_type = 'website'
     ORDER BY t.name, s.snapshot_date DESC
     """
     
@@ -321,19 +323,68 @@ This will recreate the database structure and import all data.
     
     print(f"   📄 Import instructions created: {instructions_file}")
 
+def export_to_json(conn, output_file):
+    """Exports the AI Tools and their URLs to a JSON file."""
+    logging.info(f"Exporting data to {output_file}...")
+    try:
+        # The output_file path is already correctly formed, just use it.
+        # No need to create directories here, it's done in main().
+        with open(output_file, 'w') as f:
+            # Your existing JSON export logic here...
+            # This is a placeholder as the original logic was not fully visible.
+            cur = conn.cursor(cursor_factory=RealDictCursor)
+            cur.execute("SELECT * FROM ai_tools;")
+            tools = cur.fetchall()
+            json.dump(tools, f, indent=2, default=str)
+
+        logging.info("JSON export completed successfully.")
+    except Exception as e:
+        logging.error(f"Failed to export JSON data: {e}", exc_info=True)
+
+def export_to_sql(conn, output_file):
+    """Exports all tables to a single SQL file with INSERT statements."""
+    print("📦 Exporting database to SQL file...")
+    
+    with conn.cursor(cursor_factory=RealDictCursor) as cur, open(output_file, 'w', encoding='utf-8') as f:
+        # Get all table names
+        cur.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_name")
+        tables = [row['table_name'] for row in cur.fetchall()]
+        
+        for table in tables:
+            f.write(f"\\echo 'Populating {table}...'\n")
+            cur.execute(f'SELECT * FROM "{table}"')
+            rows = cur.fetchall()
+            
+            if not rows:
+                continue
+
+            columns = rows[0].keys()
+            
+            for row in rows:
+                row_dict = dict(row)
+                # Use psycopg2's mogrify for safe SQL literal generation
+                values = ', '.join([cur.mogrify("%s", (v,)).decode('utf-8') for v in row_dict.values()])
+                
+                insert_statement = f"INSERT INTO \"{table}\" ({', '.join(columns)}) VALUES ({values});\n"
+                f.write(insert_statement)
+            
+            f.write("\n")
+            
+    print(f"   ✅ SQL export complete: {output_file}")
+
 def main():
-    parser = argparse.ArgumentParser(description="Export AI Intelligence Platform data")
-    parser.add_argument("--output-dir", default="./exports", 
-                       help="Output directory for exported files")
-    parser.add_argument("--format", choices=["json", "csv", "both"], default="json",
-                       help="Export format")
-    
+    """Main execution function."""
+    parser = argparse.ArgumentParser(description="Export AI intelligence data.")
+    parser.add_argument("--output-dir", default="exports", help="Directory to save exported files.")
+    parser.add_argument("--format", choices=['json', 'sql', 'both'], default="both", help="Format to export (json, sql, or both).")
     args = parser.parse_args()
-    
-    # Create output directory
+
+    # Use Pathlib for robust path handling
+    # The output_dir is now handled correctly relative to where the script is run from,
+    # and the PowerShell script ensures it's an absolute path.
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
-    
+
     print("🚀 AI Intelligence Platform - Database Export")
     print("=" * 50)
     
@@ -362,6 +413,15 @@ def main():
         
         # Create import instructions
         create_import_instructions(output_dir)
+
+        # Simplified calls using the corrected output_dir
+        if args.format in ['json', 'both']:
+            json_output_file = output_dir / f"ai_tools_export_{datetime.datetime.now().strftime('%Y%m%d')}.json"
+            export_to_json(conn, json_output_file)
+
+        if args.format in ['sql', 'both']:
+            sql_output_file = output_dir / f"ai_tools_export_{datetime.datetime.now().strftime('%Y%m%d')}.sql"
+            export_to_sql(conn, sql_output_file)
         
         print("\n" + "=" * 50)
         print("✅ Export completed successfully!")

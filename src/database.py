@@ -11,7 +11,7 @@ from psycopg2.extras import DictCursor
 
 
 # Database configuration
-DB_NAME = os.getenv("DB_NAME", "ai_platform")
+DB_NAME = os.getenv("DB_NAME", "ai_database")
 DB_USER = os.getenv("DB_USER", "postgres")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "postgres")
 DB_HOST = os.getenv("DB_HOST", "localhost")
@@ -36,9 +36,40 @@ def get_db_connection():
 
 
 def get_tools_to_process(conn):
-    """Fetches tools that need to be processed."""
+    """
+    Fetches tools that need to be processed and their associated URLs.
+    Each tool record will include a 'urls' key with a list of its URLs.
+    """
     with conn.cursor(cursor_factory=DictCursor) as cur:
-        cur.execute("SELECT * FROM ai_tools WHERE run_status IS NULL OR run_status = 'update'")
+        # We use a LEFT JOIN to ensure tools with no URLs are still fetched
+        cur.execute("""
+            SELECT
+                t.id,
+                t.name,
+                t.description,
+                t.github_url,
+                t.stock_symbol,
+                t.category,
+                t.status,
+                t.run_status,
+                t.last_run,
+                COALESCE(
+                    jsonb_agg(
+                        jsonb_build_object('url', u.url, 'url_type', u.url_type)
+                    ) FILTER (WHERE u.id IS NOT NULL),
+                    '[]'::jsonb
+                ) AS urls
+            FROM
+                ai_tools t
+            LEFT JOIN
+                tool_urls u ON t.id = u.tool_id
+            WHERE
+                t.run_status IS NULL OR t.run_status = 'update'
+            GROUP BY
+                t.id
+            ORDER BY
+                t.id;
+        """)
         tools = cur.fetchall()
         logging.info(f"Found {len(tools)} tools to process.")
         return tools

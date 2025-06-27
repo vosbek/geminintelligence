@@ -122,8 +122,8 @@
     },
     "output_structure": {
       "basic_info": {
-        "description": "Comprehensive tool description and categorization",
-        "category_classification": "Specific category (AI_IDE, CODE_COMPLETION, etc.)"
+        "description": "Comprehensive description including purpose, target users, and key value proposition",
+        "category_classification": "Specific category (e.g., AI_IDE, CODE_COMPLETION, CHAT_ASSISTANT, etc.)"
       },
       "technical_details": {
         "feature_list": "Exhaustive list of all features found across sources",
@@ -177,7 +177,7 @@
   "database_schema": {
     "ai_tools": {
       "description": "Master table of AI tools to track",
-      "key_fields": ["name", "website_url", "github_url", "stock_symbol", "category", "run_status"],
+      "key_fields": ["name", "github_url", "stock_symbol", "category", "run_status"],
       "features": "Tracks processing status and last run times"
     },
     "tool_snapshots": {

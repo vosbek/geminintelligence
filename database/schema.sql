@@ -2,6 +2,7 @@
 
 DROP TABLE IF EXISTS curated_snapshots CASCADE;
 DROP TABLE IF EXISTS tool_snapshots CASCADE;
+DROP TABLE IF EXISTS tool_urls CASCADE;
 DROP TABLE IF EXISTS ai_tools CASCADE;
 DROP TABLE IF EXISTS data_sources CASCADE;
 
@@ -9,13 +10,9 @@ DROP TABLE IF EXISTS data_sources CASCADE;
 CREATE TABLE ai_tools (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    website_url VARCHAR(500) NOT NULL,
     description TEXT,
-    changelog_url VARCHAR(500),
-    blog_url VARCHAR(500),
     github_url VARCHAR(500),
     stock_symbol VARCHAR(20),
-    additional_urls JSONB,
     category VARCHAR(100),
     status VARCHAR(50) DEFAULT 'active',
     run_status VARCHAR(50) DEFAULT NULL, -- null=never_run, update=needs_run, processed=completed
@@ -24,10 +21,20 @@ CREATE TABLE ai_tools (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Table to store multiple URLs for each tool
+CREATE TABLE tool_urls (
+    id SERIAL PRIMARY KEY,
+    tool_id INTEGER NOT NULL REFERENCES ai_tools(id) ON DELETE CASCADE,
+    url VARCHAR(500) NOT NULL,
+    url_type VARCHAR(50) NOT NULL, -- e.g., 'website', 'blog', 'changelog', 'release_notes'
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(tool_id, url_type)
+);
+
 -- Table to store snapshots of data collected for each tool at a point in time
 CREATE TABLE tool_snapshots (
     id SERIAL PRIMARY KEY,
-    tool_id INTEGER REFERENCES ai_tools(id),
+    tool_id INTEGER REFERENCES ai_tools(id) ON DELETE CASCADE,
     snapshot_date TIMESTAMP NOT NULL,
     basic_info JSONB,
     technical_details JSONB,
@@ -42,7 +49,7 @@ CREATE TABLE tool_snapshots (
 -- Table to store curated data and analysis on top of snapshots
 CREATE TABLE curated_snapshots (
     id SERIAL PRIMARY KEY,
-    snapshot_id INTEGER REFERENCES tool_snapshots(id),
+    snapshot_id INTEGER REFERENCES tool_snapshots(id) ON DELETE CASCADE,
     curator_notes TEXT,
     enterprise_position TEXT,
     screenshots JSONB,

@@ -54,11 +54,20 @@ async def root():
 
 @app.get("/api/tools")
 async def get_tools():
-    """Get all tools in the database."""
+    """Get all tools and their associated URLs."""
     try:
         conn = get_db_connection()
         with conn.cursor(cursor_factory=DictCursor) as cur:
-            cur.execute("SELECT * FROM ai_tools ORDER BY name")
+            cur.execute("""
+                SELECT
+                    t.id, t.name, t.description, t.github_url, t.stock_symbol, t.category,
+                    t.status, t.run_status, t.last_run,
+                    COALESCE(jsonb_agg(jsonb_build_object('url', u.url, 'url_type', u.url_type)) FILTER (WHERE u.id IS NOT NULL), '[]'::jsonb) AS urls
+                FROM ai_tools t
+                LEFT JOIN tool_urls u ON t.id = u.tool_id
+                GROUP BY t.id
+                ORDER BY t.name
+            """)
             tools = cur.fetchall()
         conn.close()
         return {"tools": [dict(tool) for tool in tools]}
@@ -67,12 +76,21 @@ async def get_tools():
 
 @app.get("/api/tools/{tool_id}")
 async def get_tool_detail(tool_id: int):
-    """Get details for a specific tool including its most recent snapshot."""
+    """Get details for a specific tool including its URLs and most recent snapshot."""
     try:
         conn = get_db_connection()
         with conn.cursor(cursor_factory=DictCursor) as cur:
-            # Get tool details
-            cur.execute("SELECT * FROM ai_tools WHERE id = %s", (tool_id,))
+            # Get tool details and URLs
+            cur.execute("""
+                SELECT
+                    t.id, t.name, t.description, t.github_url, t.stock_symbol, t.category,
+                    t.status, t.run_status, t.last_run,
+                    COALESCE(jsonb_agg(jsonb_build_object('url', u.url, 'url_type', u.url_type)) FILTER (WHERE u.id IS NOT NULL), '[]'::jsonb) AS urls
+                FROM ai_tools t
+                LEFT JOIN tool_urls u ON t.id = u.tool_id
+                WHERE t.id = %s
+                GROUP BY t.id
+            """, (tool_id,))
             tool = cur.fetchone()
             if not tool:
                 raise HTTPException(status_code=404, detail="Tool not found")
