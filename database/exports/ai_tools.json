@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "name": "Cursor",
+    "description": "The AI Code Editor",
+    "github_url": "https://github.com/getcursor/cursor",
+    "stock_symbol": "NULL",
+    "category": "AI_IDE",
+    "status": "active",
+    "run_status": "processed",
+    "last_run": "2025-06-27T12:43:01.215263",
+    "created_at": "2025-06-27T12:40:57.340886",
+    "updated_at": "2025-06-27T12:43:01.215944"
+  }
+]

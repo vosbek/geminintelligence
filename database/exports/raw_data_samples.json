@@ -1,0 +1,1396 @@
+{
+  "devto_data": [
+    {
+      "tool_name": "Cursor",
+      "snapshot_date": "2025-06-27T12:43:01.198403",
+      "sample_data": {
+        "articles": [
+          {
+            "url": "https://dev.to/proflead/cursor-ai-from-installation-to-mastery-on-linux-2024-tutorial-1k79",
+            "tags": [
+              "ai",
+              "cursorai",
+              "programming",
+              "vscode"
+            ],
+            "user": "Vladislav Guzey",
+            "title": "Cursor AI: From Installation to Mastery on Linux 2024 (Tutorial)",
+            "found_via": "variation: Cursor AI",
+            "description": "Today, we’ll explore Cursor AI. Whether you’re an experienced developer or a beginner, this article...",
+            "organization": null,
+            "published_at": "2024-09-16T14:48:26Z",
+            "comments_count": 0,
+            "reading_time_minutes": 4,
+            "positive_reactions_count": 29
+          },
+          {
+            "url": "https://dev.to/ethanleetech/how-to-streamline-your-design-and-prd-process-with-ai-tools-1id1",
+            "tags": [
+              "cursorai",
+              "ai",
+              "startup",
+              "buildinpublic"
+            ],
+            "user": "Ethan Lee",
+            "title": "Build UIs with V0, CursorAI and Behance with PRD process",
+            "found_via": "variation: Cursor AI",
+            "description": "Hey Everyone, welcome to our new Build with AI Series. If you're building UIs or crafting PRDs...",
+            "organization": null,
+            "published_at": "2024-11-12T04:41:57Z",
+            "comments_count": 0,
+            "reading_time_minutes": 2,
+            "positive_reactions_count": 24
+          },
+          {
+            "url": "https://dev.to/samchon/received-2022-top-authors-gift-from-devto-3l92",
+            "tags": [
+              "cursorai",
+              "gratitude",
+              "tooling"
+            ],
+            "user": "Jeongho Nam",
+            "title": "Received 2022 Top Authors Gift from DEV.TO",
+            "found_via": "variation: Cursor AI",
+            "description": "I received 2022 top authors gift from dev.to.   Thanks for giving me such interesting gift...",
+            "organization": null,
+            "published_at": "2023-01-28T13:23:12Z",
+            "comments_count": 5,
+            "reading_time_minutes": 2,
+            "positive_reactions_count": 23
+          },
+          {
+            "url": "https://dev.to/mendoncamaria/the-future-of-programming-with-ai-part-2-ai-powered-code-editing-2c1f",
+            "tags": [
+              "cursorai",
+              "codeeditor",
+              "promptengineering",
+              "debugging"
+            ],
+            "user": "Maria Mendonca",
+            "title": "The Future of Programming with AI - Part 2: AI-Powered Code Editing",
+            "found_via": "variation: Cursor AI",
+            "description": "In software development, code comparison, or \"diffing,\" plays a crucial role in understanding...",
+            "organization": null,
+            "published_at": "2024-10-21T14:09:28Z",
+            "comments_count": 0,
+            "reading_time_minutes": 6,
+            "positive_reactions_count": 10
+          },
+          {
+            "url": "https://dev.to/mendoncamaria/the-future-of-programming-with-ai-part-1-the-basics-and-early-adopters-1558",
+            "tags": [
+              "cursorai",
+              "codeeditor",
+              "vscode",
+              "productivity"
+            ],
+            "user": "Maria Mendonca",
+            "title": "The Future of Programming with AI - Part 1: The Basics and Early Adopters",
+            "found_via": "variation: Cursor AI",
+            "description": "In recent years, the realm of programming has witnessed a seismic shift, driven by the rapid...",
+            "organization": null,
+            "published_at": "2024-10-21T09:00:06Z",
+            "comments_count": 0,
+            "reading_time_minutes": 5,
+            "positive_reactions_count": 9
+          },
+          {
+            "url": "https://dev.to/mendoncamaria/5-part-article-series-the-future-of-programming-with-ai-introduction-to-ai-3il0",
+            "tags": [
+              "ai",
+              "cursorai",
+              "beginners",
+              "productivity"
+            ],
+            "user": "Maria Mendonca",
+            "title": "5-Part Article Series: The Future of Programming with AI - Introduction to AI",
+            "found_via": "variation: Cursor AI",
+            "description": "Artificial Intelligence: A Programmer's New Best Friend   Artificial Intelligence (AI) has...",
+            "organization": null,
+            "published_at": "2024-10-19T07:13:01Z",
+            "comments_count": 0,
+            "reading_time_minutes": 2,
+            "positive_reactions_count": 6
+          },
+          {
+            "url": "https://dev.to/betosardinha/dj-1-creating-a-rails-api-with-postgres-and-docker-2fgn",
+            "tags": [
+              "ai",
+              "cursorai",
+              "discuss"
+            ],
+            "user": "Beto Sardinha",
+            "title": "DJ-1: Creating a Rails API with Postgres and Docker",
+            "found_via": "variation: Cursor AI",
+            "description": "Hello there to you who are reading this post for some reason!     I don't know how to start...",
+            "organization": null,
+            "published_at": "2023-01-13T00:13:21Z",
+            "comments_count": 0,
+            "reading_time_minutes": 5,
+            "positive_reactions_count": 4
+          },
+          {
+            "url": "https://dev.to/unfor19/the-ultimate-guide-which-ai-coding-model-should-you-use-1pio",
+            "tags": [
+              "ai",
+              "cursor",
+              "productivity",
+              "development"
+            ],
+            "user": "Meir Gabay",
+            "title": "The Ultimate Guide: Which AI Coding Model Should You Use",
+            "found_via": "tag: cursor",
+            "description": "Ever wondered which AI model is truly best for coding tasks? Spoiler alert: there’s no...",
+            "organization": null,
+            "published_at": "2025-06-25T05:48:28Z",
+            "comments_count": 0,
+            "reading_time_minutes": 2,
+            "positive_reactions_count": 3
+          },
+          {
+            "url": "https://dev.to/john_p_wilson/a-month-with-supercodesh-how-i-learned-to-stop-worrying-and-love-the-cursor-agent-11ml",
+            "tags": [
+              "cursor",
+              "ai",
+              "openai",
+              "githubcopilot"
+            ],
+            "user": "John Wilson",
+            "title": "A Month with Supercode.sh: How I Learned to Stop Worrying and Love the Cursor agent",
+            "found_via": "tag: cursor",
+            "description": "I’m not exactly a vibe-coder. I’ve been writing code for over a decade, and building an app from...",
+            "organization": null,
+            "published_at": "2025-06-22T15:05:48Z",
+            "comments_count": 0,
+            "reading_time_minutes": 9,
+            "positive_reactions_count": 2
+          },
+          {
+            "url": "https://dev.to/aajeedhaghar/boosting-developer-efficiency-with-cursor-ide-a-comprehensive-tool-for-modern-coding-2o6d",
+            "tags": [
+              "cursorai",
+              "coding",
+              "development",
+              "ide"
+            ],
+            "user": "Aajeeth Aghar",
+            "title": "Boosting Developer Efficiency with Cursor IDE: A Comprehensive Tool for Modern Coding",
+            "found_via": "variation: Cursor AI",
+            "description": "In the fast-paced world of software development, where productivity and efficiency are key, having...",
+            "organization": null,
+            "published_at": "2024-09-27T12:23:57Z",
+            "comments_count": 0,
+            "reading_time_minutes": 3,
+            "positive_reactions_count": 2
+          },
+          {
+            "url": "https://dev.to/cohenoa/creating-github-pages-is-easy-1221",
+            "tags": [
+              "claude",
+              "cursorai",
+              "ai"
+            ],
+            "user": "Noa Cohen",
+            "title": "Creating github pages is easy!",
+            "found_via": "variation: Cursor AI",
+            "description": "I am taking Open Source Development Course given by Gabor Szabo in order to gain a better...",
+            "organization": null,
+            "published_at": "2023-01-22T08:13:08Z",
+            "comments_count": 0,
+            "reading_time_minutes": 1,
+            "positive_reactions_count": 2
+          },
+          {
+            "url": "https://dev.to/logrocket/frontend-devs-heres-how-to-get-the-most-out-of-cursor-k7j",
+            "tags": [
+              "webdev",
+              "ai",
+              "cursor"
+            ],
+            "user": "Megan Lee",
+            "title": "Frontend devs: Here’s how to get the most out of Cursor",
+            "found_via": "tag: cursor",
+            "description": "Written by Isaac Okoro✏️  If you've been in the vibe coding fever lately, you've most likely...",
+            "organization": "LogRocket",
+            "published_at": "2025-06-24T18:00:00Z",
+            "comments_count": 0,
+            "reading_time_minutes": 10,
+            "positive_reactions_count": 1
+          },
+          {
+            "url": "https://dev.to/suzuki0430/prevent-unexpected-claude-code-costs-with-this-vscodecursor-extension-nlb",
+            "tags": [
+              "vscode",
+              "cursor",
+              "extensions",
+              "vibecoding"
+            ],
+            "user": "Atsushi Suzuki",
+            "title": "Prevent Unexpected Claude Code Costs with This VSCode/Cursor Extension",
+            "found_via": "tag: cursor",
+            "description": "Recently, a CLI tool for visualizing Claude Code usage costs has been making waves in Japan. But...",
+            "organization": null,
+            "published_at": "2025-06-03T00:19:50Z",
+            "comments_count": 0,
+            "reading_time_minutes": 2,
+            "positive_reactions_count": 1
+          },
+          {
+            "url": "https://dev.to/zikrullo_gaming_cccfbe9da/how-to-crack-cursor-ai-100-method-kco",
+            "tags": [
+              "cursorai",
+              "linux",
+              "tutorial",
+              "cli"
+            ],
+            "user": "Zikrullo Gaming",
+            "title": "How to crack cursor ai 100% method",
+            "found_via": "variation: Cursor AI",
+            "description": "Hello everyone! Just cracked Cursor AI in a couple of minutes.  Tested it on Linux, but turns out it...",
+            "organization": null,
+            "published_at": "2025-05-30T12:56:43Z",
+            "comments_count": 0,
+            "reading_time_minutes": 1,
+            "positive_reactions_count": 1
+          },
+          {
+            "url": "https://dev.to/amirfawzi/vmware-on-aws-4hem",
+            "tags": [
+              "cursorai",
+              "developer",
+              "programming",
+              "productivity"
+            ],
+            "user": "amirfawzi",
+            "title": "VMware on AWS",
+            "found_via": "variation: Cursor AI",
+            "description": "VMware, a leading provider of virtualization and cloud infrastructure solutions, offers a number of...",
+            "organization": null,
+            "published_at": "2023-01-15T19:14:26Z",
+            "comments_count": 0,
+            "reading_time_minutes": 2,
+            "positive_reactions_count": 1
+          }
+        ],
+        "total_articles": 36
+      }
+    }
+  ],
+  "pypi_data": [
+    {
+      "tool_name": "Cursor",
+      "snapshot_date": "2025-06-27T12:43:01.198403",
+      "sample_data": {
+        "packages": [],
+        "total_packages": 0
+      }
+    }
+  ],
+  "scraped_content": [
+    {
+      "tool_name": "Cursor",
+      "snapshot_date": "2025-06-27T12:43:01.198403",
+      "sample_data": [
+        {
+          "url": "https://www.cursor.com/blog",
+          "content": "# Blog\n\nCompiled notes from the team\n\n## Featured\n\n[**Character Prefix Conditioning** \\\\\n\\\\\nA clever algorithm for more accurate code completion sampling.\\\\\n\\\\\n![Jacob](https://www.cursor.com/_next/image?url=%2Fauthors%2Fjacob.jpg&w=3840&q=75)\\\\\n\\\\\nByJacob\\\\\n\\\\\n2minutes read](https://www.cursor.com/blog/cpc) [**Inference Characteristics of Llama** \\\\\n\\\\\nA primer on inference math and an examination of the surprising costs of Llama.\\\\\n\\\\\n![Aman](https://www.cursor.com/_next/image?url=%2Fauthors%2Faman.jpg&w=3840&q=75)\\\\\n\\\\\nByAman\\\\\n\\\\\n19minutes read](https://www.cursor.com/blog/llama-inference)\n\n## All posts\n\n[**Introducing the Ultra Plan** \\\\\n\\\\\nIn collaboration with the model providers, we're introducing a $200 / mo tier for power users.\\\\\n\\\\\n![Michael](https://www.cursor.com/_next/image?url=%2Fauthors%2Fmichael.jpeg&w=3840&q=75)\\\\\n\\\\\nByMichael\\\\\n\\\\\n1minutes read](https://www.cursor.com/blog/new-tier) [**Series C and Scale** \\\\\n\\\\\nWe've raised $900m to push the frontier of AI coding research.\\\\\n\\\\\n![Anysphere Team](https://www.cursor.com/_next/image?url=%2Fauthors%2Fteam.png&w=3840&q=75)\\\\\n\\\\\nByAnysphere Team\\\\\n\\\\\n1minutes read](https://www.cursor.com/blog/series-c) [**Early Team** \\\\\n\\\\\nLots of great people are behind Cursor! Here are some.\\\\\n\\\\\n![Sualeh Asif](https://www.cursor.com/_next/image?url=%2Fauthors%2Fsualeh.jpg&w=3840&q=75)\\\\\n\\\\\nBySualeh Asif\\\\\n\\\\\n2minutes read](https://www.cursor.com/blog/team) [**A New Tab Model** \\\\\n\\\\\nAnnouncing the next-generation Cursor Tab model.\\\\\n\\\\\n![Phillip](https://www.cursor.com/_next/image?url=%2Fauthors%2Fphillip.png&w=3840&q=75)\\\\\n\\\\\nByPhillip\\\\\n\\\\\n3minutes read](https://www.cursor.com/blog/tab-update) [**Series B and Automating Code** \\\\\n\\\\\nWe've raised $105M to further our mission of automating code.\\\\\n\\\\\n![Anysphere Team](https://www.cursor.com/_next/image?url=%2Fauthors%2Fteam.png&w=3840&q=75)\\\\\n\\\\\nByAnysphere Team\\\\\n\\\\\n1minutes read](https://www.cursor.com/blog/series-b) [**Character Prefix Conditioning** \\\\\n\\\\\nA clever algorithm for more accurate code completion sampling.\\\\\n\\\\\n![Jacob](https://www.cursor.com/_next/image?url=%2Fauthors%2Fjacob.jpg&w=3840&q=75)\\\\\n\\\\\nByJacob\\\\\n\\\\\n2minutes read](https://www.cursor.com/blog/cpc) [**Supermaven Joins Cursor** \\\\\n\\\\\nWe're teaming up to build the next phase of AI coding.\\\\\n\\\\\n![Michael](https://www.cursor.com/_next/image?url=%2Fauthors%2Fmichael.jpeg&w=3840&q=75)\\\\\n\\\\\nByMichael\\\\\n\\\\\n2minutes read](https://www.cursor.com/blog/supermaven) [**Iterating with Shadow Workspaces** \\\\\n\\\\\nHidden windows and kernel-level folder proxies to let AIs iterate on code without affecting the user.\\\\\n\\\\\n![Arvid](https://www.cursor.com/_next/image?url=%2Fauthors%2Farvid.jpeg&w=3840&q=75)\\\\\n\\\\\nByArvid\\\\\n\\\\\n19minutes read](https://www.cursor.com/blog/shadow-workspace) [**Series A and Magic** \\\\\n\\\\\nWe've raised $60M to create a magical tool with the aim of writing the world's software.\\\\\n\\\\\n![Anysphere Team](https://www.cursor.com/_next/image?url=%2Fauthors%2Fteam.png&w=3840&q=75)\\\\\n\\\\\nByAnysphere Team\\\\\n\\\\\n2minutes read](https://www.cursor.com/blog/series-a) [**More Problems** \\\\\n\\\\\nSeveral exciting problem areas for the next phase of AI-programming.\\\\\n\\\\\n![Aman](https://www.cursor.com/_next/image?url=%2Fauthors%2Faman.jpg&w=3840&q=75)\\\\\n\\\\\nByAman\\\\\n\\\\\n5minutes read](https://www.cursor.com/blog/problems-2024) [**Our Problems** \\\\\n\\\\\nA list of problems we are excited to solve for Cursor.\\\\\n\\\\\n![Sualeh](https://www.cursor.com/_next/image?url=%2Fauthors%2Fsualeh.jpg&w=3840&q=75)\\\\\n\\\\\nBySualeh\\\\\n\\\\\n4minutes read](https://www.cursor.com/blog/problems-2023) [**Inference Characteristics of Llama** \\\\\n\\\\\nA primer on inference math and an examination of the surprising costs of Llama.\\\\\n\\\\\n![Aman](https://www.cursor.com/_next/image?url=%2Fauthors%2Faman.jpg&w=3840&q=75)\\\\\n\\\\\nByAman\\\\\n\\\\\n19minutes read](https://www.cursor.com/blog/llama-inference) [**Prompt Design** \\\\\n\\\\\nPrompting is like web design. Let's call it prompt design, and build better tools for it.\\\\\n\\\\\n![Arvid](https://www.cursor.com/_next/image?url=%2Fauthors%2Farvid.jpeg&w=3840&q=75)\\\\\n\\\\\nByArvid\\\\\n\\\\\n5minutes read](https://www.cursor.com/blog/prompt-design)",
+          "metadata": {
+            "url": "https://www.cursor.com/en/blog",
+            "title": "Blog | Cursor - The AI Code Editor",
+            "favicon": "https://www.cursor.com/favicon-48x48.png",
+            "ogImage": "https://www.cursor.com/_next/static/media/opengraph-image.375711d3.png",
+            "ogTitle": "Blog | Cursor - The AI Code Editor",
+            "language": "en",
+            "og:image": "https://www.cursor.com/_next/static/media/opengraph-image.375711d3.png",
+            "og:title": "Blog | Cursor - The AI Code Editor",
+            "scrapeId": "a3de8dac-4858-43e4-9768-17f3f3bcff08",
+            "viewport": "width=device-width, initial-scale=1",
+            "proxyUsed": "basic",
+            "sourceURL": "https://www.cursor.com/blog",
+            "statusCode": 200,
+            "contentType": "text/html; charset=utf-8",
+            "creditsUsed": 1,
+            "description": "Latest updates and insights from the Cursor team. Learn about AI-powered coding, product updates, and development tips.",
+            "theme-color": "#17191d",
+            "og:image:alt": "Cursor - The AI Code Editor",
+            "twitter:card": "summary_large_image",
+            "ogDescription": "Latest updates and insights from the Cursor team. Learn about AI-powered coding, product updates, and development tips.",
+            "twitter:image": "https://www.cursor.com/_next/static/media/opengraph-image.375711d3.png",
+            "twitter:title": "Blog | Cursor - The AI Code Editor",
+            "og:description": "Latest updates and insights from the Cursor team. Learn about AI-powered coding, product updates, and development tips.",
+            "og:image:width": "1200",
+            "og:image:height": "630",
+            "next-size-adjust": "",
+            "twitter:image:alt": "Cursor - The AI Code Editor",
+            "twitter:description": "Latest updates and insights from the Cursor team. Learn about AI-powered coding, product updates, and development tips.",
+            "twitter:image:width": "1200",
+            "twitter:image:height": "630",
+            "msapplication-TileColor": "#000000",
+            "msapplication-TileImage": "/icons/144.png",
+            "apple-mobile-web-app-title": "Cursor",
+            "apple-mobile-web-app-capable": "yes",
+            "apple-mobile-web-app-status-bar-style": "default"
+          },
+          "url_type": "blog"
+        },
+        {
+          "url": "https://www.cursor.com/changelog",
+          "content": "# Changelog\n\n1.1\n\nJune 12, 2025\n\n1.1\n\n## [Background Agents in Slack](https://www.cursor.com/changelog/1-1)\n\nYou can now launch Background Agents directly from Slack by mentioning **@Cursor**. Agents can read the thread, understand what's going on, and create PRs in GitHub, all without leaving the conversation.\n\n### Use Cursor where your team works\n\nMention **@Cursor** in any thread with a prompt like:\n\n![Using @Cursor in Slack](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fslack-zoomed.4d0262cc.gif&w=3840&q=75)\n\nAgents run remotely in a secure environment and you'll get updates directly in Slack, including links to Cursor and GitHub, when the work is done.\n\n### Agents understand context\n\nCursor reads the entire Slack thread before starting, so Background Agents understand the full context when you reference previous discussions or issues.\n\n![View PR link in Slack](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fslack-view-pr.05c38101.png&w=3840&q=75)\n\nYou can also ask Cursor to investigate issues and get answers:\n\n![Cursor agent investigating in Slack](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fslack-investigate.2320d781.png&w=3840&q=75)\n\n### Getting started\n\nTo use Background Agents in Slack, an admin needs to set up the integration first. Check out our [setup documentation](https://docs.cursor.com/slack) or ask your workspace admin to connect Cursor from the [Dashboard → Integrations](https://cursor.com/dashboard?tab=integrations) page.\n\nOnce connected, try it in any channel with **@Cursor** and write a prompt. Use the command `help` to see all commands, or `settings` to configure your default model, repo, and branch.\n\nImprovements (1)\n\n- Search in settings with `Cmd/Ctrl+F`\n\nMCP (3)\n\n- Progress notifications from servers\n- Dynamic tool registration\n- Roots supports\n\nPatches (3)\n\n**1.1.1**\n\n- Fixed workspaces indexing issue\n\n**1.1.2**\n\n- Improved client side performance\n\n**1.1.3**\n\n- Fixed MCP performance regression\n- Added PR search and indexing\n- Improved deeplink experience\n- Added option to change upstream marketplace provider\n\n**1.1.4**\n\n- Improved Background Agent reliability\n- Fixed search in Chat UI bug\n\n**1.1.5**\n\n- Small performance improvements\n\n**1.1.6**\n\n- Fixed an agent latency regression that occurs for users using Remote SSH\n\n1.0\n\nJune 4, 2025\n\n1.0\n\n## [BugBot, Background Agent access to everyone, and one-click MCP install](https://www.cursor.com/changelog/1-0)\n\nCursor 1.0 is here!\n\nThis release brings BugBot for code review, a first look at memories, one-click MCP setup, Jupyter support, and general availability of Background Agent.\n\n### Automatic code review with BugBot\n\nBugBot automatically reviews your PRs and catches potential bugs and issues.\n\nWhen an issue is found, BugBot leaves a comment on your PRs in GitHub. You can click \" _**Fix in Cursor**_\" to move back to the editor with a pre-filled prompt to fix the issue.\n\nTo set it up, follow instructions in our [BugBot docs](https://docs.cursor.com/bugbot).\n\nYour browser does not support the video tag.\n\n### Background Agent for everyone\n\nSince we released Background Agent, our remote coding agent, in early access a few weeks ago, early signals have been positive.\n\nWe're now excited to expand Background Agent to all users! You can start using it right away by clicking the cloud icon in chat or hitting `Cmd/Ctrl+E` if you have privacy mode disabled. For users with privacy mode enabled, we'll soon have a way to enable it for you too!\n\n![Background Agent in Cursor](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbg-agent.349d715a.png&w=3840&q=75)\n\n### Agent in Jupyter Notebooks\n\nCursor can now implement changes in Jupyter Notebooks!\n\nAgent will now create and edit multiple cells directly inside of Jupyter, a significant improvement for research and data science tasks. Only supported with Sonnet models to start.\n\nYour browser does not support the video tag.\n\n### Memories\n\nWith Memories, Cursor can remember facts from conversations and reference them in the future. Memories are stored per project on an individual level, and can be managed from Settings.\n\nWe're rolling out Memories as a beta feature. To get started, enable from Settings → Rules.\n\nYour browser does not support the video tag.\n\n### MCP one-click install and OAuth support\n\nYou can now set up MCP servers in Cursor with one click, and together with OAuth support, you can easily authenticate servers that support it.\n\nWe've curated a short list of official MCP servers you can add to Cursor at [docs.cursor.com/tools](https://docs.cursor.com/tools).\n\nIf you're an MCP developer, you can easily make your server available to developers by adding a _Add to Cursor_ button in your documentation and READMEs. Generate one at [docs.cursor.com/deeplinks](https://docs.cursor.com/deeplinks).\n\nYour browser does not support the video tag.\n\n### Richer Chat responses\n\nCursor can now render visualizations inside of a conversation. In particular, Mermaid diagrams and Markdown tables can now be generated and viewed in the same place!\n\nYour browser does not support the video tag.\n\nYour browser does not support the video tag.\n\n### New Settings and Dashboard\n\nThe setting and dashboard page have gotten some polish with this release.\n\nWith the new Dashboard, you can view your individual or team's usage analytics, update your display name, and view detailed statistics broken down by tool or model.\n\n![Settings in Cursor](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsettings.2dea9c3d.png&w=3840&q=75)\n\n![Dashboard in Cursor](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdashboard.2b7002bf.png&w=3840&q=75)\n\nKeyboard (1)\n\n- Open Background Agent control panel with `Cmd/Ctrl+E`\n\nImprovements (4)\n\n- `@Link` and web search can now parse PDFs and include in context\n- Network diagnostics in settings to verify connectivity\n- Faster responses with parallel tool calls\n- Collapsable tool calls in Chat\n\nAccount (3)\n\n- Enterprise users can only access stable release (no pre-release)\n- Team admins can now disable Privacy Mode\n- [Admin API for teams](https://docs.cursor.com/account/teams/admin-api) to access usage metrics and spend data\n\nModels (1)\n\n- Max mode is now available for Gemini 2.5 Flash\n\nPatches (1)\n\n**1.0.1**\n\n- Fixes and improvements to Background Agent\n\n0.50\n\nMay 15, 2025\n\n0.50\n\n## [Simplified Pricing, Background Agent and Refreshed Inline Edit](https://www.cursor.com/changelog/0-50)\n\nIntroducing unified request-based pricing, Max Mode for all top models, and Background Agent for parallel task execution. Plus, improved context management with `@folders` support, refreshed Inline Edit with new options, faster file edits, multi-root workspace support, and enhanced chat features including export and duplication.\n\n### Simpler, unified pricing\n\nWe've heard your feedback and are rolling out a unified pricing model to make it less confusing. Here's how it works:\n\n- All model usage is now unified into request-based pricing\n- Max mode now uses token-based pricing (similar to how models API pricing works)\n- Premium tool calls and long context mode are removed to keep it simple\n\nQuotas on [plans](https://www.cursor.com/pricing) Hobby, Pro and Business has not changed and slow requests are still included in the plans. All usage can be found in your [dashboard](https://cursor.com/dashboard) to help you track and manage your spend.\n\n### Max Mode for all top models\n\nMax Mode is now available for all state-of-the-art models in Cursor, with a simpler token-based pricing model. It's designed to give you full control when you need it most. You can enable it from the model picker to see which models support it. When new models roll out, Max Mode will be how we deliver their full capabilities from day one.\n\nIt's ideal for your hardest problems when you need more context, intelligence and tool use. For everything else, normal mode is still recommended with the same capabilities you're used to.\n\nThe pricing is straightforward: you're charged based on token usage. If you've used any CLI-based coding tool, Max mode will feel like that - but right in Cursor.\n\n> Note: If you're using an older version of Cursor, you'll still have access to the previous MAX versions and long context mode for a few weeks. However, these features will be sunset soon, so we recommend updating to continue using these capabilities.\n\nRead more about Max Mode in our [documentation](https://docs.cursor.com/context/max-mode)\n\nYour browser does not support the video tag.\n\n### New Tab model\n\nWe've trained a new Tab model that now can suggest changes across multiple files. The model excels particularly at refactors, edit chains, multi file changes, and jumping between related code. You'll also notice it feels more natural and snappier in day-to-day use.\n\nWith this we've also added syntax highlighting to the completion suggestions.\n\n![New Tab model in Cursor](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftab-jump.d0319f16.png&w=2880&q=75)\n\n### Background Agent  Preview\n\nIn early preview, rolling out gradually: Cursor agents can now run in the background! To try it, head to Settings > Beta > Background Agent.\n\nThis allows you to run many agents in parallel and have them tackle bigger tasks. The agents run in their own remote environments. At any point, you can view the status, send a follow-up, or take over.\n\nWe're curious to hear what you think. While it is still early, we've found background agents useful internally for fixing nits, doing investigations, and writing first drafts of medium-sized PRs. Read more at [docs.cursor.com/background-agent](https://docs.cursor.com/background-agent).\n\nYour browser does not support the video tag.\n\n### Include your entire codebase in context\n\nYou can now use `@folders` to add your entire codebase into context, just make sure to enable `Full folder contents` from settings. If a folder (or file) is too large to be included, you'll see a small icon on the context pill indicating this.\n\nYour browser does not support the video tag.\n\n### Refreshed Inline Edit (Cmd/Ctrl+K) with Agent integration\n\nInline Edit (Cmd/Ctrl+K) has gotten a UI refresh and new options for full file edits (⌘⇧⏎) and sending to agent (⌘L)\n\nFull file makes it easy to do scope changes to a file without using agent. However, you might come across cases where you're working with a piece of code you want to make multi-file edits to or simply just want more control you can get from agent. That's when you want to send selected codeblock to agent and keep on editing from there.\n\nYour browser does not support the video tag.\n\n### Fast edits for long files with Agent\n\nWe've added a new tool to the agent that will search & replace code in files, making it much more efficient for long files. Instead of reading the complete file, Agent can now find the exact place where edits should occur and change only that part. Here's an example editing a file in [Postgres codebase](https://github.com/postgres/postgres/blob/master/src/backend/tcop/postgres.c) where using search & replace tool is nearly double as fast. We're rolling this out to Anthropic models first and will expand to other models soon.\n\nYour browser does not support the video tag.\n\n### Work in multiple codebases with workspaces\n\nNow you can create multi-root workspaces to make multiple codebases available to Cursor. All of them will be indexed and available to Cursor, ideal when you have projects in different folders you want to work on in the same space.\n\n`.cursor/rules` are supported in all folders added\n\n![Multi-root workspaces in Cursor](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fworkspace.90fbcb7b.png&w=3840&q=75)\n\n### Working with Chat\n\n#### Exporting Chat\n\nYou can now export chats to markdown from the chat view. Text and code blocks are included in the final export.\n\nYour browser does not support the video tag.\n\n#### Duplicate Chats\n\nExploring different paths from a conversation while preserving the existing is now possible with chat duplication. Go to a message and start a new chat from the three dots menu.\n\nYour browser does not support the video tag.\n\nKeybindings (1)\n\n- Full file edits from Inline Edit: `Cmd/Ctrl+Shift+K`\n\nImprovements (11)\n\n- Agent now uses native terminal emulation instead of simulated terminals\n- `@folders` will now try to include all files that fit in context\n- Icons for context state in Chat to tell you if files were not included or condensed\n- Individual MCP tools can now be disabled from MCP settings\n- New C# extension available in marketplace\n- Chat font size can now be increased in settings\n- Detailed in-app changelog\n\n**MCP**\n\n- Run stdio from remote workspace (WSL, Remote SSH)\n- Streamable HTTP support\n- Fixed leaking SSE server connections\n- More reliable refreshing when changing config\n\nAccount (1)\n\n- Removed 10 free requests/day for Claude 3 Opus\n\nPatches (7)\n\n**0.50.1**\n\n- Background Agent availability\n\n**0.50.2**\n\n- Fixed keyboard navigation in Jupyter notebooks\n- Fixed Custom mode models MAX and selection issues\n- Improved indexing reliability for single-root workspaces\n- Fixed VPN reliability with ZScaler\n\n**0.50.3**\n\n- Performance improvements\n\n**0.50.4**\n\n- Improved apply reliability\n- Fixed Windows horizontal scrolling bug\n- MCP improvements\n- Improved multiroot workspace support\n\n**0.50.5**\n\n- Fixed chat pill not updating when switching files\n\n**0.50.6**\n\n- Fixed search & replace reliability issues\n- Fixed checkpoint reliability issues\n- Improved indexing\n- Improved Python extension\n\n**0.50.7**\n\n- Fixed search & replace bug for Windows\n\n0.49\n\nApril 15, 2025\n\n0.49\n\n## [Rules generation, improved agent terminal and MCP images](https://www.cursor.com/changelog/0-49)\n\n### Automated and improved rules\n\nYou can now generate rules directly from a conversation using the `/Generate Cursor Rules` command. This is useful when you want to capture the existing context of a conversation to reuse later.\n\nFor `Auto Attached` rules with path patterns defined, Agent will now automatically apply the right rules when reading or writing files\n\nWe’ve also fixed a long-standing issue where `Always` attached rules now persist across longer conversations. Agent can now also edit rules reliably.\n\nYour browser does not support the video tag.\n\n### More accessible history\n\nChat history has moved into the command palette. You can access it from the \"Show history button\" in Chat as well as through the `Show Chat History` command\n\n![Chat history](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fchat-history.99f0dd79.png&w=3840&q=75)\n\n### Making reviews easier\n\nReviewing agent generated code is now easier with a built-in diff view at the end of each conversation. You'll find the `Review changes` button at the bottom of chat after a message from the agent.\n\nYour browser does not support the video tag.\n\n### Images in MCP\n\nYou can now pass images as part of the context in MCP servers. This helps when screenshots, UI mocks, or diagrams add essential context to a question or prompt.\n\nYour browser does not support the video tag.\n\n### Improved agent terminal control\n\nWe've added more control for you over terminals started by the agent. Commands can now be edited before they run, or skipped entirely. We've also renamed \"Pop-out\" to \"Move to background\" to better reflect what it does.\n\nYour browser does not support the video tag.\n\n### Global ignore files\n\nYou can now define [global ignore](https://docs.cursor.com/context/ignore-files) patterns that apply across all projects via your user-level settings. This keeps noisy or sensitive files like build outputs or secrets out of prompts, without needing per-project configuration.\n\n![Global ignore files](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fignore-files.f9e4d0f0.png&w=3840&q=75)\n\n### New models\n\nWe've recently added many more [models](https://docs.cursor.com/settings/models) you can use. Try out Gemini 2.5 Pro, Gemini 2.5 Flash, Grok 3, Grok 3 Mini, GPT-4.1, o3 and o4-mini from model settings.\n\n![Gemini 2.5 Pro](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fgemini-2.5.8414d83f.png&w=3840&q=75)\n\n![Grok 3](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fgrok-3.5db31a7e.png&w=3840&q=75)\n\n![GPT-4.1](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fgpt-4.1.cfcf0933.png&w=3840&q=75)\n\n![o3 & o4-mini](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fo3-o4-mini.607b4179.png&w=3840&q=75)\n\n### Project structure in context  Beta\n\nWe’re introducing an option to include project structure in context, which adds your directory structure to the prompt. The agent now gets a clearer sense of how your project is organized, which improves suggestions and navigation of large or nested monorepos.\n\nKeybindings (2)\n\n- Some `CMD+K` shortcuts are now remappable\n- Emacs keybinding extensions now work reliably\n\nImprovements (5)\n\n- Simplified model picker UI for Auto-select\n- New interface for command palette\n- Refreshed UI for Tab jump suggestions. Suggestions outside viewport are now clickable\n- Tooltips for modes in Chat\n- MCP stability\n- You can now connect to AWS Bedrock using access keys and secret keys\n- Git > @PR has now been renamed to @Branch\n\nFixes (4)\n\n- Always-attached rules now persist correctly across summarization\n- Rules in `.mdc` files can now be created and edited without issue by agent\n- Fixed selection issues with `@mention` nodes at the start of the input box\n- Performance in core editor\n\nBusiness / Teams (4)\n\n**Global ignore traversal**\n\n- Cursor can now traverse up directory trees to find ignore files. This behavior is off by default and can be enabled from admin settings.\n\n**IAM roles for Bedrock**\n\n- Enterprises can now connect to AWS Bedrock using IAM roles\n\n**User-level usage insights**\n\n- Admins can now view per-user spend and fast request usage directly from the dashboard.\n\n**Auto-run controls for teams**\n\n- Admins can configure global MCP settings from dashboard.\n\nPatches (6)\n\n**0.49.1**\n\nPrerelease\n\n- Fixed Cursor Rules editor for Remote SSH\n- Fixed UI delimiter display in zsh terminal in Chat\n- Fixed \"max length\" warning showing incorrectly for rules under size limit\n- Fixed \"message too large\" warning appearing in empty chats\n\n**0.49.2**\n\nPrerelease\n\n- Improved rule generation apply\n- Improved caching for user prompts\n- Improved client metric handling\n\n**0.49.3**\n\nPrerelease\n\n- Fixed issue with loading chat\n\n**0.49.4**\n\nPrerelease\n\n- Fixed Neovim chat keybindings\n- Improved indexing debug logs\n- Fixed `.cursorignore` issue preventing chat submission on Windows\n\n**0.49.5**\n\n- Improved client reliability\n\n**0.49.6**\n\n- Fixed possibly broken codeblocks in old chats\n- Fixed loading state issue in old chats\n- Fixed chat message rendering issue\n- Improved folders parsing\n\n0.48.x\n\nMarch 23, 2025\n\n0.48.x\n\n## [Chat tabs, Custom modes & Faster indexing](https://www.cursor.com/changelog/chat-tabs-custom-modes-sound-notification)\n\nThis release introduces chat tabs for parallel conversations, a redesigned\nmodes system with custom modes, and improvements to cost visibility, indexing\nperformance, and MCP reliability. Additionally, a sound notification plays when a chat is finished\n\n### Built-in modes & custom modes (beta)\n\nAgent and Ask modes are the built-in modes in Cursor, now with the option to add custom modes. We've also renamed \"Edit\" to \"Manual\" to better reflect its behavior.\n\nAsk mode now has access to all search tools by default, so the `@Codebase` tool has been removed. It will automatically search the codebase when needed. If you want to force a search, simply ask Cursor in natural language to \"search the codebase\". You can disable search from Ask in the mode menu, which will result in Ask only seeing the context you have provided.\n\nRead more about [Agent](https://docs.cursor.com/chat/agent) and [Ask](https://docs.cursor.com/chat/ask).\n\n![Modes](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmodes.e9d94bd5.png&w=3840&q=75)\n\n**Custom modes** (beta) allow you to compose new modes with tools and prompts that fit your workflow. Since custom modes can have custom keybindings, **⌘I will default to Agent mode** and **⌘L** will toggle the side pane. If you unbind ⌘I, it will also toggle the side pane. Custom modes are currently in beta, and you can enable them from Settings → Features → Chat → Custom modes.\n\nYou can also set the default mode from settings (Settings → Features → Chat → Default chat mode) to one of your modes or to the one you used most recently.\n\nRead more about [custom modes](https://docs.cursor.com/chat/custom-modes).\n\n![custom modes](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcustom-modes.ea111789.png&w=3840&q=75)\n\n### Chat tabs\n\nCreate new tabs (⌘T) in chat to have multiple conversations in parallel. You can also hold Option and click the + button to create a new tab. Cmd+N still creates a new chat in the current tab\n\nWhen a tab is awaiting your input, you'll see an orange dot on that tab.\n\nYour browser does not support the video tag.\n\n### Faster indexing\n\nWe've made significant improvements to indexing performance of similar codebases within a team, greatly reducing the initial indexing time for subsequent copies of large repositories after one copy has been fully indexed. For example, the Cursor codebase now indexes in under a minute, previously taking around 20 minutes.\n\n### Sound notification (beta)\n\nCursor can now play a sound when a chat is ready for review. Enable this feature from Settings → Features → Chat → Play sound on finish.\n\n### Usage-based cost visibility\n\nFor usage-based models, you can now view the cost and breakdown per chat from the history.\n\n![Cost visibility](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fchat-cost.a1f3f4d2.png&w=3840&q=75)\n\n### New onboarding\n\nWe've introduced an easier onboarding process to help you get started with Cursor. You'll be guided through importing settings, selecting themes, keybindings, and other preferences.\n\n![onboarding](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fonboarding.5ec6e148.png&w=3840&q=75)\n\nOther (6)\n\n- Improved indexing performance for teams sharing codebases\n- The vertical sidebar option will temporarily be unavailable for users who opted into Early Access\n- Projects with MCP servers will now prompt users to enable them\n- Chat will now display a notification about usage-based pricing when approaching fast request or usage limits\n- Enhanced visibility of auto-run controls configured by team admins, clarifying when they are active\n- Removed auto-run prompt due to reliability issues. Auto-run has been disabled for all users who previously enabled it\n\nImprovements (4)\n\n- We've moved \"reject all diffs\" from Cmd+Backspace (⌘⌫) to Cmd+Shift+Backspace (⌘⇧⌫)\n- MCP on Windows should now be significantly more reliable\n- Improved MCP error messages when configuring MCP servers to assist with debugging\n- Added input token count for chat messages (click the three dots to view). We're continuing to improve context visibility so you can clearly see what gets sent to the model, expect more soon!\n\nPatches (9)\n\n- 0.48.1 - New onboarding\n- 0.48.2 - Allows users to accept/reject file edited in another chat tab\n- 0.48.3 - Chat Tabs UX improvements (Cmd/Ctrl+T for new tab), Max-mode support for Gemini 2.5 Pro\n- 0.48.4 - Image support for Gemini 2.5 Pro\n- 0.48.5 - Change management for Cmd+Backspace -> Cmd+Shift+Backspace\n- 0.48.6 - Creates a new chat after the AI Pane has been closed for long enough\n- 0.48.7 - Fixes an issue where some chats could get deleted on update\n- 0.48.8 - Improves CPU performance from @-symbols search\n- 0.48.9 - Lower memory usage from indexing\n\nPage 1 of 37\n\n[Next](https://www.cursor.com/changelog/2)",
+          "metadata": {
+            "url": "https://www.cursor.com/en/changelog",
+            "title": "Changelog | Cursor - The AI Code Editor",
+            "favicon": "https://www.cursor.com/favicon-48x48.png",
+            "ogImage": "https://www.cursor.com/_next/static/media/opengraph-image.375711d3.png",
+            "ogTitle": "Changelog | Cursor - The AI Code Editor",
+            "language": "en",
+            "og:image": "https://www.cursor.com/_next/static/media/opengraph-image.375711d3.png",
+            "og:title": "Changelog | Cursor - The AI Code Editor",
+            "scrapeId": "8dd17adb-7990-4a0b-a292-23a0b7346a00",
+            "viewport": "width=device-width, initial-scale=1",
+            "proxyUsed": "basic",
+            "sourceURL": "https://www.cursor.com/changelog",
+            "statusCode": 200,
+            "contentType": "text/html; charset=utf-8",
+            "creditsUsed": 1,
+            "description": "New updates and improvements.",
+            "theme-color": "#17191d",
+            "og:image:alt": "Cursor - The AI Code Editor",
+            "twitter:card": "summary_large_image",
+            "ogDescription": "New updates and improvements.",
+            "twitter:image": "https://www.cursor.com/_next/static/media/opengraph-image.375711d3.png",
+            "twitter:title": "Changelog | Cursor - The AI Code Editor",
+            "og:description": "New updates and improvements.",
+            "og:image:width": "1200",
+            "og:image:height": "630",
+            "next-size-adjust": "",
+            "twitter:image:alt": "Cursor - The AI Code Editor",
+            "twitter:description": "New updates and improvements.",
+            "twitter:image:width": "1200",
+            "twitter:image:height": "630",
+            "msapplication-TileColor": "#000000",
+            "msapplication-TileImage": "/icons/144.png",
+            "apple-mobile-web-app-title": "Cursor",
+            "apple-mobile-web-app-capable": "yes",
+            "apple-mobile-web-app-status-bar-style": "default"
+          },
+          "url_type": "changelog"
+        },
+        {
+          "url": "https://www.cursor.com/",
+          "content": "![](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fgradient-hero-prerender.3af0e196.webp&w=3840&q=75)\n\n# The AI   Code Editor\n\nBuilt to make you extraordinarily productive,\nCursor is the best way to code with AI.\n\nDownload for Linux [All Downloads](https://www.cursor.com/downloads)\n\n![](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flanding-small-dark.cropped.1eebf8a3.webp&w=3840&q=100)![](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flanding-small-light.cropped.04975081.webp&w=3840&q=100)\n\n![](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhero-dark.cff4db9b.webp&w=3840&q=100)![](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhero-light.34165af5.webp&w=3840&q=100)\n\nTrusted by engineers at\n\nJohnson & JohnsonStripeSamsungRipplingPerplexityRampShopifyUS FoodsMercadoLibre\n\n## Tab, tab, tab\n\nCursor lets you breeze through changes by predicting\nyour next edit.\n\n![](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbg-compress.28e9667b.webp&w=3840&q=75)\n\n## Knows your codebase\n\nGet answers from your codebase or refer to files or docs.\nUse the model's code in one click.\n\n![](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbg-compress.28e9667b.webp&w=3840&q=75)\n\n## Edit in natural language\n\nCursor lets you write code using instructions.\nUpdate entire classes or functions with a simple prompt.\n\n![](https://www.cursor.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbg-compress.28e9667b.webp&w=3840&q=75)\n\n## Build software faster\n\nIntelligent, fast, and familiar, Cursor is the best way to code with AI.\n\n[See more features](https://www.cursor.com/features)\n\n- [**Frontier Intelligence** \\\\\n\\\\\nPowered by a mix of purpose-built and frontier models, Cursor is smart and fast.\\\\\n\\\\\n![](https://assets.basehub.com/191e7e6d/2706e40d8bc53935e27cee0d298340ca/frontier-white.webp)](https://www.cursor.com/features)\n- [**Feels Familiar** \\\\\n\\\\\nImport all your extensions, themes, and keybindings in one click.\\\\\n\\\\\n![](https://assets.basehub.com/191e7e6d/e24c124b1af450c06d3a4d940d3dc165/familiar-white-copia.webp)](https://www.cursor.com/features)\n- [**Privacy Options** \\\\\n\\\\\nIf you enable Privacy Mode, your code is never stored remotely without your consent. Cursor is SOC 2 certified.\\\\\n\\\\\n![](https://assets.basehub.com/191e7e6d/ad251e613f32dd6064388ac781445853/sec-white-(0-00-00-00).webp)](https://www.cursor.com/features)\n\n- [**Frontier Intelligence** \\\\\n\\\\\nPowered by a mix of purpose-built and frontier models, Cursor is smart and fast.\\\\\n\\\\\n![](https://assets.basehub.com/191e7e6d/2706e40d8bc53935e27cee0d298340ca/frontier-white.webp)](https://www.cursor.com/features)\n- [**Feels Familiar** \\\\\n\\\\\nImport all your extensions, themes, and keybindings in one click.\\\\\n\\\\\n![](https://assets.basehub.com/191e7e6d/e24c124b1af450c06d3a4d940d3dc165/familiar-white-copia.webp)](https://www.cursor.com/features)\n- [**Privacy Options** \\\\\n\\\\\nIf you enable Privacy Mode, your code is never stored remotely without your consent. Cursor is SOC 2 certified.\\\\\n\\\\\n![](https://assets.basehub.com/191e7e6d/ad251e613f32dd6064388ac781445853/sec-white-(0-00-00-00).webp)](https://www.cursor.com/features)\n\n## Loved by   world-class devs\n\nEngineers all around the world reach for Cursor by choice.\n\nCursor is at least a 2x improvement over Copilot.\n\nIt's amazing having an AI pair programmer, and is an incredible accelerator for me and my team.\n\n![Ben Bernard](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fbacbbb589ac2e0ed1bff2c7fc5678fff%2Fbenb-copy.jpeg&w=384&q=75)\n\nBen Bernard\n\nInstacart\n\nThe Cursor tab completion while coding is occasionally so magic it defies reality - about ~25% of the time it is anticipating exactly what I want to do.\n\nIt is enough to make you believe that eventually you'll be able to code at the speed of thought.\n\n![Kevin Whinnery](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2F050df60ab6abfd3eb84b45f2de92017b%2Ftzdi-krg400x400.jpg&w=384&q=75)\n\nKevin Whinnery\n\nOpenAI\n\nCursor is hands down my biggest workflow improvement in years\n\n![Sawyer Hood](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Ff09b26d29b76bac95b566420ed98eebe%2F7k6yh27k400x400.jpg&w=384&q=75)\n\nSawyer Hood\n\nFigma\n\nI love writing code and Cursor is a necessity. Cursor is steps ahead of my brain, proposing multi-line edits so I type 'tab' more than anything else.\n\n![Andrew Milich](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fe296543be66f6e9fc6e46523a8c07293%2F440fe5d8f1aab84902daf6a84937e915b06ec117-684x684.png&w=384&q=75)\n\nAndrew Milich\n\nNotion\n\nCursor is so good, and literally gets better/more feature-rich every couple of weeks.\n\n![Morgan McGuire](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2F44bebc63b4051216803d29e68584ed93%2Fmorgan-copy.jpg&w=384&q=75)\n\nMorgan McGuire\n\nWeights & Biases\n\nCursor is awesome!\n\nSomeone finally put GPT into a code editor in a seamless way. It's so elegant and easy. No more copying and pasting. I'm an hour in and already hooked.\n\n![Andrew McCalip](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2F2496ef0d1a9f80230e094bd27774a2ba%2Fandrew-(1).jpg&w=384&q=75)\n\nAndrew McCalip\n\nVarda\n\nCursor is the best AI developer tool right now, avoid it at your own peril\n\n![Logan Kilpatrick](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fa59c77974e57c397895f05bbb03435b9%2Fyhl9ubk0400x400.jpg&w=384&q=75)\n\nLogan Kilpatrick\n\nGoogle\n\nStarted using Cursor yesterday & i'm blown away. it's how Copilot should feel. i'm completely off VSCode now.\n\n![Sam Whitmore](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fae5c0f6564b08bbe348f9f159172a2f7%2Fsam-copy.jpeg&w=384&q=75)\n\nSam Whitmore\n\nNew Computer\n\nCursor is the best product I've used in a while - it's an AI enabled editor.\n\nI just asked it to write a README for a project I've been working on - analyzed the code-base and worked first time.\n\n![Alex MacCaw](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Ff2d565bcb77ec05f36359266c49e77d8%2Fmccaw2-copy.jpeg&w=384&q=75)\n\nAlex MacCaw\n\nReflect\n\nCursor is the best product I've used in a while - it's an AI enabled editor.\n\nI just asked it to write a README for a project I've been working on - analyzed the code-base and worked first time.\n\n![Zeke Sikelianos](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fbc6af54399b82fab3cf63f222ffa59ea%2Fzeke2-copy.jpeg&w=384&q=75)\n\nZeke Sikelianos\n\nReplicate\n\nGonna apply to YC and list Cursor as my cofounder\n\n![Cory Etzkorn](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2F051968b0beaddbac21d296e67bac30c9%2Fcory-etzkorn-square-2023.jpg&w=384&q=75)\n\nCory Etzkorn\n\nNotion\n\nCursor's new auto-complete is insane\n\nYou no longer need to prompt it. It predicts what code you want based on what you're doing. Accept by hitting tab\n\nIn this video I change the CSS class of one link. I then simply keep hitting tab to make the same change to all other links\n\n![Marc Köhlbrugge](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2F56e05e14af25416f9fdda0e0be696dc2%2F53b183b260689e496b434ab1-11828ab0fee617c2fba3829910cda904.jpeg&w=384&q=75)\n\nMarc Köhlbrugge\n\nWIP\n\nI really like how Cursor suggests edits to existing code. It noticed I was inconsistent with my markup and popped up this suggestion that matched my other items!\n\n![Wes Bos](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fcec1d60f81af24e8e0b39ac1355bd6fa%2Fwes.jpg&w=384&q=75)\n\nWes Bos\n\nInternet\n\nCursor is 🐐-ed for real\n\n![Steven Tey](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2F0b78a17b431cc2038cd6f9fe1316741a%2Fsteven.jpg&w=384&q=75)\n\nSteven Tey\n\nDub\n\nI really like how Cursor suggests edits to existing code. It noticed I was inconsistent with my markup and popped up this suggestion that matched my other items!\n\n![Wes Bos](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fcec1d60f81af24e8e0b39ac1355bd6fa%2Fwes.jpg&w=384&q=75)\n\nWes Bos\n\nInternet\n\nThe most useful AI tool that I currently pay for is, hands down, is Cursor\n\nIt's fast, autocompletes when and where you need it to, handles brackets properly, sensible keyboard shortcuts, bring- your-own-model...everything is well put together.\n\n![shadcn](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fe941f86e0ca2b1c9eefd47618a920404%2Ftuyae5z7400x400.jpg&w=384&q=75)\n\nshadcn\n\nVercel\n\nI went from never hearing about Cursor to many IC engineers telling me it's their new favorite tool. Seemingly overnight! Pretty wild product-market fit.\n\n![Josh Miller](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2F1378a2f2a9ea7a061b2f6ac213678111%2Fjosh.jpg&w=384&q=75)\n\nJosh Miller\n\nThe Browser Company\n\nI installed Cursor\n\n... oh\n\n![Kent C. Dodds](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fc616f8d9766003b1bbae8d905945a9e1%2Fkent.jpg&w=384&q=75)\n\nKent C. Dodds\n\nInternet\n\nAfter many recommendations, I finally switched from VSC to Cursor and ... wow!\n\nIt's absolutely incredible. If you like Copilot (or if you don't), you'll be blown away by Cursor.\n\nThere is no going back. 🤯\n\n![Johannes Schickling](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fa7f0140e2322885367ff2a363473c25a%2Fjohannes.jpg&w=384&q=75)\n\nJohannes Schickling\n\nPrisma\n\nCursor is at least a 2x improvement over Copilot.\n\nIt's amazing having an AI pair programmer, and is an incredible accelerator for me and my team.\n\n![Ben Bernard](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fbacbbb589ac2e0ed1bff2c7fc5678fff%2Fbenb-copy.jpeg&w=384&q=75)\n\nBen Bernard\n\nInstacart\n\nThe Cursor tab completion while coding is occasionally so magic it defies reality - about ~25% of the time it is anticipating exactly what I want to do.\n\nIt is enough to make you believe that eventually you'll be able to code at the speed of thought.\n\n![Kevin Whinnery](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2F050df60ab6abfd3eb84b45f2de92017b%2Ftzdi-krg400x400.jpg&w=384&q=75)\n\nKevin Whinnery\n\nOpenAI\n\nCursor is hands down my biggest workflow improvement in years\n\n![Sawyer Hood](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Ff09b26d29b76bac95b566420ed98eebe%2F7k6yh27k400x400.jpg&w=384&q=75)\n\nSawyer Hood\n\nFigma\n\nI love writing code and Cursor is a necessity. Cursor is steps ahead of my brain, proposing multi-line edits so I type 'tab' more than anything else.\n\n![Andrew Milich](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fe296543be66f6e9fc6e46523a8c07293%2F440fe5d8f1aab84902daf6a84937e915b06ec117-684x684.png&w=384&q=75)\n\nAndrew Milich\n\nNotion\n\nCursor is so good, and literally gets better/more feature-rich every couple of weeks.\n\n![Morgan McGuire](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2F44bebc63b4051216803d29e68584ed93%2Fmorgan-copy.jpg&w=384&q=75)\n\nMorgan McGuire\n\nWeights & Biases\n\nCursor is awesome!\n\nSomeone finally put GPT into a code editor in a seamless way. It's so elegant and easy. No more copying and pasting. I'm an hour in and already hooked.\n\n![Andrew McCalip](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2F2496ef0d1a9f80230e094bd27774a2ba%2Fandrew-(1).jpg&w=384&q=75)\n\nAndrew McCalip\n\nVarda\n\nCursor is the best AI developer tool right now, avoid it at your own peril\n\n![Logan Kilpatrick](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fa59c77974e57c397895f05bbb03435b9%2Fyhl9ubk0400x400.jpg&w=384&q=75)\n\nLogan Kilpatrick\n\nGoogle\n\nstarted using Cursor yesterday & i'm blown away. it's how Copilot should feel. i'm completely off VSCode now.\n\n![Sam Whitmore](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fae5c0f6564b08bbe348f9f159172a2f7%2Fsam-copy.jpeg&w=384&q=75)\n\nSam Whitmore\n\nNew Computer\n\nCursor is the best product I've used in a while - it's an AI enabled editor.\n\nI just asked it to write a README for a project I've been working on - analyzed the code-base and worked first time.\n\n![Alex MacCaw](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Ff2d565bcb77ec05f36359266c49e77d8%2Fmccaw2-copy.jpeg&w=384&q=75)\n\nAlex MacCaw\n\nReflect\n\nCursor has changed the game. I really can't imagine writing code without it at this point. The switch from VSCode is easy, and now I have AI superpowers right in my editor and my terminal.\n\n![Zeke Sikelianos](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fbc6af54399b82fab3cf63f222ffa59ea%2Fzeke2-copy.jpeg&w=384&q=75)\n\nZeke Sikelianos\n\nReplicate\n\nGonna apply to YC and list Cursor as my cofounder\n\n![Cory Etzkorn](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2F051968b0beaddbac21d296e67bac30c9%2Fcory-etzkorn-square-2023.jpg&w=384&q=75)\n\nCory Etzkorn\n\nNotion\n\nCursor's new auto-complete is insane\n\nYou no longer need to prompt it. It predicts what code you want based on what you're doing. Accept by hitting tab\n\nIn this video I change the CSS class of one link. I then simply keep hitting tab to make the same change to all other links\n\n![Marc Köhlbrugge](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2F56e05e14af25416f9fdda0e0be696dc2%2F53b183b260689e496b434ab1-11828ab0fee617c2fba3829910cda904.jpeg&w=384&q=75)\n\nMarc Köhlbrugge\n\nWIP\n\nI really like how Cursor suggests edits to existing code. It noticed I was inconsistent with my markup and popped up this suggestion that matched my other items!\n\n![Wes Bos](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fcec1d60f81af24e8e0b39ac1355bd6fa%2Fwes.jpg&w=384&q=75)\n\nWes Bos\n\nInternet\n\n- Cursor is 🐐-ed for real\n\n\n\n![Steven Tey](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2F0b78a17b431cc2038cd6f9fe1316741a%2Fsteven.jpg&w=384&q=75)\n\n\n\nSteven Tey\n\n\n\nDub\n\n- I really like how Cursor suggests edits to existing code. It noticed I was inconsistent with my markup and popped up this suggestion that matched my other items!\n\n\n\n![Wes Bos](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fcec1d60f81af24e8e0b39ac1355bd6fa%2Fwes.jpg&w=384&q=75)\n\n\n\nWes Bos\n\n\n\nInternet\n\n- The most useful AI tool that I currently pay for is, hands down, is Cursor\n\nIt's fast, autocompletes when and where you need it to, handles brackets properly, sensible keyboard shortcuts, bring- your-own-model...everything is well put together.\n\n\n\n![shadcn](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fe941f86e0ca2b1c9eefd47618a920404%2Ftuyae5z7400x400.jpg&w=384&q=75)\n\n\n\nshadcn\n\n\n\nVercel\n\n- I went from never hearing about Cursor to many IC engineers telling me it's their new favorite tool. Seemingly overnight! Pretty wild product-market fit.\n\n\n\n![Josh Miller](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2F1378a2f2a9ea7a061b2f6ac213678111%2Fjosh.jpg&w=384&q=75)\n\n\n\nJosh Miller\n\n\n\nThe Browser Company\n\n- I installed Cursor\n\n... oh\n\n\n\n![Kent C. Dodds](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fc616f8d9766003b1bbae8d905945a9e1%2Fkent.jpg&w=384&q=75)\n\n\n\nKent C. Dodds\n\n\n\nInternet\n\n- After many recommendations, I finally switched from VSC to Cursor and ... wow!\n\nIt's absolutely incredible. If you like Copilot (or if you don't), you'll be blown away by Cursor.\n\nThere is no going back. 🤯\n\n\n\n![Johannes Schickling](https://www.cursor.com/_next/image?url=https%3A%2F%2Fassets.basehub.com%2F191e7e6d%2Fa7f0140e2322885367ff2a363473c25a%2Fjohannes.jpg&w=384&q=75)\n\n\n\nJohannes Schickling\n\n\n\nPrisma",
+          "metadata": {
+            "url": "https://www.cursor.com/en",
+            "title": "Cursor - The AI Code Editor",
+            "favicon": "https://www.cursor.com/favicon-48x48.png",
+            "ogImage": "https://www.cursor.com/en/opengraph-image.png?375711d39ab904b7",
+            "ogTitle": "Cursor - The AI Code Editor",
+            "language": "en",
+            "og:image": "https://www.cursor.com/en/opengraph-image.png?375711d39ab904b7",
+            "og:title": "Cursor - The AI Code Editor",
+            "scrapeId": "009f5a9f-852c-4045-b094-ec0a5b482dbb",
+            "viewport": "width=device-width, initial-scale=1",
+            "proxyUsed": "basic",
+            "sourceURL": "https://www.cursor.com/",
+            "statusCode": 200,
+            "contentType": "text/html; charset=utf-8",
+            "creditsUsed": 1,
+            "description": "Built to make you extraordinarily productive, Cursor is the best way to code with AI.",
+            "theme-color": "#17191d",
+            "twitter:card": "summary_large_image",
+            "og:image:type": "image/png",
+            "ogDescription": "Built to make you extraordinarily productive, Cursor is the best way to code with AI.",
+            "twitter:image": "https://www.cursor.com/en/twitter-image.png?375711d39ab904b7",
+            "twitter:title": "Cursor - The AI Code Editor",
+            "og:description": "Built to make you extraordinarily productive, Cursor is the best way to code with AI.",
+            "og:image:width": "1200",
+            "og:image:height": "630",
+            "next-size-adjust": "",
+            "twitter:image:type": "image/png",
+            "twitter:description": "Built to make you extraordinarily productive, Cursor is the best way to code with AI.",
+            "twitter:image:width": "1200",
+            "twitter:image:height": "630",
+            "msapplication-TileColor": "#000000",
+            "msapplication-TileImage": "/icons/144.png",
+            "apple-mobile-web-app-title": "Cursor",
+            "apple-mobile-web-app-capable": "yes",
+            "apple-mobile-web-app-status-bar-style": "default"
+          },
+          "url_type": "website"
+        }
+      ]
+    }
+  ],
+  "producthunt_data": [
+    {
+      "tool_name": "Cursor",
+      "snapshot_date": "2025-06-27T12:43:01.198403",
+      "sample_data": {
+        "search_results": []
+      }
+    }
+  ],
+  "npm_data": [
+    {
+      "tool_name": "Cursor",
+      "snapshot_date": "2025-06-27T12:43:01.198403",
+      "sample_data": {
+        "error": "403 Client Error: Forbidden for url: https://registry.npmjs.org/-/v1/search?text=Cursor&size=20&from=0&quality=0.65&popularity=0.98&maintenance=0.5"
+      }
+    }
+  ],
+  "github_data": [
+    {
+      "tool_name": "Cursor",
+      "snapshot_date": "2025-06-27T12:43:01.198403",
+      "sample_data": {
+        "size": 2062,
+        "forks": 1947,
+        "owner": "cursor",
+        "stars": 30519,
+        "topics": [],
+        "license": null,
+        "ssh_url": "git@github.com:cursor/cursor.git",
+        "archived": false,
+        "disabled": false,
+        "has_wiki": true,
+        "homepage": "https://cursor.com",
+        "language": null,
+        "watchers": 30519,
+        "clone_url": "https://github.com/cursor/cursor.git",
+        "full_name": "cursor/cursor",
+        "has_pages": false,
+        "repo_name": "cursor",
+        "created_at": "2023-03-12T00:19:42Z",
+        "has_issues": true,
+        "updated_at": "2025-06-27T15:27:51Z",
+        "description": "The AI Code Editor",
+        "open_issues": 1847,
+        "default_branch": "main",
+        "releases_count": 0,
+        "last_commit_date": "2024-10-13T19:23:26Z",
+        "top_contributors": [
+          "truell20",
+          "Sanger2000",
+          "terror",
+          "elanzini",
+          "arvid220u"
+        ],
+        "contributors_count": 28
+      }
+    }
+  ],
+  "reddit_data": [
+    {
+      "tool_name": "Cursor",
+      "snapshot_date": "2025-06-27T12:43:01.198403",
+      "sample_data": {
+        "search_results": [
+          {
+            "url": "https://www.reddit.com/r/AI_Agents/comments/1il8b1i/my_guide_on_what_tools_to_use_to_build_ai_agents/",
+            "score": 2701,
+            "title": "My guide on what tools to use to build AI agents (if you are a newb)",
+            "selftext": "First off let's remember that everyone was a newb once, I love newbs and if your are one in the Ai agent space...... Welcome, we salute you.  In this simple guide im going to cut through all the hype and BS and get straight to the point.  WHAT DO I USE TO BUILD AI AGENTS!\n\nA bit of background on me: Im an AI engineer, currently working in the cyber security space.  I design and build AI agents and I design AI automations.  Im 49, so Ive been around for a while and im as friendly as they come, so",
+            "subreddit": "AI_Agents"
+          },
+          {
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1lhgdbd/dev_jobs_are_about_to_get_a_hard_reset_and/",
+            "score": 2438,
+            "title": "Dev jobs are about to get a hard reset and nobody’s ready",
+            "selftext": "Gotta be dead honest after spending serious time with Claude Code (Opus 4 on Max mode):\n\n1. It’s already doing 100% of the coding. Not assisting. Not helping. Just doing it. And we’re only halfway through the year.\n\n2. The idea of a “Python dev” or “React dev” is outdated. Going forward, I won’t be hiring for languages, I’ll hire devs who can solve problems, no matter the stack. The language barrier is completely gone.\n\n3. We’ve hit the point where asking “Which programming language should I lea",
+            "subreddit": "ClaudeAI"
+          },
+          {
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1l5h2ds/i_paid_for_the_100_claude_max_plan_so_you_dont/",
+            "score": 2157,
+            "title": "I paid for the $100 Claude Max plan so you don't have to - an honest review",
+            "selftext": "I'm a sr. software engineer with ~16 years working experience.  I'm also a huge believer in AI, and fully expect my job to be obsolete within the decade.  I've used all of the most expensive tiers of all of the AI models extensively to test their capabilities.  I've never posted a review of any of them but this pro-Claude hysteria has made me post something this time.\n\nIf you're a software engineer you probably already realize there is truly nothing special about Claude Code relative to other AI",
+            "subreddit": "ClaudeAI"
+          },
+          {
+            "url": "https://www.reddit.com/r/PromptEngineering/comments/1kk1i8z/10_brutal_lessons_from_6_months_of_vibe_coding/",
+            "score": 1953,
+            "title": "10 brutal lessons from 6 months of vibe coding and launching AI-startups",
+            "selftext": "I’ve spent the last 6 months building and shipping multiple products using Cursor + and other tools. One is a productivity-focused voice controlled web app, another’s a mobile iOS tool — all vibe-coded, all solo.\n\nHere’s what I wish someone told me before I melted through a dozen repos and rage-uninstalled Cursor three times. No hype. Just what works.\n\nI’m not selling a prompt pack. I’m not flexing a launch. I just want to save you from wasting hundreds of hours like I did.\n\np.s. Playbook 001 is",
+            "subreddit": "PromptEngineering"
+          },
+          {
+            "url": "https://www.reddit.com/gallery/1kqj7n3",
+            "score": 1228,
+            "title": "Cursor intentionally slowing non-fast requests (Proof) and more.",
+            "selftext": "Cursor team. I didn't want to do this, but many of us have noticed recently that the slow queue is significantly slower all of the sudden and it is unacceptable how you are treating us. On models which are typically fast for the slow queue (like gemini 2.5 pro). I noticed it, and decided to see if I could uncover anything about what was happening. As my username suggests I know a thing or two about hacking, and while I was very careful about what I was doing as to not break TOS of cursor, I deci",
+            "subreddit": "cursor"
+          },
+          {
+            "url": "https://www.reddit.com/r/cursor/comments/1l3gdma/cursor_10_is_here/",
+            "score": 935,
+            "title": "Cursor 1.0 is here!",
+            "selftext": "Hey r/cursor\n\nWe just shipped Cursor 1.0! Here’s what’s new:\n\n# BugBot for automatic code review\n\nBugBot reviews your PRs and leaves comments directly in GitHub when it finds issues. You can click “Fix in Cursor” to jump back into the editor with the right prompt ready to go.\n\nYou get one week free trial from when you first set it up, check out the [docs](https://www.notion.so/Cursor-com-dashboard-revamp-1e0da74ef04580cf892be67b10574a44?pvs=21) for instructions\n\nhttps://reddit.com/link/1l3gdma/v",
+            "subreddit": "cursor"
+          },
+          {
+            "url": "https://i.redd.it/15df8ykg8b5f1.jpeg",
+            "score": 860,
+            "title": "I'm building Cursor for Mobile.",
+            "selftext": "Have you ever wanted to vibe code but you're outside, doing the dishes, or other things? Or just waiting for a slow prompt to execute?\n\nI'm building a mobile app that connects to your PC and will give you the possibility to prompt, see the results, and get notifications about executed prompts or when you have to click the accept button, all from your phone.\n\nIt will be released under the MIT license on GitHub pretty soon. F*ck it, I won't make money off of it.\n\nMrCoin",
+            "subreddit": "cursor"
+          },
+          {
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1k6yos2/i_was_rejected_by_cursorai_so_i_built_my_own/",
+            "score": 859,
+            "title": "I was rejected by CursorAI, so I built my own \"Cursor\"... And it's WAY better and here is how you can create yours.",
+            "selftext": ">\n\n>Guys, I feel the need \\[for the sake of my fingers\\] to edit this here so new people don’t get confused (especially devs who, when they read \"vibe code,\" stop reading and go straight to the comment section to say UR DUR CODE NOT SAFE, CAN'T SCALE, AI WON'T END SWE JOBS, I'M GOOD YOU BAD).\n\n>Nowhere in the post will you see me saying I am good. What I said is that after 2 years of vibe coding, I can create some stuff... like this one you’ll watch in a video... in just 5 days.\n\n>Goal of the po",
+            "subreddit": "ClaudeAI"
+          },
+          {
+            "url": "https://www.reddit.com/r/cursor/comments/1kgepx3/cursor_is_now_free_for_students/",
+            "score": 820,
+            "title": "Cursor is now free for students :)",
+            "selftext": "University and high school students can get a year free of Cursor. This is something we've wanted to do for a while! More [here](http://cursor.com/students).",
+            "subreddit": "cursor"
+          },
+          {
+            "url": "https://www.reddit.com/r/cursor/comments/1kam4i7/9_months_coding_with_cursorai/",
+            "score": 798,
+            "title": "9 months coding with Cursor.ai",
+            "selftext": "*Vibecoding turned into fuckoding. But there's a way out.*\n\nCursor, [WindSurf](https://windsurf.com/editor), [Trae](https://www.trae.ai/) – they're awesome. They transform Excel into SQL, slap logos onto images, compile videos from different sources – all through simple scripts. Literally in 15 minutes!\n\nBut try making a slightly more complex project – and it falls apart. Writing 10K lines of front and back code? The model loses context. You find yourself yelling: \"Are you kidding me? You litera",
+            "subreddit": "cursor"
+          },
+          {
+            "url": "https://www.reddit.com/r/ChatGPTCoding/comments/1inyt2s/my_experience_with_cursor_vs_cline_after_3_months/",
+            "score": 657,
+            "title": "My experience with Cursor vs Cline after 3 months of daily use",
+            "selftext": "I've been using both Cline and Cursor extensively over the past 3 months and wanted to share my experience, especially since I see a lot of Cursor recommendations here. For context: full-stack dev, primarily working on Node.js/React/Nextjs projects.\n\nTLDR: Both are solid tools but Cline is in a different league, though it comes with higher (but worth it) costs. I personally like to use Cline *inside* of Cursor to get the best of both worlds.\n\nHere's the thing about AI coding assistants that took",
+            "subreddit": "ChatGPTCoding"
+          },
+          {
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1j5jn4h/i_made_this_animation_using_claude_37_in_just_4/",
+            "score": 548,
+            "title": "I made this animation using Claude 3.7 in just 4 hours with cursor (I have zero coding knowledge)",
+            "selftext": "https://reddit.com/link/1j5jn4h/video/8i0qr4ovk8ne1/player\n\n",
+            "subreddit": "ClaudeAI"
+          },
+          {
+            "url": "https://www.reddit.com/r/cursor/comments/1ju63ig/the_one_golden_cursor_rule_that_improved/",
+            "score": 414,
+            "title": "The one golden cursor rule that improved everything!",
+            "selftext": "I simply added this to my list of rules:  \n  \n`Important: try to fix things at the cause, not the symptom.`\n\nWhat a game-changer! It doesn't just put in shitty workarounds that end up being hacks fixing hacks.  \n  \nBonus, another rule that improved things for me:\n\n`Be very detailed with summarization and do not miss out things that are important.`\n\nWhat's one rule that's made the world of difference for you?",
+            "subreddit": "cursor"
+          },
+          {
+            "url": "https://www.reddit.com/r/ChatGPTCoding/comments/1j3mnis/cursor_from_ai_tool_to_totalitarian_censorship/",
+            "score": 405,
+            "title": "Cursor: From AI Tool to Totalitarian Censorship?",
+            "selftext": "Today, I wrote a post on r/cursor about how suddenly bad Cursor became after the last update.\n\nThe post was very popular, and many people in the comments reported the same issues. Even some guy named Nick, supposedly from Cursor, asked me to DM him the details of the prompt and code I used.\n\nhttps://preview.redd.it/rusjwvewtqme1.png?width=1170&format=png&auto=webp&s=9a7c1a2d7f27111f1d6cc9ca9ad82a2d149b6757\n\nBut now, when I open the post, I see that it was removed by the moderators without any ob",
+            "subreddit": "ChatGPTCoding"
+          },
+          {
+            "url": "https://www.reddit.com/r/AI_Agents/comments/1lj3mgk/the_real_reality_of_someone_who_owns_an_ai_agency/",
+            "score": 390,
+            "title": "The REAL Reality of Someone Who Owns an AI Agency",
+            "selftext": "So I started my own agency last October, and wanted to write a post about the reality of this venture.  How I got started, what its really like, no youtube hype and BS, what I would do different if I had to do it again and what my day to day looks like.\n\nSo if you are contemplating starting your own AI Agency or just looking to make some money on the side, this post is a must read for you :) \n\n  \n**Alright so how did I get started?**   \nWell to be fair i was already working as an Engineer for a ",
+            "subreddit": "AI_Agents"
+          },
+          {
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1kv5hrh/sonnet_40_with_cursor_wow_wow_wow/",
+            "score": 381,
+            "title": "Sonnet 4.0 with Cursor Wow Wow Wow",
+            "selftext": "I switched from Sonnet 3.7 to Gemini 2.5 two weeks ago because I was not satisfied of 3.7. Since then I vibe coded with Google AI studio (Gemini 2. 5) and found the 1M token window to be fantastic (and free). Today a gave Sonnet 4.0 another chance (in Cursor). Great improvement, it didn't fail a prompt, straight to the point with a functional code. Wow wow wow ",
+            "subreddit": "ClaudeAI"
+          },
+          {
+            "url": "https://www.reddit.com/r/ChatGPTCoding/comments/1fguysz/call_for_questions_to_cursor_team_from_lex_fridman/",
+            "score": 295,
+            "title": "Call for questions to Cursor team - from Lex Fridman",
+            "selftext": "My name is Lex Fridman. I'm doing a podcast with the Cursor team. If you have questions / feature requests to discuss (including super-technical topics) let me know!\n\nThis conversation will be bigger than just about Cursor, but more generally about the future of programming with AI.",
+            "subreddit": "ChatGPTCoding"
+          },
+          {
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1j5t1nh/my_cursor_claude_37t_method_the_opposite_of_vibe/",
+            "score": 280,
+            "title": "My Cursor Claude 3.7-T Method (the OPPOSITE of ‘Vibe Coding’)",
+            "selftext": "Try ‘vibe coding’ if you must, but you’ll yeet your ‘YOLO’ code with tears in your eyes. \n\nHere’s what I recommend instead:\n\nPlace the following files in the Project’s ROOT folder. As awkward as it seems to have a bunch of docs in the ROOT folder, it’s the first place a forgetful Claude will look and if you DO NOT use the ROOT, Claude is likely to accidentally create duplicates of these files there anyway and cause confusion. \n\n1. PROTOCOL.md - Contains ROLE, WORKFLOW, and (brief) BEST PRACTICES",
+            "subreddit": "ClaudeAI"
+          },
+          {
+            "url": "https://i.redd.it/pn5ms21zlnpe1.jpeg",
+            "score": 278,
+            "title": "A Tale of Two Cursor Users 😃🤯",
+            "selftext": "",
+            "subreddit": "ChatGPTCoding"
+          },
+          {
+            "url": "https://x.com/nearcyan/status/1895432741275242957",
+            "score": 225,
+            "title": "junior devs watching claude 3.7 destroy their codebase in cursor",
+            "selftext": "",
+            "subreddit": "ChatGPTCoding"
+          },
+          {
+            "url": "https://www.reddit.com/r/ChatGPTCoding/comments/1kgi94u/cursor_is_offering_1year_free_subscription_for/",
+            "score": 217,
+            "title": "Cursor is offering 1-year free subscription for students",
+            "selftext": "University and high school students can get a year free of Cursor - https://www.cursor.com/students",
+            "subreddit": "ChatGPTCoding"
+          },
+          {
+            "url": "https://www.reddit.com/r/ChatGPTCoding/comments/1k8tf4c/why_is_cursor_so_popular/",
+            "score": 193,
+            "title": "Why is cursor so popular?",
+            "selftext": "As an IDE, what does Cursor have over VS code + copilot? \nI tried it when it came out and I could not get better results from it than I would from using a regular LLM chat. \n\nMy coding tools are: Claude Code, VS code + GitHub copilot, regular LLM chats. \nUsually brainstorm with LLM chats, get Claude code to implement, and then use vs code and copilot for cleaning up and other adjustments.\n\nI’ve tried using cursor again and I’m not sure if it has something I just don’t know about. ",
+            "subreddit": "ChatGPTCoding"
+          },
+          {
+            "url": "https://www.reddit.com/r/cursor/comments/1inoryp/cursor_fck_up_my_4_months_of_works/",
+            "score": 190,
+            "title": "Cursor f*ck up my 4 months of works",
+            "selftext": "Disclamer, I'm a moron who worked on the same project without thinking about the risk that Cursor could break everything. Yesterday, Cursor (even though I only asked it to feed a view on my UI) destroyed months of development. \n\nMy question: How do you back up your projects/versions to ensure that the next action on cursor is reversible? Ops!\n\nAlso, I know that while I'm the concern, cursor isn't the only culprit, it's also Claude (while good overall) still has some flaws ",
+            "subreddit": "cursor"
+          },
+          {
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1fdrbwa/so_how_many_of_you_have_permanently_switched_to/",
+            "score": 159,
+            "title": "So how many of you have permanently switched to cursor IDE and how’s that working out for you?",
+            "selftext": "Just recently noticed cursor AI IDE get a lot of hype and like are pro plans any worth it? Apparently it has the your complete code base as knowledge base so when you prompt inside it’s pretty good with creating functions and referencing existing?? curious about everyone’s experience ",
+            "subreddit": "ClaudeAI"
+          },
+          {
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1l3q1hx/is_claude_code_much_better_than_just_using_claude/",
+            "score": 152,
+            "title": "Is Claude Code much better than just using Claude in Cursor?",
+            "selftext": "If so, why is it so much better?   I find just using chat agents just fine.  ",
+            "subreddit": "ClaudeAI"
+          }
+        ]
+      }
+    }
+  ],
+  "stackoverflow_data": [
+    {
+      "tool_name": "Cursor",
+      "snapshot_date": "2025-06-27T12:43:01.198403",
+      "sample_data": {
+        "has_more": true,
+        "questions": [
+          {
+            "url": "https://stackoverflow.com/questions/3087975/how-to-change-the-cursor-into-a-hand-when-a-user-hovers-over-a-list-item",
+            "tags": [
+              "css",
+              "hover",
+              "mouse-cursor"
+            ],
+            "owner": "user246114",
+            "score": 2434,
+            "title": "How to change the cursor into a hand when a user hovers over a list item?",
+            "view_count": 2815160,
+            "is_answered": true,
+            "question_id": 3087975,
+            "answer_count": 28,
+            "creation_date": 1277149544,
+            "last_activity_date": 1695721423
+          },
+          {
+            "url": "https://stackoverflow.com/questions/35424367/how-can-i-navigate-back-to-the-last-cursor-position-in-visual-studio-code",
+            "tags": [
+              "visual-studio-code",
+              "keyboard-shortcuts"
+            ],
+            "owner": "kimsagro",
+            "score": 1384,
+            "title": "How can I navigate back to the last cursor position in Visual Studio Code?",
+            "view_count": 536233,
+            "is_answered": true,
+            "question_id": 35424367,
+            "answer_count": 18,
+            "creation_date": 1455600035,
+            "last_activity_date": 1734359587
+          },
+          {
+            "url": "https://stackoverflow.com/questions/6217378/place-cursor-at-the-end-of-text-in-edittext",
+            "tags": [
+              "java",
+              "android",
+              "kotlin",
+              "android-edittext",
+              "keylistener"
+            ],
+            "owner": "Manu",
+            "score": 1072,
+            "title": "Place cursor at the end of text in EditText",
+            "view_count": 377372,
+            "is_answered": true,
+            "question_id": 6217378,
+            "answer_count": 29,
+            "creation_date": 1307032362,
+            "last_activity_date": 1715070655
+          },
+          {
+            "url": "https://stackoverflow.com/questions/81272/how-to-move-the-cursor-word-by-word-in-the-os-x-terminal",
+            "tags": [
+              "macos",
+              "terminal",
+              "keyboard-shortcuts"
+            ],
+            "owner": "Arne",
+            "score": 944,
+            "title": "How to move the cursor word by word in the OS X Terminal",
+            "view_count": 492659,
+            "is_answered": true,
+            "question_id": 81272,
+            "answer_count": 21,
+            "creation_date": 1221641837,
+            "last_activity_date": 1730391766
+          },
+          {
+            "url": "https://stackoverflow.com/questions/3458689/how-to-move-screen-without-moving-cursor-in-vim",
+            "tags": [
+              "vim",
+              "scroll",
+              "cursor-position"
+            ],
+            "owner": "ereOn",
+            "score": 851,
+            "title": "How to move screen without moving cursor in Vim?",
+            "view_count": 257705,
+            "is_answered": true,
+            "question_id": 3458689,
+            "answer_count": 14,
+            "creation_date": 1281532883,
+            "last_activity_date": 1677532427
+          },
+          {
+            "url": "https://stackoverflow.com/questions/7238450/set-edittext-cursor-color",
+            "tags": [
+              "android",
+              "android-edittext",
+              "android-styles"
+            ],
+            "owner": "dineth",
+            "score": 632,
+            "title": "Set EditText cursor color",
+            "view_count": 424331,
+            "is_answered": true,
+            "question_id": 7238450,
+            "answer_count": 31,
+            "creation_date": 1314675832,
+            "last_activity_date": 1725021764
+          },
+          {
+            "url": "https://stackoverflow.com/questions/17012308/move-cursor-to-end-of-file-in-vim",
+            "tags": [
+              "vim"
+            ],
+            "owner": "user1322720",
+            "score": 535,
+            "title": "Move cursor to end of file in vim",
+            "view_count": 871667,
+            "is_answered": true,
+            "question_id": 17012308,
+            "answer_count": 17,
+            "creation_date": 1370799112,
+            "last_activity_date": 1729241688
+          },
+          {
+            "url": "https://stackoverflow.com/questions/499126/jquery-set-cursor-position-in-text-area",
+            "tags": [
+              "javascript",
+              "jquery",
+              "html",
+              "textfield"
+            ],
+            "owner": "jcnnghm",
+            "score": 451,
+            "title": "jQuery Set Cursor Position in Text Area",
+            "view_count": 372134,
+            "is_answered": true,
+            "question_id": 499126,
+            "answer_count": 16,
+            "creation_date": 1233419951,
+            "last_activity_date": 1600157956
+          },
+          {
+            "url": "https://stackoverflow.com/questions/511088/use-javascript-to-place-cursor-at-end-of-text-in-text-input-element",
+            "tags": [
+              "javascript"
+            ],
+            "owner": "Peanut",
+            "score": 429,
+            "title": "Use JavaScript to place cursor at end of text in text input element",
+            "view_count": 499177,
+            "is_answered": true,
+            "question_id": 511088,
+            "answer_count": 37,
+            "creation_date": 1233749498,
+            "last_activity_date": 1708417892
+          },
+          {
+            "url": "https://stackoverflow.com/questions/5052079/vim-move-cursor-to-its-last-position",
+            "tags": [
+              "vim"
+            ],
+            "owner": "Idan K",
+            "score": 335,
+            "title": "Vim: Move cursor to its last position",
+            "view_count": 121058,
+            "is_answered": true,
+            "question_id": 5052079,
+            "answer_count": 5,
+            "creation_date": 1298133901,
+            "last_activity_date": 1732377110
+          },
+          {
+            "url": "https://stackoverflow.com/questions/1568557/how-can-i-make-the-cursor-turn-to-the-wait-cursor",
+            "tags": [
+              "c#",
+              ".net",
+              "winforms",
+              "user-interface",
+              "mouse-cursor"
+            ],
+            "owner": "Malfist",
+            "score": 318,
+            "title": "How can I make the cursor turn to the wait cursor?",
+            "view_count": 551123,
+            "is_answered": true,
+            "question_id": 1568557,
+            "answer_count": 13,
+            "creation_date": 1255549703,
+            "last_activity_date": 1709529111
+          },
+          {
+            "url": "https://stackoverflow.com/questions/61967/is-there-a-way-to-loop-through-a-table-variable-in-tsql-without-using-a-cursor",
+            "tags": [
+              "sql-server",
+              "t-sql",
+              "loops"
+            ],
+            "owner": "Ray",
+            "score": 312,
+            "title": "Is there a way to loop through a table variable in TSQL without using a cursor?",
+            "view_count": 853359,
+            "is_answered": true,
+            "question_id": 61967,
+            "answer_count": 21,
+            "creation_date": 1221463131,
+            "last_activity_date": 1583281705
+          },
+          {
+            "url": "https://stackoverflow.com/questions/2897155/get-cursor-position-in-characters-within-a-text-input-field",
+            "tags": [
+              "javascript",
+              "jquery",
+              "html"
+            ],
+            "owner": "MarkB29",
+            "score": 311,
+            "title": "Get cursor position (in characters) within a text Input field",
+            "view_count": 481617,
+            "is_answered": true,
+            "question_id": 2897155,
+            "answer_count": 10,
+            "creation_date": 1274706350,
+            "last_activity_date": 1625768278
+          },
+          {
+            "url": "https://stackoverflow.com/questions/6249095/how-to-set-the-caret-cursor-position-in-a-contenteditable-element-div",
+            "tags": [
+              "javascript",
+              "jquery",
+              "contenteditable",
+              "caret",
+              "cursor-position"
+            ],
+            "owner": "Frodik",
+            "score": 304,
+            "title": "How to set the caret (cursor) position in a contenteditable element (div)?",
+            "view_count": 262899,
+            "is_answered": true,
+            "question_id": 6249095,
+            "answer_count": 13,
+            "creation_date": 1307346633,
+            "last_activity_date": 1748971222
+          },
+          {
+            "url": "https://stackoverflow.com/questions/10723770/whats-the-best-way-to-iterate-an-android-cursor",
+            "tags": [
+              "android",
+              "android-cursor"
+            ],
+            "owner": "Graham Borland",
+            "score": 304,
+            "title": "What&#39;s the best way to iterate an Android Cursor?",
+            "view_count": 146693,
+            "is_answered": true,
+            "question_id": 10723770,
+            "answer_count": 10,
+            "creation_date": 1337789013,
+            "last_activity_date": 1640200886
+          },
+          {
+            "url": "https://stackoverflow.com/questions/8809909/change-cursor-to-finger-pointer",
+            "tags": [
+              "html",
+              "css",
+              "mouseevent"
+            ],
+            "owner": "Dvir Levy",
+            "score": 292,
+            "title": "change cursor to finger pointer",
+            "view_count": 672474,
+            "is_answered": true,
+            "question_id": 8809909,
+            "answer_count": 10,
+            "creation_date": 1326226593,
+            "last_activity_date": 1674010972
+          },
+          {
+            "url": "https://stackoverflow.com/questions/833838/delete-word-after-or-around-cursor-in-vim",
+            "tags": [
+              "vim",
+              "keyboard-shortcuts"
+            ],
+            "owner": "Mantas",
+            "score": 284,
+            "title": "Delete word after or around cursor in Vim",
+            "view_count": 218443,
+            "is_answered": true,
+            "question_id": 833838,
+            "answer_count": 16,
+            "creation_date": 1241691255,
+            "last_activity_date": 1714785012
+          },
+          {
+            "url": "https://stackoverflow.com/questions/8296473/how-can-i-quickly-delete-a-line-in-vim-starting-at-the-cursor-position",
+            "tags": [
+              "vim"
+            ],
+            "owner": "Anthony",
+            "score": 279,
+            "title": "How can I quickly delete a line in VIM starting at the cursor position?",
+            "view_count": 319418,
+            "is_answered": true,
+            "question_id": 8296473,
+            "answer_count": 7,
+            "creation_date": 1322486906,
+            "last_activity_date": 1544000233
+          },
+          {
+            "url": "https://stackoverflow.com/questions/8035107/how-to-set-cursor-position-in-edittext",
+            "tags": [
+              "android",
+              "android-edittext"
+            ],
+            "owner": "nila",
+            "score": 271,
+            "title": "How to set cursor position in EditText?",
+            "view_count": 288907,
+            "is_answered": true,
+            "question_id": 8035107,
+            "answer_count": 26,
+            "creation_date": 1320661301,
+            "last_activity_date": 1696839919
+          },
+          {
+            "url": "https://stackoverflow.com/questions/4489885/how-can-i-increase-the-cursor-speed-in-terminal",
+            "tags": [
+              "macos",
+              "terminal",
+              "text-cursor"
+            ],
+            "owner": "classic_programmer",
+            "score": 262,
+            "title": "How can I increase the cursor speed in terminal?",
+            "view_count": 168017,
+            "is_answered": true,
+            "question_id": 4489885,
+            "answer_count": 2,
+            "creation_date": 1292850417,
+            "last_activity_date": 1703152534
+          }
+        ],
+        "total_questions": 20
+      }
+    }
+  ],
+  "medium_data": [
+    {
+      "tool_name": "Cursor",
+      "snapshot_date": "2025-06-27T12:43:01.198403",
+      "sample_data": {
+        "note": "Limited Medium access - requires API partnership for full functionality",
+        "articles": [],
+        "total_articles": 0
+      }
+    }
+  ],
+  "hackernews_data": [
+    {
+      "tool_name": "Cursor",
+      "snapshot_date": "2025-06-27T12:43:01.198403",
+      "sample_data": {
+        "hits": [
+          {
+            "url": "https://old.reddit.com/r/cursor/comments/1jyy5am/psa_cursor_now_restricts_logins_to_a_single/",
+            "title": "Cursor IDE support hallucinates lockout policy, causes user cancellations",
+            "author": "scaredpelican",
+            "hn_url": "https://news.ycombinator.com/item?id=43683012",
+            "points": 1511,
+            "created_at": "2025-04-14T16:24:28Z",
+            "story_text": "Earlier today Cursor, the magical AI-powered IDE started kicking users off when they logged in from multiple machines.<p>Like,you’d be working on your desktop, switch to your laptop, and all of a sudden you&#x27;re forcibly logged out. No warning, no notification, just gone.<p>Naturally, people thou",
+            "num_comments": 606
+          },
+          {
+            "url": "https://retrocomputing.stackexchange.com/questions/11533/why-did-moving-the-mouse-cursor-cause-windows-95-to-run-more-quickly",
+            "title": "Why did moving the mouse cursor cause Windows 95 to run more quickly?",
+            "author": "folli",
+            "hn_url": "https://news.ycombinator.com/item?id=20343728",
+            "points": 1188,
+            "created_at": "2019-07-03T12:35:54Z",
+            "story_text": "",
+            "num_comments": 196
+          },
+          {
+            "url": "http://cursors.io",
+            "title": "Cursors",
+            "author": "alloyed",
+            "hn_url": "https://news.ycombinator.com/item?id=8477124",
+            "points": 1032,
+            "created_at": "2014-10-19T03:22:25Z",
+            "story_text": "",
+            "num_comments": 236
+          },
+          {
+            "url": "https://github.com/voideditor/void",
+            "title": "Void: Open-source Cursor alternative",
+            "author": "sharjeelsayed",
+            "hn_url": "https://news.ycombinator.com/item?id=43927926",
+            "points": 948,
+            "created_at": "2025-05-08T16:35:34Z",
+            "story_text": "<a href=\"https:&#x2F;&#x2F;voideditor.com&#x2F;download-beta\">https:&#x2F;&#x2F;voideditor.com&#x2F;download-beta</a>",
+            "num_comments": 343
+          },
+          {
+            "url": "https://github.com/Microsoft/vscode/issues/22900",
+            "title": "VS Code uses 13% CPU when idle due to blinking cursor rendering",
+            "author": "Kristine1975",
+            "hn_url": "https://news.ycombinator.com/item?id=13940014",
+            "points": 899,
+            "created_at": "2017-03-23T14:29:39Z",
+            "story_text": "",
+            "num_comments": 760
+          },
+          {
+            "url": "https://xeiaso.net/notes/cursorless-alien-magic/",
+            "title": "Cursorless is alien magic from the future",
+            "author": "todsacerdoti",
+            "hn_url": "https://news.ycombinator.com/item?id=38214915",
+            "points": 790,
+            "created_at": "2023-11-10T04:04:10Z",
+            "story_text": "",
+            "num_comments": 337
+          },
+          {
+            "url": "https://forum.cursor.com/t/cursor-told-me-i-should-learn-coding-instead-of-asking-it-to-generate-it-limit-of-800-locs/61132",
+            "title": "Cursor told me I should learn coding instead of asking it to generate it",
+            "author": "nomilk",
+            "hn_url": "https://news.ycombinator.com/item?id=43351137",
+            "points": 658,
+            "created_at": "2025-03-13T07:59:55Z",
+            "story_text": "",
+            "num_comments": 399
+          },
+          {
+            "url": "https://tholman.com/cursor-effects/",
+            "title": "90s Cursor Effects",
+            "author": "lysergia",
+            "hn_url": "https://news.ycombinator.com/item?id=32640733",
+            "points": 620,
+            "created_at": "2022-08-29T17:12:33Z",
+            "story_text": "",
+            "num_comments": 170
+          },
+          {
+            "url": "https://browsermcp.io/",
+            "title": "Show HN: Browser MCP – Automate your browser using Cursor, Claude, VS Code",
+            "author": "namukang",
+            "hn_url": "https://news.ycombinator.com/item?id=43613194",
+            "points": 616,
+            "created_at": "2025-04-07T16:25:45Z",
+            "story_text": "",
+            "num_comments": 217
+          },
+          {
+            "url": "https://www.cursor.com/en/changelog/1-0",
+            "title": "Cursor 1.0",
+            "author": "ecz",
+            "hn_url": "https://news.ycombinator.com/item?id=44185256",
+            "points": 613,
+            "created_at": "2025-06-04T20:39:53Z",
+            "story_text": "",
+            "num_comments": 469
+          },
+          {
+            "url": "https://sourcecodered.com/snyk-malicious-npm-package/",
+            "title": "Snyk security researcher deploys malicious NPM packages targeting cursor.com",
+            "author": "arkadiyt",
+            "hn_url": "https://news.ycombinator.com/item?id=42690473",
+            "points": 574,
+            "created_at": "2025-01-13T22:38:27Z",
+            "story_text": "",
+            "num_comments": 312
+          },
+          {
+            "url": "https://www.arguingwithalgorithms.com/posts/cursor-review.html",
+            "title": "How I write code using Cursor",
+            "author": "tomyedwab",
+            "hn_url": "https://news.ycombinator.com/item?id=41979203",
+            "points": 491,
+            "created_at": "2024-10-29T03:50:23Z",
+            "story_text": "",
+            "num_comments": 407
+          },
+          {
+            "url": "https://ux.stackexchange.com/questions/52336/why-is-the-mouse-cursor-slightly-tilted-and-not-straight",
+            "title": "Why is the mouse cursor slightly tilted and not straight?",
+            "author": "wscourge",
+            "hn_url": "https://news.ycombinator.com/item?id=39248225",
+            "points": 471,
+            "created_at": "2024-02-04T06:57:24Z",
+            "story_text": "",
+            "num_comments": 315
+          },
+          {
+            "url": "https://devblogs.microsoft.com/oldnewthing/20201110-00/?p=104434",
+            "title": "A prank cursor resulted in an employee being fired before they started (2020)",
+            "author": "lazyjeff",
+            "hn_url": "https://news.ycombinator.com/item?id=31727457",
+            "points": 457,
+            "created_at": "2022-06-13T16:08:48Z",
+            "story_text": "",
+            "num_comments": 140
+          },
+          {
+            "url": "https://github.com/onlook-dev/onlook",
+            "title": "Show HN: Onlook – Open-source, visual-first Cursor for designers",
+            "author": "hoakiet98",
+            "hn_url": "https://news.ycombinator.com/item?id=44127653",
+            "points": 408,
+            "created_at": "2025-05-29T16:31:15Z",
+            "story_text": "Hey HN, I’m Kiet – one half of the two-person team building Onlook (<a href=\"https:&#x2F;&#x2F;beta.onlook.com&#x2F;\">https:&#x2F;&#x2F;beta.onlook.com&#x2F;</a>), an open-source [<a href=\"https:&#x2F;&#x2F;github.com&#x2F;onlook-dev&#x2F;onlook&#x2F;\">https:&#x2F;&#x2F;github.com&#x2F;onlook-dev&#x",
+            "num_comments": 81
+          },
+          {
+            "url": "http://www.pointerpointer.com/",
+            "title": "PointerPointer: points to your cursor",
+            "author": "nthitz",
+            "hn_url": "https://news.ycombinator.com/item?id=4095237",
+            "points": 367,
+            "created_at": "2012-06-11T15:56:45Z",
+            "story_text": "",
+            "num_comments": 65
+          },
+          {
+            "url": "https://github.com/voideditor/void",
+            "title": "Show HN: Void, an open-source Cursor/GitHub Copilot alternative",
+            "author": "andrewpareles",
+            "hn_url": "https://news.ycombinator.com/item?id=41563958",
+            "points": 347,
+            "created_at": "2024-09-17T03:58:29Z",
+            "story_text": "Hey HN, I&#x27;m Andrew, one of the creators of Void. I made this open source version of Cursor where you can get all of Cursor&#x27;s core features but in a fully-customizable IDE (ctrl+k, ctrl+L). We love Cursor but there are so many other features we want to build, like allowing AI to edit multip",
+            "num_comments": 154
+          },
+          {
+            "url": "http://ux.stackexchange.com/questions/52336/why-is-the-mouse-cursor-slightly-tilted-and-not-straight",
+            "title": "Why is the mouse cursor slightly tilted and not straight?",
+            "author": "attheodo",
+            "hn_url": "https://news.ycombinator.com/item?id=7251987",
+            "points": 326,
+            "created_at": "2014-02-17T13:36:41Z",
+            "story_text": "",
+            "num_comments": 103
+          },
+          {
+            "url": null,
+            "title": "Ask HN: Cursor or Windsurf?",
+            "author": "skarat",
+            "hn_url": "https://news.ycombinator.com/item?id=43959710",
+            "points": 316,
+            "created_at": "2025-05-12T04:41:50Z",
+            "story_text": "Things are changing so fast with these vscode forks I m barely able to keep up. Which one are you guys using currently? How does the autocomplete etc, compare between the two?",
+            "num_comments": 398
+          },
+          {
+            "url": "https://github.com/yetone/avante.nvim",
+            "title": "Avante.nvim: Use Your Neovim Like Using Cursor AI IDE",
+            "author": "simonpure",
+            "hn_url": "https://news.ycombinator.com/item?id=41353835",
+            "points": 300,
+            "created_at": "2024-08-26T03:44:48Z",
+            "story_text": "",
+            "num_comments": 87
+          }
+        ],
+        "total_hits": 309
+      }
+    }
+  ],
+  "news_data": [
+    {
+      "tool_name": "Cursor",
+      "snapshot_date": "2025-06-27T12:43:01.198403",
+      "sample_data": {
+        "articles": [
+          {
+            "url": "https://www.businessinsider.com/sundar-pichai-google-vibe-coding-software-engineer-ai-cursor-replit-2025-6",
+            "title": "Sundar Pichai is vibe coding. 'It feels so delightful to be a coder.'",
+            "source": "Business Insider",
+            "published_at": "2025-06-05T06:05:00Z",
+            "content_preview": "Sundar Pichai said he's using two tools — Cursor and Replit — to build a custom webpage."
+          },
+          {
+            "url": "https://www.businessinsider.com/tech-memo-ai-winners-startups-vibe-coding-2025-6",
+            "title": "Big Tech is vibe coding with these winning AI startups",
+            "source": "Business Insider",
+            "published_at": "2025-06-06T16:31:55Z",
+            "content_preview": "Amazon's adoption of the Cursor AI coding tool marks a pivotal moment in the race among startups including Anysphere, Replit, and Cognition AI."
+          },
+          {
+            "url": "https://www.cursor.com/en/changelog/1-0",
+            "title": "Cursor 1.0",
+            "source": "Cursor.com",
+            "published_at": "2025-06-04T20:39:53Z",
+            "content_preview": "Cursor 1.0 brings BugBot for code review, a first look at memories, one-click MCP setup, Jupyter support and general availability of Background Agent."
+          },
+          {
+            "url": "https://www.macrumors.com/2025/06/09/the-ipad-just-got-a-lot-more-like-a-mac/",
+            "title": "The iPad Just Got a Lot More Like a Mac Thanks to These 20+ New Features",
+            "source": "MacRumors",
+            "published_at": "2025-06-09T22:31:37Z",
+            "content_preview": "With iPadOS 26, Apple is moving the iPad closer to the Mac than ever before with a host of productivity and multitasking improvements.\n\n\n\n\n\n\n\nHere's everything Apple today announced for the ‌iPad‌ that's set to make the device more Mac-like:\n\n\n\n<ul>\n\n<li>App …"
+          },
+          {
+            "url": "https://www.businessinsider.com/vibe-coding-tech-firms-hire-engineers-2025-6",
+            "title": "Tech companies have a new hiring requirement: vibe coding",
+            "source": "Business Insider",
+            "published_at": "2025-06-10T09:00:01Z",
+            "content_preview": "Vibe coding is taking over Silicon Valley — and cropping up in tech jobs ads."
+          },
+          {
+            "url": "https://developers.slashdot.org/story/25/06/04/0820246/ai-startups-revolutionize-coding-industry-leading-to-sky-high-valuations",
+            "title": "AI Startups Revolutionize Coding Industry, Leading To Sky-High Valuations",
+            "source": "Slashdot.org",
+            "published_at": "2025-06-04T12:00:00Z",
+            "content_preview": "Code generation startups are attracting extraordinary investor interest two years after ChatGPT's launch, with companies like Cursor raising $900 million at a $10 billion valuation despite operating with negative gross margins. OpenAI is reportedly in talks t…"
+          },
+          {
+            "url": "https://www.wired.com/story/amazon-daniel-rausch-alexa-plus/",
+            "title": "Amazon Rebuilt Alexa Using a ‘Staggering’ Amount of AI Tools",
+            "source": "Wired",
+            "published_at": "2025-06-18T18:29:22Z",
+            "content_preview": "From writing code to testing the new Alexa+, Amazon engineers used generative AI throughout the build process. We talk to Amazon's Daniel Rausch about the next version of the voice assistant."
+          },
+          {
+            "url": "https://www.cursor.com/en/blog/series-c",
+            "title": "Series C and Scale (Cursor)",
+            "source": "Cursor.com",
+            "published_at": "2025-06-06T17:18:08Z",
+            "content_preview": "We've raised $900m to push the frontier of AI coding research."
+          },
+          {
+            "url": "https://hackaday.com/2025/06/17/a-gentle-introduction-to-ncurses-for-the-terminally-impatient/",
+            "title": "A Gentle Introduction to Ncurses for the Terminally Impatient",
+            "source": "Hackaday",
+            "published_at": "2025-06-17T14:00:43Z",
+            "content_preview": "Considered by many to be just a dull output for sequential text, the command-line terminal is a veritable canvas to the creative software developer. With the cursor as the brush, entire graphical u…"
+          },
+          {
+            "url": "https://www.businessinsider.com/cursor-interview-process-no-ai-on-site-project-coding-tool-2025-6",
+            "title": "Inside Cursor's hiring strategy: no AI in interviews and a 2-day project with the team",
+            "source": "Business Insider",
+            "published_at": "2025-06-12T05:20:15Z",
+            "content_preview": "The company's CEO said programming without AI is a \"great timeboxed test for skill and intelligence.\""
+          },
+          {
+            "url": "https://www.businessinsider.com/vibe-coding-increase-the-number-of-engineers-gitlab-ceo-swe-2025-6",
+            "title": "As coding gets easier with AI, there will be more engineers, not fewer, says GitLab's CEO",
+            "source": "Business Insider",
+            "published_at": "2025-06-11T05:56:48Z",
+            "content_preview": "Staples said that customers are testing coding assistants side-by-side, but he doesn't \"have a lot of concern\" about GitLab's ability to compete."
+          },
+          {
+            "url": "https://www.macrumors.com/how-to/screenshot-straight-to-clipboard/",
+            "title": "macOS Quick Tip: Screenshot Straight to the Clipboard",
+            "source": "MacRumors",
+            "published_at": "2025-06-02T15:55:35Z",
+            "content_preview": "There are several ways you can take screenshots on a Mac. Preview offers the option from its File menu. There's also a little screen capture app in the macOS Utilities folder called Screenshot. But the simplest and most common method is to use your Mac's buil…"
+          },
+          {
+            "url": "https://www.businessinsider.com/openai-cofounder-greg-brockman-vibe-coding-fun-engineering-swe-quality-2025-6",
+            "title": "OpenAI cofounder Greg Brockman says vibe coding has taken away some of the fun parts of being an engineer",
+            "source": "Business Insider",
+            "published_at": "2025-06-23T06:25:53Z",
+            "content_preview": "OpenAI's cofounder said vibe coding has left human engineers to do quality control."
+          },
+          {
+            "url": "https://slashdot.org/story/25/06/12/005258/canva-now-requires-use-of-llms-during-coding-interviews",
+            "title": "Canva Now Requires Use of LLMs During Coding Interviews",
+            "source": "Slashdot.org",
+            "published_at": "2025-06-12T03:30:00Z",
+            "content_preview": "An anonymous reader quotes a report from The Register: Australian SaaS-y graphic design service Canva now requires candidates for developer jobs to use AI coding assistants during the interview process. [...] Canva's hiring process previously included an inte…"
+          },
+          {
+            "url": "https://9to5mac.com/2025/06/17/macos-tahoe-26-mickey-mouse-hand-cursor/",
+            "title": "macOS Tahoe 26 does away with the ‘Mickey Mouse glove’ cursor",
+            "source": "9to5Mac",
+            "published_at": "2025-06-17T21:59:52Z",
+            "content_preview": "A few days ago, Apple released its Design Resources files with the official assets for macOS Tahoe 26. Among the new materials, there’s one tiny, 15×17-pixel icon that will undoubtedly leave a few long-time Mac users feeling a little heartbroken.\n\n\n\nThat cute…"
+          },
+          {
+            "url": "https://steipete.me/posts/2025/stop-overthinking-ai-subscriptions/",
+            "title": "Stop Over-Thinking AI Subscriptions – Peter Steinberger",
+            "source": "Steipete.me",
+            "published_at": "2025-06-03T07:36:04Z",
+            "content_preview": "After spending heavily on AI tools for two months, here's why the math actually works out—and which subscriptions are worth every penny."
+          },
+          {
+            "url": "https://www.theverge.com/games/679542/access-ability-summer-showcase-2025-best-games-trailers",
+            "title": "The Access-Ability Summer Showcase returns with the latest in accessible games",
+            "source": "The Verge",
+            "published_at": "2025-06-04T20:23:21Z",
+            "content_preview": "Now in its third year, the Access-Ability Summer Showcase is back to redress the lack of meaningful accessibility information across the ongoing video game showcase season. As we see progress broadly slow down, it's also a timely reminder of the good work tha…"
+          },
+          {
+            "url": "https://www.androidcentral.com/apps-software/android-os/googles-on-the-right-track-with-desktop-mode-in-android-16",
+            "title": "Google's on the right track with desktop mode in Android 16",
+            "source": "Android Central",
+            "published_at": "2025-06-11T18:29:20Z",
+            "content_preview": "It's still early, but after spending a bit of time with Google's take on Desktop Mode, I'm impressed by how polished it is. Hopefully, this means things will only get better from here."
+          },
+          {
+            "url": "https://www.androidcentral.com/gaming/virtual-reality/motorola-smart-connect-meta-quest-3",
+            "title": "This Android app can make your virtual life a little bit easier, if you have patience",
+            "source": "Android Central",
+            "published_at": "2025-06-14T17:00:24Z",
+            "content_preview": "Motorola's Smart Connect app is available on Quest 3 VR headsets, and it's a pretty cool way to use your phone while immersed in VR."
+          },
+          {
+            "url": "https://www.businessinsider.com/tech-memo-vibe-coding-replit-create-app-review-test-limitations-2025-6",
+            "title": "A former Google veteran used vibe coding to test a cat-purring app. It was fun, but wasn't purrfect.",
+            "source": "Business Insider",
+            "published_at": "2025-06-13T17:37:57Z",
+            "content_preview": "How a former Google vet used Replit to test a cat-purring app and the limitations they faced in fine-tuning and customization."
+          }
+        ],
+        "total_articles": 944
+      }
+    }
+  ],
+  "stock_data": [
+    {
+      "tool_name": "Cursor",
+      "snapshot_date": "2025-06-27T12:43:01.198403",
+      "sample_data": {
+        "error": "No data returned from API for symbol NULL"
+      }
+    }
+  ]
+}

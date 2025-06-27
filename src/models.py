@@ -34,7 +34,7 @@ class CompanyInfo(BaseModel):
     founding_date: Optional[str] = Field(None)
     key_executives: List[str] = Field([])
     parent_company: Optional[str] = Field(None)
-    major_investors: List[str] = Field([])
+    major_investors: Optional[List[str]] = Field([])
 
 
 class CommunityMetrics(BaseModel):
@@ -52,7 +52,7 @@ class CommunityMetrics(BaseModel):
     pypi_packages_count: Optional[int] = Field(None)
     medium_articles_count: Optional[int] = Field(None)
     list_of_companies_using_tool: List[str] = Field([])
-    case_studies: List[str] = Field([])
+    case_studies: Optional[List[str]] = Field([])
     testimonials: List[str] = Field([])
 
 
