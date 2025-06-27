@@ -74,7 +74,7 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
         # API keys and configs are now part of the agent's state
         self.firecrawl_api_key = os.getenv("FIRECRAWL_API_KEY")
         self.github_api_token = os.getenv("GITHUB_API_TOKEN")
-        self.alpha_vantage_api_key = os.getenv("ALPHA_VANTAGE_API_KEY")
+        self.financialmodelingprep_api_key = os.getenv("FINANCIALMODELINGPREP_API_KEY", "19k4juXL0uTO2Pfh75aIIBjpsj8uz6pE")
         self.news_api_key = os.getenv("NEWS_API_KEY")
 
         # Initialize Reddit (PRAW) client
@@ -253,7 +253,7 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
         # Scrape Reddit within specific subreddits using PRAW
         target_subreddits = [
             "AI_Agents", "mcp", "ClaudeAI", "ChatGPTCoding", "cursor", 
-            "ArtificialIntelligence", "PromptEngineering"
+            "ArtificialInteligence", "PromptEngineering"
         ]
         raw_data_payload['reddit_data'] = self.reddit_searcher(
             tool_name=tool_record['name'],
@@ -264,7 +264,10 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
         if tool_record.get('stock_symbol'):
             raw_data_payload['stock_data'] = self.stock_data_fetcher(stock_symbol=tool_record['stock_symbol'])
 
-        # Fetch News Data
+        # Search Medium articles
+        raw_data_payload['medium_data'] = self.medium_searcher(tool_name=tool_record['name'])
+
+        # News data
         raw_data_payload['news_data'] = self.news_aggregator(tool_name=tool_record['name'])
 
         # Search HackerNews
@@ -285,41 +288,9 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
         # Search PyPI packages
         raw_data_payload['pypi_data'] = self.pypi_searcher(tool_name=tool_record['name'])
 
-        # Search Medium articles
-        raw_data_payload['medium_data'] = self.medium_searcher(tool_name=tool_record['name'])
-
         # --- Company Intelligence Collection ---
-        # Extract company name from tool record or derive from tool name
         company_name = tool_record.get('company_name', tool_record['name'])
         
-        # LinkedIn company scraping for employee counts
-        raw_data_payload['linkedin_company_data'] = self.linkedin_company_scraper(
-            company_name=company_name,
-            website_url=tool_record.get('website_url')
-        )
-        
-        # Company About page scraping  
-        if tool_record.get('website_url'):
-            raw_data_payload['company_about_data'] = self.company_about_page_scraper(
-                website_url=tool_record['website_url']
-            )
-        
-        # AngelList/Wellfound startup information
-        raw_data_payload['angellist_data'] = self.angellist_company_scraper(
-            company_name=company_name
-        )
-        
-        # Enhanced news scraping with funding/partnership extraction
-        raw_data_payload['enhanced_news_data'] = self.enhanced_news_scraper(
-            tool_name=tool_record['name'],
-            company_name=company_name
-        )
-        
-        # Glassdoor company information
-        raw_data_payload['glassdoor_data'] = self.glassdoor_company_scraper(
-            company_name=company_name
-        )
-
         # --- AI-Powered Analysis ---
         logging.info("Sending data to Strands AI for analysis...")
         main_prompt = self._create_prompt(tool_record, raw_data_payload)

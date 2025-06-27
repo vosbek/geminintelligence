@@ -4,12 +4,14 @@
     "name": "Cursor",
     "description": "The AI Code Editor",
     "github_url": "https://github.com/getcursor/cursor",
-    "stock_symbol": "NULL",
+    "stock_symbol": null,
     "category": "AI_IDE",
+    "company_name": "Anysphere",
+    "legal_company_name": "Anysphere Inc.",
     "status": "active",
     "run_status": "processed",
-    "last_run": "2025-06-27 14:35:28.067506",
-    "created_at": "2025-06-27 14:32:52.709207",
-    "updated_at": "2025-06-27 14:35:28.068146"
+    "last_run": "2025-06-27 16:08:15.866601",
+    "created_at": "2025-06-27 16:06:05.343705",
+    "updated_at": "2025-06-27 16:08:15.867053"
   }
 ]

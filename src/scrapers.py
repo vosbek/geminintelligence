@@ -18,20 +18,43 @@ class ScraperMixin:
     """Mixin class containing all scraper tools for the ToolIntelligenceAgent."""
     
     @tool()
-    def web_scraper(self, url: str) -> dict:
+    def web_scraper(self, url: str, page_options: dict = None, stealth: bool = False) -> dict:
         """
         Scrapes a given URL using the Firecrawl service.
         :param url: The URL to scrape.
+        :param page_options: Additional options for Firecrawl's scrape_url, like `waitFor`.
+        :param stealth: Enables stealth mode for sites with advanced anti-bot protection.
         :return: A dictionary containing the scraped content and metadata.
         """
-        logging.info(f"Scraping URL via Firecrawl: {url}")
+        logging.info(f"Scraping URL via Firecrawl: {url} (Stealth: {stealth})")
         if not self.firecrawl_api_key:
             logging.error("FIRECRAWL_API_KEY not found in environment variables.")
             return {"error": "API key not configured."}
         
         try:
-            # Use the Firecrawl SDK to scrape the URL, passing options as keyword arguments
-            scrape_result = self.firecrawl_app.scrape_url(url, only_main_content=True)
+            # Prepare scrape parameters, starting with defaults.
+            scrape_params = {
+                'only_main_content': True,
+            }
+
+            if stealth:
+                scrape_params['stealth'] = True
+
+            # Add any custom page_options provided by the caller.
+            if page_options:
+                scrape_params.update(page_options)
+
+            # Ensure headers with a User-Agent are always present.
+            if 'headers' not in scrape_params:
+                scrape_params['headers'] = {}
+            scrape_params['headers'].setdefault(
+                'User-Agent', 
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+            )
+
+            # Use the Firecrawl SDK to scrape the URL, unpacking the parameters.
+            # Parameters like 'waitFor' and 'headers' are passed as top-level arguments.
+            scrape_result = self.firecrawl_app.scrape_url(url, **scrape_params)
 
             if not scrape_result or not scrape_result.markdown:
                 logging.warning(f"Firecrawl returned no content for {url}")
@@ -180,8 +203,8 @@ class ScraperMixin:
             for sub_name in subreddits:
                 try:
                     # Corrected the case of the subreddit name
-                    if sub_name == 'ArtificialIntelligence':
-                        sub_name = 'artificialintelligence'
+                    if sub_name == 'ArtificialInteligence':
+                        sub_name = 'artificialinteligence'
 
                     subreddit = self.reddit_client.subreddit(sub_name)
                     # Search for the tool name in the subreddit, limit results to keep it focused
@@ -626,7 +649,10 @@ class ScraperMixin:
         }
         
         try:
-            response = requests.get(base_url, params=params, timeout=15)
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+            }
+            response = requests.get(base_url, params=params, headers=headers, timeout=15)
             response.raise_for_status()
             data = response.json()
             
@@ -925,476 +951,6 @@ class ScraperMixin:
             }
         except (requests.RequestException, ValueError, KeyError) as e:
             logging.error(f"Failed to search Medium for {tool_name}: {e}")
-            return {"error": str(e)}
-
-    @tool()
-    def linkedin_company_scraper(self, company_name: str, website_url: str = None) -> dict:
-        """
-        Scrapes LinkedIn company page for employee count and company information.
-        :param company_name: The name of the company
-        :param website_url: Optional website URL to help find the right company
-        :return: Dictionary containing company metrics from LinkedIn
-        """
-        logging.info(f"Scraping LinkedIn company data for: {company_name}")
-        
-        try:
-            # Construct LinkedIn company search/page URL
-            # LinkedIn company pages usually follow: linkedin.com/company/company-name
-            company_slug = company_name.lower().replace(" ", "-").replace(".", "")
-            linkedin_url = f"https://www.linkedin.com/company/{company_slug}"
-            
-            # Use Firecrawl to scrape the LinkedIn page
-            scrape_result = self.web_scraper(linkedin_url)
-            
-            if scrape_result.get("error"):
-                # Try alternative URL formats
-                alt_urls = [
-                    f"https://www.linkedin.com/company/{company_name.lower().replace(' ', '')}",
-                    f"https://www.linkedin.com/company/{company_name.lower().replace(' ', '-').replace('.', '-')}"
-                ]
-                
-                for alt_url in alt_urls:
-                    alt_result = self.web_scraper(alt_url)
-                    if not alt_result.get("error"):
-                        scrape_result = alt_result
-                        linkedin_url = alt_url
-                        break
-            
-            if scrape_result.get("error"):
-                return {"error": f"Could not access LinkedIn page for {company_name}"}
-            
-            content = scrape_result.get("content", "").lower()
-            
-            # Extract employee count (LinkedIn shows ranges like "51-200 employees")
-            employee_count = None
-            employee_count_text = None
-            
-            # Common LinkedIn employee count patterns
-            import re
-            employee_patterns = [
-                r'(\d+[\,\d]*)\s*employees',  # "1,234 employees"
-                r'(\d+[\,\d]*)-(\d+[\,\d]*)\s*employees',  # "51-200 employees"  
-                r'company size[:\s]*(\d+[\,\d]*)',  # "Company size: 50"
-                r'employees[:\s]*(\d+[\,\d]*)',  # "Employees: 100"
-            ]
-            
-            for pattern in employee_patterns:
-                match = re.search(pattern, content)
-                if match:
-                    if '-' in pattern and len(match.groups()) > 1:
-                        # Handle range (take midpoint)
-                        low = int(match.group(1).replace(',', ''))
-                        high = int(match.group(2).replace(',', ''))
-                        employee_count = (low + high) // 2
-                        employee_count_text = f"{match.group(1)}-{match.group(2)} employees"
-                    else:
-                        employee_count = int(match.group(1).replace(',', ''))
-                        employee_count_text = match.group(0)
-                    break
-            
-            # Extract other company information
-            headquarters = None
-            hq_patterns = [
-                r'headquarters[:\s]*([^,\n]+)',
-                r'located in[:\s]*([^,\n]+)',
-                r'based in[:\s]*([^,\n]+)'
-            ]
-            
-            for pattern in hq_patterns:
-                match = re.search(pattern, content)
-                if match:
-                    headquarters = match.group(1).strip()
-                    break
-            
-            return {
-                "source": "LinkedIn",
-                "linkedin_url": linkedin_url,
-                "employee_count": employee_count,
-                "employee_count_text": employee_count_text,
-                "headquarters_location": headquarters,
-                "scraped_successfully": True
-            }
-            
-        except Exception as e:
-            logging.error(f"Failed to scrape LinkedIn for {company_name}: {e}")
-            return {"error": str(e)}
-
-    @tool()
-    def company_about_page_scraper(self, website_url: str) -> dict:
-        """
-        Scrapes company About/Team pages for employee count and company information.
-        :param website_url: The main website URL
-        :return: Dictionary containing company information from About pages
-        """
-        logging.info(f"Scraping company About page: {website_url}")
-        
-        try:
-            # Try common About page URLs
-            about_urls = [
-                f"{website_url.rstrip('/')}/about",
-                f"{website_url.rstrip('/')}/about-us", 
-                f"{website_url.rstrip('/')}/team",
-                f"{website_url.rstrip('/')}/company",
-                f"{website_url.rstrip('/')}/careers",
-                f"{website_url.rstrip('/')}/jobs"
-            ]
-            
-            company_info = {}
-            
-            for about_url in about_urls:
-                try:
-                    scrape_result = self.web_scraper(about_url)
-                    if scrape_result.get("error"):
-                        continue
-                        
-                    content = scrape_result.get("content", "").lower()
-                    
-                    # Extract employee count
-                    import re
-                    employee_patterns = [
-                        r'(\d+)\+?\s*employees',
-                        r'team of (\d+)',
-                        r'(\d+)\+?\s*people',
-                        r'staff of (\d+)',
-                        r'(\d+)\+?\s*team members'
-                    ]
-                    
-                    for pattern in employee_patterns:
-                        match = re.search(pattern, content)
-                        if match:
-                            company_info["employee_count"] = int(match.group(1))
-                            company_info["employee_count_source"] = f"About page ({about_url})"
-                            break
-                    
-                    # Extract founding information
-                    founding_patterns = [
-                        r'founded in (\d{4})',
-                        r'established (\d{4})',
-                        r'started in (\d{4})',
-                        r'since (\d{4})'
-                    ]
-                    
-                    for pattern in founding_patterns:
-                        match = re.search(pattern, content)
-                        if match:
-                            company_info["founding_date"] = match.group(1)
-                            break
-                    
-                    # Extract headquarters
-                    hq_patterns = [
-                        r'based in ([^,\n.]+)',
-                        r'located in ([^,\n.]+)',
-                        r'headquarters in ([^,\n.]+)',
-                        r'from ([^,\n.]+)'
-                    ]
-                    
-                    for pattern in hq_patterns:
-                        match = re.search(pattern, content)
-                        if match:
-                            location = match.group(1).strip()
-                            if len(location) > 3 and len(location) < 50:  # Basic validation
-                                company_info["headquarters_location"] = location
-                            break
-                    
-                    # If we found good info, break
-                    if company_info:
-                        company_info["scraped_from"] = about_url
-                        break
-                        
-                except Exception as e:
-                    logging.debug(f"Could not scrape {about_url}: {e}")
-                    continue
-            
-            if not company_info:
-                return {"error": "No company information found on About pages"}
-            
-            return company_info
-            
-        except Exception as e:
-            logging.error(f"Failed to scrape company About pages for {website_url}: {e}")
-            return {"error": str(e)}
-
-    @tool()
-    def angellist_company_scraper(self, company_name: str) -> dict:
-        """
-        Scrapes AngelList/Wellfound for startup company information.
-        :param company_name: The name of the company
-        :return: Dictionary containing startup metrics from AngelList
-        """
-        logging.info(f"Scraping AngelList/Wellfound for: {company_name}")
-        
-        try:
-            # AngelList search URL (now Wellfound)
-            search_url = f"https://wellfound.com/companies?query={company_name.replace(' ', '%20')}"
-            
-            scrape_result = self.web_scraper(search_url)
-            if scrape_result.get("error"):
-                return {"error": f"Could not access AngelList search for {company_name}"}
-            
-            content = scrape_result.get("content", "").lower()
-            
-            # Look for company profile links in search results
-            import re
-            profile_links = re.findall(r'wellfound\.com/company/([^/\s"]+)', content)
-            
-            if not profile_links:
-                return {"error": "Company not found on AngelList/Wellfound"}
-            
-            # Scrape the first matching company profile
-            company_slug = profile_links[0]
-            profile_url = f"https://wellfound.com/company/{company_slug}"
-            
-            profile_result = self.web_scraper(profile_url)
-            if profile_result.get("error"):
-                return {"error": "Could not access company profile"}
-            
-            profile_content = profile_result.get("content", "").lower()
-            
-            # Extract startup information
-            startup_info = {"source": "AngelList/Wellfound", "profile_url": profile_url}
-            
-            # Employee count
-            employee_patterns = [
-                r'(\d+)-(\d+)\s*employees',
-                r'(\d+)\+?\s*employees',
-                r'team size[:\s]*(\d+)'
-            ]
-            
-            for pattern in employee_patterns:
-                match = re.search(pattern, profile_content)
-                if match:
-                    if '-' in pattern and len(match.groups()) > 1:
-                        low = int(match.group(1))
-                        high = int(match.group(2))
-                        startup_info["employee_count"] = (low + high) // 2
-                        startup_info["employee_range"] = f"{match.group(1)}-{match.group(2)}"
-                    else:
-                        startup_info["employee_count"] = int(match.group(1))
-                    break
-            
-            # Funding stage
-            stage_patterns = [
-                r'(seed|series [a-z]|pre-seed|angel)',
-                r'funding stage[:\s]*([^,\n]+)'
-            ]
-            
-            for pattern in stage_patterns:
-                match = re.search(pattern, profile_content)
-                if match:
-                    startup_info["company_stage"] = match.group(1).strip()
-                    break
-            
-            return startup_info
-            
-        except Exception as e:
-            logging.error(f"Failed to scrape AngelList for {company_name}: {e}")
-            return {"error": str(e)}
-
-    @tool()
-    def enhanced_news_scraper(self, tool_name: str, company_name: str = None) -> dict:
-        """
-        Enhanced news scraper that extracts funding, partnership, and company information.
-        :param tool_name: The name of the tool to search for
-        :param company_name: Optional company name for more targeted search
-        :return: Dictionary containing enhanced news analysis
-        """
-        logging.info(f"Enhanced news search for: {tool_name}")
-        
-        # Get base news results
-        news_results = self.news_aggregator(tool_name)
-        if news_results.get("error"):
-            return news_results
-        
-        enhanced_articles = []
-        funding_mentions = []
-        partnership_mentions = []
-        
-        import re
-        
-        for article in news_results.get("articles", []):
-            enhanced_article = article.copy()
-            
-            # Analyze article content for specific intelligence
-            content = f"{article.get('title', '')} {article.get('content_preview', '')}".lower()
-            
-            # Extract funding information
-            funding_patterns = [
-                r'raised \$?([\d,\.]+)\s*(million|billion|m|b)',
-                r'funding of \$?([\d,\.]+)\s*(million|billion|m|b)',
-                r'series [a-z] (\$?[\d,\.]+\s*(?:million|billion|m|b))',
-                r'valuation.*\$?([\d,\.]+)\s*(million|billion|m|b)',
-                r'investment.*\$?([\d,\.]+)\s*(million|billion|m|b)'
-            ]
-            
-            funding_info = []
-            for pattern in funding_patterns:
-                matches = re.findall(pattern, content)
-                for match in matches:
-                    if isinstance(match, tuple):
-                        amount, unit = match
-                        funding_info.append(f"${amount} {unit}")
-                    else:
-                        funding_info.append(match)
-            
-            if funding_info:
-                enhanced_article["funding_mentions"] = funding_info
-                funding_mentions.extend(funding_info)
-            
-            # Extract partnership information
-            partnership_patterns = [
-                r'partnership with ([^,\n\.]+)',
-                r'collaboration with ([^,\n\.]+)',
-                r'integrates with ([^,\n\.]+)',
-                r'acquired by ([^,\n\.]+)',
-                r'merger with ([^,\n\.]+)',
-                r'invests in ([^,\n\.]+)',
-                r'strategic alliance with ([^,\n\.]+)'
-            ]
-            
-            partnerships = []
-            for pattern in partnership_patterns:
-                matches = re.findall(pattern, content)
-                partnerships.extend(matches)
-            
-            if partnerships:
-                enhanced_article["partnership_mentions"] = partnerships
-                partnership_mentions.extend(partnerships)
-            
-            # Extract investor mentions
-            investor_patterns = [
-                r'investors? include ([^,\n\.]+)',
-                r'led by ([^,\n\.]+)',
-                r'backed by ([^,\n\.]+)',
-                r'funded by ([^,\n\.]+)'
-            ]
-            
-            investors = []
-            for pattern in investor_patterns:
-                matches = re.findall(pattern, content)
-                investors.extend(matches)
-            
-            if investors:
-                enhanced_article["investor_mentions"] = investors
-            
-            # Extract employee/growth mentions
-            growth_patterns = [
-                r'(\d+)\+?\s*employees',
-                r'team.*(\d+)\s*people',
-                r'hired (\d+)',
-                r'grown to (\d+)',
-                r'staff.*(\d+)'
-            ]
-            
-            growth_info = []
-            for pattern in growth_patterns:
-                matches = re.findall(pattern, content)
-                growth_info.extend(matches)
-            
-            if growth_info:
-                enhanced_article["growth_mentions"] = growth_info
-            
-            enhanced_articles.append(enhanced_article)
-        
-        return {
-            "articles": enhanced_articles,
-            "total_articles": len(enhanced_articles),
-            "intelligence_summary": {
-                "funding_mentions": list(set(funding_mentions)),
-                "partnership_mentions": list(set(partnership_mentions)),
-                "total_funding_articles": len([a for a in enhanced_articles if a.get("funding_mentions")]),
-                "total_partnership_articles": len([a for a in enhanced_articles if a.get("partnership_mentions")])
-            }
-        }
-
-    @tool()
-    def glassdoor_company_scraper(self, company_name: str) -> dict:
-        """
-        Scrapes Glassdoor for company information including employee estimates.
-        :param company_name: The name of the company
-        :return: Dictionary containing company information from Glassdoor
-        """
-        logging.info(f"Scraping Glassdoor for: {company_name}")
-        
-        try:
-            # Glassdoor company overview pages are public
-            search_query = company_name.replace(" ", "-").lower()
-            glassdoor_url = f"https://www.glassdoor.com/Overview/Working-at-{search_query}-EI_IE.htm"
-            
-            # Try to find the company page by searching first
-            search_url = f"https://www.glassdoor.com/Search/results.htm?keyword={company_name.replace(' ', '%20')}"
-            
-            scrape_result = self.web_scraper(search_url)
-            if scrape_result.get("error"):
-                return {"error": f"Could not access Glassdoor search for {company_name}"}
-            
-            content = scrape_result.get("content", "").lower()
-            
-            # Look for company profile links
-            import re
-            # Glassdoor URLs typically have the format: /Overview/Working-at-Company-Name-EI_IE123456.htm
-            profile_links = re.findall(r'/overview/working-at-[^-]+-ei_ie(\d+)\.htm', content)
-            
-            if not profile_links:
-                return {"error": "Company not found on Glassdoor"}
-            
-            # Use the first company ID found
-            company_id = profile_links[0]
-            company_url = f"https://www.glassdoor.com/Overview/Working-at-{search_query}-EI_IE{company_id}.htm"
-            
-            profile_result = self.web_scraper(company_url)
-            if profile_result.get("error"):
-                return {"error": "Could not access Glassdoor company profile"}
-            
-            profile_content = profile_result.get("content", "").lower()
-            
-            # Extract company information
-            company_info = {"source": "Glassdoor", "glassdoor_url": company_url}
-            
-            # Extract employee count
-            employee_patterns = [
-                r'(\d+[\,\d]*)\+?\s*employees',
-                r'company size[:\s]*(\d+[\,\d]*)',
-                r'size[:\s]*(\d+[\,\d]*)\s*employees'
-            ]
-            
-            for pattern in employee_patterns:
-                match = re.search(pattern, profile_content)
-                if match:
-                    employee_count = int(match.group(1).replace(',', ''))
-                    company_info["employee_count"] = employee_count
-                    company_info["employee_count_source"] = "Glassdoor"
-                    break
-            
-            # Extract company rating
-            rating_patterns = [
-                r'(\d\.\d)\s*out of 5',
-                r'rating[:\s]*(\d\.\d)',
-                r'(\d\.\d)\s*stars?'
-            ]
-            
-            for pattern in rating_patterns:
-                match = re.search(pattern, profile_content)
-                if match:
-                    company_info["glassdoor_rating"] = float(match.group(1))
-                    break
-            
-            # Extract headquarters location
-            location_patterns = [
-                r'headquarters[:\s]*([^,\n\.]+)',
-                r'located in[:\s]*([^,\n\.]+)',
-                r'based in[:\s]*([^,\n\.]+)'
-            ]
-            
-            for pattern in location_patterns:
-                match = re.search(pattern, profile_content)
-                if match:
-                    company_info["headquarters_location"] = match.group(1).strip()
-                    break
-            
-            return company_info
-            
-        except Exception as e:
-            logging.error(f"Failed to scrape Glassdoor for {company_name}: {e}")
             return {"error": str(e)}
 
     def _make_request(self, url: str, headers: dict = None, params: dict = None) -> requests.Response:
