@@ -14,6 +14,8 @@ CREATE TABLE ai_tools (
     github_url VARCHAR(500),
     stock_symbol VARCHAR(20),
     category VARCHAR(100),
+    company_name VARCHAR(255), -- The actual company name (e.g., "Anysphere" for Cursor)
+    legal_company_name VARCHAR(255), -- Legal entity name (e.g., "Anysphere Inc.")
     status VARCHAR(50) DEFAULT 'active',
     run_status VARCHAR(50) DEFAULT NULL, -- null=never_run, update=needs_run, processed=completed
     last_run TIMESTAMP,

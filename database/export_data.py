@@ -84,6 +84,8 @@ def export_structured_analysis(conn, output_dir):
     SELECT 
         t.id as tool_id,
         t.name,
+        t.company_name,
+        t.legal_company_name,
         web_url.url as website_url,
         t.github_url,
         t.category,
@@ -135,6 +137,8 @@ def export_structured_analysis(conn, output_dir):
                     "tool_info": {
                         "id": tool_id,
                         "name": tool_name,
+                        "company_name": row['company_name'],
+                        "legal_company_name": row['legal_company_name'],
                         "website_url": row['website_url'],
                         "github_url": row['github_url'],
                         "category": row['category'],

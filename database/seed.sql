@@ -2,9 +2,9 @@
 TRUNCATE TABLE tool_urls, ai_tools RESTART IDENTITY CASCADE;
 
 -- Initial data for the ai_tools table
-INSERT INTO ai_tools (name, description, category, github_url, stock_symbol)
+INSERT INTO ai_tools (name, description, category, github_url, stock_symbol, company_name, legal_company_name)
 VALUES
-    ('Cursor', 'The AI Code Editor', 'AI_IDE', 'https://github.com/getcursor/cursor', 'NULL');
+    ('Cursor', 'The AI Code Editor', 'AI_IDE', 'https://github.com/getcursor/cursor', NULL, 'Anysphere', 'Anysphere Inc.');
 
 -- Seed data for tool_urls
 -- Note: Using WITH clauses to get the id of the tool by name for clarity and maintainability.
