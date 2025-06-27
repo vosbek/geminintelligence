@@ -105,7 +105,7 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
             logging.info(f"Using custom Firecrawl API URL: {firecrawl_api_url}")
         self.firecrawl_app = FirecrawlApp(**firecrawl_params)
 
-    def _create_prompt(self, tool_record: dict, scraped_content_list: list) -> str:
+    def _create_prompt(self, tool_record: dict, raw_data_payload: dict) -> str:
         """Create a detailed prompt for the LLM optimized for comprehensive analysis."""
         # Basic tool information
         prompt_lines = [
@@ -126,27 +126,76 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
         if tool_record.get('stock_symbol'):
             prompt_lines.append(f"- Stock Symbol: {tool_record['stock_symbol']}")
 
-        # Add scraped web content
-        prompt_lines.append("\n## Scraped Content Analysis:")
-        if not scraped_content_list:
-            prompt_lines.append("No web content was scraped.")
-        else:
-            for scraped_content in scraped_content_list:
-                url = scraped_content.get('url', 'Unknown URL')
-                url_type = scraped_content.get('url_type', 'N/A')
-                content = scraped_content.get('content', 'No content available.')
-                error = scraped_content.get('error')
+        # Add ALL collected raw data sources
+        prompt_lines.append("\n## Comprehensive Data Analysis:")
+        prompt_lines.append("Analyze all the following data sources to extract intelligence:")
+        
+        # Include all raw data in the prompt
+        for source_name, source_data in raw_data_payload.items():
+            prompt_lines.append(f"\n### {source_name.replace('_', ' ').title()}:")
+            if source_data:
+                prompt_lines.append(f"```json\n{json.dumps(source_data, indent=2)}\n```")
+            else:
+                prompt_lines.append("No data available for this source.")
 
-                prompt_lines.append(f"\n### Content from {url_type.capitalize()} URL: {url}")
-                if error:
-                    prompt_lines.append(f"Could not scrape content. Error: {error}")
-                else:
-                    prompt_lines.append("Analyze the following content for insights into the tool's features, target audience, pricing, and recent updates:")
-                    prompt_lines.append(f"```markdown\n{content}\n```")
+        # Add JSON schema and instructions
+        schema_example = {
+            "basic_info": {
+                "description": "A summary of the tool's purpose and features",
+                "category_classification": "AI_IDE, CODE_COMPLETION, etc."
+            },
+            "technical_details": {
+                "feature_list": ["feature1", "feature2"],
+                "technology_stack": ["Python", "React"],
+                "pricing_model": {"free": "description", "paid": "description"},
+                "enterprise_capabilities": "enterprise features",
+                "security_features": ["security1", "security2"],
+                "integration_capabilities": ["integration1"],
+                "scalability_features": ["scale1"],
+                "compliance_certifications": ["cert1"],
+                "comparable_tools": ["tool1", "tool2"],
+                "unique_differentiators": ["diff1"],
+                "pros_and_cons": {"pros": ["pro1"], "cons": ["con1"]},
+                "market_positioning": "market position",
+                "update_frequency": "frequency",
+                "version_history": ["v1.0", "v2.0"],
+                "roadmap_information": "roadmap info"
+            },
+            "company_info": {
+                "stock_price": 123.45,
+                "market_cap": "1B",
+                "news_mentions": 50,
+                "annual_recurring_revenue": "100M",
+                "funding_rounds": [{"round": "Series A", "amount": "10M"}],
+                "valuation": "500M",
+                "employee_count": 100,
+                "founding_date": "2020-01-01",
+                "key_executives": ["CEO Name"],
+                "parent_company": "Parent Corp",
+                "major_investors": ["Investor1"]
+            },
+            "community_metrics": {
+                "github_stars": 1000,
+                "github_forks": 100,
+                "github_last_commit_date": "2025-01-01",
+                "reddit_mentions": 50,
+                "reddit_sentiment_score": 0.7,
+                "hacker_news_mentions_count": 10,
+                "stackoverflow_questions_count": 25,
+                "producthunt_ranking": 5,
+                "devto_articles_count": 15,
+                "npm_packages_count": 3,
+                "npm_weekly_downloads": 1000,
+                "pypi_packages_count": 2,
+                "medium_articles_count": 8,
+                "list_of_companies_using_tool": ["Company1"],
+                "case_studies": ["Case study 1"],
+                "testimonials": ["Testimonial 1"]
+            }
+        }
 
-        # Add instructions for the LLM
         prompt_lines.extend([
-            "**ANALYSIS OBJECTIVE:** Extract maximum detail about this AI tool's capabilities, market position, technical architecture, community adoption, and business metrics.",
+            "\n**ANALYSIS OBJECTIVE:** Extract maximum detail about this AI tool's capabilities, market position, technical architecture, community adoption, and business metrics.",
             "**ANALYSIS INSTRUCTIONS:**",
             "1. **Be Comprehensive:** Extract every meaningful detail from all data sources",
             "2. **Be Specific:** Use exact numbers, dates, and technical specifications when available",
@@ -166,7 +215,8 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
             "4. Cross-reference data between sources for accuracy",
             "5. Extract maximum intelligence from all 11+ data sources provided",
             "6. This analysis runs infrequently, so be thorough and detailed",
-            "IMPORTANT: You must only return the JSON object and nothing else. Do not include any text before or after the JSON."
+            f"\n**REQUIRED JSON OUTPUT FORMAT:**\n```json\n{json.dumps(schema_example, indent=2)}\n```",
+            "\nIMPORTANT: You must return ONLY a valid JSON object matching the exact structure above. Do not include any text before or after the JSON. Use null for missing values, never leave fields undefined."
         ])
         return "\n".join(prompt_lines)
 
@@ -240,39 +290,52 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
 
         # --- AI-Powered Analysis ---
         logging.info("Sending data to Strands AI for analysis...")
-        main_prompt = self._create_prompt(tool_record, scraped_content_list)
+        main_prompt = self._create_prompt(tool_record, raw_data_payload)
         
         # Make the agent instance callable to handle the LLM call
-        agent_result = self(main_prompt) # Get the raw AgentResult object
-
-        # Add verbose logging for the agent's response
-        logging.info(f"Agent raw response object type: {type(agent_result)}")
-        logging.info(f"Agent raw response object: {agent_result}")
-
-        if not agent_result:
-             logging.error("Agent returned an empty response.")
-             return None, raw_data_payload
-
         try:
+            agent_result = self(main_prompt) # Get the raw AgentResult object
+            
+            # Add verbose logging for the agent's response
+            logging.info(f"Agent raw response object type: {type(agent_result)}")
+            logging.info(f"Agent raw response received successfully")
+
+            if not agent_result:
+                logging.error("Agent returned an empty response.")
+                return None, raw_data_payload
+
             # Convert the AgentResult to a string, which contains the JSON
             agent_response_text = str(agent_result)
+            logging.info(f"Agent response text length: {len(agent_response_text)}")
+            
+            # Log first 500 characters of response for debugging
+            logging.info(f"Agent response preview: {agent_response_text[:500]}...")
 
             # Find the start and end of the JSON object in the response string
             start_index = agent_response_text.find('{')
             end_index = agent_response_text.rfind('}') + 1
             
             if start_index == -1 or end_index == 0:
-                raise ValueError("Could not find a JSON object in the agent's response.")
+                logging.error("Could not find a JSON object in the agent's response.")
+                logging.error(f"Full response was: {agent_response_text}")
+                return None, raw_data_payload
 
             json_string = agent_response_text[start_index:end_index]
+            logging.info(f"Extracted JSON string length: {len(json_string)}")
             
             # Parse the extracted JSON string into the Pydantic model
             parsed_json = json.loads(json_string)
+            logging.info("JSON parsing successful")
+            
             structured_data = ToolSnapshotData.model_validate(parsed_json)
+            logging.info("Pydantic model validation successful")
 
         except (json.JSONDecodeError, ValueError) as e:
             logging.error(f"Failed to parse JSON from agent response: {e}")
             logging.error(f"Malformed response string was: {agent_response_text}")
+            return None, raw_data_payload
+        except Exception as e:
+            logging.error(f"Unexpected error during LLM processing: {e}", exc_info=True)
             return None, raw_data_payload
         
         logging.info(f"--- Finished Strands Agent for: {tool_record['name']} ---")
