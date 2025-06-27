@@ -1,5 +1,10 @@
 -- Database schema for the AI Intelligence Platform
 
+DROP TABLE IF EXISTS curated_snapshots CASCADE;
+DROP TABLE IF EXISTS tool_snapshots CASCADE;
+DROP TABLE IF EXISTS ai_tools CASCADE;
+DROP TABLE IF EXISTS data_sources CASCADE;
+
 -- Table to store information about the AI tools to be tracked
 CREATE TABLE ai_tools (
     id SERIAL PRIMARY KEY,
@@ -12,7 +17,7 @@ CREATE TABLE ai_tools (
     stock_symbol VARCHAR(20),
     additional_urls JSONB,
     category VARCHAR(100),
-    status VARCHAR(50) DEFAULT ''active'',
+    status VARCHAR(50) DEFAULT 'active',
     run_status VARCHAR(50) DEFAULT NULL, -- null=never_run, update=needs_run, processed=completed
     last_run TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -29,7 +34,7 @@ CREATE TABLE tool_snapshots (
     company_info JSONB,
     community_metrics JSONB,
     raw_data JSONB,
-    processing_status VARCHAR(50) DEFAULT ''processing'',
+    processing_status VARCHAR(50) DEFAULT 'processing',
     error_log TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -43,7 +48,7 @@ CREATE TABLE curated_snapshots (
     screenshots JSONB,
     videos JSONB,
     strategic_alignment TEXT,
-    validation_status VARCHAR(50) DEFAULT ''pending'',
+    validation_status VARCHAR(50) DEFAULT 'pending',
     curated_by VARCHAR(100),
     curated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -67,7 +72,7 @@ BEGIN
    NEW.updated_at = NOW();
    RETURN NEW;
 END;
-$$ language ''plpgsql'';
+$$ language 'plpgsql';
 
 -- Trigger to update the updated_at timestamp on ai_tools table
 CREATE TRIGGER update_ai_tools_updated_at
