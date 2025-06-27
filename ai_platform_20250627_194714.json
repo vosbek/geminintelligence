@@ -1,0 +1,54 @@
+2025-06-27 19:47:14,813 - INFO - =================================================
+2025-06-27 19:47:14,813 - INFO - AI Intelligence Platform - Weekly Run Initializing
+2025-06-27 19:47:14,814 - INFO - =================================================
+2025-06-27 19:47:14,955 - INFO - Successfully connected to the database.
+2025-06-27 19:47:14,956 - INFO - Initializing Strands Agent (AWS region: us-east-1)
+2025-06-27 19:47:14,957 - INFO - Model: anthropic.claude-3-5-sonnet-20240620-v1:0
+2025-06-27 19:47:14,967 - INFO - Found credentials in environment variables.
+2025-06-27 19:47:16,281 - INFO - PRAW Reddit instance created. Read-only: False
+2025-06-27 19:47:16,286 - INFO - Found 1 tools to process.
+2025-06-27 19:47:16,287 - INFO - Starting intelligence gathering for tool: Cursor (ID: 1)
+2025-06-27 19:47:16,288 - INFO - Found 3 URLs to scrape for Cursor.
+2025-06-27 19:47:16,288 - INFO - Scraping URL via Firecrawl: https://www.cursor.com/blog (Stealth: False)
+2025-06-27 19:47:21,100 - INFO - Scraping URL via Firecrawl: https://www.cursor.com/changelog (Stealth: False)
+2025-06-27 19:47:27,239 - INFO - Scraping URL via Firecrawl: https://www.cursor.com/ (Stealth: False)
+2025-06-27 19:47:34,692 - INFO - Analyzing GitHub repo: https://github.com/getcursor/cursor
+2025-06-27 19:47:37,535 - INFO - Searching Reddit API for 'Cursor' in subreddits: ['AI_Agents', 'mcp', 'ClaudeAI', 'ChatGPTCoding', 'cursor', 'ArtificialInteligence', 'PromptEngineering']
+2025-06-27 19:47:43,286 - INFO - Collecting financial data for Cursor
+2025-06-27 19:47:43,287 - INFO - Scraping TechCrunch for funding info on Cursor
+2025-06-27 19:47:44,713 - ERROR - Failed to scrape TechCrunch for Cursor: No module named 'bs4'
+2025-06-27 19:47:44,714 - INFO - Scraping VentureBeat for funding info on Cursor
+2025-06-27 19:47:45,851 - ERROR - Failed to scrape VentureBeat for Cursor: No module named 'bs4'
+2025-06-27 19:47:45,853 - INFO - Scraping AngelList for Cursor
+2025-06-27 19:47:46,508 - INFO - Searching Medium for: Cursor
+2025-06-27 19:47:48,393 - INFO - Searching news for: Cursor
+2025-06-27 19:47:48,950 - INFO - Searching HackerNews for: Cursor
+2025-06-27 19:47:49,883 - INFO - Searching StackOverflow for: Cursor
+2025-06-27 19:47:50,580 - INFO - Searching ProductHunt for: Cursor
+2025-06-27 19:47:55,192 - INFO - Found 1 ProductHunt results for Cursor
+2025-06-27 19:47:55,194 - INFO - Searching Dev.to for: Cursor
+2025-06-27 19:47:57,966 - INFO - Searching NPM for: Cursor
+2025-06-27 19:47:58,514 - ERROR - Failed to search NPM for Cursor: 403 Client Error: Forbidden for url: https://registry.npmjs.org/-/v1/search?text=Cursor&size=20&from=0&quality=0.65&popularity=0.98&maintenance=0.5
+2025-06-27 19:47:58,515 - INFO - Searching PyPI for: Cursor
+2025-06-27 19:48:00,236 - INFO - Sending data to Strands AI for analysis...
+2025-06-27 19:49:20,269 - INFO - Agent raw response object type: <class 'strands.agent.agent_result.AgentResult'>
+2025-06-27 19:49:20,270 - INFO - Agent raw response received successfully
+2025-06-27 19:49:20,271 - INFO - Agent response text length: 10022
+2025-06-27 19:49:20,272 - INFO - Agent response preview: ```json
+{
+  "basic_info": {
+    "description": "Cursor is an AI-powered code editor built to make developers extraordinarily productive. It combines the familiarity of a traditional IDE with advanced AI capabilities for code completion, refactoring, and natural language editing.",
+    "category_classification": "AI_IDE"
+  },
+  "technical_details": {
+    "feature_list": [
+      "AI-powered code completion and suggestions",
+      "Natural language code editing",
+      "Intelligent search across co...
+2025-06-27 19:49:20,275 - INFO - Extracted JSON string length: 10009
+2025-06-27 19:49:20,276 - INFO - JSON parsing successful
+2025-06-27 19:49:20,279 - INFO - Pydantic model validation successful
+2025-06-27 19:49:20,281 - INFO - --- Finished Strands Agent for: Cursor ---
+2025-06-27 19:49:20,354 - INFO - Successfully created snapshot and processed Cursor.
+2025-06-27 19:49:20,355 - INFO - Database connection closed.
+2025-06-27 19:49:20,356 - INFO - AI Intelligence Platform run finished.
