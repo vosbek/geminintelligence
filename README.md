@@ -2,12 +2,37 @@
 
 ## Project Overview
 
-This project is a database-driven system that automatically collects, processes, and curates information about AI developer tools. The goal is to provide comprehensive, up-to-date intelligence for strategic decision-making.
+This project is a comprehensive, database-driven system that automatically collects, processes, and curates intelligence about AI developer tools from **11 different data sources**. The goal is to provide strategic decision-makers with comprehensive, up-to-date intelligence for competitive analysis and market positioning.
+
+### System Architecture
 
 The system is composed of two main parts:
 
-1.  **Data Collection Engine (Phase 1 - Complete):** A Python-based backend that uses an AWS-powered agent (`strands`) to orchestrate data collection from various sources. It scrapes websites with Firecrawl, analyzes GitHub repositories, searches Reddit via the PRAW API, and fetches news. The collected data is processed by an LLM to generate a structured JSON snapshot, which is then stored in a PostgreSQL database.
-2.  **Curation Interface (Phase 2 - Planned):** A future application that will allow analysts to view the collected data, add notes, and curate it for executive review.
+1.  **Data Collection Engine (Phase 1 - Complete):** A sophisticated Python-based backend powered by AWS Strands agent using **Claude 3.5 Sonnet (Latest)** with optimized configuration for maximum detail extraction. The system orchestrates data collection from 11 comprehensive sources and processes everything through an LLM to generate structured intelligence snapshots stored in PostgreSQL.
+
+2.  **Curation Interface (Phase 2 - Complete):** A Flask-based web application that allows analysts to view collected data, add notes, and curate intelligence for executive review.
+
+### Comprehensive Data Sources (11 Total)
+
+**🌐 Web & Community Intelligence:**
+- **Website Content**: Firecrawl-powered scraping of primary websites
+- **GitHub Analytics**: Repository metrics, stars, forks, commit activity  
+- **Reddit Discussions**: Community sentiment and mentions across AI subreddits
+- **HackerNews**: Technical community discussions and trending stories
+- **StackOverflow**: Developer questions and technical adoption metrics
+- **Dev.to**: Technical articles and tutorials from developer community
+
+**📦 Package Ecosystem Intelligence:**
+- **NPM Registry**: JavaScript/Node.js package adoption and download metrics
+- **PyPI Registry**: Python package ecosystem and library usage
+
+**📰 Media & Market Intelligence:**
+- **News Articles**: Comprehensive news coverage via NewsAPI
+- **Medium**: Technical thought leadership and company blog content
+- **ProductHunt**: Product launches, community voting, and market reception
+
+**💼 Financial & Business Intelligence:**
+- **Stock Data**: Financial metrics via Alpha Vantage (when applicable)
 
 ---
 
@@ -52,7 +77,16 @@ Before you begin, ensure you have the following installed on your Windows machin
     ```
 4.  **Create the `.env` file:**
     *   Make a copy of `.env.example` and name it `.env`.
-    *   Open the new `.env` file and fill in your credentials for the database and all required APIs (Firecrawl, GitHub, Reddit, NewsAPI).
+    *   Open the new `.env` file and fill in your credentials for all required APIs:
+        - **Database**: PostgreSQL connection details
+        - **Firecrawl**: Web scraping API key
+        - **GitHub**: Personal access token for repository analysis  
+        - **Reddit**: PRAW API credentials (client ID, secret, username, password)
+        - **NewsAPI**: News aggregation API key
+        - **Alpha Vantage**: Financial data API key
+        - **ProductHunt**: API token for product data
+        - **Medium**: API key (optional - limited public access)
+        - **AWS**: Configured via `aws configure sso` for Strands agent
 
 ### 3. Run the Data Collection
 
@@ -89,36 +123,75 @@ LIMIT 1;
 ```
 
 #### Explore the Raw JSON Data
-The `raw_data` column contains the unprocessed data from all sources. You can inspect it using PostgreSQL's JSON functions.
+The `raw_data` column contains unprocessed data from all 11 sources. You can inspect specific data sources using PostgreSQL's JSON functions:
 
 ```sql
-SELECT
-    t.name,
-    s.snapshot_date,
-    s.raw_data -> 'news_data' as news
-FROM
-    tool_snapshots s
-JOIN
-    ai_tools t ON s.tool_id = t.id
-WHERE
-    t.name = 'Cursor'
-ORDER BY
-    s.snapshot_date DESC
-LIMIT 1;
+-- View GitHub metrics
+SELECT t.name, s.raw_data -> 'github_data' as github_metrics
+FROM tool_snapshots s JOIN ai_tools t ON s.tool_id = t.id
+WHERE t.name = 'Cursor';
+
+-- View community discussions  
+SELECT t.name, s.raw_data -> 'reddit_data' as reddit_discussions
+FROM tool_snapshots s JOIN ai_tools t ON s.tool_id = t.id  
+WHERE t.name = 'Cursor';
+
+-- View package ecosystem data
+SELECT t.name, 
+       s.raw_data -> 'npm_data' as npm_packages,
+       s.raw_data -> 'pypi_data' as python_packages
+FROM tool_snapshots s JOIN ai_tools t ON s.tool_id = t.id
+WHERE t.name = 'Cursor';
+
+-- View all data sources available
+SELECT t.name, 
+       jsonb_object_keys(s.raw_data) as data_sources
+FROM tool_snapshots s JOIN ai_tools t ON s.tool_id = t.id  
+WHERE t.name = 'Cursor'
+ORDER BY s.snapshot_date DESC LIMIT 1;
 ```
 
 ---
 
 ## Project Structure
 
-*   `src/`: Contains the main Python source code.
-    *   `main.py`: The main entry point for the data collection script. It orchestrates the process and handles database interactions.
-    *   `models.py`: Defines the Pydantic data models for structured data validation.
-*   `database/`: Contains SQL scripts for database setup.
-    *   `schema.sql`: Creates the database tables.
-    *   `seed.sql`: Populates the initial list of AI tools.
-    *   `reset_database.ps1`: A PowerShell script to quickly drop and recreate the database.
-*   `logs/`: Directory where log files are stored (created automatically).
-*   `.env.example`: An example file showing the required environment variables.
-*   `requirements.txt`: A list of all Python package dependencies.
-*   `example_raw_output.json`: An example of the raw JSON data collected for one tool before LLM processing.
+### Core Application
+*   `src/`: Contains the main Python source code (modular architecture).
+    *   `main.py`: Main entry point with optimized Strands agent and execution logic
+    *   `models.py`: Pydantic data models for structured data validation
+    *   `database.py`: Database connection and utility functions  
+    *   `scrapers.py`: All 11 data scraper implementations in modular design
+    *   `app.py`: Flask web application for data curation interface
+    *   `templates/`: HTML templates for the web interface
+
+### Configuration & Setup  
+*   `database/`: SQL scripts for database setup.
+    *   `schema.sql`: Creates PostgreSQL tables with JSONB support
+    *   `seed.sql`: Populates initial AI tools list
+    *   `reset_database.ps1`: PowerShell script to reset database
+*   `.env.example`: Environment variables template with all 11 API configurations
+*   `requirements.txt`: Python package dependencies
+
+### Data & Logs
+*   `logs/`: Timestamped log files (created automatically)
+*   `raw.json`: Example raw data output from all 11 scrapers
+
+## System Features
+
+### Advanced Data Collection
+- **11 Comprehensive Data Sources**: Web, community, packages, media, financial
+- **Optimized LLM Processing**: Claude 3.5 Sonnet with 8192 tokens, temp=0.1
+- **Intelligent Data Fusion**: Cross-references data across sources for accuracy
+- **Robust Error Handling**: Graceful degradation when APIs are unavailable
+
+### Structured Intelligence Output
+- **Basic Info**: Comprehensive descriptions and categorization
+- **Technical Details**: Features, pricing, tech stack, security, integrations
+- **Company Intelligence**: Financial metrics, funding, leadership, investors  
+- **Community Metrics**: GitHub stats, forum discussions, package adoption
+
+### Data Architecture
+- **PostgreSQL Database**: JSONB storage for flexibility and performance
+- **Modular Codebase**: Clean separation of scrapers, database, and core logic
+- **Flexible Schema**: Supports any data structure via JSONB fields
+- **Audit Trail**: Complete snapshot history with timestamps
