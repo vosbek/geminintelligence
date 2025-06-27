@@ -428,21 +428,22 @@ class ScraperMixin:
         }
 
         all_products = []
-        search_variations = [
+        
+        # Strategy: Search in relevant topics and filter results locally
+        topics_to_search = ["developer-tools", "artificial-intelligence", "productivity", "tech", "api-tools"]
+        search_variations = list(set([ # Use set to avoid duplicate searches
             tool_name,
             tool_name.lower(),
             tool_name.replace(" ", ""),
             tool_name.replace("-", " "),
             tool_name.split()[0] if " " in tool_name else tool_name
-        ]
+        ]))
 
-        # Strategy 1: Direct product search using posts query
-        for search_term in search_variations:
+        for topic in topics_to_search:
             try:
-                # Use posts query to get recent products and filter
-                graphql_query = """
-                query Posts($first: Int!) {
-                  posts(first: $first, order: VOTES) {
+                topic_query = """
+                query PostsByTopic($topic: String!, $first: Int!) {
+                  posts(topic: $topic, first: $first) {
                     edges {
                       node {
                         id
@@ -455,21 +456,6 @@ class ScraperMixin:
                         votesCount
                         createdAt
                         featuredAt
-                        topics {
-                          edges {
-                            node {
-                              name
-                            }
-                          }
-                        }
-                        makers {
-                          edges {
-                            node {
-                              name
-                              username
-                            }
-                          }
-                        }
                         reviewsCount
                         reviewsRating
                       }
@@ -478,10 +464,10 @@ class ScraperMixin:
                 }
                 """
                 
-                variables = {"first": 100}
+                variables = {"topic": topic, "first": 50}
                 response = requests.post(
                     "https://api.producthunt.com/v2/api/graphql",
-                    json={"query": graphql_query, "variables": variables},
+                    json={"query": topic_query, "variables": variables},
                     headers=headers,
                     timeout=20
                 )
@@ -489,83 +475,25 @@ class ScraperMixin:
                 data = response.json()
 
                 if "errors" in data:
-                    logging.warning(f"ProductHunt API returned errors: {data['errors']}")
+                    logging.warning(f"ProductHunt API returned errors for topic '{topic}': {data['errors']}")
                     continue
 
                 posts_data = data.get("data", {}).get("posts", {})
                 for edge in posts_data.get("edges", []):
                     node = edge.get("node", {})
                     if node:
-                        # Check if search term matches name, tagline, or description
                         name = node.get("name", "").lower()
                         tagline = node.get("tagline", "").lower()
-                        description = node.get("description", "").lower()
                         
-                        if (search_term.lower() in name or 
-                            search_term.lower() in tagline or 
-                            search_term.lower() in description):
-                            all_products.append(node)
+                        # More flexible matching for topic search
+                        for search_term in search_variations:
+                            if (search_term in name or search_term in tagline):
+                                all_products.append(node)
+                                break # Avoid adding the same product multiple times
 
             except (requests.RequestException, ValueError) as e:
-                logging.warning(f"Failed ProductHunt search for '{search_term}': {e}")
+                logging.warning(f"Failed ProductHunt topic search for '{topic}': {e}")
                 continue
-
-        # Strategy 2: Search in relevant topics if direct search yields few results
-        if len(all_products) < 3:
-            topics_to_search = ["developer-tools", "artificial-intelligence", "productivity", "tech"]
-            
-            for topic in topics_to_search:
-                try:
-                    topic_query = """
-                    query PostsByTopic($topic: String!, $first: Int!) {
-                      posts(topic: $topic, first: $first) {
-                        edges {
-                          node {
-                            id
-                            name
-                            tagline
-                            description
-                            url
-                            website
-                            commentsCount
-                            votesCount
-                            createdAt
-                            featuredAt
-                            reviewsCount
-                            reviewsRating
-                          }
-                        }
-                      }
-                    }
-                    """
-                    
-                    variables = {"topic": topic, "first": 50}
-                    response = requests.post(
-                        "https://api.producthunt.com/v2/api/graphql",
-                        json={"query": topic_query, "variables": variables},
-                        headers=headers,
-                        timeout=20
-                    )
-                    response.raise_for_status()
-                    data = response.json()
-
-                    posts_data = data.get("data", {}).get("posts", {})
-                    for edge in posts_data.get("edges", []):
-                        node = edge.get("node", {})
-                        if node:
-                            name = node.get("name", "").lower()
-                            tagline = node.get("tagline", "").lower()
-                            
-                            # More flexible matching for topic search
-                            for search_term in search_variations:
-                                if (search_term.lower() in name or 
-                                    search_term.lower() in tagline):
-                                    all_products.append(node)
-                                    break
-
-                except (requests.RequestException, ValueError) as e:
-                    logging.warning(f"Failed ProductHunt topic search for '{topic}': {e}")
-                    continue
 
         # Deduplicate results based on product ID
         unique_products = {}
@@ -586,7 +514,7 @@ class ScraperMixin:
         return {
             "products_found": len(sorted_products),
             "search_results": sorted_products,
-            "search_strategies_used": ["direct_search", "topic_search"] if len(all_products) >= 3 else ["direct_search", "topic_search"]
+            "search_strategies_used": ["topic_search"]
         }
 
     @tool()
