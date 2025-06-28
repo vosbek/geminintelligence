@@ -2,59 +2,51 @@
   {
     "id": 1,
     "tool_id": 1,
-    "snapshot_date": "2025-06-27T19:49:20.281293",
+    "snapshot_date": "2025-06-27T20:43:05.978788",
     "basic_info": {
-      "description": "Cursor is an AI-powered code editor built to make developers extraordinarily productive. It combines the familiarity of a traditional IDE with advanced AI capabilities for code completion, refactoring, and natural language editing.",
-      "category_classification": "AI_IDE"
+      "description": "Cursor is an AI-powered code editor and IDE designed to make developers extraordinarily productive. It combines advanced AI capabilities with a familiar code editing experience, offering features like intelligent code completion, natural language code editing, and automated code review.",
+      "category_classification": "AI_IDE, CODE_COMPLETION, AI_CODING_ASSISTANT"
     },
     "technical_details": {
       "feature_list": [
         "AI-powered code completion and suggestions",
         "Natural language code editing",
-        "Intelligent search across codebase",
-        "Multi-file editing support",
-        "BugBot for automatic code review",
+        "Automated code review with BugBot",
+        "Multi-file and multi-root workspace support",
         "Background Agent for parallel task execution",
-        "Memories feature to remember facts from conversations",
-        "One-click MCP (Model-Controller-Provider) setup",
         "Jupyter Notebook support",
-        "Customizable chat modes",
-        "Richer chat responses with Mermaid diagrams and Markdown tables",
-        "Network diagnostics in settings",
-        "Parallel tool calls for faster responses",
-        "Collapsable tool calls in Chat",
-        "Max mode for all top AI models",
-        "Syntax highlighting in completion suggestions",
-        "@folders support for adding entire codebase to context",
-        "Fast edits for long files using search & replace",
-        "Multi-root workspace support",
-        "Chat export to markdown",
-        "Chat duplication",
-        "Sound notifications for completed chats",
+        "Memories feature for context retention",
+        "One-click MCP (Model-Code-Prompt) setup",
+        "Custom modes for personalized workflows",
+        "Chat tabs for multiple parallel conversations",
+        "Sound notifications for completed tasks",
         "Usage-based cost visibility",
-        "Custom modes (beta)",
-        "Global ignore files",
-        "Project structure in context (beta)"
+        "Integration with GitHub for PR comments",
+        "Support for multiple AI models including Claude, GPT-4, Gemini, and custom models",
+        "Privacy mode to prevent remote code storage",
+        "Syntax highlighting in completion suggestions",
+        "Native terminal emulation",
+        "Global ignore patterns for excluding files from context",
+        "Customizable keybindings",
+        "Import of existing VS Code extensions, themes, and settings"
       ],
       "pricing_model": {
         "free": "Limited free tier available",
-        "paid": "Pro plan at $20/month, Business plan at $39/month/user, Ultra plan at $200/month"
+        "paid": "Pro plan at $20/month, Business plan at $39/user/month, Ultra plan at $200/month for power users"
       },
       "pros_and_cons": {
         "cons": [
+          "Learning curve for optimal AI utilization",
           "Potential for over-reliance on AI-generated code",
-          "Learning curve for optimal use of AI features",
-          "Privacy concerns with code sharing (though mitigated by Privacy Mode)",
-          "Subscription cost for advanced features",
-          "Possible performance impact on large codebases"
+          "Some users report occasional reliability issues",
+          "Higher pricing for advanced features compared to traditional IDEs"
         ],
         "pros": [
           "Powerful AI-assisted coding capabilities",
-          "Familiar IDE interface with VS Code compatibility",
+          "Familiar IDE experience with VS Code compatibility",
           "Flexible pricing options including free tier",
-          "Regular feature updates and improvements",
-          "Strong focus on developer productivity",
-          "Integration with popular tools and services"
+          "Regular updates and new feature additions",
+          "Strong privacy controls with Privacy Mode option"
         ]
       },
       "version_history": [
@@ -66,62 +58,51 @@
       ],
       "comparable_tools": [
         "GitHub Copilot",
-        "Tabnine",
-        "Kite",
-        "CodeWhisperer",
-        "Codeium",
         "Replit",
-        "Visual Studio Code with AI extensions",
-        "JetBrains AI Assistant",
-        "OpenAI Codex",
-        "Windsurf",
-        "Void"
+        "Cline",
+        "Void",
+        "WindSurf",
+        "Trae"
       ],
       "technology_stack": [
         "Electron (for cross-platform desktop app)",
-        "React (for UI)",
+        "React (for UI components)",
         "TypeScript",
-        "Python (likely for AI/ML components)",
-        "WebAssembly (likely for performance-critical components)",
-        "Large Language Models (e.g. GPT-4, Claude, Gemini)",
-        "Docker (for MCP servers)",
-        "Git (for version control integration)",
-        "WebSockets (for real-time communication)"
+        "Node.js",
+        "Various AI models (Claude, GPT-4, Gemini, etc.)",
+        "Git integration",
+        "MCP (Model-Code-Prompt) architecture"
       ],
-      "update_frequency": "Frequent updates, with major releases approximately monthly and patches released weekly",
+      "update_frequency": "Frequent updates, with major releases approximately monthly and patches weekly",
       "security_features": [
-        "SOC 2 certified",
-        "Privacy Mode option to prevent remote storage of code without consent",
-        "OAuth support for MCP server authentication",
-        "Global ignore patterns to exclude sensitive files"
+        "SOC 2 certification",
+        "Privacy Mode to prevent remote code storage",
+        "OAuth support for MCP servers",
+        "Configurable global ignore patterns"
       ],
-      "market_positioning": "Cursor positions itself as a next-generation IDE that seamlessly integrates AI capabilities into the development workflow, aiming to dramatically increase developer productivity across various programming tasks.",
-      "roadmap_information": "While a specific public roadmap is not provided, Cursor's blog and changelog indicate ongoing development in areas such as AI model integration, performance improvements, and new productivity features.",
+      "market_positioning": "Positioned as a premium AI-powered IDE for professional developers and teams, competing directly with GitHub Copilot and other AI coding assistants while offering a more integrated development environment",
+      "roadmap_information": "Future plans include expanding Background Agent capabilities, improving multi-language support, and enhancing enterprise features",
       "scalability_features": [
-        "Background Agent for parallel task execution",
         "Multi-root workspace support",
-        "Improved indexing performance for teams sharing codebases"
+        "Background Agent for parallel task execution",
+        "Improved indexing performance for large codebases"
       ],
       "unique_differentiators": [
-        "Built-in AI agent capabilities with Background Agent",
-        "Automatic code review with BugBot",
-        "Custom AI modes for personalized workflows",
-        "Seamless integration of multiple top-tier language models",
-        "Advanced context management with @folders and project structure",
-        "One-click MCP setup for easy server configuration"
+        "Advanced AI models with custom mode support",
+        "Background Agent for autonomous coding tasks",
+        "Integrated code review with BugBot",
+        "Memories feature for long-term context retention",
+        "One-click MCP setup for easy customization"
       ],
-      "enterprise_capabilities": "Enterprise users can only access stable releases (no pre-release versions). Team admins can disable Privacy Mode. Admin API available for teams to access usage metrics and spend data.",
+      "enterprise_capabilities": "Custom model deployment, advanced security features, team usage analytics, admin controls for disabling privacy mode, and API access for usage metrics and spend data",
       "integration_capabilities": [
-        "GitHub integration for PR reviews and comments",
+        "GitHub integration for PR comments and code review",
         "Slack integration for launching Background Agents",
-        "VS Code extension support",
-        "Jupyter Notebook integration",
-        "Git integration",
-        "AWS Bedrock integration",
-        "Docker integration for MCP servers"
+        "VS Code extension and setting imports",
+        "Custom MCP server integration"
       ],
       "compliance_certifications": [
-        "SOC 2"
+        "SOC 2 certified"
       ]
     },
     "company_info": {
@@ -130,7 +111,7 @@
       "stock_price": null,
       "company_stage": null,
       "founding_date": "2023-03-12",
-      "news_mentions": 938,
+      "news_mentions": 939,
       "business_model": null,
       "employee_count": null,
       "funding_rounds": [
@@ -148,13 +129,15 @@
         }
       ],
       "key_executives": [
-        "Michael Littman"
+        "Michael",
+        "Aman",
+        "Jacob",
+        "Phillip",
+        "Arvid"
       ],
       "parent_company": null,
       "company_website": null,
-      "major_investors": [
-        "Anysphere Team"
-      ],
+      "major_investors": null,
       "revenue_estimate": null,
       "last_funding_date": null,
       "total_funding_amount": null,
@@ -169,27 +152,22 @@
       "github_forks": 1947,
       "github_stars": 30521,
       "testimonials": [
-        "Cursor is at least a 2x improvement over Copilot. It's amazing having an AI pair programmer, and is an incredible accelerator for me and my team. - Ben Bernard, Instacart",
-        "The Cursor tab completion while coding is occasionally so magic it defies reality - about ~25% of the time it is anticipating exactly what I want to do. It is enough to make you believe that eventually you'll be able to code at the speed of thought. - Kevin Whinnery, OpenAI",
+        "Cursor is at least a 2x improvement over Copilot. - Ben Bernard, Instacart",
+        "The Cursor tab completion while coding is occasionally so magic it defies reality - about ~25% of the time it is anticipating exactly what I want to do. - Kevin Whinnery, OpenAI",
         "Cursor is hands down my biggest workflow improvement in years - Sawyer Hood, Figma",
         "I love writing code and Cursor is a necessity. Cursor is steps ahead of my brain, proposing multi-line edits so I type 'tab' more than anything else. - Andrew Milich, Notion",
         "Cursor is so good, and literally gets better/more feature-rich every couple of weeks. - Morgan McGuire, Weights & Biases",
         "Cursor is awesome! Someone finally put GPT into a code editor in a seamless way. It's so elegant and easy. No more copying and pasting. I'm an hour in and already hooked. - Andrew McCalip, Varda",
         "Cursor is the best AI developer tool right now, avoid it at your own peril - Logan Kilpatrick, Google",
         "Started using Cursor yesterday & i'm blown away. it's how Copilot should feel. i'm completely off VSCode now. - Sam Whitmore, New Computer",
-        "Cursor is the best product I've used in a while - it's an AI enabled editor. I just asked it to write a README for a project I've been working on - analyzed the code-base and worked first time. - Alex MacCaw, Reflect",
-        "Cursor has changed the game. I really can't imagine writing code without it at this point. The switch from VSCode is easy, and now I have AI superpowers right in my editor and my terminal. - Zeke Sikelianos, Replicate",
-        "Gonna apply to YC and list Cursor as my cofounder - Cory Etzkorn, Notion",
-        "Cursor's new auto-complete is insane. You no longer need to prompt it. It predicts what code you want based on what you're doing. Accept by hitting tab. - Marc Köhlbrugge, WIP",
-        "I really like how Cursor suggests edits to existing code. It noticed I was inconsistent with my markup and popped up this suggestion that matched my other items! - Wes Bos",
-        "Cursor is 🐐-ed for real - Steven Tey, Dub",
-        "The most useful AI tool that I currently pay for is, hands down, is Cursor. It's fast, autocompletes when and where you need it to, handles brackets properly, sensible keyboard shortcuts, bring-your-own-model...everything is well put together. - shadcn, Vercel",
-        "I went from never hearing about Cursor to many IC engineers telling me it's their new favorite tool. Seemingly overnight! Pretty wild product-market fit. - Josh Miller, The Browser Company",
-        "I installed Cursor ... oh - Kent C. Dodds",
-        "After many recommendations, I finally switched from VSC to Cursor and ... wow! It's absolutely incredible. If you like Copilot (or if you don't), you'll be blown away by Cursor. There is no going back. 🤯 - Johannes Schickling, Prisma"
+        "Cursor is the best product I've used in a while - it's an AI enabled editor. - Alex MacCaw, Reflect",
+        "Cursor has changed the game. I really can't imagine writing code without it at this point. - Zeke Sikelianos, Replicate",
+        "Cursor's new auto-complete is insane - Cory Etzkorn, Notion",
+        "The most useful AI tool that I currently pay for is, hands down, is Cursor - shadcn, Vercel",
+        "After many recommendations, I finally switched from VSC to Cursor and ... wow! It's absolutely incredible. - Johannes Schickling, Prisma"
       ],
-      "reddit_mentions": 12,
-      "npm_packages_count": 0,
+      "reddit_mentions": 2699,
+      "npm_packages_count": null,
       "producthunt_ranking": null,
       "pypi_packages_count": 0,
       "devto_articles_count": 36,
@@ -208,8 +186,6 @@
         "Shopify",
         "US Foods",
         "MercadoLibre",
-        "Amazon",
-        "Canva",
         "Instacart",
         "OpenAI",
         "Figma",
@@ -220,6 +196,7 @@
         "New Computer",
         "Reflect",
         "Replicate",
+        "WIP",
         "Dub",
         "Vercel",
         "The Browser Company",
@@ -229,7 +206,8 @@
     },
     "raw_data": {
       "npm_data": {
-        "error": "403 Client Error: Forbidden for url: https://registry.npmjs.org/-/v1/search?text=Cursor&size=20&from=0&quality=0.65&popularity=0.98&maintenance=0.5"
+        "reason": "NPM scraping removed - not relevant for most AI tools",
+        "status": "not_applicable"
       },
       "news_data": {
         "articles": [
@@ -297,18 +275,18 @@
             "content_preview": "Considered by many to be just a dull output for sequential text, the command-line terminal is a veritable canvas to the creative software developer. With the cursor as the brush, entire graphical u…"
           },
           {
-            "url": "https://www.businessinsider.com/vibe-coding-increase-the-number-of-engineers-gitlab-ceo-swe-2025-6",
-            "title": "As coding gets easier with AI, there will be more engineers, not fewer, says GitLab's CEO",
-            "source": "Business Insider",
-            "published_at": "2025-06-11T05:56:48Z",
-            "content_preview": "Staples said that customers are testing coding assistants side-by-side, but he doesn't \"have a lot of concern\" about GitLab's ability to compete."
-          },
-          {
             "url": "https://www.businessinsider.com/cursor-interview-process-no-ai-on-site-project-coding-tool-2025-6",
             "title": "Inside Cursor's hiring strategy: no AI in interviews and a 2-day project with the team",
             "source": "Business Insider",
             "published_at": "2025-06-12T05:20:15Z",
             "content_preview": "The company's CEO said programming without AI is a \"great timeboxed test for skill and intelligence.\""
+          },
+          {
+            "url": "https://www.businessinsider.com/vibe-coding-increase-the-number-of-engineers-gitlab-ceo-swe-2025-6",
+            "title": "As coding gets easier with AI, there will be more engineers, not fewer, says GitLab's CEO",
+            "source": "Business Insider",
+            "published_at": "2025-06-11T05:56:48Z",
+            "content_preview": "Staples said that customers are testing coding assistants side-by-side, but he doesn't \"have a lot of concern\" about GitLab's ability to compete."
           },
           {
             "url": "https://www.macrumors.com/how-to/screenshot-straight-to-clipboard/",
@@ -374,7 +352,7 @@
             "content_preview": "How a former Google vet used Replit to test a cat-purring app and the limitations they faced in fine-tuning and customization."
           }
         ],
-        "total_articles": 938
+        "total_articles": 939
       },
       "pypi_data": {
         "packages": [],
@@ -696,42 +674,42 @@
         "search_results": [
           {
             "url": "https://www.reddit.com/r/AI_Agents/comments/1il8b1i/my_guide_on_what_tools_to_use_to_build_ai_agents/",
-            "score": 2706,
+            "score": 2699,
             "title": "My guide on what tools to use to build AI agents (if you are a newb)",
             "selftext": "First off let's remember that everyone was a newb once, I love newbs and if your are one in the Ai agent space...... Welcome, we salute you.  In this simple guide im going to cut through all the hype and BS and get straight to the point.  WHAT DO I USE TO BUILD AI AGENTS!\n\nA bit of background on me: Im an AI engineer, currently working in the cyber security space.  I design and build AI agents and I design AI automations.  Im 49, so Ive been around for a while and im as friendly as they come, so",
             "subreddit": "AI_Agents"
           },
           {
             "url": "https://www.reddit.com/r/ClaudeAI/comments/1lhgdbd/dev_jobs_are_about_to_get_a_hard_reset_and/",
-            "score": 2438,
+            "score": 2439,
             "title": "Dev jobs are about to get a hard reset and nobody’s ready",
             "selftext": "Gotta be dead honest after spending serious time with Claude Code (Opus 4 on Max mode):\n\n1. It’s already doing 100% of the coding. Not assisting. Not helping. Just doing it. And we’re only halfway through the year.\n\n2. The idea of a “Python dev” or “React dev” is outdated. Going forward, I won’t be hiring for languages, I’ll hire devs who can solve problems, no matter the stack. The language barrier is completely gone.\n\n3. We’ve hit the point where asking “Which programming language should I lea",
             "subreddit": "ClaudeAI"
           },
           {
             "url": "https://www.reddit.com/r/ClaudeAI/comments/1l5h2ds/i_paid_for_the_100_claude_max_plan_so_you_dont/",
-            "score": 2160,
+            "score": 2164,
             "title": "I paid for the $100 Claude Max plan so you don't have to - an honest review",
             "selftext": "I'm a sr. software engineer with ~16 years working experience.  I'm also a huge believer in AI, and fully expect my job to be obsolete within the decade.  I've used all of the most expensive tiers of all of the AI models extensively to test their capabilities.  I've never posted a review of any of them but this pro-Claude hysteria has made me post something this time.\n\nIf you're a software engineer you probably already realize there is truly nothing special about Claude Code relative to other AI",
             "subreddit": "ClaudeAI"
           },
           {
             "url": "https://www.reddit.com/r/PromptEngineering/comments/1kk1i8z/10_brutal_lessons_from_6_months_of_vibe_coding/",
-            "score": 1947,
+            "score": 1954,
             "title": "10 brutal lessons from 6 months of vibe coding and launching AI-startups",
             "selftext": "I’ve spent the last 6 months building and shipping multiple products using Cursor + and other tools. One is a productivity-focused voice controlled web app, another’s a mobile iOS tool — all vibe-coded, all solo.\n\nHere’s what I wish someone told me before I melted through a dozen repos and rage-uninstalled Cursor three times. No hype. Just what works.\n\nI’m not selling a prompt pack. I’m not flexing a launch. I just want to save you from wasting hundreds of hours like I did.\n\np.s. Playbook 001 is",
             "subreddit": "PromptEngineering"
           },
           {
             "url": "https://www.reddit.com/gallery/1kqj7n3",
-            "score": 1223,
+            "score": 1229,
             "title": "Cursor intentionally slowing non-fast requests (Proof) and more.",
             "selftext": "Cursor team. I didn't want to do this, but many of us have noticed recently that the slow queue is significantly slower all of the sudden and it is unacceptable how you are treating us. On models which are typically fast for the slow queue (like gemini 2.5 pro). I noticed it, and decided to see if I could uncover anything about what was happening. As my username suggests I know a thing or two about hacking, and while I was very careful about what I was doing as to not break TOS of cursor, I deci",
             "subreddit": "cursor"
           },
           {
             "url": "https://www.reddit.com/r/cursor/comments/1l3gdma/cursor_10_is_here/",
-            "score": 940,
+            "score": 935,
             "title": "Cursor 1.0 is here!",
             "selftext": "Hey r/cursor\n\nWe just shipped Cursor 1.0! Here’s what’s new:\n\n# BugBot for automatic code review\n\nBugBot reviews your PRs and leaves comments directly in GitHub when it finds issues. You can click “Fix in Cursor” to jump back into the editor with the right prompt ready to go.\n\nYou get one week free trial from when you first set it up, check out the [docs](https://www.notion.so/Cursor-com-dashboard-revamp-1e0da74ef04580cf892be67b10574a44?pvs=21) for instructions\n\nhttps://reddit.com/link/1l3gdma/v",
             "subreddit": "cursor"
@@ -745,108 +723,101 @@
           },
           {
             "url": "https://i.redd.it/15df8ykg8b5f1.jpeg",
-            "score": 857,
+            "score": 852,
             "title": "I'm building Cursor for Mobile.",
             "selftext": "Have you ever wanted to vibe code but you're outside, doing the dishes, or other things? Or just waiting for a slow prompt to execute?\n\nI'm building a mobile app that connects to your PC and will give you the possibility to prompt, see the results, and get notifications about executed prompts or when you have to click the accept button, all from your phone.\n\nIt will be released under the MIT license on GitHub pretty soon. F*ck it, I won't make money off of it.\n\nMrCoin",
             "subreddit": "cursor"
           },
           {
             "url": "https://www.reddit.com/r/cursor/comments/1kgepx3/cursor_is_now_free_for_students/",
-            "score": 817,
+            "score": 818,
             "title": "Cursor is now free for students :)",
             "selftext": "University and high school students can get a year free of Cursor. This is something we've wanted to do for a while! More [here](http://cursor.com/students).",
             "subreddit": "cursor"
           },
           {
             "url": "https://www.reddit.com/r/cursor/comments/1kam4i7/9_months_coding_with_cursorai/",
-            "score": 797,
+            "score": 801,
             "title": "9 months coding with Cursor.ai",
             "selftext": "*Vibecoding turned into fuckoding. But there's a way out.*\n\nCursor, [WindSurf](https://windsurf.com/editor), [Trae](https://www.trae.ai/) – they're awesome. They transform Excel into SQL, slap logos onto images, compile videos from different sources – all through simple scripts. Literally in 15 minutes!\n\nBut try making a slightly more complex project – and it falls apart. Writing 10K lines of front and back code? The model loses context. You find yourself yelling: \"Are you kidding me? You litera",
             "subreddit": "cursor"
           },
           {
             "url": "https://www.reddit.com/r/ChatGPTCoding/comments/1inyt2s/my_experience_with_cursor_vs_cline_after_3_months/",
-            "score": 654,
+            "score": 653,
             "title": "My experience with Cursor vs Cline after 3 months of daily use",
             "selftext": "I've been using both Cline and Cursor extensively over the past 3 months and wanted to share my experience, especially since I see a lot of Cursor recommendations here. For context: full-stack dev, primarily working on Node.js/React/Nextjs projects.\n\nTLDR: Both are solid tools but Cline is in a different league, though it comes with higher (but worth it) costs. I personally like to use Cline *inside* of Cursor to get the best of both worlds.\n\nHere's the thing about AI coding assistants that took",
             "subreddit": "ChatGPTCoding"
           },
           {
             "url": "https://www.reddit.com/r/ClaudeAI/comments/1j5jn4h/i_made_this_animation_using_claude_37_in_just_4/",
-            "score": 545,
+            "score": 549,
             "title": "I made this animation using Claude 3.7 in just 4 hours with cursor (I have zero coding knowledge)",
             "selftext": "https://reddit.com/link/1j5jn4h/video/8i0qr4ovk8ne1/player\n\n",
             "subreddit": "ClaudeAI"
           },
           {
             "url": "https://www.reddit.com/r/cursor/comments/1ju63ig/the_one_golden_cursor_rule_that_improved/",
-            "score": 414,
+            "score": 418,
             "title": "The one golden cursor rule that improved everything!",
             "selftext": "I simply added this to my list of rules:  \n  \n`Important: try to fix things at the cause, not the symptom.`\n\nWhat a game-changer! It doesn't just put in shitty workarounds that end up being hacks fixing hacks.  \n  \nBonus, another rule that improved things for me:\n\n`Be very detailed with summarization and do not miss out things that are important.`\n\nWhat's one rule that's made the world of difference for you?",
             "subreddit": "cursor"
           },
           {
             "url": "https://www.reddit.com/r/ChatGPTCoding/comments/1j3mnis/cursor_from_ai_tool_to_totalitarian_censorship/",
-            "score": 406,
+            "score": 403,
             "title": "Cursor: From AI Tool to Totalitarian Censorship?",
             "selftext": "Today, I wrote a post on r/cursor about how suddenly bad Cursor became after the last update.\n\nThe post was very popular, and many people in the comments reported the same issues. Even some guy named Nick, supposedly from Cursor, asked me to DM him the details of the prompt and code I used.\n\nhttps://preview.redd.it/rusjwvewtqme1.png?width=1170&format=png&auto=webp&s=9a7c1a2d7f27111f1d6cc9ca9ad82a2d149b6757\n\nBut now, when I open the post, I see that it was removed by the moderators without any ob",
             "subreddit": "ChatGPTCoding"
           },
           {
             "url": "https://www.reddit.com/r/AI_Agents/comments/1lj3mgk/the_real_reality_of_someone_who_owns_an_ai_agency/",
-            "score": 402,
+            "score": 397,
             "title": "The REAL Reality of Someone Who Owns an AI Agency",
             "selftext": "So I started my own agency last October, and wanted to write a post about the reality of this venture.  How I got started, what its really like, no youtube hype and BS, what I would do different if I had to do it again and what my day to day looks like.\n\nSo if you are contemplating starting your own AI Agency or just looking to make some money on the side, this post is a must read for you :) \n\n  \n**Alright so how did I get started?**   \nWell to be fair i was already working as an Engineer for a ",
             "subreddit": "AI_Agents"
           },
           {
             "url": "https://www.reddit.com/r/ClaudeAI/comments/1kv5hrh/sonnet_40_with_cursor_wow_wow_wow/",
-            "score": 380,
+            "score": 381,
             "title": "Sonnet 4.0 with Cursor Wow Wow Wow",
             "selftext": "I switched from Sonnet 3.7 to Gemini 2.5 two weeks ago because I was not satisfied of 3.7. Since then I vibe coded with Google AI studio (Gemini 2. 5) and found the 1M token window to be fantastic (and free). Today a gave Sonnet 4.0 another chance (in Cursor). Great improvement, it didn't fail a prompt, straight to the point with a functional code. Wow wow wow ",
             "subreddit": "ClaudeAI"
           },
           {
             "url": "https://www.reddit.com/r/ChatGPTCoding/comments/1fguysz/call_for_questions_to_cursor_team_from_lex_fridman/",
-            "score": 295,
+            "score": 294,
             "title": "Call for questions to Cursor team - from Lex Fridman",
             "selftext": "My name is Lex Fridman. I'm doing a podcast with the Cursor team. If you have questions / feature requests to discuss (including super-technical topics) let me know!\n\nThis conversation will be bigger than just about Cursor, but more generally about the future of programming with AI.",
             "subreddit": "ChatGPTCoding"
           },
           {
             "url": "https://i.redd.it/pn5ms21zlnpe1.jpeg",
-            "score": 282,
+            "score": 284,
             "title": "A Tale of Two Cursor Users 😃🤯",
             "selftext": "",
             "subreddit": "ChatGPTCoding"
           },
           {
             "url": "https://www.reddit.com/r/ClaudeAI/comments/1j5t1nh/my_cursor_claude_37t_method_the_opposite_of_vibe/",
-            "score": 278,
+            "score": 279,
             "title": "My Cursor Claude 3.7-T Method (the OPPOSITE of ‘Vibe Coding’)",
             "selftext": "Try ‘vibe coding’ if you must, but you’ll yeet your ‘YOLO’ code with tears in your eyes. \n\nHere’s what I recommend instead:\n\nPlace the following files in the Project’s ROOT folder. As awkward as it seems to have a bunch of docs in the ROOT folder, it’s the first place a forgetful Claude will look and if you DO NOT use the ROOT, Claude is likely to accidentally create duplicates of these files there anyway and cause confusion. \n\n1. PROTOCOL.md - Contains ROLE, WORKFLOW, and (brief) BEST PRACTICES",
             "subreddit": "ClaudeAI"
           },
           {
             "url": "https://x.com/nearcyan/status/1895432741275242957",
-            "score": 224,
+            "score": 225,
             "title": "junior devs watching claude 3.7 destroy their codebase in cursor",
             "selftext": "",
             "subreddit": "ChatGPTCoding"
           },
           {
             "url": "https://www.reddit.com/r/ChatGPTCoding/comments/1kgi94u/cursor_is_offering_1year_free_subscription_for/",
-            "score": 219,
+            "score": 218,
             "title": "Cursor is offering 1-year free subscription for students",
             "selftext": "University and high school students can get a year free of Cursor - https://www.cursor.com/students",
             "subreddit": "ChatGPTCoding"
-          },
-          {
-            "url": "https://www.reddit.com/r/cursor/comments/1inoryp/cursor_fck_up_my_4_months_of_works/",
-            "score": 192,
-            "title": "Cursor f*ck up my 4 months of works",
-            "selftext": "Disclamer, I'm a moron who worked on the same project without thinking about the risk that Cursor could break everything. Yesterday, Cursor (even though I only asked it to feed a view on my UI) destroyed months of development. \n\nMy question: How do you back up your projects/versions to ensure that the next action on cursor is reversible? Ops!\n\nAlso, I know that while I'm the concern, cursor isn't the only culprit, it's also Claude (while good overall) still has some flaws ",
-            "subreddit": "cursor"
           },
           {
             "url": "https://www.reddit.com/r/ChatGPTCoding/comments/1k8tf4c/why_is_cursor_so_popular/",
@@ -856,15 +827,22 @@
             "subreddit": "ChatGPTCoding"
           },
           {
+            "url": "https://www.reddit.com/r/cursor/comments/1inoryp/cursor_fck_up_my_4_months_of_works/",
+            "score": 190,
+            "title": "Cursor f*ck up my 4 months of works",
+            "selftext": "Disclamer, I'm a moron who worked on the same project without thinking about the risk that Cursor could break everything. Yesterday, Cursor (even though I only asked it to feed a view on my UI) destroyed months of development. \n\nMy question: How do you back up your projects/versions to ensure that the next action on cursor is reversible? Ops!\n\nAlso, I know that while I'm the concern, cursor isn't the only culprit, it's also Claude (while good overall) still has some flaws ",
+            "subreddit": "cursor"
+          },
+          {
             "url": "https://www.reddit.com/r/ClaudeAI/comments/1fdrbwa/so_how_many_of_you_have_permanently_switched_to/",
-            "score": 159,
+            "score": 158,
             "title": "So how many of you have permanently switched to cursor IDE and how’s that working out for you?",
             "selftext": "Just recently noticed cursor AI IDE get a lot of hype and like are pro plans any worth it? Apparently it has the your complete code base as knowledge base so when you prompt inside it’s pretty good with creating functions and referencing existing?? curious about everyone’s experience ",
             "subreddit": "ClaudeAI"
           },
           {
             "url": "https://www.reddit.com/r/ClaudeAI/comments/1l3q1hx/is_claude_code_much_better_than_just_using_claude/",
-            "score": 149,
+            "score": 153,
             "title": "Is Claude Code much better than just using Claude in Cursor?",
             "selftext": "If so, why is it so much better?   I find just using chat agents just fine.  ",
             "subreddit": "ClaudeAI"
@@ -1105,7 +1083,7 @@
             "language": "en",
             "og:image": "https://www.cursor.com/_next/static/media/opengraph-image.375711d3.png",
             "og:title": "Blog | Cursor - The AI Code Editor",
-            "scrapeId": "8f462153-0b34-4246-8c28-5a7a61faaf92",
+            "scrapeId": "110b10e1-110f-46a7-b535-8058c05b6e11",
             "viewport": "width=device-width, initial-scale=1",
             "proxyUsed": "basic",
             "sourceURL": "https://www.cursor.com/blog",
@@ -1147,7 +1125,7 @@
             "language": "en",
             "og:image": "https://www.cursor.com/_next/static/media/opengraph-image.375711d3.png",
             "og:title": "Changelog | Cursor - The AI Code Editor",
-            "scrapeId": "9c6ca7c4-568d-4721-bd84-1e4e20d27d49",
+            "scrapeId": "f0d47778-0298-48f7-a3a8-517230b58cae",
             "viewport": "width=device-width, initial-scale=1",
             "proxyUsed": "basic",
             "sourceURL": "https://www.cursor.com/changelog",
@@ -1189,7 +1167,7 @@
             "language": "en",
             "og:image": "https://www.cursor.com/en/opengraph-image.png?375711d39ab904b7",
             "og:title": "Cursor - The AI Code Editor",
-            "scrapeId": "204fa2fd-93a8-4d64-bd51-f5f5e3c27215",
+            "scrapeId": "3ac20a53-c90d-4414-960e-418a92ea6a2d",
             "viewport": "width=device-width, initial-scale=1",
             "proxyUsed": "basic",
             "sourceURL": "https://www.cursor.com/",
@@ -1231,7 +1209,7 @@
             "website": "https://www.producthunt.com/r/KCXJ4RNLTAFE5I?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+aiapps+%28ID%3A+201008%29",
             "createdAt": "2025-06-27T07:01:00Z",
             "featuredAt": "2025-06-27T07:01:00Z",
-            "votesCount": 148,
+            "votesCount": 151,
             "description": "Just craft in Cursor. We handle versioning, publishing, cursor rules, and everything else. Focus on creating, not configuring.",
             "reviewsCount": 0,
             "commentsCount": 7,
@@ -1255,7 +1233,7 @@
             "owner": "user246114",
             "score": 2434,
             "title": "How to change the cursor into a hand when a user hovers over a list item?",
-            "view_count": 2815209,
+            "view_count": 2815213,
             "is_answered": true,
             "question_id": 3087975,
             "answer_count": 28,
@@ -1307,7 +1285,7 @@
             "owner": "Arne",
             "score": 944,
             "title": "How to move the cursor word by word in the OS X Terminal",
-            "view_count": 492684,
+            "view_count": 492685,
             "is_answered": true,
             "question_id": 81272,
             "answer_count": 21,
@@ -1356,7 +1334,7 @@
             "owner": "user1322720",
             "score": 535,
             "title": "Move cursor to end of file in vim",
-            "view_count": 871707,
+            "view_count": 871711,
             "is_answered": true,
             "question_id": 17012308,
             "answer_count": 17,
@@ -1404,7 +1382,7 @@
             "owner": "Idan K",
             "score": 335,
             "title": "Vim: Move cursor to its last position",
-            "view_count": 121064,
+            "view_count": 121065,
             "is_answered": true,
             "question_id": 5052079,
             "answer_count": 5,
@@ -1509,7 +1487,7 @@
             "owner": "Dvir Levy",
             "score": 292,
             "title": "change cursor to finger pointer",
-            "view_count": 672483,
+            "view_count": 672484,
             "is_answered": true,
             "question_id": 8809909,
             "answer_count": 10,
@@ -1573,7 +1551,7 @@
             "owner": "classic_programmer",
             "score": 262,
             "title": "How can I increase the cursor speed in terminal?",
-            "view_count": 168021,
+            "view_count": 168022,
             "is_answered": true,
             "question_id": 4489885,
             "answer_count": 2,
@@ -1586,6 +1564,6 @@
     },
     "processing_status": "processed",
     "error_log": null,
-    "created_at": "2025-06-27T19:47:16.282837"
+    "created_at": "2025-06-27T20:41:28.101934"
   }
 ]
