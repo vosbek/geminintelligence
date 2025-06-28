@@ -184,8 +184,6 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
                 "stackoverflow_questions_count": 25,
                 "producthunt_ranking": 5,
                 "devto_articles_count": 15,
-                "npm_packages_count": 3,
-                "npm_weekly_downloads": 1000,
                 "pypi_packages_count": 2,
                 "medium_articles_count": 8,
                 "list_of_companies_using_tool": ["Company1"],
@@ -202,19 +200,21 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
             "3. **Cross-Reference:** Validate information across multiple sources when possible",
             "4. **Quantify Everything:** Convert qualitative observations to metrics where possible",
             "5. **Stay Factual:** Only include information explicitly found in the data",
+            "6. **Source Attribution:** For critical claims (funding, valuation, employee count), note which data source provided the information",
             "**DETAILED OUTPUT REQUIREMENTS:**",
             "- Feature lists should be exhaustive with specific capabilities",
             "- Technology stack should include versions, frameworks, and dependencies found",
             "- Pricing should include all tiers, limits, and enterprise details",
-            "- Community metrics should reflect actual counts from Dev.to, NPM, PyPI, etc.",
-            "- Company info should include precise financial data and organizational details",
+            "- Community metrics should reflect actual counts from Dev.to, PyPI, etc.",
+            "- Company info should include precise financial data and organizational details with source attribution",
             "**CRITICAL REQUIREMENTS:**",
             "1. Replace ALL placeholder values with actual data from the sources",
             "2. Use exact numbers, not approximations",
             "3. Include comprehensive lists - don't truncate for brevity",
             "4. Cross-reference data between sources for accuracy",
-            "5. Extract maximum intelligence from all 11+ data sources provided",
+            "5. Extract maximum intelligence from all 10+ data sources provided (excluding NPM)",
             "6. This analysis runs infrequently, so be thorough and detailed",
+            "7. For financial data (funding, valuation), indicate source (e.g., 'from TechCrunch article', 'from news_data')",
             f"\n**REQUIRED JSON OUTPUT FORMAT:**\n```json\n{json.dumps(schema_example, indent=2)}\n```",
             "\nIMPORTANT: You must return ONLY a valid JSON object matching the exact structure above. Do not include any text before or after the JSON. Use null for missing values, never leave fields undefined."
         ])
@@ -261,7 +261,7 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
         )
             
         # Fetch Financial Data (public or private companies)
-        company_name = tool_record.get('company', tool_record.get('name', ''))
+        company_name = tool_record.get('company_name', tool_record.get('name', ''))
         stock_symbol = tool_record.get('stock_symbol')
         
         raw_data_payload['financial_data'] = self.private_company_financial_data(
@@ -287,8 +287,8 @@ class ToolIntelligenceAgent(Agent, ScraperMixin):
         # Search Dev.to for articles
         raw_data_payload['devto_data'] = self.devto_searcher(tool_name=tool_record['name'])
 
-        # Search NPM packages
-        raw_data_payload['npm_data'] = self.npm_searcher(tool_name=tool_record['name'])
+        # NPM packages - REMOVED (not needed for AI tools intelligence)
+        raw_data_payload['npm_data'] = {"status": "not_applicable", "reason": "NPM scraping removed - not relevant for most AI tools"}
 
         # Search PyPI packages
         raw_data_payload['pypi_data'] = self.pypi_searcher(tool_name=tool_record['name'])

@@ -919,10 +919,7 @@ class ScraperMixin:
         params = {
             "text": tool_name,
             "size": 20,
-            "from": 0,
-            "quality": 0.65,
-            "popularity": 0.98,
-            "maintenance": 0.5
+            "from": 0
         }
         
         try:
