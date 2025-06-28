@@ -1,0 +1,50 @@
+2025-06-27 21:40:54,973 - INFO - =================================================
+2025-06-27 21:40:54,974 - INFO - AI Intelligence Platform - Weekly Run Initializing
+2025-06-27 21:40:54,975 - INFO - =================================================
+2025-06-27 21:40:55,074 - INFO - Successfully connected to the database.
+2025-06-27 21:40:55,074 - INFO - Initializing Strands Agent (AWS region: us-east-1)
+2025-06-27 21:40:55,075 - INFO - Model: anthropic.claude-3-5-sonnet-20240620-v1:0
+2025-06-27 21:40:55,082 - INFO - Found credentials in environment variables.
+2025-06-27 21:40:55,912 - INFO - PRAW Reddit instance created. Read-only: False
+2025-06-27 21:40:55,949 - INFO - Found 1 tools to process.
+2025-06-27 21:40:55,949 - INFO - Starting intelligence gathering for tool: Cursor (ID: 1)
+2025-06-27 21:40:55,950 - INFO - Found 3 URLs to scrape for Cursor.
+2025-06-27 21:40:55,950 - INFO - Scraping URL via Firecrawl: https://www.cursor.com/blog (Stealth: False)
+2025-06-27 21:41:00,248 - INFO - Scraping URL via Firecrawl: https://www.cursor.com/changelog (Stealth: False)
+2025-06-27 21:41:04,363 - INFO - Scraping URL via Firecrawl: https://www.cursor.com/ (Stealth: False)
+2025-06-27 21:41:12,249 - INFO - Analyzing GitHub repo: https://github.com/getcursor/cursor
+2025-06-27 21:41:14,967 - INFO - Searching Reddit API for 'Cursor' in subreddits: ['AI_Agents', 'mcp', 'ClaudeAI', 'ChatGPTCoding', 'cursor', 'ArtificialInteligence', 'PromptEngineering']
+2025-06-27 21:41:21,095 - INFO - Collecting financial data for Cursor
+2025-06-27 21:41:21,096 - INFO - Scraping TechCrunch for funding info on Cursor
+2025-06-27 21:41:22,559 - INFO - Scraping VentureBeat for funding info on Cursor
+2025-06-27 21:41:23,738 - INFO - Scraping AngelList for Cursor
+2025-06-27 21:41:24,393 - INFO - Searching Medium for: Cursor
+2025-06-27 21:41:26,120 - INFO - Searching news for: Cursor
+2025-06-27 21:41:27,509 - INFO - Searching HackerNews for: Cursor
+2025-06-27 21:41:28,472 - INFO - Searching StackOverflow for: Cursor
+2025-06-27 21:41:29,186 - INFO - Searching ProductHunt for: Cursor
+2025-06-27 21:41:33,129 - INFO - Found 1 ProductHunt results for Cursor
+2025-06-27 21:41:33,130 - INFO - Searching Dev.to for: Cursor
+2025-06-27 21:41:35,890 - INFO - Searching PyPI for: Cursor
+2025-06-27 21:41:37,638 - INFO - Sending data to Strands AI for analysis...
+2025-06-27 21:41:37,640 - INFO - Creating Strands MetricsClient
+2025-06-27 21:42:46,328 - INFO - Agent raw response object type: <class 'strands.agent.agent_result.AgentResult'>
+2025-06-27 21:42:46,329 - INFO - Agent raw response received successfully
+2025-06-27 21:42:46,330 - INFO - Agent response text length: 9052
+2025-06-27 21:42:46,331 - INFO - Agent response preview: ```json
+{
+  "basic_info": {
+    "description": "Cursor is an AI-powered code editor designed to make developers extraordinarily productive. It combines the functionality of a traditional IDE with advanced AI capabilities for code completion, refactoring, and natural language code editing.",
+    "category_classification": "AI_IDE, CODE_COMPLETION, NATURAL_LANGUAGE_PROGRAMMING"
+  },
+  "technical_details": {
+    "feature_list": [
+      "AI-powered code completion and suggestions",
+      "Natural la...
+2025-06-27 21:42:46,334 - INFO - Extracted JSON string length: 9039
+2025-06-27 21:42:46,335 - INFO - JSON parsing successful
+2025-06-27 21:42:46,336 - INFO - Pydantic model validation successful
+2025-06-27 21:42:46,336 - INFO - --- Finished Strands Agent for: Cursor ---
+2025-06-27 21:42:46,376 - INFO - Successfully created snapshot and processed Cursor.
+2025-06-27 21:42:46,376 - INFO - Database connection closed.
+2025-06-27 21:42:46,376 - INFO - AI Intelligence Platform run finished.

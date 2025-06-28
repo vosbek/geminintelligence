@@ -1,6 +1,6 @@
 # Core AI and Data Processing
-strands-agents==0.1.7
-strands-agents-tools==0.1.7
+strands-agents
+strands-agents-tools
 pydantic==2.11.7
 pydantic-settings==2.9.1
 pydantic_core==2.33.2
@@ -84,4 +84,3 @@ sniffio==1.3.1
 colorama==0.4.6
 wcwidth==0.2.13
 zipp==3.23.0
-strands
