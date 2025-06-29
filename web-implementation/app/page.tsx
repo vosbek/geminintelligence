@@ -1,6 +1,7 @@
 // app/page.tsx - Dashboard with tools overview
 import { getAllTools } from '@/lib/db';
 import ToolCard from '@/components/dashboard/ToolCard';
+import ScraperControls from '@/components/scraper/ScraperControls';
 import { AITool } from '@/types/database';
 
 export default async function Dashboard() {
@@ -24,6 +25,9 @@ export default async function Dashboard() {
           Review and curate AI developer tools intelligence data
         </p>
       </div>
+
+      {/* Scraper Controls */}
+      <ScraperControls />
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">

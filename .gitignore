@@ -156,10 +156,24 @@ logs/
 # Raw data / examples
 raw.json
 /firecrawl/
+
+# Node.js dependencies
 /node_modules/
+web-implementation/node_modules/
 package-lock.json
+web-implementation/package-lock.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
-.pnpm-debug.log* 
+.pnpm-debug.log*
+
+# Next.js build files
+web-implementation/.next/
+web-implementation/out/
+
+# Environment files
+web-implementation/.env
+web-implementation/.env.local
+web-implementation/.env.production
+web-implementation/.env.development 

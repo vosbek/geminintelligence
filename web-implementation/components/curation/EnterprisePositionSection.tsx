@@ -1,7 +1,7 @@
 // components/curation/EnterprisePositionSection.tsx - Enterprise positioning analysis
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ToolDetailData } from '@/types/database';
 import EditableField from '@/components/curation/EditableField';
 
@@ -10,7 +10,7 @@ interface EnterprisePositionSectionProps {
 }
 
 export default function EnterprisePositionSection({ data }: EnterprisePositionSectionProps) {
-  const { tool, enterprise_position } = data;
+  const { tool, enterprise_position, snapshot } = data;
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
     market_position: enterprise_position?.market_position || '',
@@ -19,6 +19,44 @@ export default function EnterprisePositionSection({ data }: EnterprisePositionSe
     implementation_complexity: enterprise_position?.implementation_complexity || '',
     strategic_notes: enterprise_position?.strategic_notes || '',
   });
+
+  // Auto-populate from intelligence data if enterprise position is empty
+  useEffect(() => {
+    if (!enterprise_position && snapshot) {
+      const autoMarketPosition = snapshot.technical_details?.market_positioning || 
+        snapshot.basic_info?.description || '';
+      
+      const autoCompetitiveAdvantages = [
+        ...(snapshot.technical_details?.unique_differentiators || []),
+        ...(snapshot.technical_details?.pros_and_cons?.pros || [])
+      ].slice(0, 3).join(', ');
+
+      const autoTargetEnterprises = snapshot.community_metrics?.list_of_companies_using_tool?.length > 0 
+        ? `Used by ${snapshot.community_metrics.list_of_companies_using_tool.length} companies including: ${snapshot.community_metrics.list_of_companies_using_tool.slice(0, 5).join(', ')}`
+        : '';
+
+      const autoImplementationComplexity = [
+        snapshot.technical_details?.enterprise_capabilities ? "Enterprise features available" : "",
+        snapshot.technical_details?.security_features?.length ? `Security: ${snapshot.technical_details.security_features.slice(0, 2).join(', ')}` : "",
+      ].filter(Boolean).join('. ');
+
+      const autoStrategicNotes = [
+        snapshot.company_info?.valuation ? `${snapshot.company_info.valuation} valuation` : "",
+        snapshot.community_metrics?.github_stars ? `${snapshot.community_metrics.github_stars.toLocaleString()} GitHub stars` : "",
+        snapshot.community_metrics?.testimonials?.length ? `${snapshot.community_metrics.testimonials.length} testimonials` : ""
+      ].filter(Boolean).join(', ');
+
+      if (autoMarketPosition || autoCompetitiveAdvantages || autoTargetEnterprises) {
+        setFormData({
+          market_position: autoMarketPosition,
+          competitive_advantages: autoCompetitiveAdvantages,
+          target_enterprises: autoTargetEnterprises,
+          implementation_complexity: autoImplementationComplexity,
+          strategic_notes: autoStrategicNotes,
+        });
+      }
+    }
+  }, [enterprise_position, snapshot]);
 
   const handleSave = async () => {
     try {
