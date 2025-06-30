@@ -75,8 +75,9 @@ export async function POST(
     
   } catch (error) {
     console.error('Single tool run error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { success: false, error: 'Failed to start tool scraping: ' + error.message },
+      { success: false, error: 'Failed to start tool scraping: ' + errorMessage },
       { status: 500 }
     );
   }

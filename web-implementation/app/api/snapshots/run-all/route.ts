@@ -62,12 +62,13 @@ export async function POST(request: NextRequest) {
     }).catch((error) => {
       console.error('❌ Scraper failed:', error);
       
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       // Update session with error
       query(`
         UPDATE curation_sessions 
         SET session_notes = $1
         WHERE id = $2
-      `, [`Error: ${error.message}`, sessionId]);
+      `, [`Error: ${errorMessage}`, sessionId]);
     });
     
     return NextResponse.json({ 
@@ -80,8 +81,9 @@ export async function POST(request: NextRequest) {
     
   } catch (error) {
     console.error('Weekly run error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { success: false, error: 'Failed to start weekly run: ' + error.message },
+      { success: false, error: 'Failed to start weekly run: ' + errorMessage },
       { status: 500 }
     );
   }

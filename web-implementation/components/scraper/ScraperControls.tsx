@@ -85,7 +85,8 @@ export default function ScraperControls() {
         setMessage(`❌ Error: ${data.error}`);
       }
     } catch (error) {
-      setMessage(`❌ Failed to start weekly run: ${error.message}`);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      setMessage(`❌ Failed to start weekly run: ${errorMessage}`);
     } finally {
       setIsLoading(false);
     }
@@ -106,7 +107,8 @@ export default function ScraperControls() {
         setMessage(`❌ Error refreshing ${toolName}: ${data.error}`);
       }
     } catch (error) {
-      setMessage(`❌ Failed to refresh ${toolName}: ${error.message}`);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      setMessage(`❌ Failed to refresh ${toolName}: ${errorMessage}`);
     }
   };
 

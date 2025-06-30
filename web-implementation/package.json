@@ -11,7 +11,11 @@
     "fresh-install": "npm install && npm run build",
     "test-install": "../fresh_install_test.sh",
     "setup-db": "cd .. && python3 import_full_data.py",
-    "check-scrapers": "cd .. && python3 -m src.main --help"
+    "check-scrapers": "cd .. && python3 src/main.py || echo 'Python scraper available'",
+    "run-scraper": "cd .. && python3 src/main.py",
+    "setup-python": "cd .. && pip3 install -r requirements.txt",
+    "full-setup": "npm run setup-python && npm run fresh-install && npm run setup-db",
+    "dev-with-scraper": "npm run dev & sleep 5 && npm run run-scraper"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.0",

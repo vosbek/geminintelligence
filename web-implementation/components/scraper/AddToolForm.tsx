@@ -47,7 +47,8 @@ export default function AddToolForm() {
         setMessage(`❌ Error: ${data.error}`);
       }
     } catch (error) {
-      setMessage(`❌ Failed to add tool: ${error.message}`);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      setMessage(`❌ Failed to add tool: ${errorMessage}`);
     } finally {
       setIsLoading(false);
     }

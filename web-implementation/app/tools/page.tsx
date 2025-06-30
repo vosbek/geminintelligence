@@ -2,6 +2,8 @@
 import { getAllTools } from '@/lib/db';
 import Link from 'next/link';
 import { AITool } from '@/types/database';
+import AddToolForm from '@/components/forms/AddToolForm';
+import ScraperTrigger from '@/components/scraper/ScraperTrigger';
 
 export default async function ToolsPage() {
   const tools = await getAllTools() as AITool[];
@@ -10,12 +12,22 @@ export default async function ToolsPage() {
     <div className="space-y-8">
       {/* Header */}
       <div className="bg-white rounded-lg shadow p-6">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          AI Tools Directory
-        </h1>
-        <p className="text-gray-600">
-          Comprehensive listing of all AI developer tools with intelligence data
-        </p>
+        <div className="flex justify-between items-start">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              AI Tools Directory
+            </h1>
+            <p className="text-gray-600">
+              Comprehensive listing of all AI developer tools with intelligence data
+            </p>
+          </div>
+          <AddToolForm />
+        </div>
+      </div>
+
+      {/* Scraper Controls */}
+      <div className="bg-white rounded-lg shadow p-6">
+        <ScraperTrigger />
       </div>
 
       {/* Tools Table */}

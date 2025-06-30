@@ -73,8 +73,9 @@ export async function GET(request: NextRequest) {
     
   } catch (error) {
     console.error('Status check error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { success: false, error: 'Failed to get scraper status: ' + error.message },
+      { success: false, error: 'Failed to get scraper status: ' + errorMessage },
       { status: 500 }
     );
   }
