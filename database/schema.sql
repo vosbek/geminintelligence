@@ -1,5 +1,10 @@
 -- Database schema for the AI Intelligence Platform
 
+DROP TABLE IF EXISTS enterprise_positioning CASCADE;
+DROP TABLE IF EXISTS curated_tool_data CASCADE;
+DROP TABLE IF EXISTS tool_screenshots CASCADE;
+DROP TABLE IF EXISTS curation_sessions CASCADE;
+DROP TABLE IF EXISTS snapshot_changes CASCADE;
 DROP TABLE IF EXISTS curated_snapshots CASCADE;
 DROP TABLE IF EXISTS tool_snapshots CASCADE;
 DROP TABLE IF EXISTS tool_urls CASCADE;
@@ -198,6 +203,63 @@ CREATE TRIGGER detect_changes_trigger
     AFTER INSERT ON tool_snapshots
     FOR EACH ROW
     EXECUTE FUNCTION trigger_detect_changes();
+
+-- ================================================================= 
+-- Additional tables required by web application
+-- =================================================================
+
+-- Table to store tool screenshots uploaded through the web interface
+CREATE TABLE tool_screenshots (
+    id SERIAL PRIMARY KEY,
+    tool_id INTEGER REFERENCES ai_tools(id) ON DELETE CASCADE,
+    filename VARCHAR(255) NOT NULL,
+    original_name VARCHAR(255),
+    file_path VARCHAR(500) NOT NULL,
+    description TEXT,
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Table to store curated tool data sections managed through the web interface
+CREATE TABLE curated_tool_data (
+    id SERIAL PRIMARY KEY,
+    tool_id INTEGER REFERENCES ai_tools(id) ON DELETE CASCADE,
+    section_name VARCHAR(100) NOT NULL,
+    curated_content JSONB NOT NULL,
+    curator_notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(tool_id, section_name)
+);
+
+-- Table to store enterprise positioning data for tools
+CREATE TABLE enterprise_positioning (
+    id SERIAL PRIMARY KEY,
+    tool_id INTEGER REFERENCES ai_tools(id) ON DELETE CASCADE,
+    market_position TEXT,
+    competitive_advantages TEXT,
+    target_enterprises TEXT,
+    implementation_complexity TEXT,
+    strategic_notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(tool_id)
+);
+
+-- Add triggers for updated_at timestamps
+CREATE TRIGGER update_curated_tool_data_updated_at
+BEFORE UPDATE ON curated_tool_data
+FOR EACH ROW
+EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_enterprise_positioning_updated_at
+BEFORE UPDATE ON enterprise_positioning
+FOR EACH ROW
+EXECUTE FUNCTION update_updated_at_column();
+
+-- Create indexes for web application performance
+CREATE INDEX idx_tool_screenshots_tool_id ON tool_screenshots(tool_id);
+CREATE INDEX idx_curated_tool_data_tool_id ON curated_tool_data(tool_id);
+CREATE INDEX idx_enterprise_positioning_tool_id ON enterprise_positioning(tool_id);
 
 -- Add helpful view for the curation workflow
 CREATE VIEW weekly_review_summary AS

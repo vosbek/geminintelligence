@@ -9,10 +9,14 @@
 node --version    # Should be v18+ 
 npm --version     # Should be 8+
 python3 --version # Should be 3.8+
+pip3 --version    # Should be 20+
 psql --version    # Should be 12+
 
 # If missing any, install them first:
 # sudo apt update && sudo apt install -y nodejs npm python3 python3-pip postgresql postgresql-contrib
+
+# Check if all required Python packages can be installed
+python3 -c "import sys; print(f'Python {sys.version}')"
 ```
 
 ## Step 1: Get Latest Code
@@ -74,7 +78,44 @@ sudo -u postgres psql ai_database -c "\dt"
 echo "✅ Database schema applied"
 ```
 
-## Step 4: Import Data (If Available)
+## Step 4: Python Environment Setup
+
+```bash
+# Install Python dependencies
+pip3 install -r requirements.txt
+
+# Create .env file for Python scraper
+cat > .env << 'EOF'
+# Database configuration (for Python scraper)
+DB_NAME=ai_database
+DB_USER=ai_user
+DB_PASSWORD=dota
+DB_HOST=localhost
+DB_PORT=5432
+
+# API Keys (add your actual keys here for full functionality)
+# FIRECRAWL_API_KEY=your_firecrawl_key
+# GITHUB_API_TOKEN=your_github_token
+# REDDIT_CLIENT_ID=your_reddit_client_id
+# REDDIT_CLIENT_SECRET=your_reddit_client_secret
+# REDDIT_USERNAME=your_reddit_username
+# REDDIT_PASSWORD=your_reddit_password
+# REDDIT_USER_AGENT=YourApp/1.0
+# NEWS_API_KEY=your_news_api_key
+# ALPHA_VANTAGE_API_KEY=your_alpha_vantage_key
+# PRODUCTHUNT_API_TOKEN=your_producthunt_token
+# MEDIUM_API_KEY=your_medium_key
+# AWS credentials for Strands AI
+# AWS_REGION=us-east-1
+# AWS_ACCESS_KEY_ID=your_aws_access_key
+# AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+EOF
+
+echo "✅ Python environment setup completed"
+echo "⚠️  Important: Add your actual API keys to .env file for full scraping functionality"
+```
+
+## Step 5: Import Data (If Available)
 
 ```bash
 # Check if you have export data
@@ -89,14 +130,14 @@ else
     # Insert a test tool to verify everything works
     sudo -u postgres psql ai_database << 'EOF'
 INSERT INTO ai_tools (name, description, status, run_status) 
-VALUES ('Test Tool', 'A test tool for verification', 'active', 'processed');
+VALUES ('Test Tool', 'A test tool for verification', 'active', 'update');
 EOF
 fi
 
 echo "✅ Data import completed"
 ```
 
-## Step 5: Web Application Setup
+## Step 6: Web Application Setup
 
 ```bash
 # Navigate to web application directory
@@ -125,7 +166,7 @@ chmod 755 public/uploads
 echo "✅ Web application configured"
 ```
 
-## Step 6: Test Database Connection
+## Step 7: Test Database Connection
 
 ```bash
 # Test database connection from Node.js
@@ -152,7 +193,7 @@ pool.query('SELECT COUNT(*) FROM ai_tools', (err, res) => {
 "
 ```
 
-## Step 7: Build and Start Application
+## Step 8: Build and Start Application
 
 ```bash
 # Build for production (fast performance)
@@ -172,7 +213,7 @@ sleep 5
 echo "✅ Application should be running at http://localhost:3000"
 ```
 
-## Step 8: Verify Everything Works
+## Step 9: Verify Everything Works
 
 ```bash
 # Test the application endpoints
@@ -198,7 +239,85 @@ echo "🎉 Setup verification complete!"
 echo "👉 Open your browser to: http://localhost:3000"
 ```
 
-## Step 9: Final Verification Checklist
+## Step 10: Test Complete Workflow
+
+```bash
+# Test the complete workflow from web interface
+echo "🧪 Testing complete workflow..."
+
+# 1. Access web interface
+curl -s http://localhost:3000 | grep -q "AI Tools Intelligence Dashboard" && echo "✅ Web interface accessible" || echo "❌ Web interface failed"
+
+# 2. Test Python scraper availability
+cd ..
+python3 src/main.py --help >/dev/null 2>&1 && echo "✅ Python scraper available" || echo "❌ Python scraper failed"
+
+# 3. Test API endpoints
+curl -s http://localhost:3000/api/tools | python3 -c "import sys, json; data = json.load(sys.stdin); print(f'✅ API returns {len(data)} tools')" 2>/dev/null || echo "❌ API failed"
+
+echo "🎉 Workflow test complete!"
+echo "👉 Open your browser to: http://localhost:3000/tools"
+echo "💡 Use 'Add New Tool' button to add tools, then 'Run Scraper' to collect intelligence"
+```
+
+---
+
+## Complete Workflow Guide
+
+### Adding New Tools via Web Interface
+
+1. **Navigate to Tools Page**: `http://localhost:3000/tools`
+2. **Click "Add New Tool"** button in the top-right
+3. **Fill in tool details**:
+   - **Tool Name**: Required (e.g., "Cursor")
+   - **Description**: Optional brief description
+   - **Company Info**: Company name and legal name
+   - **GitHub URL**: If available
+   - **Category**: e.g., "AI_IDE", "CODE_COMPLETION"
+   - **URLs**: Add multiple URLs (website, blog, changelog, etc.)
+4. **Click "Add Tool"** - tool will be added with `run_status='update'`
+
+### Running Intelligence Collection
+
+**Option 1: Via Web Interface**
+1. On the Tools page, find the "AI Tool Scraper" section
+2. Click **"Run Scraper"** button
+3. Monitor progress and results in the interface
+
+**Option 2: Via Command Line**
+```bash
+# From project root directory
+python3 src/main.py
+```
+
+### What the Scraper Collects
+
+The Python scraper (`src/main.py`) collects intelligence from:
+- **Web scraping** of all tool URLs (using Firecrawl)
+- **GitHub analysis** (stars, forks, commits, releases)
+- **Reddit mentions** across AI-related subreddits
+- **News articles** and press coverage
+- **Financial data** for public/private companies
+- **Community metrics** (HackerNews, StackOverflow, Dev.to)
+- **ProductHunt rankings and reviews**
+
+### Viewing Results
+
+1. **Dashboard**: `http://localhost:3000` - Overview and stats
+2. **Tools List**: `http://localhost:3000/tools` - All tools with intelligence status
+3. **Tool Details**: `http://localhost:3000/tool/[id]` - Detailed intelligence data
+4. **Reports**: `http://localhost:3000/reports` - Analytics and insights
+
+### API Integration
+
+The web application provides REST APIs:
+- `GET /api/tools` - List all tools
+- `POST /api/tools` - Add new tool
+- `GET /api/tools/[id]` - Get tool details
+- `POST /api/scraper/run` - Trigger Python scraper
+- `GET /api/scraper/run` - Check scraper status
+
+## Step 11: Final Verification Checklist
 
 ```bash
 # Run the automated test script
