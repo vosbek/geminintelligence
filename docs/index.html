@@ -450,6 +450,45 @@
             background: var(--color-primary-hover);
         }
 
+        /* Compare Checkbox */
+        .compare-checkbox-container {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 10;
+        }
+        
+        .compare-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 4px;
+            background: var(--color-bg);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .compare-checkbox.checked {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+        
+        .compare-checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .compare-checkbox:hover {
+            border-color: var(--color-primary);
+        }
+
         /* Compare Section */
         .compare-section {
             margin-top: 32px;
@@ -491,6 +530,95 @@
             background: var(--color-primary);
             color: white;
             border-color: var(--color-primary);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            margin-top: 16px;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-light);
+        }
+        
+        .comparison-table th {
+            background: var(--color-bg-secondary);
+            font-weight: 600;
+            color: var(--color-text);
+            font-size: 14px;
+        }
+        
+        .comparison-table td {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+        }
+        
+        .comparison-table .tool-name {
+            font-weight: 700;
+            color: var(--color-text);
+            font-size: 16px;
+        }
+        
+        .comparison-table .company-name {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-top: 2px;
+        }
+        
+        .comparison-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        
+        .comparison-feature-tag {
+            padding: 2px 6px;
+            background: var(--color-bg-tertiary);
+            border-radius: 4px;
+            font-size: 11px;
+            color: var(--color-text-secondary);
+        }
+        
+        .comparison-metric {
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        
+        .selected-tools-count {
+            padding: 6px 12px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: var(--border-radius);
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 16px;
+        }
+        
+        .clear-selection-btn {
+            padding: 6px 12px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            color: var(--color-text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-left: 8px;
+        }
+        
+        .clear-selection-btn:hover {
+            background: var(--color-danger);
+            color: white;
+            border-color: var(--color-danger);
         }
 
         /* Responsive */
@@ -793,7 +921,10 @@
         <!-- Tools Grid -->
         <div class="tools-grid" id="tools">
             <!-- Cursor -->
-            <div class="tool-card" id="cursor">
+            <div class="tool-card" id="cursor" data-tool="cursor">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="cursor"></div>
+                </div>
                 <div class="tool-header">
                     <div class="tool-info">
                         <h3>Cursor</h3>
@@ -848,7 +979,10 @@
             </div>
 
             <!-- Claude Code -->
-            <div class="tool-card" id="claude-code">
+            <div class="tool-card" id="claude-code" data-tool="claude-code">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="claude-code"></div>
+                </div>
                 <div class="tool-header">
                     <div class="tool-info">
                         <h3>Claude Code</h3>
@@ -902,7 +1036,10 @@
             </div>
 
             <!-- GitHub Copilot -->
-            <div class="tool-card" id="github-copilot">
+            <div class="tool-card" id="github-copilot" data-tool="github-copilot">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="github-copilot"></div>
+                </div>
                 <div class="tool-header">
                     <div class="tool-info">
                         <h3>GitHub Copilot</h3>
@@ -955,7 +1092,10 @@
             </div>
 
             <!-- Replit -->
-            <div class="tool-card" id="replit">
+            <div class="tool-card" id="replit" data-tool="replit">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="replit"></div>
+                </div>
                 <div class="tool-header">
                     <div class="tool-info">
                         <h3>Replit</h3>
@@ -1009,7 +1149,10 @@
             </div>
 
             <!-- Continue -->
-            <div class="tool-card" id="continue">
+            <div class="tool-card" id="continue" data-tool="continue">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="continue"></div>
+                </div>
                 <div class="tool-header">
                     <div class="tool-info">
                         <h3>Continue</h3>
@@ -1063,7 +1206,10 @@
             </div>
 
             <!-- v0 -->
-            <div class="tool-card" id="v0">
+            <div class="tool-card" id="v0" data-tool="v0">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="v0"></div>
+                </div>
                 <div class="tool-header">
                     <div class="tool-info">
                         <h3>v0</h3>
@@ -1116,7 +1262,10 @@
             </div>
 
             <!-- smol developer -->
-            <div class="tool-card" id="smol-developer">
+            <div class="tool-card" id="smol-developer" data-tool="smol-developer">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="smol-developer"></div>
+                </div>
                 <div class="tool-header">
                     <div class="tool-info">
                         <h3>smol developer</h3>
@@ -1169,7 +1318,10 @@
             </div>
 
             <!-- Open Interpreter -->
-            <div class="tool-card" id="open-interpreter">
+            <div class="tool-card" id="open-interpreter" data-tool="open-interpreter">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="open-interpreter"></div>
+                </div>
                 <div class="tool-header">
                     <div class="tool-info">
                         <h3>Open Interpreter</h3>
@@ -1223,7 +1375,10 @@
             </div>
 
             <!-- Aider -->
-            <div class="tool-card" id="aider">
+            <div class="tool-card" id="aider" data-tool="aider">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="aider"></div>
+                </div>
                 <div class="tool-header">
                     <div class="tool-info">
                         <h3>Aider</h3>
@@ -1281,16 +1436,22 @@
             <div class="compare-header">
                 <h2 class="compare-title">Tool Comparison</h2>
                 <div class="compare-controls">
-                    <button class="compare-btn active">Features</button>
-                    <button class="compare-btn">Metrics</button>
-                    <button class="compare-btn">Enterprise</button>
+                    <button class="compare-btn active" data-compare-view="features">Features</button>
+                    <button class="compare-btn" data-compare-view="metrics">Metrics</button>
+                    <button class="compare-btn" data-compare-view="enterprise">Enterprise</button>
+                    <span class="selected-tools-count" id="selected-count">0 tools selected</span>
+                    <button class="clear-selection-btn" id="clear-selection">Clear All</button>
                 </div>
             </div>
             
-            <div style="background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); padding: 24px; text-align: center; color: var(--color-text-secondary);">
+            <div id="comparison-placeholder" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); padding: 24px; text-align: center; color: var(--color-text-secondary);">
                 <i data-lucide="table" style="width: 48px; height: 48px; margin-bottom: 16px; opacity: 0.5;"></i>
-                <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Detailed Comparison Table</div>
-                <div style="font-size: 14px;">Select tools from the sidebar to compare features, metrics, and enterprise capabilities side by side.</div>
+                <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Select Tools to Compare</div>
+                <div style="font-size: 14px;">Click the checkbox on any tool card above to add it to the comparison. You can compare up to 4 tools side by side.</div>
+            </div>
+            
+            <div id="comparison-table-container" style="display: none;">
+                <!-- Dynamic comparison table will be inserted here -->
             </div>
         </div>
 
@@ -1378,6 +1539,280 @@
     <script>
         // Initialize Lucide icons
         lucide.createIcons();
+        
+        // Tool data for comparison
+        const toolData = {
+            'cursor': {
+                name: 'Cursor',
+                company: 'Anysphere Inc.',
+                description: 'The AI Code Editor - AI-powered code editor designed to make developers extraordinarily productive.',
+                funding: '$1.1B',
+                githubStars: '30K',
+                enterprises: '12+',
+                features: 18,
+                keyFeatures: ['Intelligent code completion', 'Natural language editing', 'Codebase understanding', 'Multi-line code suggestions', 'Privacy mode'],
+                enterpriseCustomers: ['Johnson & Johnson', 'Stripe', 'Samsung', 'Shopify'],
+                website: 'https://www.cursor.com/'
+            },
+            'claude-code': {
+                name: 'Claude Code',
+                company: 'Anthropic PBC',
+                description: 'AI-powered coding assistant developed by Anthropic, designed to enhance developer productivity.',
+                funding: 'N/A',
+                githubStars: '16K',
+                enterprises: '1',
+                features: 18,
+                keyFeatures: ['AI-powered code completion', 'Code refactoring', 'Bug detection and fixing', 'Large codebase analysis', 'Natural language code generation'],
+                enterpriseCustomers: ['Cloudflare'],
+                website: 'https://claude.ai/'
+            },
+            'github-copilot': {
+                name: 'GitHub Copilot',
+                company: 'Microsoft Corporation',
+                description: 'Your AI pair programmer - AI-powered coding assistant that provides contextualized assistance.',
+                funding: 'N/A',
+                githubStars: '1K',
+                enterprises: '7',
+                features: 16,
+                keyFeatures: ['AI-powered code completion', 'Chat assistance in IDE', 'Code explanations', 'Agent mode', 'Next edit suggestions'],
+                enterpriseCustomers: ['Duolingo', 'General Motors', 'CocaCola', 'Stripe'],
+                website: 'https://github.com/features/copilot'
+            },
+            'replit': {
+                name: 'Replit',
+                company: 'Replit Inc.',
+                description: 'A collaborative browser-based IDE for creating and deploying applications.',
+                funding: 'N/A',
+                githubStars: 'N/A',
+                enterprises: '11',
+                features: 16,
+                keyFeatures: ['AI-powered code generation', 'Ready-to-use database', 'User authentication', 'Secure integrations', 'Vibe coding capabilities'],
+                enterpriseCustomers: ['Google', 'Coinbase', 'Amazon'],
+                website: 'https://replit.com/'
+            },
+            'continue': {
+                name: 'Continue',
+                company: 'Continue',
+                description: 'The open-source autopilot for software development.',
+                funding: 'N/A',
+                githubStars: '8.9K',
+                enterprises: 'N/A',
+                features: 14,
+                keyFeatures: ['Open-source autopilot', 'ChatGPT integration', 'Code completion', 'AI debugging', 'Multiple model support'],
+                enterpriseCustomers: [],
+                website: 'https://www.continue.dev/'
+            },
+            'v0': {
+                name: 'v0',
+                company: 'Vercel',
+                description: 'AI-powered design tool for creating user interfaces.',
+                funding: 'N/A',
+                githubStars: '15K',
+                enterprises: 'N/A',
+                features: 11,
+                keyFeatures: ['AI UI generation', 'Component creation', 'Design automation', 'Quick prototyping', 'React integration'],
+                enterpriseCustomers: [],
+                website: 'https://v0.dev/'
+            },
+            'smol-developer': {
+                name: 'smol developer',
+                company: 'smol-ai',
+                description: 'Your own personal junior developer - AI agent for codebase generation.',
+                funding: 'N/A',
+                githubStars: '15K',
+                enterprises: 'N/A',
+                features: 10,
+                keyFeatures: ['Codebase generation', 'Single prompt setup', 'Rapid prototyping', 'Simple architecture', 'AI agent workflow'],
+                enterpriseCustomers: [],
+                website: 'https://github.com/smol-ai/developer'
+            },
+            'open-interpreter': {
+                name: 'Open Interpreter',
+                company: 'Open Interpreter',
+                description: 'Local-first, open-source implementation of OpenAI\'s Code Interpreter.',
+                funding: 'N/A',
+                githubStars: '47K',
+                enterprises: 'N/A',
+                features: 15,
+                keyFeatures: ['Local-first execution', 'Open-source implementation', 'Code interpretation', 'Task completion', 'LLM integration'],
+                enterpriseCustomers: [],
+                website: 'https://openinterpreter.com/'
+            },
+            'aider': {
+                name: 'Aider',
+                company: 'Community',
+                description: 'AI pair programming in your terminal.',
+                funding: 'N/A',
+                githubStars: '7.3K',
+                enterprises: 'N/A',
+                features: 14,
+                keyFeatures: ['Terminal-based AI', 'Git integration', 'GPT-4 support', 'Local repository editing', 'Command-line interface'],
+                enterpriseCustomers: [],
+                website: 'https://github.com/paul-gauthier/aider'
+            }
+        };
+        
+        // Comparison functionality
+        let selectedTools = [];
+        let currentComparisonView = 'features';
+        
+        function updateSelectedCount() {
+            const countElement = document.getElementById('selected-count');
+            countElement.textContent = `${selectedTools.length} tools selected`;
+        }
+        
+        function updateComparisonTable() {
+            const placeholder = document.getElementById('comparison-placeholder');
+            const tableContainer = document.getElementById('comparison-table-container');
+            
+            if (selectedTools.length === 0) {
+                placeholder.style.display = 'block';
+                tableContainer.style.display = 'none';
+                return;
+            }
+            
+            placeholder.style.display = 'none';
+            tableContainer.style.display = 'block';
+            
+            let tableHTML = '<table class="comparison-table">';
+            
+            if (currentComparisonView === 'features') {
+                tableHTML += `
+                    <thead>
+                        <tr>
+                            <th>Tool</th>
+                            ${selectedTools.map(toolId => `<th>${toolData[toolId].name}</th>`).join('')}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Company</strong></td>
+                            ${selectedTools.map(toolId => `<td>${toolData[toolId].company}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>Description</strong></td>
+                            ${selectedTools.map(toolId => `<td>${toolData[toolId].description}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>Key Features</strong></td>
+                            ${selectedTools.map(toolId => `
+                                <td>
+                                    <div class="comparison-features">
+                                        ${toolData[toolId].keyFeatures.map(feature => `<span class="comparison-feature-tag">${feature}</span>`).join('')}
+                                    </div>
+                                </td>
+                            `).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>Total Features</strong></td>
+                            ${selectedTools.map(toolId => `<td class="comparison-metric">${toolData[toolId].features}</td>`).join('')}
+                        </tr>
+                    </tbody>
+                `;
+            } else if (currentComparisonView === 'metrics') {
+                tableHTML += `
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            ${selectedTools.map(toolId => `<th>${toolData[toolId].name}</th>`).join('')}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Funding</strong></td>
+                            ${selectedTools.map(toolId => `<td class="comparison-metric">${toolData[toolId].funding}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>GitHub Stars</strong></td>
+                            ${selectedTools.map(toolId => `<td class="comparison-metric">${toolData[toolId].githubStars}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>Enterprise Customers</strong></td>
+                            ${selectedTools.map(toolId => `<td class="comparison-metric">${toolData[toolId].enterprises}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>Feature Count</strong></td>
+                            ${selectedTools.map(toolId => `<td class="comparison-metric">${toolData[toolId].features}</td>`).join('')}
+                        </tr>
+                    </tbody>
+                `;
+            } else if (currentComparisonView === 'enterprise') {
+                tableHTML += `
+                    <thead>
+                        <tr>
+                            <th>Tool</th>
+                            ${selectedTools.map(toolId => `<th>${toolData[toolId].name}</th>`).join('')}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Enterprise Customers</strong></td>
+                            ${selectedTools.map(toolId => `<td class="comparison-metric">${toolData[toolId].enterprises}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>Notable Customers</strong></td>
+                            ${selectedTools.map(toolId => `
+                                <td>
+                                    <div class="comparison-features">
+                                        ${toolData[toolId].enterpriseCustomers.slice(0, 3).map(customer => `<span class="comparison-feature-tag">${customer}</span>`).join('')}
+                                        ${toolData[toolId].enterpriseCustomers.length > 3 ? `<span class="comparison-feature-tag">+${toolData[toolId].enterpriseCustomers.length - 3} more</span>` : ''}
+                                    </div>
+                                </td>
+                            `).join('')}
+                        </tr>
+                    </tbody>
+                `;
+            }
+            
+            tableHTML += '</table>';
+            tableContainer.innerHTML = tableHTML;
+        }
+        
+        // Checkbox functionality
+        document.querySelectorAll('.compare-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const toolId = this.getAttribute('data-tool');
+                
+                if (selectedTools.includes(toolId)) {
+                    // Remove from selection
+                    selectedTools = selectedTools.filter(id => id !== toolId);
+                    this.classList.remove('checked');
+                } else {
+                    // Add to selection (max 4 tools)
+                    if (selectedTools.length < 4) {
+                        selectedTools.push(toolId);
+                        this.classList.add('checked');
+                    } else {
+                        alert('You can compare up to 4 tools at once. Please deselect a tool first.');
+                        return;
+                    }
+                }
+                
+                updateSelectedCount();
+                updateComparisonTable();
+            });
+        });
+        
+        // Comparison view switching
+        document.querySelectorAll('.compare-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.compare-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentComparisonView = this.getAttribute('data-compare-view');
+                updateComparisonTable();
+            });
+        });
+        
+        // Clear selection
+        document.getElementById('clear-selection').addEventListener('click', function() {
+            selectedTools = [];
+            document.querySelectorAll('.compare-checkbox').forEach(checkbox => {
+                checkbox.classList.remove('checked');
+            });
+            updateSelectedCount();
+            updateComparisonTable();
+        });
         
         // Navigation functionality
         document.querySelectorAll('.nav-item').forEach(item => {
