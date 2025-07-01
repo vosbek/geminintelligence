@@ -3,46 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Developer Tools | Executive Market Intelligence</title>
-    <meta name="description" content="Premium executive dashboard for AI developer tools market intelligence with comprehensive funding, enterprise adoption, and competitive analysis">
+    <title>AI Developer Tools | Comprehensive Analysis Dashboard</title>
+    <meta name="description" content="Comprehensive analysis and comparison of AI developer tools with detailed metrics, features, and enterprise adoption data">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-success: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
-            --gradient-warning: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            --gradient-dark: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            --color-navy: #0f172a;
-            --color-slate-900: #0f172a;
-            --color-slate-800: #1e293b;
-            --color-slate-700: #334155;
-            --color-slate-600: #475569;
-            --color-slate-500: #64748b;
-            --color-slate-400: #94a3b8;
-            --color-slate-300: #cbd5e1;
-            --color-slate-200: #e2e8f0;
-            --color-slate-100: #f1f5f9;
-            --color-white: #ffffff;
-            --color-blue-600: #2563eb;
-            --color-blue-500: #3b82f6;
-            --color-green-500: #10b981;
-            --color-purple-500: #8b5cf6;
-            --color-red-500: #ef4444;
-            --color-yellow-500: #f59e0b;
-            --color-emerald-500: #10b981;
-            --color-rose-500: #f43f5e;
-            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --border-radius-lg: 16px;
-            --border-radius-xl: 24px;
+            --color-bg: #ffffff;
+            --color-bg-secondary: #f8f9fa;
+            --color-bg-tertiary: #edebeb;
+            --color-text: #333333;
+            --color-text-secondary: #666666;
+            --color-text-muted: #999999;
+            --color-border: #e1e5e9;
+            --color-border-light: #f0f0f0;
+            --color-primary: #0066cc;
+            --color-primary-hover: #0052a3;
+            --color-success: #22c55e;
+            --color-warning: #f59e0b;
+            --color-danger: #ef4444;
+            --sidebar-width: 280px;
+            --header-height: 64px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --border-radius-lg: 12px;
         }
         
         * {
@@ -53,1623 +40,1477 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--color-slate-100);
-            color: var(--color-slate-900);
+            background: var(--color-bg);
+            color: var(--color-text);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
 
         /* Header */
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--color-slate-200);
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
-            box-shadow: var(--shadow-sm);
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
         }
         
-        .header-content {
+        .header-left {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 0;
+            gap: 16px;
         }
         
         .logo {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--color-text);
         }
         
         .logo-icon {
-            width: 56px;
-            height: 56px;
-            background: var(--gradient-primary);
-            border-radius: var(--border-radius-lg);
+            width: 32px;
+            height: 32px;
+            background: var(--color-primary);
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 900;
-            font-size: 1.5rem;
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .logo-text {
-            font-size: 1.75rem;
-            font-weight: 900;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 800;
+            font-size: 14px;
         }
         
         .header-nav {
             display: flex;
-            gap: 2rem;
-            align-items: center;
+            gap: 8px;
+            margin-left: 32px;
         }
         
         .nav-item {
-            color: var(--color-slate-600);
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            color: var(--color-text-secondary);
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.875rem;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
             transition: all 0.2s ease;
         }
         
-        .nav-item:hover, .nav-item.active {
-            background: var(--gradient-primary);
-            color: white;
+        .nav-item:hover,
+        .nav-item.active {
+            background: var(--color-bg-tertiary);
+            color: var(--color-text);
         }
         
-        .header-meta {
-            display: flex;
-            flex-direction: column;
-            align-items: end;
-            gap: 0.25rem;
-        }
-        
-        .last-updated {
-            font-size: 0.875rem;
-            color: var(--color-slate-600);
-            font-weight: 600;
-        }
-        
-        .data-sources {
-            font-size: 0.75rem;
-            color: var(--color-slate-500);
+        .header-right {
+            margin-left: auto;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 16px;
+        }
+        
+        .search-box {
+            position: relative;
+            width: 300px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 8px 40px 8px 16px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            background: var(--color-bg-secondary);
+            transition: all 0.2s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background: var(--color-bg);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-muted);
         }
 
-        /* Executive Summary */
-        .executive-summary {
-            background: var(--gradient-primary);
-            color: white;
-            padding: 4rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .executive-summary::before {
-            content: '';
-            position: absolute;
-            top: 0;
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: var(--header-height);
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
+            width: var(--sidebar-width);
+            height: calc(100vh - var(--header-height));
+            background: var(--color-bg);
+            border-right: 1px solid var(--color-border);
+            overflow-y: auto;
+            z-index: 100;
         }
         
-        .executive-content {
-            position: relative;
-            z-index: 1;
+        .sidebar-section {
+            padding: 24px;
+            border-bottom: 1px solid var(--color-border-light);
         }
         
-        .executive-header {
-            text-align: center;
-            margin-bottom: 3rem;
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
         }
         
-        .executive-title {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.025em;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        .tool-list {
+            list-style: none;
         }
         
-        .executive-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-            opacity: 0.95;
+        .tool-item {
+            margin-bottom: 4px;
+        }
+        
+        .tool-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: var(--border-radius);
+            color: var(--color-text-secondary);
+            text-decoration: none;
             font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s ease;
         }
         
-        .executive-insights {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+        .tool-link:hover,
+        .tool-link.active {
+            background: var(--color-bg-tertiary);
+            color: var(--color-text);
         }
         
-        .insight-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: var(--border-radius-xl);
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .insight-card:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.25);
-        }
-        
-        .insight-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 1rem;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
+        .tool-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--color-bg-secondary);
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--color-text-secondary);
         }
         
-        .insight-number {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
+        .filter-section {
+            padding: 16px 24px;
+        }
+        
+        .filter-group {
+            margin-bottom: 16px;
+        }
+        
+        .filter-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
             display: block;
         }
         
-        .insight-label {
-            font-size: 1rem;
+        .filter-select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            background: var(--color-bg);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--header-height);
+            padding: 32px;
+            min-height: calc(100vh - var(--header-height));
+        }
+        
+        .content-header {
+            margin-bottom: 32px;
+        }
+        
+        .page-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+        
+        .page-subtitle {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+        }
+        
+        .stats-bar {
+            display: flex;
+            gap: 32px;
+            padding: 16px 0;
+            border-top: 1px solid var(--color-border-light);
+            border-bottom: 1px solid var(--color-border-light);
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--color-text);
+        }
+        
+        .stat-label {
+            font-size: 12px;
             font-weight: 600;
+            color: var(--color-text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            opacity: 0.9;
-        }
-        
-        .insight-description {
-            font-size: 0.875rem;
-            opacity: 0.8;
-            margin-top: 0.5rem;
         }
 
-        /* KPI Dashboard */
-        .kpi-dashboard {
-            padding: 4rem 0;
-            background: var(--color-white);
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .section-title {
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--color-slate-900);
-            margin-bottom: 1rem;
-            letter-spacing: -0.025em;
-        }
-        
-        .section-subtitle {
-            font-size: 1.25rem;
-            color: var(--color-slate-600);
-            max-width: 800px;
-            margin: 0 auto;
-            font-weight: 500;
-        }
-        
-        .kpi-grid {
+        /* Tool Grid */
+        .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
         }
         
-        .kpi-card {
-            background: var(--color-white);
-            border-radius: var(--border-radius-xl);
-            padding: 2rem;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--color-slate-200);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        .tool-card {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-lg);
+            padding: 24px;
+            transition: all 0.2s ease;
         }
         
-        .kpi-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .tool-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-primary);
         }
         
-        .kpi-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .kpi-card:hover::before {
-            opacity: 1;
-        }
-        
-        .kpi-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-        
-        .kpi-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--color-slate-900);
-        }
-        
-        .kpi-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-accent);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-        
-        .kpi-value {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--color-slate-900);
-            margin-bottom: 0.5rem;
-        }
-        
-        .kpi-change {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-        
-        .kpi-change.positive {
-            color: var(--color-green-500);
-        }
-        
-        .kpi-change.negative {
-            color: var(--color-red-500);
-        }
-        
-        .kpi-chart {
-            margin-top: 1rem;
-            height: 80px;
-        }
-
-        /* Market Leaders */
-        .market-leaders {
-            padding: 4rem 0;
-            background: var(--color-slate-100);
-        }
-        
-        .leaders-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 2rem;
-        }
-        
-        .leader-card {
-            background: var(--color-white);
-            border-radius: var(--border-radius-xl);
-            padding: 2rem;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--color-slate-200);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .leader-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .leader-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .leader-card:hover::before {
-            opacity: 1;
-        }
-        
-        .leader-header {
+        .tool-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 2rem;
+            margin-bottom: 16px;
         }
         
-        .leader-info h3 {
-            font-size: 1.75rem;
-            font-weight: 900;
-            color: var(--color-slate-900);
-            margin-bottom: 0.5rem;
-        }
-        
-        .leader-company {
-            font-size: 1rem;
-            color: var(--color-slate-600);
-            font-weight: 600;
-        }
-        
-        .leader-valuation {
-            background: var(--gradient-success);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--border-radius-lg);
-            font-size: 1rem;
-            font-weight: 800;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .leader-metrics {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .leader-metric {
-            text-align: center;
-            padding: 1.5rem 1rem;
-            background: var(--color-slate-100);
-            border-radius: var(--border-radius-lg);
-            transition: all 0.2s ease;
-        }
-        
-        .leader-metric:hover {
-            background: var(--color-slate-200);
-            transform: scale(1.05);
-        }
-        
-        .leader-metric-value {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--color-slate-900);
-            margin-bottom: 0.5rem;
-        }
-        
-        .leader-metric-label {
-            font-size: 0.75rem;
-            color: var(--color-slate-600);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .tool-info h3 {
+            font-size: 20px;
             font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 4px;
         }
         
-        .leader-features {
-            margin-bottom: 2rem;
-        }
-        
-        .leader-features-title {
-            font-size: 1rem;
-            font-weight: 800;
-            color: var(--color-slate-900);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.75rem;
-        }
-        
-        .feature-tag {
-            background: var(--color-slate-200);
-            color: var(--color-slate-800);
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-align: center;
-            transition: all 0.2s ease;
-        }
-        
-        .feature-tag:hover {
-            background: var(--color-blue-500);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .leader-enterprises {
-            margin-bottom: 2rem;
-        }
-        
-        .enterprises-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 0.75rem;
-        }
-        
-        .enterprise-tag {
-            background: var(--gradient-secondary);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            transition: all 0.2s ease;
-        }
-        
-        .enterprise-tag:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .leader-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--color-slate-200);
-        }
-        
-        .leader-links {
-            display: flex;
-            gap: 0.75rem;
-        }
-        
-        .leader-link {
-            background: var(--color-slate-100);
-            color: var(--color-slate-700);
-            text-decoration: none;
-            padding: 0.75rem 1.25rem;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            transition: all 0.2s ease;
-        }
-        
-        .leader-link:hover {
-            background: var(--color-blue-500);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .view-details {
-            background: var(--gradient-primary);
-            color: white;
-            text-decoration: none;
-            padding: 1rem 2rem;
-            border-radius: var(--border-radius-lg);
-            font-size: 0.875rem;
-            font-weight: 800;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .view-details:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Investment Intelligence */
-        .investment-intelligence {
-            padding: 4rem 0;
-            background: var(--color-white);
-        }
-        
-        .investment-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-        }
-        
-        .investment-card {
-            background: var(--color-white);
-            border-radius: var(--border-radius-xl);
-            padding: 2rem;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--color-slate-200);
-            transition: all 0.3s ease;
-        }
-        
-        .investment-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .investment-card h3 {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--color-slate-900);
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .investment-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-warning);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-        
-        .ranking-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem;
-            background: var(--color-slate-100);
-            border-radius: var(--border-radius-lg);
-            margin-bottom: 1rem;
-            transition: all 0.2s ease;
-        }
-        
-        .ranking-item:hover {
-            background: var(--color-slate-200);
-            transform: translateX(4px);
-        }
-        
-        .ranking-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .ranking-number {
-            width: 2.5rem;
-            height: 2.5rem;
-            background: var(--gradient-primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 1rem;
-        }
-        
-        .ranking-name {
-            font-weight: 800;
-            color: var(--color-slate-900);
-            font-size: 1rem;
-        }
-        
-        .ranking-value {
-            font-weight: 900;
-            color: var(--color-green-500);
-            font-size: 1.1rem;
-        }
-
-        /* Market Intelligence */
-        .market-intelligence {
-            padding: 4rem 0;
-            background: var(--color-slate-100);
-        }
-        
-        .intelligence-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 2rem;
-        }
-        
-        .intelligence-item {
-            background: var(--color-white);
-            border-radius: var(--border-radius-xl);
-            padding: 2rem;
-            border-left: 4px solid var(--color-blue-500);
-            box-shadow: var(--shadow-lg);
-            transition: all 0.3s ease;
-        }
-        
-        .intelligence-item:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .intelligence-title {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--color-slate-900);
-            margin-bottom: 1rem;
-            line-height: 1.4;
-        }
-        
-        .intelligence-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.875rem;
-            color: var(--color-slate-600);
-            font-weight: 600;
-        }
-        
-        .intelligence-source {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .intelligence-date {
-            background: var(--color-slate-200);
-            padding: 0.25rem 0.75rem;
-            border-radius: 6px;
-            font-size: 0.75rem;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--gradient-dark);
-            color: white;
-            padding: 4rem 0 2rem;
-            text-align: center;
-        }
-        
-        .footer-content {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1rem;
+        .tool-company {
+            font-size: 14px;
+            color: var(--color-text-secondary);
             font-weight: 500;
         }
         
-        .footer-stats {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
+        .tool-status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--color-success);
+            color: white;
         }
         
-        .footer-stat {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.875rem;
+        .tool-description {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .tool-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .tool-metric {
+            text-align: center;
+        }
+        
+        .tool-metric-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 2px;
+        }
+        
+        .tool-metric-label {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .tool-features {
+            margin-bottom: 20px;
+        }
+        
+        .features-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 12px;
+        }
+        
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .feature-tag {
+            padding: 4px 8px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+        
+        .tool-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid var(--color-border-light);
+        }
+        
+        .tool-links {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .tool-link-btn {
+            padding: 6px 12px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .tool-link-btn:hover {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+        
+        .view-details-btn {
+            padding: 8px 16px;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .view-details-btn:hover {
+            background: var(--color-primary-hover);
+        }
+
+        /* Compare Section */
+        .compare-section {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .compare-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .compare-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+        
+        .compare-controls {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .compare-btn {
+            padding: 8px 16px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .compare-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .executive-title {
-                font-size: 2.5rem;
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
             }
             
-            .section-title {
-                font-size: 2rem;
+            .sidebar.open {
+                transform: translateX(0);
             }
             
-            .leaders-grid {
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .tools-grid {
                 grid-template-columns: 1fr;
             }
+        }
+        
+        @media (max-width: 768px) {
+            .header-nav {
+                display: none;
+            }
             
-            .leader-metrics {
+            .search-box {
+                width: 200px;
+            }
+            
+            .main-content {
+                padding: 16px;
+            }
+            
+            .tool-metrics {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
-            .executive-insights {
-                grid-template-columns: 1fr;
-            }
-            
-            .container {
-                padding: 0 1rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .executive-insights {
-                grid-template-columns: 1fr;
-            }
-            
-            .leader-metrics {
-                grid-template-columns: 1fr;
-            }
-            
-            .kpi-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Animations */
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        
-        .animate-slide-up {
-            animation: slideUp 0.6s ease-out;
-        }
-        
-        .animate-fade-in {
-            animation: fadeIn 0.8s ease-out;
-        }
-        
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--color-slate-200);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--gradient-primary);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--gradient-secondary);
         }
 
-        /* Chart containers */
-        .chart-container {
-            position: relative;
-            height: 300px;
-            margin: 1rem 0;
+        /* News Section */
+        .news-section {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--color-border);
         }
         
-        .mini-chart {
-            height: 80px;
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .news-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+        
+        .news-filter {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .news-filter-btn {
+            padding: 6px 12px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            color: var(--color-text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .news-filter-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 16px;
+        }
+        
+        .news-item {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: 16px;
+            transition: all 0.2s ease;
+        }
+        
+        .news-item:hover {
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .news-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .news-item-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+        
+        .news-item-source {
+            font-weight: 500;
+        }
+        
+        .news-item-date {
+            color: var(--color-text-muted);
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">AI</div>
-                    <div class="logo-text">Executive Intelligence</div>
-                </div>
-                <nav class="header-nav">
-                    <a href="#overview" class="nav-item active">Overview</a>
-                    <a href="#market" class="nav-item">Market Leaders</a>
-                    <a href="#investment" class="nav-item">Investment</a>
-                    <a href="#intelligence" class="nav-item">Intelligence</a>
-                </nav>
-                <div class="header-meta">
-                    <div class="last-updated">
-                        <i data-lucide="clock" style="width: 16px; height: 16px; margin-right: 4px;"></i>
-                        Updated: June 30, 2025
-                    </div>
-                    <div class="data-sources">
-                        <i data-lucide="database" style="width: 14px; height: 14px;"></i>
-                        172 articles • 225 Reddit posts • GitHub data
-                    </div>
-                </div>
+        <div class="header-left">
+            <div class="logo">
+                <div class="logo-icon">AI</div>
+                AI Developer Tools
+            </div>
+            <nav class="header-nav">
+                <a href="#overview" class="nav-item active">Overview</a>
+                <a href="#tools" class="nav-item">Tools</a>
+                <a href="#compare" class="nav-item">Compare</a>
+                <a href="#news" class="nav-item">News</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search tools, features, companies...">
+                <i data-lucide="search" class="search-icon" style="width: 16px; height: 16px;"></i>
             </div>
         </div>
     </header>
 
-    <section class="executive-summary" id="overview">
-        <div class="container">
-            <div class="executive-content">
-                <div class="executive-header">
-                    <h1 class="executive-title">AI Developer Tools</h1>
-                    <p class="executive-subtitle">
-                        Executive Market Intelligence Dashboard
-                    </p>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-title">All Tools</div>
+            <ul class="tool-list">
+                <li class="tool-item">
+                    <a href="#cursor" class="tool-link active">
+                        <div class="tool-icon">CR</div>
+                        <div>
+                            <div>Cursor</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Anysphere</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#claude-code" class="tool-link">
+                        <div class="tool-icon">CC</div>
+                        <div>
+                            <div>Claude Code</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Anthropic</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#github-copilot" class="tool-link">
+                        <div class="tool-icon">GC</div>
+                        <div>
+                            <div>GitHub Copilot</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Microsoft</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#replit" class="tool-link">
+                        <div class="tool-icon">RP</div>
+                        <div>
+                            <div>Replit</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Replit</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#continue" class="tool-link">
+                        <div class="tool-icon">CT</div>
+                        <div>
+                            <div>Continue</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Continue</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#v0" class="tool-link">
+                        <div class="tool-icon">V0</div>
+                        <div>
+                            <div>v0</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Vercel</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#smol-developer" class="tool-link">
+                        <div class="tool-icon">SD</div>
+                        <div>
+                            <div>smol developer</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">smol-ai</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#open-interpreter" class="tool-link">
+                        <div class="tool-icon">OI</div>
+                        <div>
+                            <div>Open Interpreter</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Open Interpreter</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#aider" class="tool-link">
+                        <div class="tool-icon">AD</div>
+                        <div>
+                            <div>Aider</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Community</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="filter-section">
+            <div class="sidebar-title">Filters</div>
+            <div class="filter-group">
+                <label class="filter-label">Category</label>
+                <select class="filter-select">
+                    <option value="">All Categories</option>
+                    <option value="ai-ide">AI IDE</option>
+                    <option value="editor">Editor</option>
+                    <option value="copilot">Copilot</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Company Type</label>
+                <select class="filter-select">
+                    <option value="">All Companies</option>
+                    <option value="startup">Startup</option>
+                    <option value="enterprise">Enterprise</option>
+                    <option value="open-source">Open Source</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Funding Status</label>
+                <select class="filter-select">
+                    <option value="">Any Funding</option>
+                    <option value="funded">Funded</option>
+                    <option value="unfunded">Unfunded</option>
+                </select>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-header">
+            <h1 class="page-title">AI Developer Tools Analysis</h1>
+            <p class="page-subtitle">Comprehensive comparison and analysis of 9 leading AI developer tools with detailed metrics, features, and enterprise adoption data.</p>
+            
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-value">9</div>
+                    <div class="stat-label">Tools Analyzed</div>
                 </div>
-                
-                <div class="executive-insights">
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <i data-lucide="trending-up" style="width: 24px; height: 24px;"></i>
-                        </div>
-                        <span class="insight-number">$1.1B</span>
-                        <span class="insight-label">Total Funding</span>
-                        <div class="insight-description">Across 9 market leaders</div>
-                    </div>
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <i data-lucide="building" style="width: 24px; height: 24px;"></i>
-                        </div>
-                        <span class="insight-number">38</span>
-                        <span class="insight-label">Enterprise Customers</span>
-                        <div class="insight-description">Fortune 500 adoption</div>
-                    </div>
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <i data-lucide="star" style="width: 24px; height: 24px;"></i>
-                        </div>
-                        <span class="insight-number">155,877</span>
-                        <span class="insight-label">GitHub Stars</span>
-                        <div class="insight-description">Developer community</div>
-                    </div>
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <i data-lucide="zap" style="width: 24px; height: 24px;"></i>
-                        </div>
-                        <span class="insight-number">231</span>
-                        <span class="insight-label">Features Tracked</span>
-                        <div class="insight-description">Comprehensive analysis</div>
-                    </div>
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <i data-lucide="newspaper" style="width: 24px; height: 24px;"></i>
-                        </div>
-                        <span class="insight-number">172</span>
-                        <span class="insight-label">News Articles</span>
-                        <div class="insight-description">Market intelligence</div>
-                    </div>
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <i data-lucide="users" style="width: 24px; height: 24px;"></i>
-                        </div>
-                        <span class="insight-number">225</span>
-                        <span class="insight-label">Reddit Discussions</span>
-                        <div class="insight-description">Community sentiment</div>
-                    </div>
+                <div class="stat-item">
+                    <div class="stat-value">$1.1B</div>
+                    <div class="stat-label">Total Funding</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">139K</div>
+                    <div class="stat-label">GitHub Stars</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">31+</div>
+                    <div class="stat-label">Enterprise Customers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">132</div>
+                    <div class="stat-label">Features Tracked</div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <section class="kpi-dashboard">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Key Performance Indicators</h2>
-                <p class="section-subtitle">
-                    Real-time market metrics and performance indicators
-                </p>
+        <!-- Tools Grid -->
+        <div class="tools-grid" id="tools">
+            <!-- Cursor -->
+            <div class="tool-card" id="cursor">
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>Cursor</h3>
+                        <div class="tool-company">Anysphere Inc.</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    The AI Code Editor - Cursor is an AI-powered code editor designed to make developers extraordinarily productive. It integrates AI capabilities directly into the coding environment, offering features like intelligent code completion, natural language editing, and codebase understanding.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">$1.1B</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">30K</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">12+</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">18</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">Intelligent code completion</div>
+                        <div class="feature-tag">Natural language editing</div>
+                        <div class="feature-tag">Codebase understanding</div>
+                        <div class="feature-tag">Multi-line code suggestions</div>
+                        <div class="feature-tag">Privacy mode</div>
+                        <div class="feature-tag">+13 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://www.cursor.com/" target="_blank" class="tool-link-btn">Website</a>
+                        <a href="https://github.com/getcursor/cursor" target="_blank" class="tool-link-btn">GitHub</a>
+                        <a href="https://www.cursor.com/blog" target="_blank" class="tool-link-btn">Blog</a>
+                    </div>
+                    <a href="tools/1.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Claude Code -->
+            <div class="tool-card" id="claude-code">
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>Claude Code</h3>
+                        <div class="tool-company">Anthropic PBC</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    A family of foundational AI models that can be used in a variety of applications. AI-powered coding assistant developed by Anthropic, designed to enhance developer productivity by integrating into modern workflows and IDEs.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">16K</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">1</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">18</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">AI-powered code completion</div>
+                        <div class="feature-tag">Code refactoring</div>
+                        <div class="feature-tag">Bug detection and fixing</div>
+                        <div class="feature-tag">Large codebase analysis</div>
+                        <div class="feature-tag">Natural language code generation</div>
+                        <div class="feature-tag">+13 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://claude.ai/" target="_blank" class="tool-link-btn">Website</a>
+                        <a href="https://github.com/anthropics/claude-code" target="_blank" class="tool-link-btn">GitHub</a>
+                    </div>
+                    <a href="tools/2.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- GitHub Copilot -->
+            <div class="tool-card" id="github-copilot">
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>GitHub Copilot</h3>
+                        <div class="tool-company">Microsoft Corporation</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    Your AI pair programmer. GitHub Copilot is an AI-powered coding assistant that provides contextualized assistance throughout the software development lifecycle, offering features like code completions and chat assistance.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">1K</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">7</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">16</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">AI-powered code completion</div>
+                        <div class="feature-tag">Chat assistance in IDE</div>
+                        <div class="feature-tag">Code explanations</div>
+                        <div class="feature-tag">Agent mode</div>
+                        <div class="feature-tag">Next edit suggestions</div>
+                        <div class="feature-tag">+11 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://github.com/features/copilot" target="_blank" class="tool-link-btn">Website</a>
+                    </div>
+                    <a href="tools/3.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Replit -->
+            <div class="tool-card" id="replit">
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>Replit</h3>
+                        <div class="tool-company">Replit Inc.</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    A collaborative browser-based IDE. Replit allows users to create and deploy websites, applications, automations, internal tools, and data pipelines in any programming language with AI-powered coding assistance.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">11</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">16</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">AI-powered code generation</div>
+                        <div class="feature-tag">Ready-to-use database</div>
+                        <div class="feature-tag">User authentication</div>
+                        <div class="feature-tag">Secure integrations</div>
+                        <div class="feature-tag">Vibe coding capabilities</div>
+                        <div class="feature-tag">+11 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://replit.com/" target="_blank" class="tool-link-btn">Website</a>
+                        <a href="https://github.com/replit" target="_blank" class="tool-link-btn">GitHub</a>
+                    </div>
+                    <a href="tools/4.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Continue -->
+            <div class="tool-card" id="continue">
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>Continue</h3>
+                        <div class="tool-company">Continue</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    The open-source autopilot for software development. Continue brings the power of ChatGPT to your IDE, offering AI-powered code completion, editing, and debugging capabilities.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">8.9K</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">14</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">Open-source autopilot</div>
+                        <div class="feature-tag">ChatGPT integration</div>
+                        <div class="feature-tag">Code completion</div>
+                        <div class="feature-tag">AI debugging</div>
+                        <div class="feature-tag">Multiple model support</div>
+                        <div class="feature-tag">+9 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://www.continue.dev/" target="_blank" class="tool-link-btn">Website</a>
+                        <a href="https://github.com/continuedev/continue" target="_blank" class="tool-link-btn">GitHub</a>
+                    </div>
+                    <a href="tools/5.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- v0 -->
+            <div class="tool-card" id="v0">
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>v0</h3>
+                        <div class="tool-company">Vercel</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    AI-powered design tool for creating user interfaces. v0 generates UI components and designs using artificial intelligence, helping developers create interfaces quickly and efficiently.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">15K</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">11</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">AI UI generation</div>
+                        <div class="feature-tag">Component creation</div>
+                        <div class="feature-tag">Design automation</div>
+                        <div class="feature-tag">Quick prototyping</div>
+                        <div class="feature-tag">React integration</div>
+                        <div class="feature-tag">+6 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://v0.dev/" target="_blank" class="tool-link-btn">Website</a>
+                    </div>
+                    <a href="tools/6.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- smol developer -->
+            <div class="tool-card" id="smol-developer">
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>smol developer</h3>
+                        <div class="tool-company">smol-ai</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    Your own personal junior developer. smol developer is an AI agent that can generate entire codebases from a single prompt, focusing on simplicity and rapid prototyping.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">15K</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">10</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">Codebase generation</div>
+                        <div class="feature-tag">Single prompt setup</div>
+                        <div class="feature-tag">Rapid prototyping</div>
+                        <div class="feature-tag">Simple architecture</div>
+                        <div class="feature-tag">AI agent workflow</div>
+                        <div class="feature-tag">+5 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://github.com/smol-ai/developer" target="_blank" class="tool-link-btn">GitHub</a>
+                    </div>
+                    <a href="tools/7.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Open Interpreter -->
+            <div class="tool-card" id="open-interpreter">
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>Open Interpreter</h3>
+                        <div class="tool-company">Open Interpreter</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    A local-first, open-source implementation of OpenAI's Code Interpreter. Open Interpreter lets LLMs run code on your computer to complete tasks.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">47K</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">15</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">Local-first execution</div>
+                        <div class="feature-tag">Open-source implementation</div>
+                        <div class="feature-tag">Code interpretation</div>
+                        <div class="feature-tag">Task completion</div>
+                        <div class="feature-tag">LLM integration</div>
+                        <div class="feature-tag">+10 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://openinterpreter.com/" target="_blank" class="tool-link-btn">Website</a>
+                        <a href="https://github.com/KillianLucas/open-interpreter" target="_blank" class="tool-link-btn">GitHub</a>
+                    </div>
+                    <a href="tools/8.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Aider -->
+            <div class="tool-card" id="aider">
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>Aider</h3>
+                        <div class="tool-company">Community</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    AI pair programming in your terminal. Aider is a command-line tool that lets you pair program with GPT-3.5/GPT-4, to edit code stored in your local git repository.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">7.3K</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">14</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">Terminal-based AI</div>
+                        <div class="feature-tag">Git integration</div>
+                        <div class="feature-tag">GPT-4 support</div>
+                        <div class="feature-tag">Local repository editing</div>
+                        <div class="feature-tag">Command-line interface</div>
+                        <div class="feature-tag">+9 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://github.com/paul-gauthier/aider" target="_blank" class="tool-link-btn">GitHub</a>
+                    </div>
+                    <a href="tools/9.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compare Section -->
+        <div class="compare-section" id="compare">
+            <div class="compare-header">
+                <h2 class="compare-title">Tool Comparison</h2>
+                <div class="compare-controls">
+                    <button class="compare-btn active">Features</button>
+                    <button class="compare-btn">Metrics</button>
+                    <button class="compare-btn">Enterprise</button>
+                </div>
             </div>
             
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <div class="kpi-header">
-                        <h3 class="kpi-title">Market Valuation</h3>
-                        <div class="kpi-icon">
-                            <i data-lucide="dollar-sign" style="width: 20px; height: 20px;"></i>
-                        </div>
-                    </div>
-                    <div class="kpi-value">$13.0B</div>
-                    <div class="kpi-change positive">
-                        <i data-lucide="arrow-up" style="width: 16px; height: 16px;"></i>
-                        +23% from last quarter
-                    </div>
-                    <div class="kpi-chart">
-                        <canvas id="valuationChart"></canvas>
-                    </div>
-                </div>
-                
-                <div class="kpi-card">
-                    <div class="kpi-header">
-                        <h3 class="kpi-title">Enterprise Adoption</h3>
-                        <div class="kpi-icon">
-                            <i data-lucide="building-2" style="width: 20px; height: 20px;"></i>
-                        </div>
-                    </div>
-                    <div class="kpi-value">38</div>
-                    <div class="kpi-change positive">
-                        <i data-lucide="arrow-up" style="width: 16px; height: 16px;"></i>
-                        +18% growth
-                    </div>
-                    <div class="kpi-chart">
-                        <canvas id="adoptionChart"></canvas>
-                    </div>
-                </div>
-                
-                <div class="kpi-card">
-                    <div class="kpi-header">
-                        <h3 class="kpi-title">Developer Engagement</h3>
-                        <div class="kpi-icon">
-                            <i data-lucide="code" style="width: 20px; height: 20px;"></i>
-                        </div>
-                    </div>
-                    <div class="kpi-value">155K</div>
-                    <div class="kpi-change positive">
-                        <i data-lucide="arrow-up" style="width: 16px; height: 16px;"></i>
-                        +45% this month
-                    </div>
-                    <div class="kpi-chart">
-                        <canvas id="engagementChart"></canvas>
-                    </div>
-                </div>
-                
-                <div class="kpi-card">
-                    <div class="kpi-header">
-                        <h3 class="kpi-title">Market Sentiment</h3>
-                        <div class="kpi-icon">
-                            <i data-lucide="heart" style="width: 20px; height: 20px;"></i>
-                        </div>
-                    </div>
-                    <div class="kpi-value">8.7/10</div>
-                    <div class="kpi-change positive">
-                        <i data-lucide="arrow-up" style="width: 16px; height: 16px;"></i>
-                        +0.3 points
-                    </div>
-                    <div class="kpi-chart">
-                        <canvas id="sentimentChart"></canvas>
-                    </div>
-                </div>
+            <div style="background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); padding: 24px; text-align: center; color: var(--color-text-secondary);">
+                <i data-lucide="table" style="width: 48px; height: 48px; margin-bottom: 16px; opacity: 0.5;"></i>
+                <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Detailed Comparison Table</div>
+                <div style="font-size: 14px;">Select tools from the sidebar to compare features, metrics, and enterprise capabilities side by side.</div>
             </div>
         </div>
-    </section>
 
-    <section class="market-leaders" id="market">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Market Leaders</h2>
-                <p class="section-subtitle">
-                    Comprehensive analysis of top AI developer tools with complete market intelligence
-                </p>
+        <!-- News Section -->
+        <div class="news-section" id="news">
+            <div class="news-header">
+                <h2 class="news-title">Latest News & Updates</h2>
+                <div class="news-filter">
+                    <button class="news-filter-btn active">All</button>
+                    <button class="news-filter-btn">Cursor</button>
+                    <button class="news-filter-btn">GitHub Copilot</button>
+                    <button class="news-filter-btn">Claude Code</button>
+                    <button class="news-filter-btn">Replit</button>
+                </div>
             </div>
             
-            <div class="leaders-grid">
-                <div class="leader-card">
-                    <div class="leader-header">
-                        <div class="leader-info">
-                            <h3>Cursor</h3>
-                            <div class="leader-company">Anysphere • Series C</div>
-                        </div>
-                        <div class="leader-valuation">$10.0B</div>
-                    </div>
-                    
-                    <div class="leader-metrics">
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">$1.1B</div>
-                            <div class="leader-metric-label">Funding</div>
-                        </div>
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">12</div>
-                            <div class="leader-metric-label">Enterprises</div>
-                        </div>
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">30K</div>
-                            <div class="leader-metric-label">GitHub ⭐</div>
-                        </div>
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">18</div>
-                            <div class="leader-metric-label">Features</div>
-                        </div>
-                    </div>
-                    
-                    <div class="leader-features">
-                        <div class="leader-features-title">Key Capabilities</div>
-                        <div class="features-grid">
-                            <div class="feature-tag">AI Code Completion</div>
-                            <div class="feature-tag">Natural Language Editing</div>
-                            <div class="feature-tag">Codebase Understanding</div>
-                            <div class="feature-tag">Vibe Coding</div>
-                            <div class="feature-tag">Privacy Mode</div>
-                            <div class="feature-tag">+13 more</div>
-                        </div>
-                    </div>
-                    
-                    <div class="leader-enterprises">
-                        <div class="leader-features-title">Enterprise Customers</div>
-                        <div class="enterprises-grid">
-                            <div class="enterprise-tag">Johnson & Johnson</div>
-                            <div class="enterprise-tag">Stripe</div>
-                            <div class="enterprise-tag">Samsung</div>
-                            <div class="enterprise-tag">Shopify</div>
-                            <div class="enterprise-tag">+8 more</div>
-                        </div>
-                    </div>
-                    
-                    <div class="leader-footer">
-                        <div class="leader-links">
-                            <a href="https://cursor.com" target="_blank" class="leader-link">
-                                <i data-lucide="external-link" style="width: 14px; height: 14px; margin-right: 4px;"></i>
-                                Website
-                            </a>
-                            <a href="https://github.com/getcursor/cursor" target="_blank" class="leader-link">
-                                <i data-lucide="github" style="width: 14px; height: 14px; margin-right: 4px;"></i>
-                                GitHub
-                            </a>
-                        </div>
-                        <a href="tools/1.html" class="view-details">Complete Analysis</a>
+            <div class="news-grid">
+                <div class="news-item">
+                    <div class="news-item-title">Copilot Chat in VS Code is now open source</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">GitHub • GitHub Copilot</div>
+                        <div class="news-item-date">6/27/2025</div>
                     </div>
                 </div>
                 
-                <div class="leader-card">
-                    <div class="leader-header">
-                        <div class="leader-info">
-                            <h3>Windsurf</h3>
-                            <div class="leader-company">Codeium • Series B</div>
-                        </div>
-                        <div class="leader-valuation">$3.0B</div>
-                    </div>
-                    
-                    <div class="leader-metrics">
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">$0M</div>
-                            <div class="leader-metric-label">Funding</div>
-                        </div>
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">2</div>
-                            <div class="leader-metric-label">Enterprises</div>
-                        </div>
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">0</div>
-                            <div class="leader-metric-label">GitHub ⭐</div>
-                        </div>
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">40</div>
-                            <div class="leader-metric-label">Features</div>
-                        </div>
-                    </div>
-                    
-                    <div class="leader-features">
-                        <div class="leader-features-title">Key Capabilities</div>
-                        <div class="features-grid">
-                            <div class="feature-tag">Cascade AI Chat</div>
-                            <div class="feature-tag">Windsurf Tab</div>
-                            <div class="feature-tag">Supercomplete</div>
-                            <div class="feature-tag">Memories</div>
-                            <div class="feature-tag">Rules Engine</div>
-                            <div class="feature-tag">+35 more</div>
-                        </div>
-                    </div>
-                    
-                    <div class="leader-enterprises">
-                        <div class="leader-features-title">Enterprise Customers</div>
-                        <div class="enterprises-grid">
-                            <div class="enterprise-tag">Y Combinator</div>
-                            <div class="enterprise-tag">athenahealth</div>
-                        </div>
-                    </div>
-                    
-                    <div class="leader-footer">
-                        <div class="leader-links">
-                            <a href="https://windsurf.com" target="_blank" class="leader-link">
-                                <i data-lucide="external-link" style="width: 14px; height: 14px; margin-right: 4px;"></i>
-                                Website
-                            </a>
-                        </div>
-                        <a href="tools/8.html" class="view-details">Complete Analysis</a>
+                <div class="news-item">
+                    <div class="news-item-title">Claude Code for VSCode Extension Released</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">Visual Studio • Claude Code</div>
+                        <div class="news-item-date">6/23/2025</div>
                     </div>
                 </div>
                 
-                <div class="leader-card">
-                    <div class="leader-header">
-                        <div class="leader-info">
-                            <h3>Zed</h3>
-                            <div class="leader-company">Zed Industries • Open Source</div>
-                        </div>
-                    </div>
-                    
-                    <div class="leader-metrics">
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">$0M</div>
-                            <div class="leader-metric-label">Funding</div>
-                        </div>
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">1</div>
-                            <div class="leader-metric-label">Enterprises</div>
-                        </div>
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">62K</div>
-                            <div class="leader-metric-label">GitHub ⭐</div>
-                        </div>
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">28</div>
-                            <div class="leader-metric-label">Features</div>
-                        </div>
-                    </div>
-                    
-                    <div class="leader-features">
-                        <div class="leader-features-title">Key Capabilities</div>
-                        <div class="features-grid">
-                            <div class="feature-tag">High Performance</div>
-                            <div class="feature-tag">Multiplayer Editing</div>
-                            <div class="feature-tag">Built-in Debugger</div>
-                            <div class="feature-tag">Rust Performance</div>
-                            <div class="feature-tag">GPU Acceleration</div>
-                            <div class="feature-tag">+23 more</div>
-                        </div>
-                    </div>
-                    
-                    <div class="leader-enterprises">
-                        <div class="leader-features-title">Enterprise Customers</div>
-                        <div class="enterprises-grid">
-                            <div class="enterprise-tag">Anthropic</div>
-                        </div>
-                    </div>
-                    
-                    <div class="leader-footer">
-                        <div class="leader-links">
-                            <a href="https://zed.dev" target="_blank" class="leader-link">
-                                <i data-lucide="external-link" style="width: 14px; height: 14px; margin-right: 4px;"></i>
-                                Website
-                            </a>
-                            <a href="https://github.com/zed-industries/zed" target="_blank" class="leader-link">
-                                <i data-lucide="github" style="width: 14px; height: 14px; margin-right: 4px;"></i>
-                                GitHub
-                            </a>
-                        </div>
-                        <a href="tools/6.html" class="view-details">Complete Analysis</a>
+                <div class="news-item">
+                    <div class="news-item-title">Remote MCP Support in Claude Code</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">Anthropic • Claude Code</div>
+                        <div class="news-item-date">6/18/2025</div>
                     </div>
                 </div>
                 
-                <div class="leader-card">
-                    <div class="leader-header">
-                        <div class="leader-info">
-                            <h3>Cline</h3>
-                            <div class="leader-company">Open Source • Community</div>
-                        </div>
+                <div class="news-item">
+                    <div class="news-item-title">Cursor Raises $1.1B Series C at $10B Valuation</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">TechCrunch • Cursor</div>
+                        <div class="news-item-date">6/15/2025</div>
                     </div>
-                    
-                    <div class="leader-metrics">
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">$0M</div>
-                            <div class="leader-metric-label">Funding</div>
-                        </div>
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">1</div>
-                            <div class="leader-metric-label">Enterprises</div>
-                        </div>
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">47K</div>
-                            <div class="leader-metric-label">GitHub ⭐</div>
-                        </div>
-                        <div class="leader-metric">
-                            <div class="leader-metric-value">34</div>
-                            <div class="leader-metric-label">Features</div>
-                        </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-title">Replit Introduces Enhanced AI Agent Capabilities</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">Replit Blog • Replit</div>
+                        <div class="news-item-date">6/10/2025</div>
                     </div>
-                    
-                    <div class="leader-features">
-                        <div class="leader-features-title">Key Capabilities</div>
-                        <div class="features-grid">
-                            <div class="feature-tag">Autonomous Coding</div>
-                            <div class="feature-tag">Plan/Act Modes</div>
-                            <div class="feature-tag">MCP Integration</div>
-                            <div class="feature-tag">Browser Control</div>
-                            <div class="feature-tag">Multi-AI Models</div>
-                            <div class="feature-tag">+29 more</div>
-                        </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-title">Continue.dev Reaches 10K GitHub Stars</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">GitHub • Continue</div>
+                        <div class="news-item-date">6/8/2025</div>
                     </div>
-                    
-                    <div class="leader-enterprises">
-                        <div class="leader-features-title">Enterprise Customers</div>
-                        <div class="enterprises-grid">
-                            <div class="enterprise-tag">Cleat Street</div>
-                        </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-title">v0 by Vercel Launches Advanced AI Design Features</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">Vercel Blog • v0</div>
+                        <div class="news-item-date">6/5/2025</div>
                     </div>
-                    
-                    <div class="leader-footer">
-                        <div class="leader-links">
-                            <a href="https://cline.bot" target="_blank" class="leader-link">
-                                <i data-lucide="external-link" style="width: 14px; height: 14px; margin-right: 4px;"></i>
-                                Website
-                            </a>
-                            <a href="https://github.com/cline/cline" target="_blank" class="leader-link">
-                                <i data-lucide="github" style="width: 14px; height: 14px; margin-right: 4px;"></i>
-                                GitHub
-                            </a>
-                        </div>
-                        <a href="tools/7.html" class="view-details">Complete Analysis</a>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-title">Open Interpreter 2.0 Released with Enhanced Security</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">Open Interpreter • Open Interpreter</div>
+                        <div class="news-item-date">6/1/2025</div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="investment-intelligence" id="investment">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Investment Intelligence</h2>
-                <p class="section-subtitle">
-                    Comprehensive funding analysis and market positioning insights
-                </p>
-            </div>
-            
-            <div class="investment-grid">
-                <div class="investment-card">
-                    <h3>
-                        <div class="investment-icon">
-                            <i data-lucide="trophy" style="width: 20px; height: 20px;"></i>
-                        </div>
-                        Valuation Leaders
-                    </h3>
-                    <div class="ranking-item">
-                        <div class="ranking-left">
-                            <div class="ranking-number">1</div>
-                            <div class="ranking-name">Cursor</div>
-                        </div>
-                        <div class="ranking-value">$10.0B</div>
-                    </div>
-                    <div class="ranking-item">
-                        <div class="ranking-left">
-                            <div class="ranking-number">2</div>
-                            <div class="ranking-name">Windsurf</div>
-                        </div>
-                        <div class="ranking-value">$3.0B</div>
-                    </div>
-                </div>
-                
-                <div class="investment-card">
-                    <h3>
-                        <div class="investment-icon">
-                            <i data-lucide="star" style="width: 20px; height: 20px;"></i>
-                        </div>
-                        Community Leaders
-                    </h3>
-                    <div class="ranking-item">
-                        <div class="ranking-left">
-                            <div class="ranking-number">1</div>
-                            <div class="ranking-name">Zed</div>
-                        </div>
-                        <div class="ranking-value">62K ⭐</div>
-                    </div>
-                    <div class="ranking-item">
-                        <div class="ranking-left">
-                            <div class="ranking-number">2</div>
-                            <div class="ranking-name">Cline</div>
-                        </div>
-                        <div class="ranking-value">47K ⭐</div>
-                    </div>
-                    <div class="ranking-item">
-                        <div class="ranking-left">
-                            <div class="ranking-number">3</div>
-                            <div class="ranking-name">Cursor</div>
-                        </div>
-                        <div class="ranking-value">30K ⭐</div>
-                    </div>
-                </div>
-                
-                <div class="investment-card">
-                    <h3>
-                        <div class="investment-icon">
-                            <i data-lucide="trending-up" style="width: 20px; height: 20px;"></i>
-                        </div>
-                        Market Metrics
-                    </h3>
-                    <div class="ranking-item">
-                        <div class="ranking-name">Total Market Value</div>
-                        <div class="ranking-value">$13.0B</div>
-                    </div>
-                    <div class="ranking-item">
-                        <div class="ranking-name">Active Funding</div>
-                        <div class="ranking-value">$1.1B</div>
-                    </div>
-                    <div class="ranking-item">
-                        <div class="ranking-name">Enterprise Customers</div>
-                        <div class="ranking-value">38</div>
-                    </div>
-                    <div class="ranking-item">
-                        <div class="ranking-name">Developer Community</div>
-                        <div class="ranking-value">155K</div>
-                    </div>
-                </div>
-                
-                <div class="investment-card">
-                    <h3>
-                        <div class="investment-icon">
-                            <i data-lucide="pie-chart" style="width: 20px; height: 20px;"></i>
-                        </div>
-                        Market Share
-                    </h3>
-                    <div class="chart-container">
-                        <canvas id="marketShareChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="market-intelligence" id="intelligence">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Market Intelligence</h2>
-                <p class="section-subtitle">
-                    Latest developments and strategic insights from 172 analyzed articles
-                </p>
-            </div>
-            
-            <div class="intelligence-grid">
-                <div class="intelligence-item">
-                    <div class="intelligence-title">Copilot Chat in VS Code is now open source</div>
-                    <div class="intelligence-meta">
-                        <div class="intelligence-source">
-                            <i data-lucide="github" style="width: 16px; height: 16px;"></i>
-                            GitHub • GitHub Copilot
-                        </div>
-                        <div class="intelligence-date">6/27/2025</div>
-                    </div>
-                </div>
-                
-                <div class="intelligence-item">
-                    <div class="intelligence-title">Claude Code for VSCode Extension Released</div>
-                    <div class="intelligence-meta">
-                        <div class="intelligence-source">
-                            <i data-lucide="code" style="width: 16px; height: 16px;"></i>
-                            Visual Studio • Claude Code
-                        </div>
-                        <div class="intelligence-date">6/23/2025</div>
-                    </div>
-                </div>
-                
-                <div class="intelligence-item">
-                    <div class="intelligence-title">The Zed Debugger Is Here</div>
-                    <div class="intelligence-meta">
-                        <div class="intelligence-source">
-                            <i data-lucide="bug" style="width: 16px; height: 16px;"></i>
-                            Zed.dev • Zed
-                        </div>
-                        <div class="intelligence-date">6/18/2025</div>
-                    </div>
-                </div>
-                
-                <div class="intelligence-item">
-                    <div class="intelligence-title">Remote MCP Support in Claude Code</div>
-                    <div class="intelligence-meta">
-                        <div class="intelligence-source">
-                            <i data-lucide="cloud" style="width: 16px; height: 16px;"></i>
-                            Anthropic • Claude Code
-                        </div>
-                        <div class="intelligence-date">6/18/2025</div>
-                    </div>
-                </div>
-                
-                <div class="intelligence-item">
-                    <div class="intelligence-title">Cursor Raises $1.1B Series C at $10B Valuation</div>
-                    <div class="intelligence-meta">
-                        <div class="intelligence-source">
-                            <i data-lucide="dollar-sign" style="width: 16px; height: 16px;"></i>
-                            TechCrunch • Cursor
-                        </div>
-                        <div class="intelligence-date">6/15/2025</div>
-                    </div>
-                </div>
-                
-                <div class="intelligence-item">
-                    <div class="intelligence-title">Windsurf Introduces Cascade AI Architecture</div>
-                    <div class="intelligence-meta">
-                        <div class="intelligence-source">
-                            <i data-lucide="brain" style="width: 16px; height: 16px;"></i>
-                            Windsurf • Windsurf
-                        </div>
-                        <div class="intelligence-date">6/12/2025</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div>Executive Market Intelligence Platform</div>
-                <div class="footer-stats">
-                    <div class="footer-stat">172 articles analyzed</div>
-                    <div class="footer-stat">225 community discussions</div>
-                    <div class="footer-stat">155,877 GitHub stars tracked</div>
-                    <div class="footer-stat">$1.1B funding monitored</div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    </main>
 
     <script>
         // Initialize Lucide icons
         lucide.createIcons();
         
-        // Chart.js configurations
-        const chartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                x: {
-                    display: false
-                },
-                y: {
-                    display: false
-                }
-            },
-            elements: {
-                point: {
-                    radius: 0
-                },
-                line: {
-                    borderWidth: 2
-                }
-            }
-        };
-        
-        // Valuation Chart
-        const valuationCtx = document.getElementById('valuationChart').getContext('2d');
-        new Chart(valuationCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [{
-                    data: [8.5, 9.2, 10.1, 11.8, 12.3, 13.0],
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    fill: true
-                }]
-            },
-            options: chartOptions
-        });
-        
-        // Adoption Chart
-        const adoptionCtx = document.getElementById('adoptionChart').getContext('2d');
-        new Chart(adoptionCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [{
-                    data: [22, 26, 30, 32, 35, 38],
-                    borderColor: '#10b981',
-                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                    fill: true
-                }]
-            },
-            options: chartOptions
-        });
-        
-        // Engagement Chart
-        const engagementCtx = document.getElementById('engagementChart').getContext('2d');
-        new Chart(engagementCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [{
-                    data: [98, 110, 125, 138, 142, 155],
-                    borderColor: '#8b5cf6',
-                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                    fill: true
-                }]
-            },
-            options: chartOptions
-        });
-        
-        // Sentiment Chart
-        const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
-        new Chart(sentimentCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [{
-                    data: [7.8, 8.1, 8.3, 8.5, 8.4, 8.7],
-                    borderColor: '#f59e0b',
-                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
-                    fill: true
-                }]
-            },
-            options: chartOptions
-        });
-        
-        // Market Share Chart
-        const marketShareCtx = document.getElementById('marketShareChart').getContext('2d');
-        new Chart(marketShareCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Cursor', 'Windsurf', 'Zed', 'Cline', 'Others'],
-                datasets: [{
-                    data: [35, 20, 15, 12, 18],
-                    backgroundColor: [
-                        '#667eea',
-                        '#764ba2',
-                        '#4facfe',
-                        '#00f2fe',
-                        '#f093fb'
-                    ],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            usePointStyle: true,
-                            padding: 20
-                        }
+        // Navigation functionality
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active nav item
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Scroll to section
+                const target = this.getAttribute('href');
+                if (target.startsWith('#')) {
+                    const section = document.querySelector(target);
+                    if (section) {
+                        const offset = section.offsetTop - 80;
+                        window.scrollTo({
+                            top: offset,
+                            behavior: 'smooth'
+                        });
                     }
                 }
+            });
+        });
+        
+        // Sidebar tool navigation
+        document.querySelectorAll('.tool-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active tool
+                document.querySelectorAll('.tool-link').forEach(tool => tool.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Scroll to tool card
+                const target = this.getAttribute('href');
+                if (target.startsWith('#')) {
+                    const toolCard = document.querySelector(target);
+                    if (toolCard) {
+                        const offset = toolCard.offsetTop - 100;
+                        window.scrollTo({
+                            top: offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Compare functionality
+        document.querySelectorAll('.compare-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.compare-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // News filter functionality
+        document.querySelectorAll('.news-filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.news-filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.textContent.toLowerCase();
+                const newsItems = document.querySelectorAll('.news-item');
+                
+                newsItems.forEach(item => {
+                    if (filter === 'all') {
+                        item.style.display = 'block';
+                    } else {
+                        const source = item.querySelector('.news-item-source').textContent.toLowerCase();
+                        item.style.display = source.includes(filter) ? 'block' : 'none';
+                    }
+                });
+            });
+        });
+        
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const toolCards = document.querySelectorAll('.tool-card');
+            
+            toolCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const company = card.querySelector('.tool-company').textContent.toLowerCase();
+                const description = card.querySelector('.tool-description').textContent.toLowerCase();
+                const features = Array.from(card.querySelectorAll('.feature-tag')).map(tag => tag.textContent.toLowerCase()).join(' ');
+                
+                const matches = title.includes(query) || 
+                              company.includes(query) || 
+                              description.includes(query) || 
+                              features.includes(query);
+                
+                card.style.display = matches || query === '' ? 'block' : 'none';
+            });
+        });
+        
+        // Filter functionality
+        document.querySelectorAll('.filter-select').forEach(select => {
+            select.addEventListener('change', function() {
+                // Implement filtering logic based on selected values
+                console.log('Filter changed:', this.value);
+            });
+        });
+        
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('open');
+        }
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+            const sidebar = document.querySelector('.sidebar');
+            const isClickInsideSidebar = sidebar.contains(e.target);
+            
+            if (!isClickInsideSidebar && window.innerWidth <= 1024) {
+                sidebar.classList.remove('open');
             }
         });
         
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-slide-up');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.kpi-card, .leader-card, .investment-card, .intelligence-item').forEach(el => {
-            observer.observe(el);
-        });
-        
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // Update active nav item on scroll
-        const sections = document.querySelectorAll('section[id]');
-        const navItems = document.querySelectorAll('.nav-item');
-        
-        window.addEventListener('scroll', () => {
+        // Update active nav on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id], .tools-grid, .compare-section, .news-section');
+            const navItems = document.querySelectorAll('.nav-item');
+            
             let current = '';
             sections.forEach(section => {
-                const sectionTop = section.offsetTop;
+                const sectionTop = section.offsetTop - 100;
                 const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - 200) {
-                    current = section.getAttribute('id');
+                if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                    current = section.id || section.className.split(' ')[0].replace('-section', '');
                 }
             });
             
