@@ -3,254 +3,566 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Tools Directory | AI Intelligence Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>* { font-family: 'Inter', system-ui, sans-serif; }</style>
+    <title>AI Tools Directory | Market Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-navy: #0f172a;
+            --color-slate: #1e293b;
+            --color-blue: #1e40af;
+            --color-gray: #64748b;
+            --color-light: #f8fafc;
+            --color-white: #ffffff;
+            --color-green: #059669;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-light);
+            color: var(--color-navy);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .header {
+            background: var(--color-white);
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-slate) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-navy);
+        }
+        
+        .nav-link {
+            color: var(--color-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .hero {
+            background: var(--color-white);
+            padding: 3rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-navy);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-gray);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .tool-card {
+            background: var(--color-white);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+        }
+        
+        .tool-card:hover {
+            border-color: var(--color-blue);
+            box-shadow: 0 4px 20px rgba(30, 64, 175, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tool-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 0.25rem;
+        }
+        
+        .tool-company {
+            font-size: 0.875rem;
+            color: var(--color-gray);
+        }
+        
+        .tool-valuation {
+            background: var(--color-green);
+            color: white;
+            padding: 0.375rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .tool-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 0.75rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .stat-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-navy);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--color-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .tool-description {
+            color: var(--color-gray);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .enterprise-preview {
+            font-size: 0.75rem;
+            color: var(--color-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .view-details {
+            color: var(--color-blue);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-50">
-    <nav class="bg-white shadow-lg border-b border-gray-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <a href="../index.html" class="flex items-center">
-                        <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-3">
-                            <span class="text-white font-bold text-sm">AI</span>
-                        </div>
-                        <span class="text-xl font-bold text-gray-900">AI Intelligence Platform</span>
-                    </a>
-                </div>
-                <div class="flex items-center">
-                    <a href="../index.html" class="text-blue-600 hover:text-blue-700 font-medium">← Back to Dashboard</a>
-                </div>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <div class="logo-icon">AI</div>
+                    <div class="logo-text">Market Intelligence</div>
+                </a>
+                <a href="../index.html" class="nav-link">← Back to Dashboard</a>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <div class="max-w-7xl mx-auto px-4 py-12">
-        <div class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">AI Developer Tools Directory</h1>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                Comprehensive profiles of 9 leading AI development tools with detailed market intelligence and analysis.
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">AI Developer Tools Directory</h1>
+            <p class="hero-subtitle">
+                Comprehensive intelligence on 9 market-leading AI development tools
+                with detailed financial, technical, and enterprise adoption analysis
             </p>
         </div>
+    </section>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="container">
+        <div class="tools-grid">
             
-                    <a href="1.html" class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-blue-300 block">
-                        <div class="flex items-start justify-between mb-4">
+                    <a href="1.html" class="tool-card">
+                        <div class="tool-header">
                             <div>
-                                <h3 class="text-xl font-bold text-gray-900">Cursor</h3>
-                                <p class="text-gray-600">Anysphere</p>
+                                <div class="tool-name">Cursor</div>
+                                <div class="tool-company">Anysphere</div>
                             </div>
-                            <span class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-                                AI IDE
-                            </span>
+                            <div class="tool-valuation">$10 billion</div>
                         </div>
                         
-                        <p class="text-gray-700 text-sm mb-4 line-clamp-3">Cursor is an AI-powered code editor designed to make developers extraordinarily productive. It integrates AI capabilities directly into the coding environment, offering features like intelligent code completion, natural language editing, and codebase understanding. It enables 'vibe coding', a new approach to software development that leverages AI assistance.</p>
-                        
-                        <div class="flex justify-between items-center text-sm">
-                            <div class="flex items-center space-x-4 text-gray-500">
-                                <span>12 enterprises</span>
-                                <span>26 mentions</span>
+                        <div class="tool-stats">
+                            <div class="stat">
+                                <div class="stat-value">$1065M</div>
+                                <div class="stat-label">Funding</div>
                             </div>
-                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">$10 billion</span>
+                            <div class="stat">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Enterprises</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">18</div>
+                                <div class="stat-label">Features</div>
+                            </div>
                         </div>
                         
-                        <div class="mt-4 text-blue-600 font-medium text-sm">View Details →</div>
+                        <div class="tool-description">
+                            Cursor is an AI-powered code editor designed to make developers extraordinarily productive. It integrates AI capabilities directly into the coding env...
+                        </div>
+                        
+                        
+                        <div class="enterprise-preview">
+                            Enterprise customers: Johnson & Johnson, Stripe, Samsung, Rippling +8 more
+                        </div>
+                        
+                        
+                        <div class="view-details">View Complete Analysis →</div>
                     </a>
                 
-                    <a href="2.html" class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-blue-300 block">
-                        <div class="flex items-start justify-between mb-4">
+                    <a href="2.html" class="tool-card">
+                        <div class="tool-header">
                             <div>
-                                <h3 class="text-xl font-bold text-gray-900">Claude Code</h3>
-                                <p class="text-gray-600">Anthropic</p>
-                            </div>
-                            <span class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-                                AI ASSISTANT
-                            </span>
-                        </div>
-                        
-                        <p class="text-gray-700 text-sm mb-4 line-clamp-3">Claude Code is an AI-powered coding assistant developed by Anthropic, designed to enhance developer productivity by integrating into modern workflows and IDEs. It helps developers with tasks such as code completion, refactoring, bug fixing, code analysis, and AI-paired programming.</p>
-                        
-                        <div class="flex justify-between items-center text-sm">
-                            <div class="flex items-center space-x-4 text-gray-500">
-                                <span>1 enterprises</span>
-                                <span>22 mentions</span>
+                                <div class="tool-name">Claude Code</div>
+                                <div class="tool-company">Anthropic</div>
                             </div>
                             
                         </div>
                         
-                        <div class="mt-4 text-blue-600 font-medium text-sm">View Details →</div>
-                    </a>
-                
-                    <a href="3.html" class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-blue-300 block">
-                        <div class="flex items-start justify-between mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-900">GitHub Copilot</h3>
-                                <p class="text-gray-600">Microsoft</p>
+                        <div class="tool-stats">
+                            <div class="stat">
+                                <div class="stat-value">$0M</div>
+                                <div class="stat-label">Funding</div>
                             </div>
-                            <span class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-                                CODE COMPLETION
-                            </span>
+                            <div class="stat">
+                                <div class="stat-value">1</div>
+                                <div class="stat-label">Enterprises</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">18</div>
+                                <div class="stat-label">Features</div>
+                            </div>
                         </div>
                         
-                        <p class="text-gray-700 text-sm mb-4 line-clamp-3">GitHub Copilot is an AI-powered coding assistant that provides contextualized assistance throughout the software development lifecycle, offering features like code completions, chat assistance, code explanations, and code suggestions to help developers write, review, and refactor code more efficiently.</p>
+                        <div class="tool-description">
+                            Claude Code is an AI-powered coding assistant developed by Anthropic, designed to enhance developer productivity by integrating into modern workflows ...
+                        </div>
                         
-                        <div class="flex justify-between items-center text-sm">
-                            <div class="flex items-center space-x-4 text-gray-500">
-                                <span>7 enterprises</span>
-                                <span>25 mentions</span>
+                        
+                        <div class="enterprise-preview">
+                            Enterprise customers: Cloudflare
+                        </div>
+                        
+                        
+                        <div class="view-details">View Complete Analysis →</div>
+                    </a>
+                
+                    <a href="3.html" class="tool-card">
+                        <div class="tool-header">
+                            <div>
+                                <div class="tool-name">GitHub Copilot</div>
+                                <div class="tool-company">Microsoft</div>
                             </div>
                             
                         </div>
                         
-                        <div class="mt-4 text-blue-600 font-medium text-sm">View Details →</div>
-                    </a>
-                
-                    <a href="4.html" class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-blue-300 block">
-                        <div class="flex items-start justify-between mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-900">Replit</h3>
-                                <p class="text-gray-600">Replit</p>
+                        <div class="tool-stats">
+                            <div class="stat">
+                                <div class="stat-value">$0M</div>
+                                <div class="stat-label">Funding</div>
                             </div>
-                            <span class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-                                CLOUD IDE
-                            </span>
+                            <div class="stat">
+                                <div class="stat-value">7</div>
+                                <div class="stat-label">Enterprises</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">16</div>
+                                <div class="stat-label">Features</div>
+                            </div>
                         </div>
                         
-                        <p class="text-gray-700 text-sm mb-4 line-clamp-3">Replit is a collaborative browser-based IDE that allows users to create and deploy websites, applications, automations, internal tools, and data pipelines in any programming language. It features AI-powered coding assistance, including Replit Agent for autonomous coding tasks, and supports vibe coding techniques.</p>
+                        <div class="tool-description">
+                            GitHub Copilot is an AI-powered coding assistant that provides contextualized assistance throughout the software development lifecycle, offering featu...
+                        </div>
                         
-                        <div class="flex justify-between items-center text-sm">
-                            <div class="flex items-center space-x-4 text-gray-500">
-                                <span>11 enterprises</span>
-                                <span>25 mentions</span>
+                        
+                        <div class="enterprise-preview">
+                            Enterprise customers: Coyote Logistics, Duolingo, General Motors, Mercado Libre +3 more
+                        </div>
+                        
+                        
+                        <div class="view-details">View Complete Analysis →</div>
+                    </a>
+                
+                    <a href="4.html" class="tool-card">
+                        <div class="tool-header">
+                            <div>
+                                <div class="tool-name">Replit</div>
+                                <div class="tool-company">Replit</div>
                             </div>
                             
                         </div>
                         
-                        <div class="mt-4 text-blue-600 font-medium text-sm">View Details →</div>
-                    </a>
-                
-                    <a href="5.html" class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-blue-300 block">
-                        <div class="flex items-start justify-between mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-900">Augment</h3>
-                                <p class="text-gray-600">Augment</p>
+                        <div class="tool-stats">
+                            <div class="stat">
+                                <div class="stat-value">$0M</div>
+                                <div class="stat-label">Funding</div>
                             </div>
-                            <span class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-                                AI ASSISTANT
-                            </span>
+                            <div class="stat">
+                                <div class="stat-value">11</div>
+                                <div class="stat-label">Enterprises</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">16</div>
+                                <div class="stat-label">Features</div>
+                            </div>
                         </div>
                         
-                        <p class="text-gray-700 text-sm mb-4 line-clamp-3">Augment is an AI-powered coding assistant that helps developers code faster and better, offering features like autonomous coding agents, real-time codebase indexing, context-aware AI suggestions, code generation, chat assistance, and code review. It integrates with various IDEs and uses cutting-edge AI models to enhance human potential in software development tasks.</p>
+                        <div class="tool-description">
+                            Replit is a collaborative browser-based IDE that allows users to create and deploy websites, applications, automations, internal tools, and data pipel...
+                        </div>
                         
-                        <div class="flex justify-between items-center text-sm">
-                            <div class="flex items-center space-x-4 text-gray-500">
-                                <span>3 enterprises</span>
-                                <span>6 mentions</span>
+                        
+                        <div class="enterprise-preview">
+                            Enterprise customers: Google, Anthropic, Coinbase, Hg Capital +7 more
+                        </div>
+                        
+                        
+                        <div class="view-details">View Complete Analysis →</div>
+                    </a>
+                
+                    <a href="5.html" class="tool-card">
+                        <div class="tool-header">
+                            <div>
+                                <div class="tool-name">Augment</div>
+                                <div class="tool-company">Augment</div>
                             </div>
                             
                         </div>
                         
-                        <div class="mt-4 text-blue-600 font-medium text-sm">View Details →</div>
-                    </a>
-                
-                    <a href="6.html" class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-blue-300 block">
-                        <div class="flex items-start justify-between mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-900">Zed</h3>
-                                <p class="text-gray-600">Zed Industries</p>
+                        <div class="tool-stats">
+                            <div class="stat">
+                                <div class="stat-value">$0M</div>
+                                <div class="stat-label">Funding</div>
                             </div>
-                            <span class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-                                EDITOR
-                            </span>
+                            <div class="stat">
+                                <div class="stat-value">3</div>
+                                <div class="stat-label">Enterprises</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">23</div>
+                                <div class="stat-label">Features</div>
+                            </div>
                         </div>
                         
-                        <p class="text-gray-700 text-sm mb-4 line-clamp-3">Zed is a high-performance, open-source, multiplayer code editor designed for collaboration and AI-assisted coding. Written from scratch in Rust, it efficiently leverages multiple CPU cores and GPU for fast performance, offering modern features like built-in debugger capabilities, syntax-aware editing, and agentic editing mode. It supports multiple programming languages and integrates various AI models for code assistance.</p>
+                        <div class="tool-description">
+                            Augment is an AI-powered coding assistant that helps developers code faster and better, offering features like autonomous coding agents, real-time cod...
+                        </div>
                         
-                        <div class="flex justify-between items-center text-sm">
-                            <div class="flex items-center space-x-4 text-gray-500">
-                                <span>1 enterprises</span>
-                                <span>25 mentions</span>
+                        
+                        <div class="enterprise-preview">
+                            Enterprise customers: Collective, Webflow, GitHub
+                        </div>
+                        
+                        
+                        <div class="view-details">View Complete Analysis →</div>
+                    </a>
+                
+                    <a href="6.html" class="tool-card">
+                        <div class="tool-header">
+                            <div>
+                                <div class="tool-name">Zed</div>
+                                <div class="tool-company">Zed Industries</div>
                             </div>
                             
                         </div>
                         
-                        <div class="mt-4 text-blue-600 font-medium text-sm">View Details →</div>
-                    </a>
-                
-                    <a href="7.html" class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-blue-300 block">
-                        <div class="flex items-start justify-between mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-900">CLIne</h3>
-                                <p class="text-gray-600">Cline Bot Inc.</p>
+                        <div class="tool-stats">
+                            <div class="stat">
+                                <div class="stat-value">$0M</div>
+                                <div class="stat-label">Funding</div>
                             </div>
-                            <span class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-                                EDITOR
-                            </span>
+                            <div class="stat">
+                                <div class="stat-value">1</div>
+                                <div class="stat-label">Enterprises</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">28</div>
+                                <div class="stat-label">Features</div>
+                            </div>
                         </div>
                         
-                        <p class="text-gray-700 text-sm mb-4 line-clamp-3">Cline is an open-source, fully collaborative AI coding assistant that integrates directly into IDEs. It offers dual Plan/Act modes, autonomous coding, context management, and integration with various AI models to enhance software development workflows.</p>
+                        <div class="tool-description">
+                            Zed is a high-performance, open-source, multiplayer code editor designed for collaboration and AI-assisted coding. Written from scratch in Rust, it ef...
+                        </div>
                         
-                        <div class="flex justify-between items-center text-sm">
-                            <div class="flex items-center space-x-4 text-gray-500">
-                                <span>1 enterprises</span>
-                                <span>25 mentions</span>
+                        
+                        <div class="enterprise-preview">
+                            Enterprise customers: Anthropic
+                        </div>
+                        
+                        
+                        <div class="view-details">View Complete Analysis →</div>
+                    </a>
+                
+                    <a href="7.html" class="tool-card">
+                        <div class="tool-header">
+                            <div>
+                                <div class="tool-name">CLIne</div>
+                                <div class="tool-company">Cline Bot Inc.</div>
                             </div>
                             
                         </div>
                         
-                        <div class="mt-4 text-blue-600 font-medium text-sm">View Details →</div>
+                        <div class="tool-stats">
+                            <div class="stat">
+                                <div class="stat-value">$NaNM</div>
+                                <div class="stat-label">Funding</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">1</div>
+                                <div class="stat-label">Enterprises</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">34</div>
+                                <div class="stat-label">Features</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-description">
+                            Cline is an open-source, fully collaborative AI coding assistant that integrates directly into IDEs. It offers dual Plan/Act modes, autonomous coding,...
+                        </div>
+                        
+                        
+                        <div class="enterprise-preview">
+                            Enterprise customers: Cleat Street
+                        </div>
+                        
+                        
+                        <div class="view-details">View Complete Analysis →</div>
                     </a>
                 
-                    <a href="8.html" class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-blue-300 block">
-                        <div class="flex items-start justify-between mb-4">
+                    <a href="8.html" class="tool-card">
+                        <div class="tool-header">
                             <div>
-                                <h3 class="text-xl font-bold text-gray-900">Windsurf</h3>
-                                <p class="text-gray-600">Codeium.</p>
+                                <div class="tool-name">Windsurf</div>
+                                <div class="tool-company">Codeium.</div>
                             </div>
-                            <span class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-                                EDITOR
-                            </span>
+                            <div class="tool-valuation">$3 billion</div>
                         </div>
                         
-                        <p class="text-gray-700 text-sm mb-4 line-clamp-3">Windsurf is a purpose-built AI-powered IDE that offers features like Cascade for deep codebase understanding, full repo-aware chat with multi-file edits, blazing fast Autocomplete, Supercomplete for predicting next intent, and various AI-powered capabilities to streamline the development workflow.</p>
-                        
-                        <div class="flex justify-between items-center text-sm">
-                            <div class="flex items-center space-x-4 text-gray-500">
-                                <span>2 enterprises</span>
-                                <span>25 mentions</span>
+                        <div class="tool-stats">
+                            <div class="stat">
+                                <div class="stat-value">$0M</div>
+                                <div class="stat-label">Funding</div>
                             </div>
-                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">$3 billion</span>
+                            <div class="stat">
+                                <div class="stat-value">2</div>
+                                <div class="stat-label">Enterprises</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">40</div>
+                                <div class="stat-label">Features</div>
+                            </div>
                         </div>
                         
-                        <div class="mt-4 text-blue-600 font-medium text-sm">View Details →</div>
+                        <div class="tool-description">
+                            Windsurf is a purpose-built AI-powered IDE that offers features like Cascade for deep codebase understanding, full repo-aware chat with multi-file edi...
+                        </div>
+                        
+                        
+                        <div class="enterprise-preview">
+                            Enterprise customers: Y Combinator, athenahealth
+                        </div>
+                        
+                        
+                        <div class="view-details">View Complete Analysis →</div>
                     </a>
                 
-                    <a href="9.html" class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-blue-300 block">
-                        <div class="flex items-start justify-between mb-4">
+                    <a href="9.html" class="tool-card">
+                        <div class="tool-header">
                             <div>
-                                <h3 class="text-xl font-bold text-gray-900">Roo Code</h3>
-                                <p class="text-gray-600">Community</p>
-                            </div>
-                            <span class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-                                EDITOR
-                            </span>
-                        </div>
-                        
-                        <p class="text-gray-700 text-sm mb-4 line-clamp-3">Roo Code (formerly Roo Cline) is an AI-powered autonomous coding agent that lives in your editor. It's a fork of Cline with additional experimental features, offering comprehensive file management, command execution, browser automation, and integration with multiple AI models. It provides features for creating and running entire workflows using prompts to large language models, with capabilities like intelligent context condensing, fast edits, and orchestration with large context windows.</p>
-                        
-                        <div class="flex justify-between items-center text-sm">
-                            <div class="flex items-center space-x-4 text-gray-500">
-                                
-                                <span>23 mentions</span>
+                                <div class="tool-name">Roo Code</div>
+                                <div class="tool-company">Community</div>
                             </div>
                             
                         </div>
                         
-                        <div class="mt-4 text-blue-600 font-medium text-sm">View Details →</div>
+                        <div class="tool-stats">
+                            <div class="stat">
+                                <div class="stat-value">$0M</div>
+                                <div class="stat-label">Funding</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">0</div>
+                                <div class="stat-label">Enterprises</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">38</div>
+                                <div class="stat-label">Features</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-description">
+                            Roo Code (formerly Roo Cline) is an AI-powered autonomous coding agent that lives in your editor. It's a fork of Cline with additional experimental fe...
+                        </div>
+                        
+                        
+                        
+                        <div class="view-details">View Complete Analysis →</div>
                     </a>
                 
         </div>

@@ -3,372 +3,643 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windsurf - AI Tool Analysis | AI Intelligence Platform</title>
-    <meta name="description" content="Comprehensive analysis of Windsurf by Codeium. - features, pricing, market position, and enterprise adoption">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Windsurf - Complete Market Intelligence | AI Tools</title>
+    <meta name="description" content="Comprehensive analysis of Windsurf by Codeium.: funding, enterprise adoption, technical specifications, and market position">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { font-family: 'Inter', system-ui, sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        :root {
+            --color-navy: #0f172a;
+            --color-slate: #1e293b;
+            --color-blue: #1e40af;
+            --color-gray: #64748b;
+            --color-light: #f8fafc;
+            --color-white: #ffffff;
+            --color-green: #059669;
+            --color-red: #dc2626;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-light);
+            color: var(--color-navy);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .header {
+            background: var(--color-white);
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-slate) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-navy);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--color-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .hero {
+            background: var(--color-white);
+            padding: 3rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .hero-info h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--color-navy);
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-company {
+            font-size: 1.125rem;
+            color: var(--color-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--color-gray);
+            line-height: 1.6;
+            max-width: 600px;
+        }
+        
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-width: 200px;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: var(--color-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        
+        .btn-secondary {
+            background: var(--color-white);
+            color: var(--color-blue);
+            border: 1px solid var(--color-blue);
+        }
+        
+        .btn-secondary:hover {
+            background: #eff6ff;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .content-section {
+            background: var(--color-white);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 1.5rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .feature-item {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid var(--color-blue);
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            color: var(--color-navy);
+            margin-bottom: 0.25rem;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .metric-card {
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--color-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .enterprise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        
+        .enterprise-item {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--color-navy);
+        }
+        
+        .testimonial {
+            padding: 1.5rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            border-left: 4px solid var(--color-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: var(--color-slate);
+            margin-bottom: 0.5rem;
+        }
+        
+        .testimonial-author {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-blue);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .pricing-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .pricing-plan {
+            font-weight: 600;
+            color: var(--color-navy);
+        }
+        
+        .pricing-cost {
+            font-weight: 700;
+            color: var(--color-green);
+        }
+        
+        .news-item {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .news-title {
+            font-weight: 600;
+            color: var(--color-navy);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .news-meta {
+            font-size: 0.75rem;
+            color: var(--color-gray);
+        }
+        
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-info h1 {
+                font-size: 2rem;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-lg border-b border-gray-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <a href="../index.html" class="flex items-center">
-                        <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-3">
-                            <span class="text-white font-bold text-sm">AI</span>
-                        </div>
-                        <span class="text-xl font-bold text-gray-900">AI Intelligence Platform</span>
-                    </a>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="index.html" class="text-gray-600 hover:text-gray-900">Tools Directory</a>
-                    <a href="../index.html" class="text-blue-600 hover:text-blue-700 font-medium">← Dashboard</a>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <div class="logo-icon">AI</div>
+                    <div class="logo-text">Market Intelligence</div>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Tools Directory</a>
+                    <a href="../index.html" class="nav-link">← Dashboard</a>
                 </div>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="gradient-bg text-white py-16">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center">
-                <h1 class="text-5xl font-bold mb-4">Windsurf</h1>
-                <p class="text-xl text-blue-100 mb-2">Codeium. • OpenAI</p>
-                <p class="text-lg text-blue-200 max-w-4xl mx-auto mb-8">Windsurf is a purpose-built AI-powered IDE that offers features like Cascade for deep codebase understanding, full repo-aware chat with multi-file edits, blazing fast Autocomplete, Supercomplete for predicting next intent, and various AI-powered capabilities to streamline the development workflow.</p>
-                
-                <div class="flex justify-center space-x-4">
-                    <a href="https://windsurf.com/" target="_blank" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors">Visit Website</a>
-                    <a href="https://windsurf.com/" target="_blank" class="bg-blue-700 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-800 transition-colors">GitHub</a>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-info">
+                    <h1>Windsurf</h1>
+                    <div class="hero-company">Codeium. • OpenAI</div>
+                    <div class="hero-description">
+                        Windsurf is a purpose-built AI-powered IDE that offers features like Cascade for deep codebase understanding, full repo-aware chat with multi-file edits, blazing fast Autocomplete, Supercomplete for predicting next intent, and various AI-powered capabilities to streamline the development workflow.
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a href="https://windsurf.com/" target="_blank" class="btn btn-primary">Visit Website</a>
+                    <a href="https://windsurf.com/" target="_blank" class="btn btn-secondary">View on GitHub</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="max-w-7xl mx-auto px-4 py-12">
-        <div class="grid lg:grid-cols-3 gap-8">
-            <!-- Main Content -->
-            <div class="lg:col-span-2 space-y-8">
-                <!-- Key Features -->
-                <div class="bg-white rounded-xl p-8 shadow-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Key Features</h2>
-                    <div class="grid md:grid-cols-2 gap-4">
+    <div class="container">
+        <div class="main-content">
+            <div class="main-column">
+                <!-- Key Metrics -->
+                <div class="content-section">
+                    <h2 class="section-title">Business Metrics</h2>
+                    <div class="metrics-grid">
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Cascade AI-powered chat</span>
+                        <div class="metric-card">
+                            <div class="metric-value">$3 billion</div>
+                            <div class="metric-label">Valuation</div>
+                        </div>
+                        
+                        
+                        <div class="metric-card">
+                            <div class="metric-value">2</div>
+                            <div class="metric-label">Enterprise Customers</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">40</div>
+                            <div class="metric-label">Features</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-value">25</div>
+                            <div class="metric-label">Reddit Mentions</div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+
+                <!-- Features -->
+                
+                <div class="content-section">
+                    <h2 class="section-title">Features & Capabilities</h2>
+                    <div class="features-grid">
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Cascade AI-powered chat</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Windsurf Tab</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Windsurf Tab</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Blazing fast Autocomplete</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Blazing fast Autocomplete</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Supercomplete for predicting next intent</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Supercomplete for predicting next intent</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Command for larger file diffs and modifications</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Command for larger file diffs and modifications</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Memories</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Memories</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Rules</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Rules</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Lint Fixing</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Lint Fixing</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">MCP Support</span>
+                            <div class="feature-item">
+                                <div class="feature-title">MCP Support</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Drag & Drop Images</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Drag & Drop Images</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Terminal Command</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Terminal Command</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Continue My Work</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Continue My Work</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Turbo Mode</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Turbo Mode</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Browser integration</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Browser integration</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Planning Mode</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Planning Mode</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Deploys</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Deploys</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Commit Message Generation</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Commit Message Generation</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Custom Workflows</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Custom Workflows</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">File-Based Rules</span>
+                            <div class="feature-item">
+                                <div class="feature-title">File-Based Rules</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Teams Features</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Teams Features</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Jupyter Notebook Support</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Jupyter Notebook Support</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Remote Development Support</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Remote Development Support</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Web and documentation search</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Web and documentation search</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Auto-generated memories</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Auto-generated memories</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Customizable app icons</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Customizable app icons</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Tab to Jump</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Tab to Jump</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Dev Container support</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Dev Container support</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Windsurf Previews</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Windsurf Previews</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Auto-Linter</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Auto-Linter</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Tab-to-Import</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Tab-to-Import</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Suggested Actions</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Suggested Actions</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Credit visibility</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Credit visibility</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">WSL support (beta)</span>
+                            <div class="feature-item">
+                                <div class="feature-title">WSL support (beta)</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Image upload to Cascade</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Image upload to Cascade</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Explain & fix problem functionality</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Explain & fix problem functionality</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Import settings from other IDEs</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Import settings from other IDEs</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Usage transparency and pricing system</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Usage transparency and pricing system</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Privacy protection</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Privacy protection</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">App integration</span>
+                            <div class="feature-item">
+                                <div class="feature-title">App integration</div>
                             </div>
                         
-                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700 text-sm">Instant apply functionality</span>
+                            <div class="feature-item">
+                                <div class="feature-title">Instant apply functionality</div>
                             </div>
                         
                     </div>
                 </div>
+                
 
                 <!-- Unique Differentiators -->
                 
-                <div class="bg-white rounded-xl p-8 shadow-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Unique Differentiators</h2>
-                    <div class="space-y-4">
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Cascade for deep codebase understanding</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Real-time awareness of user actions</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Collaborative flow</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Windsurf Tab for multiple actions in one keystroke</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Browser integration for seamless web development</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Planning Mode for complex tasks</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Built-in deployment capabilities</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Auto-generated memories for context retention</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Integrated web search and documentation lookup</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Model Context Protocol (MCP) support</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Full repo-aware chat with multi-file edits</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Blazing fast Autocomplete</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Supercomplete for predicting next intent</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Command for larger file diffs and modifications</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Instant apply functionality</span>
-                            </div>
-                        
-                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                                <span class="text-gray-700">Unlimited AI model usage at a lower price point</span>
-                            </div>
-                        
-                    </div>
+                <div class="content-section">
+                    <h2 class="section-title">Competitive Advantages</h2>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Cascade for deep codebase understanding</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Real-time awareness of user actions</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Collaborative flow</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Windsurf Tab for multiple actions in one keystroke</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Browser integration for seamless web development</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Planning Mode for complex tasks</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Built-in deployment capabilities</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Auto-generated memories for context retention</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Integrated web search and documentation lookup</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Model Context Protocol (MCP) support</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Full repo-aware chat with multi-file edits</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Blazing fast Autocomplete</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Supercomplete for predicting next intent</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Command for larger file diffs and modifications</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Instant apply functionality</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Unlimited AI model usage at a lower price point</div>
+                        </div>
+                    
                 </div>
-                
-
-                <!-- Market Position -->
                 
 
                 <!-- Enterprise Adoption -->
                 
-                <div class="bg-white rounded-xl p-8 shadow-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Enterprise Adoption</h2>
-                    <p class="text-gray-600 mb-6">2 companies using this tool</p>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="content-section">
+                    <h2 class="section-title">Enterprise Customers (2)</h2>
+                    <div class="enterprise-grid">
                         
-                            <div class="bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-lg p-4 text-center">
-                                <span class="font-medium text-gray-900 text-sm">Y Combinator</span>
-                            </div>
+                            <div class="enterprise-item">Y Combinator</div>
                         
-                            <div class="bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-lg p-4 text-center">
-                                <span class="font-medium text-gray-900 text-sm">athenahealth</span>
-                            </div>
+                            <div class="enterprise-item">athenahealth</div>
                         
                     </div>
                 </div>
@@ -376,158 +647,169 @@
 
                 <!-- Customer Testimonials -->
                 
-                <div class="bg-white rounded-xl p-8 shadow-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Customer Testimonials</h2>
-                    <div class="space-y-6">
+                <div class="content-section">
+                    <h2 class="section-title">Customer Testimonials</h2>
+                    
+                            <div class="testimonial">
+                                <div class="testimonial-text">"Windsurf is so much better than Cursor. It just makes the steps easier, like creating new folders within the flow. I like how I just type my prompt, go away for a bit, come back and theres a web preview waiting."</div>
+                                <div class="testimonial-author">— Avi Schiffmann</div>
+                            </div>
                         
-                            <blockquote class="bg-blue-50 border-l-4 border-blue-500 pl-6 py-4 rounded-r-lg">
-                                <p class="text-gray-700 italic">"Windsurf is so much better than Cursor. It just makes the steps easier, like creating new folders within the flow. I like how I just type my prompt, go away for a bit, come back and theres a web preview waiting. - Avi Schiffmann"</p>
-                            </blockquote>
+                            <div class="testimonial">
+                                <div class="testimonial-text">"I think @windsurf_ai will win the AI Coding Assistant wars. What leads me to believe this is beyond the product itself and how the team executes."</div>
+                                <div class="testimonial-author">— Andrew Brown</div>
+                            </div>
                         
-                            <blockquote class="bg-blue-50 border-l-4 border-blue-500 pl-6 py-4 rounded-r-lg">
-                                <p class="text-gray-700 italic">"I think @windsurf_ai will win the AI Coding Assistant wars. What leads me to believe this is beyond the product itself and how the team executes. - Andrew Brown"</p>
-                            </blockquote>
+                            <div class="testimonial">
+                                <div class="testimonial-text">"Unreal. I just built an app with 1 prompt."</div>
+                                <div class="testimonial-author">— Alex Finn</div>
+                            </div>
                         
-                            <blockquote class="bg-blue-50 border-l-4 border-blue-500 pl-6 py-4 rounded-r-lg">
-                                <p class="text-gray-700 italic">"Unreal. I just built an app with 1 prompt. - Alex Finn"</p>
-                            </blockquote>
+                            <div class="testimonial">
+                                <div class="testimonial-text">"I've been exclusively using Windsurf for the past 3 weeks. They are not paying me to say this. It's really good. Really really good."</div>
+                                <div class="testimonial-author">— The Jack Forge</div>
+                            </div>
                         
-                    </div>
+                            <div class="testimonial">
+                                <div class="testimonial-text">"Windsurf is one of the best AI coding tools I've ever used."</div>
+                                <div class="testimonial-author">— Alvaro Cintas</div>
+                            </div>
+                        
                 </div>
+                
+
+                <!-- Market Position -->
                 
             </div>
 
-            <!-- Sidebar -->
-            <div class="space-y-6">
-                <!-- Quick Stats -->
-                <div class="bg-white rounded-xl p-6 shadow-lg">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4">Quick Stats</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Category</span>
-                            <span class="font-medium bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm">EDITOR</span>
+            <div class="sidebar">
+                <!-- Company Info -->
+                <div class="content-section">
+                    <h3 class="section-title">Company Information</h3>
+                    <div style="space-y: 1rem;">
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--color-navy);">Legal Name</div>
+                            <div style="color: var(--color-gray);">OpenAI</div>
                         </div>
                         
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Valuation</span>
-                            <span class="font-medium text-green-600">$3 billion</span>
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--color-navy);">Business Model</div>
+                            <div style="color: var(--color-gray);">Subscription-based</div>
                         </div>
                         
-                        
-                        
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Business Model</span>
-                            <span class="font-medium">Subscription-based</span>
-                        </div>
-                        
-                        
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Reddit Mentions</span>
-                            <span class="font-medium">25</span>
-                        </div>
                         
                         
                     </div>
                 </div>
 
-                <!-- Technical Details -->
-                <div class="bg-white rounded-xl p-6 shadow-lg">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4">Technical Details</h3>
-                    <div class="space-y-4">
-                        
-                        
-                        <div>
-                            <span class="text-sm text-gray-600 block mb-2">Supported Languages</span>
-                            <div class="flex flex-wrap gap-1">
-                                <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">Python</span>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
+                <!-- Funding Rounds -->
+                
 
                 <!-- Pricing -->
                 
-                <div class="bg-white rounded-xl p-6 shadow-lg">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4">Pricing</h3>
-                    <div class="space-y-3">
+                <div class="content-section">
+                    <h3 class="section-title">Pricing</h3>
+                    <div class="pricing-grid">
                         
-                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                                <span class="text-gray-700 font-medium">Pro</span>
-                                <span class="text-gray-900 font-bold">[object Object]</span>
+                            <div class="pricing-item">
+                                <div class="pricing-plan">Pro</div>
+                                <div class="pricing-cost">[object Object]</div>
                             </div>
                         
-                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                                <span class="text-gray-700 font-medium">Free</span>
-                                <span class="text-gray-900 font-bold">[object Object]</span>
+                            <div class="pricing-item">
+                                <div class="pricing-plan">Free</div>
+                                <div class="pricing-cost">[object Object]</div>
                             </div>
                         
-                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                                <span class="text-gray-700 font-medium">Enterprise</span>
-                                <span class="text-gray-900 font-bold">[object Object]</span>
+                            <div class="pricing-item">
+                                <div class="pricing-plan">Enterprise</div>
+                                <div class="pricing-cost">[object Object]</div>
                             </div>
                         
-                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                                <span class="text-gray-700 font-medium">Pro Ultimate</span>
-                                <span class="text-gray-900 font-bold">[object Object]</span>
+                            <div class="pricing-item">
+                                <div class="pricing-plan">Pro Ultimate</div>
+                                <div class="pricing-cost">[object Object]</div>
                             </div>
                         
-                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                                <span class="text-gray-700 font-medium">subscription</span>
-                                <span class="text-gray-900 font-bold">[object Object]</span>
+                            <div class="pricing-item">
+                                <div class="pricing-plan">subscription</div>
+                                <div class="pricing-cost">[object Object]</div>
                             </div>
                         
                     </div>
                 </div>
                 
 
-                <!-- Competitors -->
-                
-                <div class="bg-white rounded-xl p-6 shadow-lg">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4">Comparable Tools</h3>
-                    <div class="space-y-2">
+                <!-- Technical Details -->
+                <div class="content-section">
+                    <h3 class="section-title">Technical Details</h3>
+                    <div style="space-y: 1rem;">
                         
-                            <div class="text-gray-700 text-sm py-1">Cursor</div>
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--color-navy);">Category</div>
+                            <div style="color: var(--color-gray);">EDITOR</div>
+                        </div>
                         
-                            <div class="text-gray-700 text-sm py-1">GitHub Copilot</div>
                         
-                            <div class="text-gray-700 text-sm py-1">Cline</div>
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--color-navy);">Languages</div>
+                            <div style="color: var(--color-gray);">Python</div>
+                        </div>
+                        
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--color-navy);">Update Frequency</div>
+                            <div style="color: var(--color-gray);">Regular updates with version releases</div>
+                        </div>
                         
                     </div>
                 </div>
+
+                <!-- Recent News -->
+                
+                <div class="content-section">
+                    <h3 class="section-title">Recent News</h3>
+                    
+                        <div class="news-item">
+                            <div class="news-title">Windsurf's CEO says big teams can kill new ideas</div>
+                            <div class="news-meta">Business Insider • 6/3/2025</div>
+                        </div>
+                    
+                        <div class="news-item">
+                            <div class="news-title">AI Startups Revolutionize Coding Industry, Leading To Sky-High Valuations</div>
+                            <div class="news-meta">Slashdot.org • 6/4/2025</div>
+                        </div>
+                    
+                        <div class="news-item">
+                            <div class="news-title">Inside Microsoft’s complicated relationship with OpenAI</div>
+                            <div class="news-meta">The Verge • 6/18/2025</div>
+                        </div>
+                    
+                        <div class="news-item">
+                            <div class="news-title">Fast-growing Swedish vibe coding startup Lovable is set to raise funding from Accel at a $1.5 billion valuation</div>
+                            <div class="news-meta">Business Insider • 6/12/2025</div>
+                        </div>
+                    
+                        <div class="news-item">
+                            <div class="news-title">OpenAI CPO says the company's engineers only get faster as ChatGPT gets better at coding</div>
+                            <div class="news-meta">Business Insider • 6/12/2025</div>
+                        </div>
+                    
+                </div>
                 
 
-                <!-- Links -->
-                <div class="bg-white rounded-xl p-6 shadow-lg">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4">Official Links</h3>
-                    <div class="space-y-3">
-                        <a href="https://windsurf.com/" target="_blank" class="flex items-center justify-between p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                            <span class="text-blue-700 font-medium">Website</span>
-                            <span class="text-blue-600">→</span>
-                        </a>
-                        <a href="https://windsurf.com/" target="_blank" class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                            <span class="text-gray-700 font-medium">GitHub</span>
-                            <span class="text-gray-600">→</span>
-                        </a>
-                        <a href="https://windsurf.com/blog" target="_blank" class="flex items-center justify-between p-3 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
-                            <span class="text-green-700 font-medium">Blog</span>
-                            <span class="text-green-600">→</span>
-                        </a>
-                        <a href="https://windsurf.com/changelog" target="_blank" class="flex items-center justify-between p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
-                            <span class="text-purple-700 font-medium">Changelog</span>
-                            <span class="text-purple-600">→</span>
-                        </a>
+                <!-- Official Links -->
+                <div class="content-section">
+                    <h3 class="section-title">Official Links</h3>
+                    <div style="space-y: 0.5rem;">
+                        <a href="https://windsurf.com/" target="_blank" class="btn btn-secondary" style="display: block; margin-bottom: 0.5rem;">Website</a>
+                        <a href="https://windsurf.com/" target="_blank" class="btn btn-secondary" style="display: block; margin-bottom: 0.5rem;">GitHub</a>
+                        <a href="https://windsurf.com/blog" target="_blank" class="btn btn-secondary" style="display: block; margin-bottom: 0.5rem;">Blog</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-gray-400">AI Intelligence Platform • Professional market intelligence</p>
-        </div>
-    </footer>
 </body>
 </html>
