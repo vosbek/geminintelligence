@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zed - Complete Market Intelligence | AI Tools</title>
+    <meta name="description" content="Comprehensive analysis of Zed by Zed Industries: funding, enterprise adoption, technical specifications, and market position">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-navy: #0f172a;
+            --color-slate: #1e293b;
+            --color-blue: #1e40af;
+            --color-gray: #64748b;
+            --color-light: #f8fafc;
+            --color-white: #ffffff;
+            --color-green: #059669;
+            --color-red: #dc2626;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-light);
+            color: var(--color-navy);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .header {
+            background: var(--color-white);
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-slate) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-navy);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--color-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .hero {
+            background: var(--color-white);
+            padding: 3rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .hero-info h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--color-navy);
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-company {
+            font-size: 1.125rem;
+            color: var(--color-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--color-gray);
+            line-height: 1.6;
+            max-width: 600px;
+        }
+        
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-width: 200px;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: var(--color-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        
+        .btn-secondary {
+            background: var(--color-white);
+            color: var(--color-blue);
+            border: 1px solid var(--color-blue);
+        }
+        
+        .btn-secondary:hover {
+            background: #eff6ff;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .content-section {
+            background: var(--color-white);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 1.5rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .feature-item {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid var(--color-blue);
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            color: var(--color-navy);
+            margin-bottom: 0.25rem;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .metric-card {
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--color-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .enterprise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        
+        .enterprise-item {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--color-navy);
+        }
+        
+        .testimonial {
+            padding: 1.5rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            border-left: 4px solid var(--color-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: var(--color-slate);
+            margin-bottom: 0.5rem;
+        }
+        
+        .testimonial-author {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-blue);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .pricing-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .pricing-plan {
+            font-weight: 600;
+            color: var(--color-navy);
+        }
+        
+        .pricing-cost {
+            font-weight: 700;
+            color: var(--color-green);
+        }
+        
+        .news-item {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .news-title {
+            font-weight: 600;
+            color: var(--color-navy);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .news-meta {
+            font-size: 0.75rem;
+            color: var(--color-gray);
+        }
+        
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-info h1 {
+                font-size: 2rem;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <div class="logo-icon">AI</div>
+                    <div class="logo-text">Market Intelligence</div>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Tools Directory</a>
+                    <a href="../index.html" class="nav-link">← Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-info">
+                    <h1>Zed</h1>
+                    <div class="hero-company">Zed Industries • Zed Industries Inc.</div>
+                    <div class="hero-description">
+                        Zed is a high-performance, open-source, multiplayer code editor designed for collaboration and AI-assisted coding. Written from scratch in Rust, it efficiently leverages multiple CPU cores and GPU for fast performance, offering modern features like built-in debugger capabilities, syntax-aware editing, and agentic editing mode. It supports multiple programming languages and integrates various AI models for code assistance.
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a href="https://zed.dev/" target="_blank" class="btn btn-primary">Visit Website</a>
+                    <a href="https://github.com/zed-industries/zed" target="_blank" class="btn btn-secondary">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="main-column">
+                <!-- Key Metrics -->
+                <div class="content-section">
+                    <h2 class="section-title">Business Metrics</h2>
+                    <div class="metrics-grid">
+                        
+                        
+                        <div class="metric-card">
+                            <div class="metric-value">1</div>
+                            <div class="metric-label">Enterprise Customers</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">28</div>
+                            <div class="metric-label">Features</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-value">25</div>
+                            <div class="metric-label">Reddit Mentions</div>
+                        </div>
+                        
+                        
+                        <div class="metric-card">
+                            <div class="metric-value">60,702</div>
+                            <div class="metric-label">GitHub Stars</div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Features -->
+                
+                <div class="content-section">
+                    <h2 class="section-title">Features & Capabilities</h2>
+                    <div class="features-grid">
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">High-performance editing</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">AI-powered code generation and analysis</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Collaborative features (chat, notes, screen sharing)</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Debugger support</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Native Git support</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Edit prediction</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Remote development</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Multibuffer editing</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Interactive programming</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Terminal and task runner</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Vim-friendly modal editing</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Icon themes</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">SSH remoting</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Extensible language support</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">User themes</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">REPL support</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Syntax-aware task spawning</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Panel system</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">GitHub Copilot integration</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Assistant panel</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">GPUI for high performance</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Low-latency editing</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Syntax-aware editing using Tree-sitter</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">GPU-accelerated rendering</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">CRDTs for multiplayer text editing</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Agentic Editing mode</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Zeta tab completion model</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">MCP (Model Context Protocol) support</div>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+
+                <!-- Unique Differentiators -->
+                
+                <div class="content-section">
+                    <h2 class="section-title">Competitive Advantages</h2>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Written from scratch in Rust</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Efficient use of multiple CPU cores and GPU</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Integrated AI capabilities</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Built-in collaboration features</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">High-performance UI with GPUI</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Open-source</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">High-performance UI rendering at 120 FPS</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Built-in multiplayer capabilities using CRDTs</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Syntax-aware editing with Tree-sitter</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Built-in Zeta tab completion model</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Agentic Editing mode</div>
+                        </div>
+                    
+                </div>
+                
+
+                <!-- Enterprise Adoption -->
+                
+                <div class="content-section">
+                    <h2 class="section-title">Enterprise Customers (1)</h2>
+                    <div class="enterprise-grid">
+                        
+                            <div class="enterprise-item">Anthropic</div>
+                        
+                    </div>
+                </div>
+                
+
+                <!-- Customer Testimonials -->
+                
+                <div class="content-section">
+                    <h2 class="section-title">Customer Testimonials</h2>
+                    
+                            <div class="testimonial">
+                                <div class="testimonial-text">"I've had my mind blown using Zed with Claude 3.5 Sonnet. I wrote up a few sentences around a research idea and Claude 3.5 Sonnet delivered a first pass in seconds. When I spotted some small mistakes, I highlighted the parts I wanted to change and shared feedback for it to fix. I was able to go from idea to running experiment code in half an hour—it was really easy and fun."</div>
+                                <div class="testimonial-author">— Ethan Perez, Adversarial Robustness Research Lead</div>
+                            </div>
+                        
+                            <div class="testimonial">
+                                <div class="testimonial-text">"Yes! Now I can have shortcuts to run and debug tests. Ever since snippets were added, Zed has all of the features I could ask for in an editor."</div>
+                                <div class="testimonial-author">— José Valim, Creator of Elixir</div>
+                            </div>
+                        
+                            <div class="testimonial">
+                                <div class="testimonial-text">"This is obviously a product built with love and care. I can tell it from two minutes of using it. Kudos to the team."</div>
+                                <div class="testimonial-author">— Dan Abramov, Engineer and React Core team member</div>
+                            </div>
+                        
+                            <div class="testimonial">
+                                <div class="testimonial-text">"My god it is so fast. Boot time, UI interaction, typing latency. I feel it. I knew VS Code always felt sluggish, but I didn't realize how good things could really be. I'm honestly astounded."</div>
+                                <div class="testimonial-author">— Matt Baker, Principal Engineer</div>
+                            </div>
+                        
+                            <div class="testimonial">
+                                <div class="testimonial-text">"I've started using Zed, and I love it. Lots of subtle innovations (multibuffers, inlay hints, collaboration). Thoughtful, precise design. And the speed, the speed!"</div>
+                                <div class="testimonial-author">— Mike Bostock, Creator of D3.js, founder of Observable</div>
+                            </div>
+                        
+                </div>
+                
+
+                <!-- Market Position -->
+                
+            </div>
+
+            <div class="sidebar">
+                <!-- Company Info -->
+                <div class="content-section">
+                    <h3 class="section-title">Company Information</h3>
+                    <div style="space-y: 1rem;">
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--color-navy);">Legal Name</div>
+                            <div style="color: var(--color-gray);">Zed Industries Inc.</div>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                </div>
+
+                <!-- Funding Rounds -->
+                
+
+                <!-- Pricing -->
+                
+
+                <!-- Technical Details -->
+                <div class="content-section">
+                    <h3 class="section-title">Technical Details</h3>
+                    <div style="space-y: 1rem;">
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--color-navy);">Category</div>
+                            <div style="color: var(--color-gray);">EDITOR</div>
+                        </div>
+                        
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--color-navy);">Deployment</div>
+                            <div style="color: var(--color-gray);">macOS, Linux, Windows (coming soon)</div>
+                        </div>
+                        
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--color-navy);">Languages</div>
+                            <div style="color: var(--color-gray);">Multiple languages via Tree-sitter, WebAssembly, and Language Server Protocol</div>
+                        </div>
+                        
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--color-navy);">Update Frequency</div>
+                            <div style="color: var(--color-gray);">Weekly updates documented in 'This Week at Zed Industries' blog posts</div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Recent News -->
+                
+                <div class="content-section">
+                    <h3 class="section-title">Recent News</h3>
+                    
+                        <div class="news-item">
+                            <div class="news-title">The Zed Debugger Is Here</div>
+                            <div class="news-meta">Zed.dev • 6/18/2025</div>
+                        </div>
+                    
+                        <div class="news-item">
+                            <div class="news-title">PLL Week 3 preview: Key players, stats and storylines for Philly homecoming</div>
+                            <div class="news-meta">ESPN • 6/13/2025</div>
+                        </div>
+                    
+                        <div class="news-item">
+                            <div class="news-title">Zed Editor Introduces Built-In Debugger</div>
+                            <div class="news-meta">Phoronix • 6/18/2025</div>
+                        </div>
+                    
+                        <div class="news-item">
+                            <div class="news-title">CodeEdit Might be the Best Free Code Editor for Mac</div>
+                            <div class="news-meta">Osxdaily.com • 6/5/2025</div>
+                        </div>
+                    
+                        <div class="news-item">
+                            <div class="news-title">Week 5 preview: Key stats, players for Redwoods homecoming</div>
+                            <div class="news-meta">ESPN • 6/27/2025</div>
+                        </div>
+                    
+                </div>
+                
+
+                <!-- Official Links -->
+                <div class="content-section">
+                    <h3 class="section-title">Official Links</h3>
+                    <div style="space-y: 0.5rem;">
+                        <a href="https://zed.dev/" target="_blank" class="btn btn-secondary" style="display: block; margin-bottom: 0.5rem;">Website</a>
+                        <a href="https://github.com/zed-industries/zed" target="_blank" class="btn btn-secondary" style="display: block; margin-bottom: 0.5rem;">GitHub</a>
+                        <a href="https://zed.dev/blog" target="_blank" class="btn btn-secondary" style="display: block; margin-bottom: 0.5rem;">Blog</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

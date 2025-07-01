@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  * {
+    @apply border-executive-200;
+  }
+  body {
+    @apply bg-executive-50 text-executive-900 font-executive;
+  }
+}
+
+@layer components {
+  .executive-card {
+    @apply bg-white shadow-lg rounded-lg border border-executive-200 hover:shadow-xl transition-shadow duration-200;
+  }
+  
+  .executive-heading {
+    @apply text-executive-900 font-bold tracking-tight;
+  }
+  
+  .executive-subheading {
+    @apply text-executive-700 font-semibold;
+  }
+  
+  .executive-text {
+    @apply text-executive-600 leading-relaxed;
+  }
+  
+  .metric-card {
+    @apply executive-card p-6 text-center;
+  }
+  
+  .metric-value {
+    @apply text-3xl font-bold text-executive-900 mb-2;
+  }
+  
+  .metric-label {
+    @apply text-sm font-medium text-executive-600 uppercase tracking-wide;
+  }
+  
+  .chart-container {
+    @apply executive-card p-6;
+  }
+  
+  .tool-card {
+    @apply executive-card p-6 hover:border-accent-300 transition-colors duration-200;
+  }
+  
+  .news-item {
+    @apply border-b border-executive-200 pb-4 mb-4 last:border-b-0 last:mb-0;
+  }
+  
+  .category-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent-100 text-accent-800;
+  }
+  
+  .funding-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800;
+  }
+  
+  .valuation-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800;
+  }
+}
+
+/* Executive dashboard specific styles */
+.dashboard-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.dashboard-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.metric-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.chart-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+@media (max-width: 768px) {
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .metric-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Print styles for executive reports */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .executive-card {
+    @apply shadow-none border-2;
+  }
+  
+  .dashboard-header {
+    background: none !important;
+    @apply text-executive-900;
+  }
+}

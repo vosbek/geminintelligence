@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIne - Complete Market Intelligence | AI Tools</title>
+    <meta name="description" content="Comprehensive analysis of CLIne by Cline Bot Inc.: funding, enterprise adoption, technical specifications, and market position">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-navy: #0f172a;
+            --color-slate: #1e293b;
+            --color-blue: #1e40af;
+            --color-gray: #64748b;
+            --color-light: #f8fafc;
+            --color-white: #ffffff;
+            --color-green: #059669;
+            --color-red: #dc2626;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-light);
+            color: var(--color-navy);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .header {
+            background: var(--color-white);
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-slate) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-navy);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--color-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .hero {
+            background: var(--color-white);
+            padding: 3rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .hero-info h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--color-navy);
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-company {
+            font-size: 1.125rem;
+            color: var(--color-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--color-gray);
+            line-height: 1.6;
+            max-width: 600px;
+        }
+        
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-width: 200px;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: var(--color-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        
+        .btn-secondary {
+            background: var(--color-white);
+            color: var(--color-blue);
+            border: 1px solid var(--color-blue);
+        }
+        
+        .btn-secondary:hover {
+            background: #eff6ff;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .content-section {
+            background: var(--color-white);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 1.5rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .feature-item {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid var(--color-blue);
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            color: var(--color-navy);
+            margin-bottom: 0.25rem;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .metric-card {
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--color-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .enterprise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        
+        .enterprise-item {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--color-navy);
+        }
+        
+        .testimonial {
+            padding: 1.5rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            border-left: 4px solid var(--color-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: var(--color-slate);
+            margin-bottom: 0.5rem;
+        }
+        
+        .testimonial-author {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-blue);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .pricing-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .pricing-plan {
+            font-weight: 600;
+            color: var(--color-navy);
+        }
+        
+        .pricing-cost {
+            font-weight: 700;
+            color: var(--color-green);
+        }
+        
+        .news-item {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .news-title {
+            font-weight: 600;
+            color: var(--color-navy);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .news-meta {
+            font-size: 0.75rem;
+            color: var(--color-gray);
+        }
+        
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-info h1 {
+                font-size: 2rem;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <div class="logo-icon">AI</div>
+                    <div class="logo-text">Market Intelligence</div>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Tools Directory</a>
+                    <a href="../index.html" class="nav-link">← Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-info">
+                    <h1>CLIne</h1>
+                    <div class="hero-company">Cline Bot Inc. • Cline Bot Inc.</div>
+                    <div class="hero-description">
+                        Cline is an open-source, fully collaborative AI coding assistant that integrates directly into IDEs. It offers dual Plan/Act modes, autonomous coding, context management, and integration with various AI models to enhance software development workflows.
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a href="https://cline.bot/" target="_blank" class="btn btn-primary">Visit Website</a>
+                    <a href="https://github.com/cline/cline" target="_blank" class="btn btn-secondary">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="main-column">
+                <!-- Key Metrics -->
+                <div class="content-section">
+                    <h2 class="section-title">Business Metrics</h2>
+                    <div class="metrics-grid">
+                        
+                        
+                        <div class="metric-card">
+                            <div class="metric-value">$NaNM</div>
+                            <div class="metric-label">Total Funding</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-value">1</div>
+                            <div class="metric-label">Enterprise Customers</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">34</div>
+                            <div class="metric-label">Features</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-value">25</div>
+                            <div class="metric-label">Reddit Mentions</div>
+                        </div>
+                        
+                        
+                        <div class="metric-card">
+                            <div class="metric-value">46,700</div>
+                            <div class="metric-label">GitHub Stars</div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Features -->
+                
+                <div class="content-section">
+                    <h2 class="section-title">Features & Capabilities</h2>
+                    <div class="features-grid">
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">AI-powered code generation and analysis</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Collaborative planning and coding</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Integration with multiple IDEs</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">MCP Servers integration</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Automatic issue detection and fixing</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Checkpoint system for version control</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Access to multiple AI models</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Headless browser capabilities</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Workflows for task automation</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Global workflows across projects</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Diff edits for targeted code changes</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">CSV/XLSX file support</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Toggleable .clinerules for context switching</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Slash Commands for session management</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Message Editing with Checkpoint Restore</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Task Timeline for visualizing AI actions</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Gemini caching for cost efficiency</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">LaTeX support</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Model favorites</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Context window management</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">new_task tool for persistent memory across context windows</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Local Chrome integration</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">YOLO mode</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Drag & Drop functionality</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Account view for billing and usage tracking</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Sort underlying provider routing</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Rich MCP display with dynamic image loading and GIF support</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Anonymous telemetry</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Context Window Progress Bar</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Memory Bank for persistent context</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Web app debugging</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Navigation of pages for testing</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">Gathering of network and console logs</div>
+                            </div>
+                        
+                            <div class="feature-item">
+                                <div class="feature-title">UI error fixing</div>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+
+                <!-- Unique Differentiators -->
+                
+                <div class="content-section">
+                    <h2 class="section-title">Competitive Advantages</h2>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Fully open-source</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Collaborative AI partner approach</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">MCP Servers integration for extended capabilities</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Checkpoint system for controlled progress</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Doesn't index codebase for privacy and security</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Supports multiple AI providers</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Global workflows feature</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Plan & Act paradigm for agentic coding</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Toggleable .clinerules for flexible context management</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Full, unrestricted access to frontier models</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">No context limitations</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Transparent token-based pricing</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Model Context Protocol (MCP) support</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Visual context management through Context Window Progress Bar</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Memory Bank feature for persistent context across sessions</div>
+                        </div>
+                    
+                        <div class="feature-item" style="margin-bottom: 1rem;">
+                            <div class="feature-title">Computer Use feature</div>
+                        </div>
+                    
+                </div>
+                
+
+                <!-- Enterprise Adoption -->
+                
+                <div class="content-section">
+                    <h2 class="section-title">Enterprise Customers (1)</h2>
+                    <div class="enterprise-grid">
+                        
+                            <div class="enterprise-item">Cleat Street</div>
+                        
+                    </div>
+                </div>
+                
+
+                <!-- Customer Testimonials -->
+                
+                <div class="content-section">
+                    <h2 class="section-title">Customer Testimonials</h2>
+                    
+                            <div class="testimonial">
+                                <div class="testimonial-text">"One of the most important extensions for any IDE out there"</div>
+                                <div class="testimonial-author">— has been a game changer for how I work over the past few months. I'm extremely grateful to the Cline team for the work they're putting in to push out meaningful features.</div>
+                            </div>
+                        
+                            <div class="testimonial">
+                                <div class="testimonial-text">"Amazing"</div>
+                                <div class="testimonial-author">— Shoriful</div>
+                            </div>
+                        
+                            <div class="testimonial">
+                                <div class="testimonial-text">"Feels like magic"</div>
+                                <div class="testimonial-author">— the first AI tool I used that could handle entire repos</div>
+                            </div>
+                        
+                            <div class="testimonial">
+                                <div class="testimonial-text">"I've been using Cline since the first month it was released and can't live without it anymore! It's the smartest coding agent I've used for my type of work. This is just an amazing tool that I believe any developer should be using!"</div>
+                                <div class="testimonial-author">— Mohamed</div>
+                            </div>
+                        
+                            <div class="testimonial">
+                                <div class="testimonial-text">"Without a doubt the single greatest boost to my coding productivty, ever. Being able to explore new ideas and test innovative solutions in a fraction of the time has been invaluable to every project that has used Cline. I could not reccomend Cline any more than I do."</div>
+                                <div class="testimonial-author">— Kevin</div>
+                            </div>
+                        
+                </div>
+                
+
+                <!-- Market Position -->
+                
+            </div>
+
+            <div class="sidebar">
+                <!-- Company Info -->
+                <div class="content-section">
+                    <h3 class="section-title">Company Information</h3>
+                    <div style="space-y: 1rem;">
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--color-navy);">Legal Name</div>
+                            <div style="color: var(--color-gray);">Cline Bot Inc.</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--color-navy);">Business Model</div>
+                            <div style="color: var(--color-gray);">Open-source with API integration</div>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                </div>
+
+                <!-- Funding Rounds -->
+                
+
+                <!-- Pricing -->
+                
+                <div class="content-section">
+                    <h3 class="section-title">Pricing</h3>
+                    <div class="pricing-grid">
+                        
+                            <div class="pricing-item">
+                                <div class="pricing-plan">token-based</div>
+                                <div class="pricing-cost">Transparent token-based pricing approach</div>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+
+                <!-- Technical Details -->
+                <div class="content-section">
+                    <h3 class="section-title">Technical Details</h3>
+                    <div style="space-y: 1rem;">
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--color-navy);">Category</div>
+                            <div style="color: var(--color-gray);">EDITOR</div>
+                        </div>
+                        
+                        
+                        
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--color-navy);">Update Frequency</div>
+                            <div style="color: var(--color-gray);">Regular updates with version releases</div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Recent News -->
+                
+                <div class="content-section">
+                    <h3 class="section-title">Recent News</h3>
+                    
+                        <div class="news-item">
+                            <div class="news-title">Karma Strikes Back in the New ‘I Know What You Did Last Summer’ Trailer</div>
+                            <div class="news-meta">Gizmodo.com • 6/17/2025</div>
+                        </div>
+                    
+                        <div class="news-item">
+                            <div class="news-title">We bought a rental property instead of a 'starter home.' It pays for itself, and we use it whenever we want.</div>
+                            <div class="news-meta">Business Insider • 6/23/2025</div>
+                        </div>
+                    
+                        <div class="news-item">
+                            <div class="news-title">21-Year-Old Kayaker Called 911 for Help Before Vanishing and His Body Was Just Found, Mom Says</div>
+                            <div class="news-meta">PEOPLE • 6/6/2025</div>
+                        </div>
+                    
+                        <div class="news-item">
+                            <div class="news-title">Livvy Dunne Makes NSFW Comment About Her and Madelyn Cline</div>
+                            <div class="news-meta">Eonline.com • 6/20/2025</div>
+                        </div>
+                    
+                        <div class="news-item">
+                            <div class="news-title">Lionsgate Shows Off Movie Magic With First ‘Now You See Me: Now You Don’t’ Footage; Paul Feig Promises Pearl-Clutching Moments In ‘The Housemaid’ – CineEurope</div>
+                            <div class="news-meta">Deadline • 6/17/2025</div>
+                        </div>
+                    
+                </div>
+                
+
+                <!-- Official Links -->
+                <div class="content-section">
+                    <h3 class="section-title">Official Links</h3>
+                    <div style="space-y: 0.5rem;">
+                        <a href="https://cline.bot/" target="_blank" class="btn btn-secondary" style="display: block; margin-bottom: 0.5rem;">Website</a>
+                        <a href="https://github.com/cline/cline" target="_blank" class="btn btn-secondary" style="display: block; margin-bottom: 0.5rem;">GitHub</a>
+                        <a href="https://cline.bot/blog" target="_blank" class="btn btn-secondary" style="display: block; margin-bottom: 0.5rem;">Blog</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

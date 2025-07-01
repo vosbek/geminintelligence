@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Developer Tools | Comprehensive Analysis Dashboard</title>
+    <meta name="description" content="Comprehensive analysis and comparison of AI developer tools with detailed metrics, features, and enterprise adoption data">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        :root {
+            --color-bg: #ffffff;
+            --color-bg-secondary: #f8f9fa;
+            --color-bg-tertiary: #edebeb;
+            --color-text: #333333;
+            --color-text-secondary: #666666;
+            --color-text-muted: #999999;
+            --color-border: #e1e5e9;
+            --color-border-light: #f0f0f0;
+            --color-primary: #0066cc;
+            --color-primary-hover: #0052a3;
+            --color-success: #22c55e;
+            --color-warning: #f59e0b;
+            --color-danger: #ef4444;
+            --sidebar-width: 280px;
+            --header-height: 64px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --border-radius-lg: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--color-text);
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--color-primary);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 14px;
+        }
+        
+        .header-nav {
+            display: flex;
+            gap: 8px;
+            margin-left: 32px;
+        }
+        
+        .nav-item {
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-item:hover,
+        .nav-item.active {
+            background: var(--color-bg-tertiary);
+            color: var(--color-text);
+        }
+        
+        .header-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .search-box {
+            position: relative;
+            width: 300px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 8px 40px 8px 16px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            background: var(--color-bg-secondary);
+            transition: all 0.2s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background: var(--color-bg);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-muted);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            width: var(--sidebar-width);
+            height: calc(100vh - var(--header-height));
+            background: var(--color-bg);
+            border-right: 1px solid var(--color-border);
+            overflow-y: auto;
+            z-index: 100;
+        }
+        
+        .sidebar-section {
+            padding: 24px;
+            border-bottom: 1px solid var(--color-border-light);
+        }
+        
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+        
+        .tool-list {
+            list-style: none;
+        }
+        
+        .tool-item {
+            margin-bottom: 4px;
+        }
+        
+        .tool-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: var(--border-radius);
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        
+        .tool-link:hover,
+        .tool-link.active {
+            background: var(--color-bg-tertiary);
+            color: var(--color-text);
+        }
+        
+        .tool-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--color-bg-secondary);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--color-text-secondary);
+        }
+        
+        .filter-section {
+            padding: 16px 24px;
+        }
+        
+        .filter-group {
+            margin-bottom: 16px;
+        }
+        
+        .filter-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            background: var(--color-bg);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--header-height);
+            padding: 32px;
+            min-height: calc(100vh - var(--header-height));
+        }
+        
+        .content-header {
+            margin-bottom: 32px;
+        }
+        
+        .page-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+        
+        .page-subtitle {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+        }
+        
+        .stats-bar {
+            display: flex;
+            gap: 32px;
+            padding: 16px 0;
+            border-top: 1px solid var(--color-border-light);
+            border-bottom: 1px solid var(--color-border-light);
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--color-text);
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tool Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+        
+        .tool-card {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-lg);
+            padding: 24px;
+            transition: all 0.2s ease;
+        }
+        
+        .tool-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-primary);
+        }
+        
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        
+        .tool-info h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 4px;
+        }
+        
+        .tool-company {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+        
+        .tool-status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--color-success);
+            color: white;
+        }
+        
+        .tool-description {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .tool-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .tool-metric {
+            text-align: center;
+        }
+        
+        .tool-metric-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 2px;
+        }
+        
+        .tool-metric-label {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .tool-features {
+            margin-bottom: 20px;
+        }
+        
+        .features-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 12px;
+        }
+        
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .feature-tag {
+            padding: 4px 8px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+        
+        .tool-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid var(--color-border-light);
+        }
+        
+        .tool-links {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .tool-link-btn {
+            padding: 6px 12px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .tool-link-btn:hover {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+        
+        .view-details-btn {
+            padding: 8px 16px;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .view-details-btn:hover {
+            background: var(--color-primary-hover);
+        }
+
+        /* Compare Checkbox */
+        .compare-checkbox-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        
+        .compare-checkbox-container:hover {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .compare-checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--color-border);
+            border-radius: 4px;
+            background: var(--color-bg);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .compare-checkbox.checked {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+        
+        .compare-checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        .compare-checkbox:hover {
+            border-color: var(--color-primary);
+        }
+        
+        .compare-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Compare Section */
+        .compare-section {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .compare-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .compare-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+        
+        .compare-controls {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .compare-btn {
+            padding: 8px 16px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .compare-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            margin-top: 16px;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-light);
+        }
+        
+        .comparison-table th {
+            background: var(--color-bg-secondary);
+            font-weight: 600;
+            color: var(--color-text);
+            font-size: 14px;
+        }
+        
+        .comparison-table td {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+        }
+        
+        .comparison-table .tool-name {
+            font-weight: 700;
+            color: var(--color-text);
+            font-size: 16px;
+        }
+        
+        .comparison-table .company-name {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-top: 2px;
+        }
+        
+        .comparison-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        
+        .comparison-feature-tag {
+            padding: 2px 6px;
+            background: var(--color-bg-tertiary);
+            border-radius: 4px;
+            font-size: 11px;
+            color: var(--color-text-secondary);
+        }
+        
+        .comparison-metric {
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        
+        .selected-tools-count {
+            padding: 6px 12px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: var(--border-radius);
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 16px;
+        }
+        
+        .clear-selection-btn {
+            padding: 6px 12px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            color: var(--color-text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-left: 8px;
+        }
+        
+        .clear-selection-btn:hover {
+            background: var(--color-danger);
+            color: white;
+            border-color: var(--color-danger);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-nav {
+                display: none;
+            }
+            
+            .search-box {
+                width: 200px;
+            }
+            
+            .main-content {
+                padding: 16px;
+            }
+            
+            .tool-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* News Section */
+        .news-section {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .news-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+        
+        .news-filter {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .news-filter-btn {
+            padding: 6px 12px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            color: var(--color-text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .news-filter-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 16px;
+        }
+        
+        .news-item {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: 16px;
+            transition: all 0.2s ease;
+        }
+        
+        .news-item:hover {
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .news-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .news-item-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+        
+        .news-item-source {
+            font-weight: 500;
+        }
+        
+        .news-item-date {
+            color: var(--color-text-muted);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">
+                <div class="logo-icon">AI</div>
+                AI Developer Tools
+            </div>
+            <nav class="header-nav">
+                <a href="#overview" class="nav-item active">Overview</a>
+                <a href="#tools" class="nav-item">Tools</a>
+                <a href="#compare" class="nav-item">Compare</a>
+                <a href="#news" class="nav-item">News</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search tools, features, companies...">
+                <i data-lucide="search" class="search-icon" style="width: 16px; height: 16px;"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-title">All Tools</div>
+            <ul class="tool-list">
+                <li class="tool-item">
+                    <a href="#cursor" class="tool-link active">
+                        <div class="tool-icon">CR</div>
+                        <div>
+                            <div>Cursor</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Anysphere</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#claude-code" class="tool-link">
+                        <div class="tool-icon">CC</div>
+                        <div>
+                            <div>Claude Code</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Anthropic</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#github-copilot" class="tool-link">
+                        <div class="tool-icon">GC</div>
+                        <div>
+                            <div>GitHub Copilot</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Microsoft</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#replit" class="tool-link">
+                        <div class="tool-icon">RP</div>
+                        <div>
+                            <div>Replit</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Replit</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#augment" class="tool-link">
+                        <div class="tool-icon">AG</div>
+                        <div>
+                            <div>Augment</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Augment Code Inc.</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#zed" class="tool-link">
+                        <div class="tool-icon">ZD</div>
+                        <div>
+                            <div>Zed</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Zed Industries</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#cline" class="tool-link">
+                        <div class="tool-icon">CL</div>
+                        <div>
+                            <div>Cline</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Community</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#windsurf" class="tool-link">
+                        <div class="tool-icon">WS</div>
+                        <div>
+                            <div>Windsurf</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Codeium</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tool-item">
+                    <a href="#roo-code" class="tool-link">
+                        <div class="tool-icon">RC</div>
+                        <div>
+                            <div>Roo Code</div>
+                            <div style="font-size: 11px; color: var(--color-text-muted);">Community</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="filter-section">
+            <div class="sidebar-title">Filters</div>
+            <div class="filter-group">
+                <label class="filter-label">Category</label>
+                <select class="filter-select">
+                    <option value="">All Categories</option>
+                    <option value="ai-ide">AI IDE</option>
+                    <option value="editor">Editor</option>
+                    <option value="copilot">Copilot</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Company Type</label>
+                <select class="filter-select">
+                    <option value="">All Companies</option>
+                    <option value="startup">Startup</option>
+                    <option value="enterprise">Enterprise</option>
+                    <option value="open-source">Open Source</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Funding Status</label>
+                <select class="filter-select">
+                    <option value="">Any Funding</option>
+                    <option value="funded">Funded</option>
+                    <option value="unfunded">Unfunded</option>
+                </select>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-header">
+            <h1 class="page-title">AI Developer Tools Analysis</h1>
+            <p class="page-subtitle">Comprehensive comparison and analysis of 9 leading AI developer tools with detailed metrics, features, and enterprise adoption data.</p>
+            
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-value">9</div>
+                    <div class="stat-label">Tools Analyzed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">$1.1B</div>
+                    <div class="stat-label">Total Funding</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">139K</div>
+                    <div class="stat-label">GitHub Stars</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">31+</div>
+                    <div class="stat-label">Enterprise Customers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">132</div>
+                    <div class="stat-label">Features Tracked</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools Grid -->
+        <div class="tools-grid" id="tools">
+            <!-- Cursor -->
+            <div class="tool-card" id="cursor" data-tool="cursor">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="cursor"></div>
+                    <span class="compare-label">Compare</span>
+                </div>
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>Cursor</h3>
+                        <div class="tool-company">Anysphere Inc.</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    The AI Code Editor - Cursor is an AI-powered code editor designed to make developers extraordinarily productive. It integrates AI capabilities directly into the coding environment, offering features like intelligent code completion, natural language editing, and codebase understanding.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">$1.1B</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">30K</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">12+</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">18</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">Intelligent code completion</div>
+                        <div class="feature-tag">Natural language editing</div>
+                        <div class="feature-tag">Codebase understanding</div>
+                        <div class="feature-tag">Multi-line code suggestions</div>
+                        <div class="feature-tag">Privacy mode</div>
+                        <div class="feature-tag">+13 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://www.cursor.com/" target="_blank" class="tool-link-btn">Website</a>
+                        <a href="https://github.com/getcursor/cursor" target="_blank" class="tool-link-btn">GitHub</a>
+                        <a href="https://www.cursor.com/blog" target="_blank" class="tool-link-btn">Blog</a>
+                    </div>
+                    <a href="tools/1.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Claude Code -->
+            <div class="tool-card" id="claude-code" data-tool="claude-code">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="claude-code"></div>
+                    <span class="compare-label">Compare</span>
+                </div>
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>Claude Code</h3>
+                        <div class="tool-company">Anthropic PBC</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    A family of foundational AI models that can be used in a variety of applications. AI-powered coding assistant developed by Anthropic, designed to enhance developer productivity by integrating into modern workflows and IDEs.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">16K</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">1</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">18</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">AI-powered code completion</div>
+                        <div class="feature-tag">Code refactoring</div>
+                        <div class="feature-tag">Bug detection and fixing</div>
+                        <div class="feature-tag">Large codebase analysis</div>
+                        <div class="feature-tag">Natural language code generation</div>
+                        <div class="feature-tag">+13 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://claude.ai/" target="_blank" class="tool-link-btn">Website</a>
+                        <a href="https://github.com/anthropics/claude-code" target="_blank" class="tool-link-btn">GitHub</a>
+                    </div>
+                    <a href="tools/2.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- GitHub Copilot -->
+            <div class="tool-card" id="github-copilot" data-tool="github-copilot">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="github-copilot"></div>
+                    <span class="compare-label">Compare</span>
+                </div>
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>GitHub Copilot</h3>
+                        <div class="tool-company">Microsoft Corporation</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    Your AI pair programmer. GitHub Copilot is an AI-powered coding assistant that provides contextualized assistance throughout the software development lifecycle, offering features like code completions and chat assistance.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">1K</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">7</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">16</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">AI-powered code completion</div>
+                        <div class="feature-tag">Chat assistance in IDE</div>
+                        <div class="feature-tag">Code explanations</div>
+                        <div class="feature-tag">Agent mode</div>
+                        <div class="feature-tag">Next edit suggestions</div>
+                        <div class="feature-tag">+11 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://github.com/features/copilot" target="_blank" class="tool-link-btn">Website</a>
+                    </div>
+                    <a href="tools/3.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Replit -->
+            <div class="tool-card" id="replit" data-tool="replit">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="replit"></div>
+                    <span class="compare-label">Compare</span>
+                </div>
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>Replit</h3>
+                        <div class="tool-company">Replit Inc.</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    A collaborative browser-based IDE. Replit allows users to create and deploy websites, applications, automations, internal tools, and data pipelines in any programming language with AI-powered coding assistance.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">11</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">16</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">AI-powered code generation</div>
+                        <div class="feature-tag">Ready-to-use database</div>
+                        <div class="feature-tag">User authentication</div>
+                        <div class="feature-tag">Secure integrations</div>
+                        <div class="feature-tag">Vibe coding capabilities</div>
+                        <div class="feature-tag">+11 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://replit.com/" target="_blank" class="tool-link-btn">Website</a>
+                        <a href="https://github.com/replit" target="_blank" class="tool-link-btn">GitHub</a>
+                    </div>
+                    <a href="tools/4.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Augment -->
+            <div class="tool-card" id="augment" data-tool="augment">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="augment"></div>
+                    <span class="compare-label">Compare</span>
+                </div>
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>Augment</h3>
+                        <div class="tool-company">Augment Code Inc.</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    Augment is an AI-powered coding assistant that helps developers code faster and better, offering features like autonomous coding agents, real-time codebase indexing, context-aware AI suggestions, code generation, chat assistance, and code review.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">3</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">23</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">Autonomous coding agents</div>
+                        <div class="feature-tag">Context engine</div>
+                        <div class="feature-tag">Code completion</div>
+                        <div class="feature-tag">Chat assistance</div>
+                        <div class="feature-tag">Code review</div>
+                        <div class="feature-tag">+18 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://www.augmentcode.com/" target="_blank" class="tool-link-btn">Website</a>
+                        <a href="https://github.com/augmentcode" target="_blank" class="tool-link-btn">GitHub</a>
+                    </div>
+                    <a href="tools/5.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Zed -->
+            <div class="tool-card" id="zed" data-tool="zed">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="zed"></div>
+                    <span class="compare-label">Compare</span>
+                </div>
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>Zed</h3>
+                        <div class="tool-company">Zed Industries Inc.</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    Zed is a high-performance, open-source, multiplayer code editor designed for collaboration and AI-assisted coding. Written from scratch in Rust, it efficiently leverages multiple CPU cores and GPU for fast performance.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">62K</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">1</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">28</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">High-performance editing</div>
+                        <div class="feature-tag">Multiplayer collaboration</div>
+                        <div class="feature-tag">Built-in debugger</div>
+                        <div class="feature-tag">Rust performance</div>
+                        <div class="feature-tag">GPU acceleration</div>
+                        <div class="feature-tag">+23 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://zed.dev/" target="_blank" class="tool-link-btn">Website</a>
+                        <a href="https://github.com/zed-industries/zed" target="_blank" class="tool-link-btn">GitHub</a>
+                    </div>
+                    <a href="tools/6.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Cline -->
+            <div class="tool-card" id="cline" data-tool="cline">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="cline"></div>
+                    <span class="compare-label">Compare</span>
+                </div>
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>Cline</h3>
+                        <div class="tool-company">Cline Bot Inc.</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    Cline is an open-source, fully collaborative AI coding assistant that integrates directly into IDEs. It offers dual Plan/Act modes, autonomous coding, context management, and integration with various AI models.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">47K</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">1</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">34</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">Autonomous coding</div>
+                        <div class="feature-tag">Plan/Act modes</div>
+                        <div class="feature-tag">MCP integration</div>
+                        <div class="feature-tag">Browser automation</div>
+                        <div class="feature-tag">Multi-AI models</div>
+                        <div class="feature-tag">+29 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://cline.bot/" target="_blank" class="tool-link-btn">Website</a>
+                        <a href="https://github.com/cline/cline" target="_blank" class="tool-link-btn">GitHub</a>
+                    </div>
+                    <a href="tools/7.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Windsurf -->
+            <div class="tool-card" id="windsurf" data-tool="windsurf">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="windsurf"></div>
+                    <span class="compare-label">Compare</span>
+                </div>
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>Windsurf</h3>
+                        <div class="tool-company">Codeium</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    Windsurf is a purpose-built AI-powered IDE that offers features like Cascade for deep codebase understanding, full repo-aware chat with multi-file edits, blazing fast Autocomplete, and Supercomplete for predicting next intent.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">2</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">40</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">Cascade AI chat</div>
+                        <div class="feature-tag">Windsurf Tab</div>
+                        <div class="feature-tag">Supercomplete</div>
+                        <div class="feature-tag">Memories</div>
+                        <div class="feature-tag">Rules engine</div>
+                        <div class="feature-tag">+35 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://windsurf.com/" target="_blank" class="tool-link-btn">Website</a>
+                    </div>
+                    <a href="tools/8.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Roo Code -->
+            <div class="tool-card" id="roo-code" data-tool="roo-code">
+                <div class="compare-checkbox-container">
+                    <div class="compare-checkbox" data-tool="roo-code"></div>
+                    <span class="compare-label">Compare</span>
+                </div>
+                <div class="tool-header">
+                    <div class="tool-info">
+                        <h3>Roo Code</h3>
+                        <div class="tool-company">Community</div>
+                    </div>
+                    <div class="tool-status">Active</div>
+                </div>
+                
+                <div class="tool-description">
+                    Roo Code (formerly Roo Cline) is an AI-powered autonomous coding agent that lives in your editor. It's a fork of Cline with additional experimental features, offering comprehensive file management, command execution, and browser automation.
+                </div>
+                
+                <div class="tool-metrics">
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Funding</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">GitHub ⭐</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">N/A</div>
+                        <div class="tool-metric-label">Enterprise</div>
+                    </div>
+                    <div class="tool-metric">
+                        <div class="tool-metric-value">38</div>
+                        <div class="tool-metric-label">Features</div>
+                    </div>
+                </div>
+                
+                <div class="tool-features">
+                    <div class="features-title">Key Features</div>
+                    <div class="features-list">
+                        <div class="feature-tag">Code mode</div>
+                        <div class="feature-tag">Architect mode</div>
+                        <div class="feature-tag">Ask mode</div>
+                        <div class="feature-tag">Browser automation</div>
+                        <div class="feature-tag">Multi-API integration</div>
+                        <div class="feature-tag">+33 more</div>
+                    </div>
+                </div>
+                
+                <div class="tool-footer">
+                    <div class="tool-links">
+                        <a href="https://roocline.dev/" target="_blank" class="tool-link-btn">Website</a>
+                        <a href="https://roocline.dev/" target="_blank" class="tool-link-btn">GitHub</a>
+                    </div>
+                    <a href="tools/9.html" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compare Section -->
+        <div class="compare-section" id="compare">
+            <div class="compare-header">
+                <h2 class="compare-title">Tool Comparison</h2>
+                <div class="compare-controls">
+                    <button class="compare-btn active" data-compare-view="features">Features</button>
+                    <button class="compare-btn" data-compare-view="metrics">Metrics</button>
+                    <button class="compare-btn" data-compare-view="enterprise">Enterprise</button>
+                    <span class="selected-tools-count" id="selected-count">0 tools selected</span>
+                    <button class="clear-selection-btn" id="clear-selection">Clear All</button>
+                </div>
+            </div>
+            
+            <div id="comparison-placeholder" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); padding: 24px; text-align: center; color: var(--color-text-secondary);">
+                <i data-lucide="table" style="width: 48px; height: 48px; margin-bottom: 16px; opacity: 0.5;"></i>
+                <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Select Tools to Compare</div>
+                <div style="font-size: 14px;">Click the checkbox on any tool card above to add it to the comparison. You can compare up to 4 tools side by side.</div>
+            </div>
+            
+            <div id="comparison-table-container" style="display: none;">
+                <!-- Dynamic comparison table will be inserted here -->
+            </div>
+        </div>
+
+        <!-- News Section -->
+        <div class="news-section" id="news">
+            <div class="news-header">
+                <h2 class="news-title">Latest News & Updates</h2>
+                <div class="news-filter">
+                    <button class="news-filter-btn active">All</button>
+                    <button class="news-filter-btn">Cursor</button>
+                    <button class="news-filter-btn">GitHub Copilot</button>
+                    <button class="news-filter-btn">Claude Code</button>
+                    <button class="news-filter-btn">Replit</button>
+                </div>
+            </div>
+            
+            <div class="news-grid">
+                <div class="news-item">
+                    <div class="news-item-title">Copilot Chat in VS Code is now open source</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">GitHub • GitHub Copilot</div>
+                        <div class="news-item-date">6/27/2025</div>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-title">Claude Code for VSCode Extension Released</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">Visual Studio • Claude Code</div>
+                        <div class="news-item-date">6/23/2025</div>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-title">Remote MCP Support in Claude Code</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">Anthropic • Claude Code</div>
+                        <div class="news-item-date">6/18/2025</div>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-title">Cursor Raises $1.1B Series C at $10B Valuation</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">TechCrunch • Cursor</div>
+                        <div class="news-item-date">6/15/2025</div>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-title">Replit Introduces Enhanced AI Agent Capabilities</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">Replit Blog • Replit</div>
+                        <div class="news-item-date">6/10/2025</div>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-title">Continue.dev Reaches 10K GitHub Stars</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">GitHub • Continue</div>
+                        <div class="news-item-date">6/8/2025</div>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-title">v0 by Vercel Launches Advanced AI Design Features</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">Vercel Blog • v0</div>
+                        <div class="news-item-date">6/5/2025</div>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-item-title">Open Interpreter 2.0 Released with Enhanced Security</div>
+                    <div class="news-item-meta">
+                        <div class="news-item-source">Open Interpreter • Open Interpreter</div>
+                        <div class="news-item-date">6/1/2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Tool data for comparison
+        const toolData = {
+            'cursor': {
+                name: 'Cursor',
+                company: 'Anysphere Inc.',
+                description: 'The AI Code Editor - AI-powered code editor designed to make developers extraordinarily productive.',
+                funding: '$1.1B',
+                githubStars: '30K',
+                enterprises: '12+',
+                features: 18,
+                keyFeatures: ['Intelligent code completion', 'Natural language editing', 'Codebase understanding', 'Multi-line code suggestions', 'Privacy mode'],
+                enterpriseCustomers: ['Johnson & Johnson', 'Stripe', 'Samsung', 'Shopify'],
+                website: 'https://www.cursor.com/'
+            },
+            'claude-code': {
+                name: 'Claude Code',
+                company: 'Anthropic PBC',
+                description: 'AI-powered coding assistant developed by Anthropic, designed to enhance developer productivity.',
+                funding: 'N/A',
+                githubStars: '16K',
+                enterprises: '1',
+                features: 18,
+                keyFeatures: ['AI-powered code completion', 'Code refactoring', 'Bug detection and fixing', 'Large codebase analysis', 'Natural language code generation'],
+                enterpriseCustomers: ['Cloudflare'],
+                website: 'https://claude.ai/'
+            },
+            'github-copilot': {
+                name: 'GitHub Copilot',
+                company: 'Microsoft Corporation',
+                description: 'Your AI pair programmer - AI-powered coding assistant that provides contextualized assistance.',
+                funding: 'N/A',
+                githubStars: '1K',
+                enterprises: '7',
+                features: 16,
+                keyFeatures: ['AI-powered code completion', 'Chat assistance in IDE', 'Code explanations', 'Agent mode', 'Next edit suggestions'],
+                enterpriseCustomers: ['Duolingo', 'General Motors', 'CocaCola', 'Stripe'],
+                website: 'https://github.com/features/copilot'
+            },
+            'replit': {
+                name: 'Replit',
+                company: 'Replit Inc.',
+                description: 'A collaborative browser-based IDE for creating and deploying applications.',
+                funding: 'N/A',
+                githubStars: 'N/A',
+                enterprises: '11',
+                features: 16,
+                keyFeatures: ['AI-powered code generation', 'Ready-to-use database', 'User authentication', 'Secure integrations', 'Vibe coding capabilities'],
+                enterpriseCustomers: ['Google', 'Coinbase', 'Amazon'],
+                website: 'https://replit.com/'
+            },
+            'augment': {
+                name: 'Augment',
+                company: 'Augment Code Inc.',
+                description: 'AI-powered coding assistant with autonomous coding agents and real-time codebase indexing.',
+                funding: 'N/A',
+                githubStars: 'N/A',
+                enterprises: '3',
+                features: 23,
+                keyFeatures: ['Autonomous coding agents', 'Context engine', 'Code completion', 'Chat assistance', 'Code review'],
+                enterpriseCustomers: ['Collective', 'Webflow', 'GitHub'],
+                website: 'https://www.augmentcode.com/'
+            },
+            'zed': {
+                name: 'Zed',
+                company: 'Zed Industries Inc.',
+                description: 'High-performance, open-source, multiplayer code editor designed for collaboration and AI-assisted coding.',
+                funding: 'N/A',
+                githubStars: '62K',
+                enterprises: '1',
+                features: 28,
+                keyFeatures: ['High-performance editing', 'Multiplayer collaboration', 'Built-in debugger', 'Rust performance', 'GPU acceleration'],
+                enterpriseCustomers: ['Anthropic'],
+                website: 'https://zed.dev/'
+            },
+            'cline': {
+                name: 'Cline',
+                company: 'Cline Bot Inc.',
+                description: 'Open-source, fully collaborative AI coding assistant with dual Plan/Act modes.',
+                funding: 'N/A',
+                githubStars: '47K',
+                enterprises: '1',
+                features: 34,
+                keyFeatures: ['Autonomous coding', 'Plan/Act modes', 'MCP integration', 'Browser automation', 'Multi-AI models'],
+                enterpriseCustomers: ['Cleat Street'],
+                website: 'https://cline.bot/'
+            },
+            'windsurf': {
+                name: 'Windsurf',
+                company: 'Codeium',
+                description: 'Purpose-built AI-powered IDE with Cascade for deep codebase understanding.',
+                funding: 'N/A',
+                githubStars: 'N/A',
+                enterprises: '2',
+                features: 40,
+                keyFeatures: ['Cascade AI chat', 'Windsurf Tab', 'Supercomplete', 'Memories', 'Rules engine'],
+                enterpriseCustomers: ['Y Combinator', 'athenahealth'],
+                website: 'https://windsurf.com/'
+            },
+            'roo-code': {
+                name: 'Roo Code',
+                company: 'Community',
+                description: 'AI-powered autonomous coding agent with comprehensive file management and browser automation.',
+                funding: 'N/A',
+                githubStars: 'N/A',
+                enterprises: 'N/A',
+                features: 38,
+                keyFeatures: ['Code mode', 'Architect mode', 'Ask mode', 'Browser automation', 'Multi-API integration'],
+                enterpriseCustomers: [],
+                website: 'https://roocline.dev/'
+            }
+        };
+        
+        // Comparison functionality
+        let selectedTools = [];
+        let currentComparisonView = 'features';
+        
+        function updateSelectedCount() {
+            const countElement = document.getElementById('selected-count');
+            countElement.textContent = `${selectedTools.length} tools selected`;
+        }
+        
+        function updateComparisonTable() {
+            const placeholder = document.getElementById('comparison-placeholder');
+            const tableContainer = document.getElementById('comparison-table-container');
+            
+            if (selectedTools.length === 0) {
+                placeholder.style.display = 'block';
+                tableContainer.style.display = 'none';
+                return;
+            }
+            
+            placeholder.style.display = 'none';
+            tableContainer.style.display = 'block';
+            
+            let tableHTML = '<table class="comparison-table">';
+            
+            if (currentComparisonView === 'features') {
+                tableHTML += `
+                    <thead>
+                        <tr>
+                            <th>Tool</th>
+                            ${selectedTools.map(toolId => `<th>${toolData[toolId].name}</th>`).join('')}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Company</strong></td>
+                            ${selectedTools.map(toolId => `<td>${toolData[toolId].company}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>Description</strong></td>
+                            ${selectedTools.map(toolId => `<td>${toolData[toolId].description}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>Key Features</strong></td>
+                            ${selectedTools.map(toolId => `
+                                <td>
+                                    <div class="comparison-features">
+                                        ${toolData[toolId].keyFeatures.map(feature => `<span class="comparison-feature-tag">${feature}</span>`).join('')}
+                                    </div>
+                                </td>
+                            `).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>Total Features</strong></td>
+                            ${selectedTools.map(toolId => `<td class="comparison-metric">${toolData[toolId].features}</td>`).join('')}
+                        </tr>
+                    </tbody>
+                `;
+            } else if (currentComparisonView === 'metrics') {
+                tableHTML += `
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            ${selectedTools.map(toolId => `<th>${toolData[toolId].name}</th>`).join('')}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Funding</strong></td>
+                            ${selectedTools.map(toolId => `<td class="comparison-metric">${toolData[toolId].funding}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>GitHub Stars</strong></td>
+                            ${selectedTools.map(toolId => `<td class="comparison-metric">${toolData[toolId].githubStars}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>Enterprise Customers</strong></td>
+                            ${selectedTools.map(toolId => `<td class="comparison-metric">${toolData[toolId].enterprises}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>Feature Count</strong></td>
+                            ${selectedTools.map(toolId => `<td class="comparison-metric">${toolData[toolId].features}</td>`).join('')}
+                        </tr>
+                    </tbody>
+                `;
+            } else if (currentComparisonView === 'enterprise') {
+                tableHTML += `
+                    <thead>
+                        <tr>
+                            <th>Tool</th>
+                            ${selectedTools.map(toolId => `<th>${toolData[toolId].name}</th>`).join('')}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Enterprise Customers</strong></td>
+                            ${selectedTools.map(toolId => `<td class="comparison-metric">${toolData[toolId].enterprises}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>Notable Customers</strong></td>
+                            ${selectedTools.map(toolId => `
+                                <td>
+                                    <div class="comparison-features">
+                                        ${toolData[toolId].enterpriseCustomers.slice(0, 3).map(customer => `<span class="comparison-feature-tag">${customer}</span>`).join('')}
+                                        ${toolData[toolId].enterpriseCustomers.length > 3 ? `<span class="comparison-feature-tag">+${toolData[toolId].enterpriseCustomers.length - 3} more</span>` : ''}
+                                    </div>
+                                </td>
+                            `).join('')}
+                        </tr>
+                    </tbody>
+                `;
+            }
+            
+            tableHTML += '</table>';
+            tableContainer.innerHTML = tableHTML;
+        }
+        
+        // Checkbox functionality
+        document.querySelectorAll('.compare-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const toolId = this.getAttribute('data-tool');
+                
+                if (selectedTools.includes(toolId)) {
+                    // Remove from selection
+                    selectedTools = selectedTools.filter(id => id !== toolId);
+                    this.classList.remove('checked');
+                } else {
+                    // Add to selection (max 4 tools)
+                    if (selectedTools.length < 4) {
+                        selectedTools.push(toolId);
+                        this.classList.add('checked');
+                    } else {
+                        alert('You can compare up to 4 tools at once. Please deselect a tool first.');
+                        return;
+                    }
+                }
+                
+                updateSelectedCount();
+                updateComparisonTable();
+            });
+        });
+        
+        // Comparison view switching
+        document.querySelectorAll('.compare-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.compare-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentComparisonView = this.getAttribute('data-compare-view');
+                updateComparisonTable();
+            });
+        });
+        
+        // Clear selection
+        document.getElementById('clear-selection').addEventListener('click', function() {
+            selectedTools = [];
+            document.querySelectorAll('.compare-checkbox').forEach(checkbox => {
+                checkbox.classList.remove('checked');
+            });
+            updateSelectedCount();
+            updateComparisonTable();
+        });
+        
+        // Navigation functionality
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active nav item
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Scroll to section
+                const target = this.getAttribute('href');
+                if (target.startsWith('#')) {
+                    const section = document.querySelector(target);
+                    if (section) {
+                        const offset = section.offsetTop - 80;
+                        window.scrollTo({
+                            top: offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Sidebar tool navigation
+        document.querySelectorAll('.tool-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active tool
+                document.querySelectorAll('.tool-link').forEach(tool => tool.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Scroll to tool card
+                const target = this.getAttribute('href');
+                if (target.startsWith('#')) {
+                    const toolCard = document.querySelector(target);
+                    if (toolCard) {
+                        const offset = toolCard.offsetTop - 100;
+                        window.scrollTo({
+                            top: offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Compare functionality
+        document.querySelectorAll('.compare-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.compare-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // News filter functionality
+        document.querySelectorAll('.news-filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.news-filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.textContent.toLowerCase();
+                const newsItems = document.querySelectorAll('.news-item');
+                
+                newsItems.forEach(item => {
+                    if (filter === 'all') {
+                        item.style.display = 'block';
+                    } else {
+                        const source = item.querySelector('.news-item-source').textContent.toLowerCase();
+                        item.style.display = source.includes(filter) ? 'block' : 'none';
+                    }
+                });
+            });
+        });
+        
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const toolCards = document.querySelectorAll('.tool-card');
+            
+            toolCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const company = card.querySelector('.tool-company').textContent.toLowerCase();
+                const description = card.querySelector('.tool-description').textContent.toLowerCase();
+                const features = Array.from(card.querySelectorAll('.feature-tag')).map(tag => tag.textContent.toLowerCase()).join(' ');
+                
+                const matches = title.includes(query) || 
+                              company.includes(query) || 
+                              description.includes(query) || 
+                              features.includes(query);
+                
+                card.style.display = matches || query === '' ? 'block' : 'none';
+            });
+        });
+        
+        // Filter functionality
+        document.querySelectorAll('.filter-select').forEach(select => {
+            select.addEventListener('change', function() {
+                // Implement filtering logic based on selected values
+                console.log('Filter changed:', this.value);
+            });
+        });
+        
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('open');
+        }
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+            const sidebar = document.querySelector('.sidebar');
+            const isClickInsideSidebar = sidebar.contains(e.target);
+            
+            if (!isClickInsideSidebar && window.innerWidth <= 1024) {
+                sidebar.classList.remove('open');
+            }
+        });
+        
+        // Update active nav on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id], .tools-grid, .compare-section, .news-section');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                    current = section.id || section.className.split(' ')[0].replace('-section', '');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
