@@ -24,6 +24,7 @@ CREATE TABLE ai_tools (
     status VARCHAR(50) DEFAULT 'active',
     run_status VARCHAR(50) DEFAULT NULL, -- null=never_run, update=needs_run, processed=completed
     last_run TIMESTAMP,
+    error_message TEXT, -- To store the error message if a run fails
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
