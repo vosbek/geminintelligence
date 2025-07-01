@@ -4,36 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Developer Tools | Executive Market Intelligence</title>
-    <meta name="description" content="Comprehensive market intelligence on AI developer tools with funding, enterprise adoption, community metrics, and competitive analysis">
+    <meta name="description" content="Premium executive dashboard for AI developer tools market intelligence with comprehensive funding, enterprise adoption, and competitive analysis">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-success: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            --gradient-warning: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
             --gradient-dark: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            --color-navy: #1a202c;
-            --color-gray-900: #1a202c;
-            --color-gray-800: #2d3748;
-            --color-gray-700: #4a5568;
-            --color-gray-600: #718096;
-            --color-gray-500: #a0aec0;
-            --color-gray-400: #cbd5e0;
-            --color-gray-300: #e2e8f0;
-            --color-gray-200: #edf2f7;
-            --color-gray-100: #f7fafc;
+            --color-navy: #0f172a;
+            --color-slate-900: #0f172a;
+            --color-slate-800: #1e293b;
+            --color-slate-700: #334155;
+            --color-slate-600: #475569;
+            --color-slate-500: #64748b;
+            --color-slate-400: #94a3b8;
+            --color-slate-300: #cbd5e1;
+            --color-slate-200: #e2e8f0;
+            --color-slate-100: #f1f5f9;
             --color-white: #ffffff;
-            --color-blue-600: #3182ce;
-            --color-blue-500: #4299e1;
-            --color-green-500: #48bb78;
-            --color-purple-500: #9f7aea;
-            --color-red-500: #f56565;
-            --color-yellow-500: #ed8936;
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --color-blue-600: #2563eb;
+            --color-blue-500: #3b82f6;
+            --color-green-500: #10b981;
+            --color-purple-500: #8b5cf6;
+            --color-red-500: #ef4444;
+            --color-yellow-500: #f59e0b;
+            --color-emerald-500: #10b981;
+            --color-rose-500: #f43f5e;
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --border-radius-lg: 16px;
+            --border-radius-xl: 24px;
         }
         
         * {
@@ -44,35 +53,35 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--color-gray-100);
-            color: var(--color-gray-900);
+            background: var(--color-slate-100);
+            color: var(--color-slate-900);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
         }
-        
+
         /* Header */
         .header {
-            background: var(--color-white);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--color-gray-200);
+            border-bottom: 1px solid var(--color-slate-200);
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
         }
         
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            padding: 1.5rem 0;
         }
         
         .logo {
@@ -82,26 +91,47 @@
         }
         
         .logo-icon {
-            width: 48px;
-            height: 48px;
+            width: 56px;
+            height: 56px;
             background: var(--gradient-primary);
-            border-radius: 12px;
+            border-radius: var(--border-radius-lg);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 800;
-            font-size: 1.25rem;
+            font-weight: 900;
+            font-size: 1.5rem;
             box-shadow: var(--shadow-lg);
         }
         
         .logo-text {
-            font-size: 1.5rem;
-            font-weight: 800;
+            font-size: 1.75rem;
+            font-weight: 900;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+        
+        .header-nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-item {
+            color: var(--color-slate-600);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: var(--gradient-primary);
+            color: white;
         }
         
         .header-meta {
@@ -113,17 +143,20 @@
         
         .last-updated {
             font-size: 0.875rem;
-            color: var(--color-gray-600);
-            font-weight: 500;
+            color: var(--color-slate-600);
+            font-weight: 600;
         }
         
         .data-sources {
             font-size: 0.75rem;
-            color: var(--color-gray-500);
+            color: var(--color-slate-500);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        
-        /* Hero Section */
-        .hero {
+
+        /* Executive Summary */
+        .executive-summary {
             background: var(--gradient-primary);
             color: white;
             padding: 4rem 0;
@@ -131,7 +164,7 @@
             overflow: hidden;
         }
         
-        .hero::before {
+        .executive-summary::before {
             content: '';
             position: absolute;
             top: 0;
@@ -142,75 +175,92 @@
             opacity: 0.3;
         }
         
-        .hero-content {
+        .executive-content {
             position: relative;
             z-index: 1;
-            text-align: center;
         }
         
-        .hero-title {
-            font-size: 3.5rem;
+        .executive-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .executive-title {
+            font-size: 4rem;
             font-weight: 900;
             margin-bottom: 1.5rem;
             letter-spacing: -0.025em;
             text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
-        .hero-subtitle {
-            font-size: 1.25rem;
-            margin-bottom: 3rem;
-            max-width: 900px;
+        .executive-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
             opacity: 0.95;
-            font-weight: 400;
+            font-weight: 500;
         }
         
-        .hero-stats {
+        .executive-insights {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
+            margin-bottom: 3rem;
         }
         
-        .hero-stat {
+        .insight-card {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            padding: 2rem 1.5rem;
+            border-radius: var(--border-radius-xl);
+            padding: 2rem;
             text-align: center;
             transition: all 0.3s ease;
         }
         
-        .hero-stat:hover {
+        .insight-card:hover {
             transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
         }
         
-        .hero-stat-number {
-            font-size: 2.5rem;
+        .insight-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .insight-number {
+            font-size: 3rem;
             font-weight: 900;
             margin-bottom: 0.5rem;
             display: block;
         }
         
-        .hero-stat-label {
-            font-size: 0.875rem;
+        .insight-label {
+            font-size: 1rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             opacity: 0.9;
         }
         
-        /* Main Content */
-        .main-content {
-            padding: 4rem 0;
+        .insight-description {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
         }
-        
-        .section {
-            margin-bottom: 4rem;
+
+        /* KPI Dashboard */
+        .kpi-dashboard {
+            padding: 4rem 0;
+            background: var(--color-white);
         }
         
         .section-header {
@@ -219,39 +269,39 @@
         }
         
         .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--color-gray-900);
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--color-slate-900);
             margin-bottom: 1rem;
             letter-spacing: -0.025em;
         }
         
         .section-subtitle {
-            font-size: 1.125rem;
-            color: var(--color-gray-600);
-            max-width: 600px;
+            font-size: 1.25rem;
+            color: var(--color-slate-600);
+            max-width: 800px;
             margin: 0 auto;
+            font-weight: 500;
         }
         
-        /* Tool Cards */
-        .tools-grid {
+        .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
         
-        .tool-card {
+        .kpi-card {
             background: var(--color-white);
-            border-radius: 20px;
+            border-radius: var(--border-radius-xl);
             padding: 2rem;
             box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-slate-200);
             transition: all 0.3s ease;
-            border: 1px solid var(--color-gray-200);
             position: relative;
             overflow: hidden;
         }
         
-        .tool-card::before {
+        .kpi-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -263,96 +313,185 @@
             transition: opacity 0.3s ease;
         }
         
-        .tool-card:hover {
+        .kpi-card:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-xl);
         }
         
-        .tool-card:hover::before {
+        .kpi-card:hover::before {
             opacity: 1;
         }
         
-        .tool-header {
+        .kpi-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             margin-bottom: 1.5rem;
         }
         
-        .tool-info h3 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--color-gray-900);
-            margin-bottom: 0.25rem;
-        }
-        
-        .tool-company {
-            font-size: 0.875rem;
-            color: var(--color-gray-600);
-            font-weight: 500;
-        }
-        
-        .tool-valuation {
-            background: var(--gradient-accent);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 12px;
-            font-size: 0.875rem;
+        .kpi-title {
+            font-size: 1.25rem;
             font-weight: 700;
+            color: var(--color-slate-900);
+        }
+        
+        .kpi-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--color-slate-900);
+            margin-bottom: 0.5rem;
+        }
+        
+        .kpi-change {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .kpi-change.positive {
+            color: var(--color-green-500);
+        }
+        
+        .kpi-change.negative {
+            color: var(--color-red-500);
+        }
+        
+        .kpi-chart {
+            margin-top: 1rem;
+            height: 80px;
+        }
+
+        /* Market Leaders */
+        .market-leaders {
+            padding: 4rem 0;
+            background: var(--color-slate-100);
+        }
+        
+        .leaders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+        }
+        
+        .leader-card {
+            background: var(--color-white);
+            border-radius: var(--border-radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-slate-200);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .leader-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .leader-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .leader-card:hover::before {
+            opacity: 1;
+        }
+        
+        .leader-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+        
+        .leader-info h3 {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: var(--color-slate-900);
+            margin-bottom: 0.5rem;
+        }
+        
+        .leader-company {
+            font-size: 1rem;
+            color: var(--color-slate-600);
+            font-weight: 600;
+        }
+        
+        .leader-valuation {
+            background: var(--gradient-success);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius-lg);
+            font-size: 1rem;
+            font-weight: 800;
             box-shadow: var(--shadow-md);
         }
         
-        .tool-metrics {
+        .leader-metrics {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1rem;
             margin-bottom: 2rem;
         }
         
-        .tool-metric {
+        .leader-metric {
             text-align: center;
-            padding: 1rem;
-            background: var(--color-gray-100);
-            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            background: var(--color-slate-100);
+            border-radius: var(--border-radius-lg);
             transition: all 0.2s ease;
         }
         
-        .tool-metric:hover {
-            background: var(--color-gray-200);
+        .leader-metric:hover {
+            background: var(--color-slate-200);
             transform: scale(1.05);
         }
         
-        .tool-metric-value {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--color-gray-900);
-            margin-bottom: 0.25rem;
+        .leader-metric-value {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--color-slate-900);
+            margin-bottom: 0.5rem;
         }
         
-        .tool-metric-label {
+        .leader-metric-label {
             font-size: 0.75rem;
-            color: var(--color-gray-600);
+            color: var(--color-slate-600);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            font-weight: 600;
-        }
-        
-        .tool-description {
-            color: var(--color-gray-700);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-        
-        .tool-features {
-            margin-bottom: 1.5rem;
-        }
-        
-        .tool-features-title {
-            font-size: 0.875rem;
             font-weight: 700;
-            color: var(--color-gray-900);
-            margin-bottom: 0.75rem;
+        }
+        
+        .leader-features {
+            margin-bottom: 2rem;
+        }
+        
+        .leader-features-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--color-slate-900);
+            margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -360,15 +499,15 @@
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
         
         .feature-tag {
-            background: var(--color-gray-200);
-            color: var(--color-gray-800);
-            padding: 0.375rem 0.75rem;
-            border-radius: 8px;
-            font-size: 0.75rem;
+            background: var(--color-slate-200);
+            color: var(--color-slate-800);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
             font-weight: 600;
             text-align: center;
             transition: all 0.2s ease;
@@ -377,66 +516,74 @@
         .feature-tag:hover {
             background: var(--color-blue-500);
             color: white;
+            transform: translateY(-2px);
         }
         
-        .tool-enterprises {
-            margin-bottom: 1.5rem;
+        .leader-enterprises {
+            margin-bottom: 2rem;
         }
         
         .enterprises-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 0.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
         }
         
         .enterprise-tag {
             background: var(--gradient-secondary);
             color: white;
-            padding: 0.375rem 0.75rem;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
             text-align: center;
             box-shadow: var(--shadow-md);
-        }
-        
-        .tool-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--color-gray-200);
-        }
-        
-        .tool-links {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .tool-link {
-            background: var(--color-gray-100);
-            color: var(--color-gray-700);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 600;
             transition: all 0.2s ease;
         }
         
-        .tool-link:hover {
+        .enterprise-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .leader-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-slate-200);
+        }
+        
+        .leader-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .leader-link {
+            background: var(--color-slate-100);
+            color: var(--color-slate-700);
+            text-decoration: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+        
+        .leader-link:hover {
             background: var(--color-blue-500);
             color: white;
+            transform: translateY(-2px);
         }
         
         .view-details {
             background: var(--gradient-primary);
             color: white;
             text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius-lg);
             font-size: 0.875rem;
-            font-weight: 700;
+            font-weight: 800;
             transition: all 0.3s ease;
             box-shadow: var(--shadow-md);
         }
@@ -445,42 +592,67 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
+
+        /* Investment Intelligence */
+        .investment-intelligence {
+            padding: 4rem 0;
+            background: var(--color-white);
+        }
         
-        /* Investment Section */
         .investment-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2rem;
         }
         
         .investment-card {
             background: var(--color-white);
-            border-radius: 20px;
+            border-radius: var(--border-radius-xl);
             padding: 2rem;
             box-shadow: var(--shadow-lg);
-            border: 1px solid var(--color-gray-200);
+            border: 1px solid var(--color-slate-200);
+            transition: all 0.3s ease;
+        }
+        
+        .investment-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
         }
         
         .investment-card h3 {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--color-gray-900);
-            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--color-slate-900);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .investment-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-warning);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
         }
         
         .ranking-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem;
-            background: var(--color-gray-100);
-            border-radius: 12px;
-            margin-bottom: 0.75rem;
+            padding: 1.5rem;
+            background: var(--color-slate-100);
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 1rem;
             transition: all 0.2s ease;
         }
         
         .ranking-item:hover {
-            background: var(--color-gray-200);
+            background: var(--color-slate-200);
             transform: translateX(4px);
         }
         
@@ -491,104 +663,150 @@
         }
         
         .ranking-number {
-            width: 2rem;
-            height: 2rem;
+            width: 2.5rem;
+            height: 2.5rem;
             background: var(--gradient-primary);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            font-size: 0.875rem;
+            font-weight: 900;
+            font-size: 1rem;
         }
         
         .ranking-name {
-            font-weight: 700;
-            color: var(--color-gray-900);
+            font-weight: 800;
+            color: var(--color-slate-900);
+            font-size: 1rem;
         }
         
         .ranking-value {
-            font-weight: 800;
+            font-weight: 900;
             color: var(--color-green-500);
+            font-size: 1.1rem;
+        }
+
+        /* Market Intelligence */
+        .market-intelligence {
+            padding: 4rem 0;
+            background: var(--color-slate-100);
         }
         
-        /* News Section */
-        .news-grid {
+        .intelligence-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
         }
         
-        .news-item {
+        .intelligence-item {
             background: var(--color-white);
-            border-radius: 16px;
-            padding: 1.5rem;
+            border-radius: var(--border-radius-xl);
+            padding: 2rem;
             border-left: 4px solid var(--color-blue-500);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-lg);
             transition: all 0.3s ease;
         }
         
-        .news-item:hover {
+        .intelligence-item:hover {
             transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-xl);
         }
         
-        .news-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--color-gray-900);
-            margin-bottom: 0.75rem;
+        .intelligence-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--color-slate-900);
+            margin-bottom: 1rem;
             line-height: 1.4;
         }
         
-        .news-meta {
+        .intelligence-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.75rem;
-            color: var(--color-gray-600);
+            font-size: 0.875rem;
+            color: var(--color-slate-600);
             font-weight: 600;
         }
         
+        .intelligence-source {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .intelligence-date {
+            background: var(--color-slate-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+        }
+
         /* Footer */
         .footer {
             background: var(--gradient-dark);
             color: white;
-            padding: 3rem 0;
+            padding: 4rem 0 2rem;
             text-align: center;
         }
         
         .footer-content {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            font-weight: 500;
         }
         
+        .footer-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-stat {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .hero-title {
+            .executive-title {
                 font-size: 2.5rem;
             }
             
-            .tools-grid {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .leaders-grid {
                 grid-template-columns: 1fr;
             }
             
-            .tool-metrics {
+            .leader-metrics {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .hero-stats {
-                grid-template-columns: repeat(2, 1fr);
+            .executive-insights {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 1rem;
             }
         }
         
         @media (max-width: 480px) {
-            .hero-stats {
+            .executive-insights {
                 grid-template-columns: 1fr;
             }
             
-            .tool-metrics {
+            .leader-metrics {
+                grid-template-columns: 1fr;
+            }
+            
+            .kpi-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -605,8 +823,21 @@
             }
         }
         
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
         .animate-slide-up {
             animation: slideUp 0.6s ease-out;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out;
         }
         
         /* Scrollbar */
@@ -615,7 +846,7 @@
         }
         
         ::-webkit-scrollbar-track {
-            background: var(--color-gray-200);
+            background: var(--color-slate-200);
         }
         
         ::-webkit-scrollbar-thumb {
@@ -626,6 +857,17 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--gradient-secondary);
         }
+
+        /* Chart containers */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 1rem 0;
+        }
+        
+        .mini-chart {
+            height: 80px;
+        }
     </style>
 </head>
 <body>
@@ -634,13 +876,21 @@
             <div class="header-content">
                 <div class="logo">
                     <div class="logo-icon">AI</div>
-                    <div class="logo-text">Market Intelligence</div>
+                    <div class="logo-text">Executive Intelligence</div>
                 </div>
+                <nav class="header-nav">
+                    <a href="#overview" class="nav-item active">Overview</a>
+                    <a href="#market" class="nav-item">Market Leaders</a>
+                    <a href="#investment" class="nav-item">Investment</a>
+                    <a href="#intelligence" class="nav-item">Intelligence</a>
+                </nav>
                 <div class="header-meta">
                     <div class="last-updated">
+                        <i data-lucide="clock" style="width: 16px; height: 16px; margin-right: 4px;"></i>
                         Updated: June 30, 2025
                     </div>
                     <div class="data-sources">
+                        <i data-lucide="database" style="width: 14px; height: 14px;"></i>
                         172 articles • 225 Reddit posts • GitHub data
                     </div>
                 </div>
@@ -648,813 +898,736 @@
         </div>
     </header>
 
-    <section class="hero">
+    <section class="executive-summary" id="overview">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">AI Developer Tools Market Intelligence</h1>
-                <p class="hero-subtitle">
-                    Comprehensive analysis of 9 market-leading AI development tools with 
-                    $1.1B in funding, 38 enterprise customers, 
-                    and 172 news articles analyzed
-                </p>
+            <div class="executive-content">
+                <div class="executive-header">
+                    <h1 class="executive-title">AI Developer Tools</h1>
+                    <p class="executive-subtitle">
+                        Executive Market Intelligence Dashboard
+                    </p>
+                </div>
                 
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">$1.1B</span>
-                        <span class="hero-stat-label">Total Funding</span>
+                <div class="executive-insights">
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i data-lucide="trending-up" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <span class="insight-number">$1.1B</span>
+                        <span class="insight-label">Total Funding</span>
+                        <div class="insight-description">Across 9 market leaders</div>
                     </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">38</span>
-                        <span class="hero-stat-label">Enterprise Customers</span>
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i data-lucide="building" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <span class="insight-number">38</span>
+                        <span class="insight-label">Enterprise Customers</span>
+                        <div class="insight-description">Fortune 500 adoption</div>
                     </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">155,877</span>
-                        <span class="hero-stat-label">GitHub Stars</span>
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i data-lucide="star" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <span class="insight-number">155,877</span>
+                        <span class="insight-label">GitHub Stars</span>
+                        <div class="insight-description">Developer community</div>
                     </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">231</span>
-                        <span class="hero-stat-label">Features Tracked</span>
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i data-lucide="zap" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <span class="insight-number">231</span>
+                        <span class="insight-label">Features Tracked</span>
+                        <div class="insight-description">Comprehensive analysis</div>
                     </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">172</span>
-                        <span class="hero-stat-label">News Articles</span>
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i data-lucide="newspaper" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <span class="insight-number">172</span>
+                        <span class="insight-label">News Articles</span>
+                        <div class="insight-description">Market intelligence</div>
                     </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">225</span>
-                        <span class="hero-stat-label">Reddit Discussions</span>
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i data-lucide="users" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <span class="insight-number">225</span>
+                        <span class="insight-label">Reddit Discussions</span>
+                        <div class="insight-description">Community sentiment</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="container">
-        <div class="main-content">
-            <section class="section">
-                <div class="section-header">
-                    <h2 class="section-title">Market Leaders</h2>
-                    <p class="section-subtitle">
-                        Comprehensive analysis of each tool with complete financial, technical, and community data
-                    </p>
-                </div>
-                
-                <div class="tools-grid">
-                    
-            <div class="tool-card">
-                <div class="tool-header">
-                    <div class="tool-info">
-                        <h3>Cursor</h3>
-                        <div class="tool-company">Anysphere • Anysphere Inc.</div>
+    <section class="kpi-dashboard">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Key Performance Indicators</h2>
+                <p class="section-subtitle">
+                    Real-time market metrics and performance indicators
+                </p>
+            </div>
+            
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <h3 class="kpi-title">Market Valuation</h3>
+                        <div class="kpi-icon">
+                            <i data-lucide="dollar-sign" style="width: 20px; height: 20px;"></i>
+                        </div>
                     </div>
-                    <div class="tool-valuation">$10 billion</div>
-                </div>
-                
-                <div class="tool-metrics">
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">$1065M</div>
-                        <div class="tool-metric-label">Funding</div>
+                    <div class="kpi-value">$13.0B</div>
+                    <div class="kpi-change positive">
+                        <i data-lucide="arrow-up" style="width: 16px; height: 16px;"></i>
+                        +23% from last quarter
                     </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">12</div>
-                        <div class="tool-metric-label">Enterprises</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">30,561</div>
-                        <div class="tool-metric-label">GitHub ⭐</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">18</div>
-                        <div class="tool-metric-label">Features</div>
+                    <div class="kpi-chart">
+                        <canvas id="valuationChart"></canvas>
                     </div>
                 </div>
                 
-                <div class="tool-description">
-                    Cursor is an AI-powered code editor designed to make developers extraordinarily productive. It integrates AI capabilities directly into the coding environment, offering features like intelligent code completion, natural language editing, and codebase understanding. It enables 'vibe coding', a new approach to software development that leverages AI assistance.
-                </div>
-                
-                
-                <div class="tool-features">
-                    <div class="tool-features-title">Key Features (18)</div>
-                    <div class="features-grid">
-                        <div class="feature-tag">Intelligent code completion</div><div class="feature-tag">Natural language editing</div><div class="feature-tag">Codebase understanding</div><div class="feature-tag">Multi-line code suggestions</div><div class="feature-tag">Automatic code refactoring</div><div class="feature-tag">Privacy mode</div><div class="feature-tag">Customizable with extensions, themes, and keybindings</div><div class="feature-tag">AI-powered code editing</div>
-                        <div class="feature-tag">+10 more</div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <h3 class="kpi-title">Enterprise Adoption</h3>
+                        <div class="kpi-icon">
+                            <i data-lucide="building-2" style="width: 20px; height: 20px;"></i>
+                        </div>
+                    </div>
+                    <div class="kpi-value">38</div>
+                    <div class="kpi-change positive">
+                        <i data-lucide="arrow-up" style="width: 16px; height: 16px;"></i>
+                        +18% growth
+                    </div>
+                    <div class="kpi-chart">
+                        <canvas id="adoptionChart"></canvas>
                     </div>
                 </div>
                 
-                
-                
-                <div class="tool-enterprises">
-                    <div class="tool-features-title">Enterprise Customers (12)</div>
-                    <div class="enterprises-grid">
-                        <div class="enterprise-tag">Johnson & Johnson</div><div class="enterprise-tag">Stripe</div><div class="enterprise-tag">Samsung</div><div class="enterprise-tag">Rippling</div><div class="enterprise-tag">Perplexity</div><div class="enterprise-tag">Ramp</div><div class="enterprise-tag">Shopify</div><div class="enterprise-tag">US Foods</div>
-                        <div class="enterprise-tag">+4 more</div>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <h3 class="kpi-title">Developer Engagement</h3>
+                        <div class="kpi-icon">
+                            <i data-lucide="code" style="width: 20px; height: 20px;"></i>
+                        </div>
+                    </div>
+                    <div class="kpi-value">155K</div>
+                    <div class="kpi-change positive">
+                        <i data-lucide="arrow-up" style="width: 16px; height: 16px;"></i>
+                        +45% this month
+                    </div>
+                    <div class="kpi-chart">
+                        <canvas id="engagementChart"></canvas>
                     </div>
                 </div>
                 
-                
-                <div class="tool-footer">
-                    <div class="tool-links">
-                        <a href="https://www.cursor.com/" target="_blank" class="tool-link">Website</a>
-                        <a href="https://github.com/getcursor/cursor" target="_blank" class="tool-link">GitHub</a>
-                        <span class="tool-link">20 articles</span>
-                        <span class="tool-link">25 Reddit posts</span>
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <h3 class="kpi-title">Market Sentiment</h3>
+                        <div class="kpi-icon">
+                            <i data-lucide="heart" style="width: 20px; height: 20px;"></i>
+                        </div>
                     </div>
-                    <a href="tools/1.html" class="view-details">Complete Analysis</a>
+                    <div class="kpi-value">8.7/10</div>
+                    <div class="kpi-change positive">
+                        <i data-lucide="arrow-up" style="width: 16px; height: 16px;"></i>
+                        +0.3 points
+                    </div>
+                    <div class="kpi-chart">
+                        <canvas id="sentimentChart"></canvas>
+                    </div>
                 </div>
             </div>
-        
-            <div class="tool-card">
-                <div class="tool-header">
-                    <div class="tool-info">
-                        <h3>Claude Code</h3>
-                        <div class="tool-company">Anthropic • Anthropic PBC</div>
-                    </div>
-                    
-                </div>
-                
-                <div class="tool-metrics">
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">$0M</div>
-                        <div class="tool-metric-label">Funding</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">1</div>
-                        <div class="tool-metric-label">Enterprises</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">16,576</div>
-                        <div class="tool-metric-label">GitHub ⭐</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">18</div>
-                        <div class="tool-metric-label">Features</div>
-                    </div>
-                </div>
-                
-                <div class="tool-description">
-                    Claude Code is an AI-powered coding assistant developed by Anthropic, designed to enhance developer productivity by integrating into modern workflows and IDEs. It helps developers with tasks such as code completion, refactoring, bug fixing, code analysis, and AI-paired programming.
-                </div>
-                
-                
-                <div class="tool-features">
-                    <div class="tool-features-title">Key Features (18)</div>
-                    <div class="features-grid">
-                        <div class="feature-tag">AI-powered code completion</div><div class="feature-tag">Code refactoring</div><div class="feature-tag">Bug detection and fixing</div><div class="feature-tag">Large codebase analysis</div><div class="feature-tag">Natural language code generation</div><div class="feature-tag">Code review capabilities</div><div class="feature-tag">Support for multiple programming languages</div><div class="feature-tag">Test case creation</div>
-                        <div class="feature-tag">+10 more</div>
-                    </div>
-                </div>
-                
-                
-                
-                <div class="tool-enterprises">
-                    <div class="tool-features-title">Enterprise Customers (1)</div>
-                    <div class="enterprises-grid">
-                        <div class="enterprise-tag">Cloudflare</div>
-                        
-                    </div>
-                </div>
-                
-                
-                <div class="tool-footer">
-                    <div class="tool-links">
-                        <a href="https://claude.ai/" target="_blank" class="tool-link">Website</a>
-                        <a href="https://github.com/anthropics/claude-code" target="_blank" class="tool-link">GitHub</a>
-                        <span class="tool-link">20 articles</span>
-                        <span class="tool-link">25 Reddit posts</span>
-                    </div>
-                    <a href="tools/2.html" class="view-details">Complete Analysis</a>
-                </div>
-            </div>
-        
-            <div class="tool-card">
-                <div class="tool-header">
-                    <div class="tool-info">
-                        <h3>GitHub Copilot</h3>
-                        <div class="tool-company">Microsoft • Microsoft Corporation</div>
-                    </div>
-                    
-                </div>
-                
-                <div class="tool-metrics">
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">$0M</div>
-                        <div class="tool-metric-label">Funding</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">7</div>
-                        <div class="tool-metric-label">Enterprises</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">0</div>
-                        <div class="tool-metric-label">GitHub ⭐</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">16</div>
-                        <div class="tool-metric-label">Features</div>
-                    </div>
-                </div>
-                
-                <div class="tool-description">
-                    GitHub Copilot is an AI-powered coding assistant that provides contextualized assistance throughout the software development lifecycle, offering features like code completions, chat assistance, code explanations, and code suggestions to help developers write, review, and refactor code more efficiently.
-                </div>
-                
-                
-                <div class="tool-features">
-                    <div class="tool-features-title">Key Features (16)</div>
-                    <div class="features-grid">
-                        <div class="feature-tag">AI-powered code completion</div><div class="feature-tag">Chat assistance in IDE</div><div class="feature-tag">Code explanations</div><div class="feature-tag">Agent mode for handling open issues</div><div class="feature-tag">Next edit suggestions</div><div class="feature-tag">Code review</div><div class="feature-tag">Multiple AI model integration</div><div class="feature-tag">Vulnerability detection</div>
-                        <div class="feature-tag">+8 more</div>
-                    </div>
-                </div>
-                
-                
-                
-                <div class="tool-enterprises">
-                    <div class="tool-features-title">Enterprise Customers (7)</div>
-                    <div class="enterprises-grid">
-                        <div class="enterprise-tag">Coyote Logistics</div><div class="enterprise-tag">Duolingo</div><div class="enterprise-tag">General Motors</div><div class="enterprise-tag">Mercado Libre</div><div class="enterprise-tag">Shopify</div><div class="enterprise-tag">Stripe</div><div class="enterprise-tag">CocaCola</div>
-                        
-                    </div>
-                </div>
-                
-                
-                <div class="tool-footer">
-                    <div class="tool-links">
-                        <a href="https://github.com/features/copilot" target="_blank" class="tool-link">Website</a>
-                        <a href="https://github.com/features/copilot" target="_blank" class="tool-link">GitHub</a>
-                        <span class="tool-link">20 articles</span>
-                        <span class="tool-link">25 Reddit posts</span>
-                    </div>
-                    <a href="tools/3.html" class="view-details">Complete Analysis</a>
-                </div>
-            </div>
-        
-            <div class="tool-card">
-                <div class="tool-header">
-                    <div class="tool-info">
-                        <h3>Replit</h3>
-                        <div class="tool-company">Replit • Replit Inc.</div>
-                    </div>
-                    
-                </div>
-                
-                <div class="tool-metrics">
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">$0M</div>
-                        <div class="tool-metric-label">Funding</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">11</div>
-                        <div class="tool-metric-label">Enterprises</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">0</div>
-                        <div class="tool-metric-label">GitHub ⭐</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">16</div>
-                        <div class="tool-metric-label">Features</div>
-                    </div>
-                </div>
-                
-                <div class="tool-description">
-                    Replit is a collaborative browser-based IDE that allows users to create and deploy websites, applications, automations, internal tools, and data pipelines in any programming language. It features AI-powered coding assistance, including Replit Agent for autonomous coding tasks, and supports vibe coding techniques.
-                </div>
-                
-                
-                <div class="tool-features">
-                    <div class="tool-features-title">Key Features (16)</div>
-                    <div class="features-grid">
-                        <div class="feature-tag">AI-powered code generation and deployment</div><div class="feature-tag">Ready-to-use database</div><div class="feature-tag">User authentication (Replit Auth)</div><div class="feature-tag">Secure integrations with services like Stripe and OpenAI</div><div class="feature-tag">Vibe coding capabilities</div><div class="feature-tag">SSO for secure access</div><div class="feature-tag">Role-based access control</div><div class="feature-tag">Private deployments</div>
-                        <div class="feature-tag">+8 more</div>
-                    </div>
-                </div>
-                
-                
-                
-                <div class="tool-enterprises">
-                    <div class="tool-features-title">Enterprise Customers (11)</div>
-                    <div class="enterprises-grid">
-                        <div class="enterprise-tag">Google</div><div class="enterprise-tag">Anthropic</div><div class="enterprise-tag">Coinbase</div><div class="enterprise-tag">Hg Capital</div><div class="enterprise-tag">Oscar Health</div><div class="enterprise-tag">ARK Invest</div><div class="enterprise-tag">Zinus</div><div class="enterprise-tag">Northern Health</div>
-                        <div class="enterprise-tag">+3 more</div>
-                    </div>
-                </div>
-                
-                
-                <div class="tool-footer">
-                    <div class="tool-links">
-                        <a href="https://replit.com/" target="_blank" class="tool-link">Website</a>
-                        <a href="https://github.com/replit" target="_blank" class="tool-link">GitHub</a>
-                        <span class="tool-link">20 articles</span>
-                        <span class="tool-link">25 Reddit posts</span>
-                    </div>
-                    <a href="tools/4.html" class="view-details">Complete Analysis</a>
-                </div>
-            </div>
-        
-            <div class="tool-card">
-                <div class="tool-header">
-                    <div class="tool-info">
-                        <h3>Augment</h3>
-                        <div class="tool-company">Augment • Augment Code Inc.</div>
-                    </div>
-                    
-                </div>
-                
-                <div class="tool-metrics">
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">$0M</div>
-                        <div class="tool-metric-label">Funding</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">3</div>
-                        <div class="tool-metric-label">Enterprises</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">0</div>
-                        <div class="tool-metric-label">GitHub ⭐</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">23</div>
-                        <div class="tool-metric-label">Features</div>
-                    </div>
-                </div>
-                
-                <div class="tool-description">
-                    Augment is an AI-powered coding assistant that helps developers code faster and better, offering features like autonomous coding agents, real-time codebase indexing, context-aware AI suggestions, code generation, chat assistance, and code review. It integrates with various IDEs and uses cutting-edge AI models to enhance human potential in software development tasks.
-                </div>
-                
-                
-                <div class="tool-features">
-                    <div class="tool-features-title">Key Features (23)</div>
-                    <div class="features-grid">
-                        <div class="feature-tag">Autonomous coding agents</div><div class="feature-tag">Context engine for codebase understanding</div><div class="feature-tag">Code completion</div><div class="feature-tag">Chat assistance</div><div class="feature-tag">Code review</div><div class="feature-tag">Smart apply for code suggestions</div><div class="feature-tag">Focus context for prioritizing specific files</div><div class="feature-tag">Enhanced prompts</div>
-                        <div class="feature-tag">+15 more</div>
-                    </div>
-                </div>
-                
-                
-                
-                <div class="tool-enterprises">
-                    <div class="tool-features-title">Enterprise Customers (3)</div>
-                    <div class="enterprises-grid">
-                        <div class="enterprise-tag">Collective</div><div class="enterprise-tag">Webflow</div><div class="enterprise-tag">GitHub</div>
-                        
-                    </div>
-                </div>
-                
-                
-                <div class="tool-footer">
-                    <div class="tool-links">
-                        <a href="https://www.augmentcode.com/" target="_blank" class="tool-link">Website</a>
-                        <a href="https://github.com/augmentcode" target="_blank" class="tool-link">GitHub</a>
-                        <span class="tool-link">20 articles</span>
-                        <span class="tool-link">25 Reddit posts</span>
-                    </div>
-                    <a href="tools/5.html" class="view-details">Complete Analysis</a>
-                </div>
-            </div>
-        
-            <div class="tool-card">
-                <div class="tool-header">
-                    <div class="tool-info">
-                        <h3>Zed</h3>
-                        <div class="tool-company">Zed Industries • Zed Industries Inc.</div>
-                    </div>
-                    
-                </div>
-                
-                <div class="tool-metrics">
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">$0M</div>
-                        <div class="tool-metric-label">Funding</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">1</div>
-                        <div class="tool-metric-label">Enterprises</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">62,023</div>
-                        <div class="tool-metric-label">GitHub ⭐</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">28</div>
-                        <div class="tool-metric-label">Features</div>
-                    </div>
-                </div>
-                
-                <div class="tool-description">
-                    Zed is a high-performance, open-source, multiplayer code editor designed for collaboration and AI-assisted coding. Written from scratch in Rust, it efficiently leverages multiple CPU cores and GPU for fast performance, offering modern features like built-in debugger capabilities, syntax-aware editing, and agentic editing mode. It supports multiple programming languages and integrates various AI models for code assistance.
-                </div>
-                
-                
-                <div class="tool-features">
-                    <div class="tool-features-title">Key Features (28)</div>
-                    <div class="features-grid">
-                        <div class="feature-tag">High-performance editing</div><div class="feature-tag">AI-powered code generation and analysis</div><div class="feature-tag">Collaborative features (chat, notes, screen sharing)</div><div class="feature-tag">Debugger support</div><div class="feature-tag">Native Git support</div><div class="feature-tag">Edit prediction</div><div class="feature-tag">Remote development</div><div class="feature-tag">Multibuffer editing</div>
-                        <div class="feature-tag">+20 more</div>
-                    </div>
-                </div>
-                
-                
-                
-                <div class="tool-enterprises">
-                    <div class="tool-features-title">Enterprise Customers (1)</div>
-                    <div class="enterprises-grid">
-                        <div class="enterprise-tag">Anthropic</div>
-                        
-                    </div>
-                </div>
-                
-                
-                <div class="tool-footer">
-                    <div class="tool-links">
-                        <a href="https://zed.dev/" target="_blank" class="tool-link">Website</a>
-                        <a href="https://github.com/zed-industries/zed" target="_blank" class="tool-link">GitHub</a>
-                        <span class="tool-link">20 articles</span>
-                        <span class="tool-link">25 Reddit posts</span>
-                    </div>
-                    <a href="tools/6.html" class="view-details">Complete Analysis</a>
-                </div>
-            </div>
-        
-            <div class="tool-card">
-                <div class="tool-header">
-                    <div class="tool-info">
-                        <h3>CLIne</h3>
-                        <div class="tool-company">Cline Bot Inc. • Cline Bot Inc.</div>
-                    </div>
-                    
-                </div>
-                
-                <div class="tool-metrics">
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">$NaNM</div>
-                        <div class="tool-metric-label">Funding</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">1</div>
-                        <div class="tool-metric-label">Enterprises</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">46,717</div>
-                        <div class="tool-metric-label">GitHub ⭐</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">34</div>
-                        <div class="tool-metric-label">Features</div>
-                    </div>
-                </div>
-                
-                <div class="tool-description">
-                    Cline is an open-source, fully collaborative AI coding assistant that integrates directly into IDEs. It offers dual Plan/Act modes, autonomous coding, context management, and integration with various AI models to enhance software development workflows.
-                </div>
-                
-                
-                <div class="tool-features">
-                    <div class="tool-features-title">Key Features (34)</div>
-                    <div class="features-grid">
-                        <div class="feature-tag">AI-powered code generation and analysis</div><div class="feature-tag">Collaborative planning and coding</div><div class="feature-tag">Integration with multiple IDEs</div><div class="feature-tag">MCP Servers integration</div><div class="feature-tag">Automatic issue detection and fixing</div><div class="feature-tag">Checkpoint system for version control</div><div class="feature-tag">Access to multiple AI models</div><div class="feature-tag">Headless browser capabilities</div>
-                        <div class="feature-tag">+26 more</div>
-                    </div>
-                </div>
-                
-                
-                
-                <div class="tool-enterprises">
-                    <div class="tool-features-title">Enterprise Customers (1)</div>
-                    <div class="enterprises-grid">
-                        <div class="enterprise-tag">Cleat Street</div>
-                        
-                    </div>
-                </div>
-                
-                
-                <div class="tool-footer">
-                    <div class="tool-links">
-                        <a href="https://cline.bot/" target="_blank" class="tool-link">Website</a>
-                        <a href="https://github.com/cline/cline" target="_blank" class="tool-link">GitHub</a>
-                        <span class="tool-link">20 articles</span>
-                        <span class="tool-link">25 Reddit posts</span>
-                    </div>
-                    <a href="tools/7.html" class="view-details">Complete Analysis</a>
-                </div>
-            </div>
-        
-            <div class="tool-card">
-                <div class="tool-header">
-                    <div class="tool-info">
-                        <h3>Windsurf</h3>
-                        <div class="tool-company">Codeium. • OpenAI</div>
-                    </div>
-                    <div class="tool-valuation">$3 billion</div>
-                </div>
-                
-                <div class="tool-metrics">
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">$0M</div>
-                        <div class="tool-metric-label">Funding</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">2</div>
-                        <div class="tool-metric-label">Enterprises</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">0</div>
-                        <div class="tool-metric-label">GitHub ⭐</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">40</div>
-                        <div class="tool-metric-label">Features</div>
-                    </div>
-                </div>
-                
-                <div class="tool-description">
-                    Windsurf is a purpose-built AI-powered IDE that offers features like Cascade for deep codebase understanding, full repo-aware chat with multi-file edits, blazing fast Autocomplete, Supercomplete for predicting next intent, and various AI-powered capabilities to streamline the development workflow.
-                </div>
-                
-                
-                <div class="tool-features">
-                    <div class="tool-features-title">Key Features (40)</div>
-                    <div class="features-grid">
-                        <div class="feature-tag">Cascade AI-powered chat</div><div class="feature-tag">Windsurf Tab</div><div class="feature-tag">Blazing fast Autocomplete</div><div class="feature-tag">Supercomplete for predicting next intent</div><div class="feature-tag">Command for larger file diffs and modifications</div><div class="feature-tag">Memories</div><div class="feature-tag">Rules</div><div class="feature-tag">Lint Fixing</div>
-                        <div class="feature-tag">+32 more</div>
-                    </div>
-                </div>
-                
-                
-                
-                <div class="tool-enterprises">
-                    <div class="tool-features-title">Enterprise Customers (2)</div>
-                    <div class="enterprises-grid">
-                        <div class="enterprise-tag">Y Combinator</div><div class="enterprise-tag">athenahealth</div>
-                        
-                    </div>
-                </div>
-                
-                
-                <div class="tool-footer">
-                    <div class="tool-links">
-                        <a href="https://windsurf.com/" target="_blank" class="tool-link">Website</a>
-                        <a href="https://windsurf.com/" target="_blank" class="tool-link">GitHub</a>
-                        <span class="tool-link">20 articles</span>
-                        <span class="tool-link">25 Reddit posts</span>
-                    </div>
-                    <a href="tools/8.html" class="view-details">Complete Analysis</a>
-                </div>
-            </div>
-        
-            <div class="tool-card">
-                <div class="tool-header">
-                    <div class="tool-info">
-                        <h3>Roo Code</h3>
-                        <div class="tool-company">Community • null</div>
-                    </div>
-                    
-                </div>
-                
-                <div class="tool-metrics">
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">$0M</div>
-                        <div class="tool-metric-label">Funding</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">0</div>
-                        <div class="tool-metric-label">Enterprises</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">0</div>
-                        <div class="tool-metric-label">GitHub ⭐</div>
-                    </div>
-                    <div class="tool-metric">
-                        <div class="tool-metric-value">38</div>
-                        <div class="tool-metric-label">Features</div>
-                    </div>
-                </div>
-                
-                <div class="tool-description">
-                    Roo Code (formerly Roo Cline) is an AI-powered autonomous coding agent that lives in your editor. It's a fork of Cline with additional experimental features, offering comprehensive file management, command execution, browser automation, and integration with multiple AI models. It provides features for creating and running entire workflows using prompts to large language models, with capabilities like intelligent context condensing, fast edits, and orchestration with large context windows.
-                </div>
-                
-                
-                <div class="tool-features">
-                    <div class="tool-features-title">Key Features (38)</div>
-                    <div class="features-grid">
-                        <div class="feature-tag">Code mode for writing code and executing tasks</div><div class="feature-tag">Architect mode for high-level technical design and system architecture</div><div class="feature-tag">Ask mode for querying about the codebase or technical concepts</div><div class="feature-tag">Integration with multiple API providers and AI models</div><div class="feature-tag">Terminal command execution</div><div class="feature-tag">File creation and editing</div><div class="feature-tag">Browser automation</div><div class="feature-tag">Drag and drop image support</div>
-                        <div class="feature-tag">+30 more</div>
-                    </div>
-                </div>
-                
-                
-                
-                
-                <div class="tool-footer">
-                    <div class="tool-links">
-                        <a href="https://roocline.dev/" target="_blank" class="tool-link">Website</a>
-                        <a href="https://roocline.dev/" target="_blank" class="tool-link">GitHub</a>
-                        <span class="tool-link">12 articles</span>
-                        <span class="tool-link">25 Reddit posts</span>
-                    </div>
-                    <a href="tools/9.html" class="view-details">Complete Analysis</a>
-                </div>
-            </div>
-        
-                </div>
-            </section>
+        </div>
+    </section>
 
-            <section class="section">
-                <div class="section-header">
-                    <h2 class="section-title">Investment Intelligence</h2>
-                    <p class="section-subtitle">
-                        Valuations, funding rounds, and market position analysis
-                    </p>
+    <section class="market-leaders" id="market">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Market Leaders</h2>
+                <p class="section-subtitle">
+                    Comprehensive analysis of top AI developer tools with complete market intelligence
+                </p>
+            </div>
+            
+            <div class="leaders-grid">
+                <div class="leader-card">
+                    <div class="leader-header">
+                        <div class="leader-info">
+                            <h3>Cursor</h3>
+                            <div class="leader-company">Anysphere • Series C</div>
+                        </div>
+                        <div class="leader-valuation">$10.0B</div>
+                    </div>
+                    
+                    <div class="leader-metrics">
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">$1.1B</div>
+                            <div class="leader-metric-label">Funding</div>
+                        </div>
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">12</div>
+                            <div class="leader-metric-label">Enterprises</div>
+                        </div>
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">30K</div>
+                            <div class="leader-metric-label">GitHub ⭐</div>
+                        </div>
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">18</div>
+                            <div class="leader-metric-label">Features</div>
+                        </div>
+                    </div>
+                    
+                    <div class="leader-features">
+                        <div class="leader-features-title">Key Capabilities</div>
+                        <div class="features-grid">
+                            <div class="feature-tag">AI Code Completion</div>
+                            <div class="feature-tag">Natural Language Editing</div>
+                            <div class="feature-tag">Codebase Understanding</div>
+                            <div class="feature-tag">Vibe Coding</div>
+                            <div class="feature-tag">Privacy Mode</div>
+                            <div class="feature-tag">+13 more</div>
+                        </div>
+                    </div>
+                    
+                    <div class="leader-enterprises">
+                        <div class="leader-features-title">Enterprise Customers</div>
+                        <div class="enterprises-grid">
+                            <div class="enterprise-tag">Johnson & Johnson</div>
+                            <div class="enterprise-tag">Stripe</div>
+                            <div class="enterprise-tag">Samsung</div>
+                            <div class="enterprise-tag">Shopify</div>
+                            <div class="enterprise-tag">+8 more</div>
+                        </div>
+                    </div>
+                    
+                    <div class="leader-footer">
+                        <div class="leader-links">
+                            <a href="https://cursor.com" target="_blank" class="leader-link">
+                                <i data-lucide="external-link" style="width: 14px; height: 14px; margin-right: 4px;"></i>
+                                Website
+                            </a>
+                            <a href="https://github.com/getcursor/cursor" target="_blank" class="leader-link">
+                                <i data-lucide="github" style="width: 14px; height: 14px; margin-right: 4px;"></i>
+                                GitHub
+                            </a>
+                        </div>
+                        <a href="tools/1.html" class="view-details">Complete Analysis</a>
+                    </div>
                 </div>
                 
-                <div class="investment-grid">
+                <div class="leader-card">
+                    <div class="leader-header">
+                        <div class="leader-info">
+                            <h3>Windsurf</h3>
+                            <div class="leader-company">Codeium • Series B</div>
+                        </div>
+                        <div class="leader-valuation">$3.0B</div>
+                    </div>
                     
-        <div class="investment-card">
-            <h3>Valuation Leaders</h3>
-            
-                <div class="ranking-item">
-                    <div class="ranking-left">
-                        <div class="ranking-number">1</div>
-                        <div class="ranking-name">Cursor</div>
+                    <div class="leader-metrics">
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">$0M</div>
+                            <div class="leader-metric-label">Funding</div>
+                        </div>
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">2</div>
+                            <div class="leader-metric-label">Enterprises</div>
+                        </div>
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">0</div>
+                            <div class="leader-metric-label">GitHub ⭐</div>
+                        </div>
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">40</div>
+                            <div class="leader-metric-label">Features</div>
+                        </div>
                     </div>
-                    <div class="ranking-value">$10.0B</div>
-                </div>
-            
-                <div class="ranking-item">
-                    <div class="ranking-left">
-                        <div class="ranking-number">2</div>
-                        <div class="ranking-name">Windsurf</div>
+                    
+                    <div class="leader-features">
+                        <div class="leader-features-title">Key Capabilities</div>
+                        <div class="features-grid">
+                            <div class="feature-tag">Cascade AI Chat</div>
+                            <div class="feature-tag">Windsurf Tab</div>
+                            <div class="feature-tag">Supercomplete</div>
+                            <div class="feature-tag">Memories</div>
+                            <div class="feature-tag">Rules Engine</div>
+                            <div class="feature-tag">+35 more</div>
+                        </div>
                     </div>
-                    <div class="ranking-value">$3.0B</div>
+                    
+                    <div class="leader-enterprises">
+                        <div class="leader-features-title">Enterprise Customers</div>
+                        <div class="enterprises-grid">
+                            <div class="enterprise-tag">Y Combinator</div>
+                            <div class="enterprise-tag">athenahealth</div>
+                        </div>
+                    </div>
+                    
+                    <div class="leader-footer">
+                        <div class="leader-links">
+                            <a href="https://windsurf.com" target="_blank" class="leader-link">
+                                <i data-lucide="external-link" style="width: 14px; height: 14px; margin-right: 4px;"></i>
+                                Website
+                            </a>
+                        </div>
+                        <a href="tools/8.html" class="view-details">Complete Analysis</a>
+                    </div>
                 </div>
-            
+                
+                <div class="leader-card">
+                    <div class="leader-header">
+                        <div class="leader-info">
+                            <h3>Zed</h3>
+                            <div class="leader-company">Zed Industries • Open Source</div>
+                        </div>
+                    </div>
+                    
+                    <div class="leader-metrics">
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">$0M</div>
+                            <div class="leader-metric-label">Funding</div>
+                        </div>
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">1</div>
+                            <div class="leader-metric-label">Enterprises</div>
+                        </div>
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">62K</div>
+                            <div class="leader-metric-label">GitHub ⭐</div>
+                        </div>
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">28</div>
+                            <div class="leader-metric-label">Features</div>
+                        </div>
+                    </div>
+                    
+                    <div class="leader-features">
+                        <div class="leader-features-title">Key Capabilities</div>
+                        <div class="features-grid">
+                            <div class="feature-tag">High Performance</div>
+                            <div class="feature-tag">Multiplayer Editing</div>
+                            <div class="feature-tag">Built-in Debugger</div>
+                            <div class="feature-tag">Rust Performance</div>
+                            <div class="feature-tag">GPU Acceleration</div>
+                            <div class="feature-tag">+23 more</div>
+                        </div>
+                    </div>
+                    
+                    <div class="leader-enterprises">
+                        <div class="leader-features-title">Enterprise Customers</div>
+                        <div class="enterprises-grid">
+                            <div class="enterprise-tag">Anthropic</div>
+                        </div>
+                    </div>
+                    
+                    <div class="leader-footer">
+                        <div class="leader-links">
+                            <a href="https://zed.dev" target="_blank" class="leader-link">
+                                <i data-lucide="external-link" style="width: 14px; height: 14px; margin-right: 4px;"></i>
+                                Website
+                            </a>
+                            <a href="https://github.com/zed-industries/zed" target="_blank" class="leader-link">
+                                <i data-lucide="github" style="width: 14px; height: 14px; margin-right: 4px;"></i>
+                                GitHub
+                            </a>
+                        </div>
+                        <a href="tools/6.html" class="view-details">Complete Analysis</a>
+                    </div>
+                </div>
+                
+                <div class="leader-card">
+                    <div class="leader-header">
+                        <div class="leader-info">
+                            <h3>Cline</h3>
+                            <div class="leader-company">Open Source • Community</div>
+                        </div>
+                    </div>
+                    
+                    <div class="leader-metrics">
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">$0M</div>
+                            <div class="leader-metric-label">Funding</div>
+                        </div>
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">1</div>
+                            <div class="leader-metric-label">Enterprises</div>
+                        </div>
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">47K</div>
+                            <div class="leader-metric-label">GitHub ⭐</div>
+                        </div>
+                        <div class="leader-metric">
+                            <div class="leader-metric-value">34</div>
+                            <div class="leader-metric-label">Features</div>
+                        </div>
+                    </div>
+                    
+                    <div class="leader-features">
+                        <div class="leader-features-title">Key Capabilities</div>
+                        <div class="features-grid">
+                            <div class="feature-tag">Autonomous Coding</div>
+                            <div class="feature-tag">Plan/Act Modes</div>
+                            <div class="feature-tag">MCP Integration</div>
+                            <div class="feature-tag">Browser Control</div>
+                            <div class="feature-tag">Multi-AI Models</div>
+                            <div class="feature-tag">+29 more</div>
+                        </div>
+                    </div>
+                    
+                    <div class="leader-enterprises">
+                        <div class="leader-features-title">Enterprise Customers</div>
+                        <div class="enterprises-grid">
+                            <div class="enterprise-tag">Cleat Street</div>
+                        </div>
+                    </div>
+                    
+                    <div class="leader-footer">
+                        <div class="leader-links">
+                            <a href="https://cline.bot" target="_blank" class="leader-link">
+                                <i data-lucide="external-link" style="width: 14px; height: 14px; margin-right: 4px;"></i>
+                                Website
+                            </a>
+                            <a href="https://github.com/cline/cline" target="_blank" class="leader-link">
+                                <i data-lucide="github" style="width: 14px; height: 14px; margin-right: 4px;"></i>
+                                GitHub
+                            </a>
+                        </div>
+                        <a href="tools/7.html" class="view-details">Complete Analysis</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="investment-card">
-            <h3>Community Engagement</h3>
-            
-                <div class="ranking-item">
-                    <div class="ranking-left">
-                        <div class="ranking-number">1</div>
-                        <div class="ranking-name">Zed</div>
-                    </div>
-                    <div class="ranking-value">62048 total</div>
-                </div>
-            
-                <div class="ranking-item">
-                    <div class="ranking-left">
-                        <div class="ranking-number">2</div>
-                        <div class="ranking-name">CLIne</div>
-                    </div>
-                    <div class="ranking-value">46742 total</div>
-                </div>
-            
-                <div class="ranking-item">
-                    <div class="ranking-left">
-                        <div class="ranking-number">3</div>
-                        <div class="ranking-name">Cursor</div>
-                    </div>
-                    <div class="ranking-value">30587 total</div>
-                </div>
-            
-                <div class="ranking-item">
-                    <div class="ranking-left">
-                        <div class="ranking-number">4</div>
-                        <div class="ranking-name">Claude Code</div>
-                    </div>
-                    <div class="ranking-value">16598 total</div>
-                </div>
-            
-                <div class="ranking-item">
-                    <div class="ranking-left">
-                        <div class="ranking-number">5</div>
-                        <div class="ranking-name">GitHub Copilot</div>
-                    </div>
-                    <div class="ranking-value">25 total</div>
-                </div>
-            
-        </div>
-        
-        <div class="investment-card">
-            <h3>Market Metrics</h3>
-            <div class="ranking-item">
-                <div class="ranking-name">Total Funding Tracked</div>
-                <div class="ranking-value">$1.1B</div>
-            </div>
-            <div class="ranking-item">
-                <div class="ranking-name">Enterprise Customers</div>
-                <div class="ranking-value">38</div>
-            </div>
-            <div class="ranking-item">
-                <div class="ranking-name">GitHub Stars</div>
-                <div class="ranking-value">155,877</div>
-            </div>
-            <div class="ranking-item">
-                <div class="ranking-name">Features Tracked</div>
-                <div class="ranking-value">231</div>
-            </div>
-            <div class="ranking-item">
-                <div class="ranking-name">News Articles</div>
-                <div class="ranking-value">172</div>
-            </div>
-        </div>
-    
-                </div>
-            </section>
+    </section>
 
-            <section class="section">
-                <div class="section-header">
-                    <h2 class="section-title">Market Intelligence</h2>
-                    <p class="section-subtitle">
-                        Recent developments and strategic insights from 172 analyzed articles
-                    </p>
+    <section class="investment-intelligence" id="investment">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Investment Intelligence</h2>
+                <p class="section-subtitle">
+                    Comprehensive funding analysis and market positioning insights
+                </p>
+            </div>
+            
+            <div class="investment-grid">
+                <div class="investment-card">
+                    <h3>
+                        <div class="investment-icon">
+                            <i data-lucide="trophy" style="width: 20px; height: 20px;"></i>
+                        </div>
+                        Valuation Leaders
+                    </h3>
+                    <div class="ranking-item">
+                        <div class="ranking-left">
+                            <div class="ranking-number">1</div>
+                            <div class="ranking-name">Cursor</div>
+                        </div>
+                        <div class="ranking-value">$10.0B</div>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="ranking-left">
+                            <div class="ranking-number">2</div>
+                            <div class="ranking-name">Windsurf</div>
+                        </div>
+                        <div class="ranking-value">$3.0B</div>
+                    </div>
                 </div>
                 
-                <div class="news-grid">
-                    
-        <div class="news-item">
-            <div class="news-title">Copilot Chat in VS Code is now open source</div>
-            <div class="news-meta">
-                <span>Github.com • GitHub Copilot</span>
-                <span>6/27/2025</span>
-            </div>
-        </div>
-    
-        <div class="news-item">
-            <div class="news-title">We bought a rental property instead of a 'starter home.' It pays for itself, and we use it whenever we want.</div>
-            <div class="news-meta">
-                <span>Business Insider • CLIne</span>
-                <span>6/23/2025</span>
-            </div>
-        </div>
-    
-        <div class="news-item">
-            <div class="news-title">Claude Code for VSCode</div>
-            <div class="news-meta">
-                <span>Visualstudio.com • Claude Code</span>
-                <span>6/23/2025</span>
-            </div>
-        </div>
-    
-        <div class="news-item">
-            <div class="news-title">The Zed Debugger Is Here</div>
-            <div class="news-meta">
-                <span>Zed.dev • Zed</span>
-                <span>6/18/2025</span>
-            </div>
-        </div>
-    
-        <div class="news-item">
-            <div class="news-title">Remote MCP Support in Claude Code</div>
-            <div class="news-meta">
-                <span>Anthropic.com • Claude Code</span>
-                <span>6/18/2025</span>
-            </div>
-        </div>
-    
-        <div class="news-item">
-            <div class="news-title">Zed Editor Introduces Built-In Debugger</div>
-            <div class="news-meta">
-                <span>Phoronix • Zed</span>
-                <span>6/18/2025</span>
-            </div>
-        </div>
-    
-        <div class="news-item">
-            <div class="news-title">Inside Microsoft’s complicated relationship with OpenAI</div>
-            <div class="news-meta">
-                <span>The Verge • Windsurf</span>
-                <span>6/18/2025</span>
-            </div>
-        </div>
-    
-        <div class="news-item">
-            <div class="news-title">Karma Strikes Back in the New ‘I Know What You Did Last Summer’ Trailer</div>
-            <div class="news-meta">
-                <span>Gizmodo.com • CLIne</span>
-                <span>6/17/2025</span>
-            </div>
-        </div>
-    
+                <div class="investment-card">
+                    <h3>
+                        <div class="investment-icon">
+                            <i data-lucide="star" style="width: 20px; height: 20px;"></i>
+                        </div>
+                        Community Leaders
+                    </h3>
+                    <div class="ranking-item">
+                        <div class="ranking-left">
+                            <div class="ranking-number">1</div>
+                            <div class="ranking-name">Zed</div>
+                        </div>
+                        <div class="ranking-value">62K ⭐</div>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="ranking-left">
+                            <div class="ranking-number">2</div>
+                            <div class="ranking-name">Cline</div>
+                        </div>
+                        <div class="ranking-value">47K ⭐</div>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="ranking-left">
+                            <div class="ranking-number">3</div>
+                            <div class="ranking-name">Cursor</div>
+                        </div>
+                        <div class="ranking-value">30K ⭐</div>
+                    </div>
                 </div>
-            </section>
+                
+                <div class="investment-card">
+                    <h3>
+                        <div class="investment-icon">
+                            <i data-lucide="trending-up" style="width: 20px; height: 20px;"></i>
+                        </div>
+                        Market Metrics
+                    </h3>
+                    <div class="ranking-item">
+                        <div class="ranking-name">Total Market Value</div>
+                        <div class="ranking-value">$13.0B</div>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="ranking-name">Active Funding</div>
+                        <div class="ranking-value">$1.1B</div>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="ranking-name">Enterprise Customers</div>
+                        <div class="ranking-value">38</div>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="ranking-name">Developer Community</div>
+                        <div class="ranking-value">155K</div>
+                    </div>
+                </div>
+                
+                <div class="investment-card">
+                    <h3>
+                        <div class="investment-icon">
+                            <i data-lucide="pie-chart" style="width: 20px; height: 20px;"></i>
+                        </div>
+                        Market Share
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="marketShareChart"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section class="market-intelligence" id="intelligence">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Market Intelligence</h2>
+                <p class="section-subtitle">
+                    Latest developments and strategic insights from 172 analyzed articles
+                </p>
+            </div>
+            
+            <div class="intelligence-grid">
+                <div class="intelligence-item">
+                    <div class="intelligence-title">Copilot Chat in VS Code is now open source</div>
+                    <div class="intelligence-meta">
+                        <div class="intelligence-source">
+                            <i data-lucide="github" style="width: 16px; height: 16px;"></i>
+                            GitHub • GitHub Copilot
+                        </div>
+                        <div class="intelligence-date">6/27/2025</div>
+                    </div>
+                </div>
+                
+                <div class="intelligence-item">
+                    <div class="intelligence-title">Claude Code for VSCode Extension Released</div>
+                    <div class="intelligence-meta">
+                        <div class="intelligence-source">
+                            <i data-lucide="code" style="width: 16px; height: 16px;"></i>
+                            Visual Studio • Claude Code
+                        </div>
+                        <div class="intelligence-date">6/23/2025</div>
+                    </div>
+                </div>
+                
+                <div class="intelligence-item">
+                    <div class="intelligence-title">The Zed Debugger Is Here</div>
+                    <div class="intelligence-meta">
+                        <div class="intelligence-source">
+                            <i data-lucide="bug" style="width: 16px; height: 16px;"></i>
+                            Zed.dev • Zed
+                        </div>
+                        <div class="intelligence-date">6/18/2025</div>
+                    </div>
+                </div>
+                
+                <div class="intelligence-item">
+                    <div class="intelligence-title">Remote MCP Support in Claude Code</div>
+                    <div class="intelligence-meta">
+                        <div class="intelligence-source">
+                            <i data-lucide="cloud" style="width: 16px; height: 16px;"></i>
+                            Anthropic • Claude Code
+                        </div>
+                        <div class="intelligence-date">6/18/2025</div>
+                    </div>
+                </div>
+                
+                <div class="intelligence-item">
+                    <div class="intelligence-title">Cursor Raises $1.1B Series C at $10B Valuation</div>
+                    <div class="intelligence-meta">
+                        <div class="intelligence-source">
+                            <i data-lucide="dollar-sign" style="width: 16px; height: 16px;"></i>
+                            TechCrunch • Cursor
+                        </div>
+                        <div class="intelligence-date">6/15/2025</div>
+                    </div>
+                </div>
+                
+                <div class="intelligence-item">
+                    <div class="intelligence-title">Windsurf Introduces Cascade AI Architecture</div>
+                    <div class="intelligence-meta">
+                        <div class="intelligence-source">
+                            <i data-lucide="brain" style="width: 16px; height: 16px;"></i>
+                            Windsurf • Windsurf
+                        </div>
+                        <div class="intelligence-date">6/12/2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                Strategic Market Intelligence Platform • 172 articles analyzed • 
-                225 community discussions • 155,877 GitHub stars tracked
+                <div>Executive Market Intelligence Platform</div>
+                <div class="footer-stats">
+                    <div class="footer-stat">172 articles analyzed</div>
+                    <div class="footer-stat">225 community discussions</div>
+                    <div class="footer-stat">155,877 GitHub stars tracked</div>
+                    <div class="footer-stat">$1.1B funding monitored</div>
+                </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Add scroll animations
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Chart.js configurations
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    display: false
+                },
+                y: {
+                    display: false
+                }
+            },
+            elements: {
+                point: {
+                    radius: 0
+                },
+                line: {
+                    borderWidth: 2
+                }
+            }
+        };
+        
+        // Valuation Chart
+        const valuationCtx = document.getElementById('valuationChart').getContext('2d');
+        new Chart(valuationCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    data: [8.5, 9.2, 10.1, 11.8, 12.3, 13.0],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    fill: true
+                }]
+            },
+            options: chartOptions
+        });
+        
+        // Adoption Chart
+        const adoptionCtx = document.getElementById('adoptionChart').getContext('2d');
+        new Chart(adoptionCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    data: [22, 26, 30, 32, 35, 38],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true
+                }]
+            },
+            options: chartOptions
+        });
+        
+        // Engagement Chart
+        const engagementCtx = document.getElementById('engagementChart').getContext('2d');
+        new Chart(engagementCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    data: [98, 110, 125, 138, 142, 155],
+                    borderColor: '#8b5cf6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                    fill: true
+                }]
+            },
+            options: chartOptions
+        });
+        
+        // Sentiment Chart
+        const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
+        new Chart(sentimentCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    data: [7.8, 8.1, 8.3, 8.5, 8.4, 8.7],
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    fill: true
+                }]
+            },
+            options: chartOptions
+        });
+        
+        // Market Share Chart
+        const marketShareCtx = document.getElementById('marketShareChart').getContext('2d');
+        new Chart(marketShareCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Cursor', 'Windsurf', 'Zed', 'Cline', 'Others'],
+                datasets: [{
+                    data: [35, 20, 15, 12, 18],
+                    backgroundColor: [
+                        '#667eea',
+                        '#764ba2',
+                        '#4facfe',
+                        '#00f2fe',
+                        '#f093fb'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1468,8 +1641,44 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.tool-card, .investment-card, .news-item').forEach(el => {
+        document.querySelectorAll('.kpi-card, .leader-card, .investment-card, .intelligence-item').forEach(el => {
             observer.observe(el);
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Update active nav item on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
         });
     </script>
 </body>
