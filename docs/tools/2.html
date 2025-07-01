@@ -3,19 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude Code - Complete Market Intelligence | AI Tools</title>
-    <meta name="description" content="Comprehensive analysis of Claude Code by Anthropic: funding, enterprise adoption, technical specifications, and market position">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Cursor - Detailed Analysis | AI Developer Tools</title>
+    <meta name="description" content="Comprehensive analysis of Cursor by Anysphere: funding, enterprise adoption, technical specifications, and market position">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         :root {
-            --color-navy: #0f172a;
-            --color-slate: #1e293b;
-            --color-blue: #1e40af;
-            --color-gray: #64748b;
-            --color-light: #f8fafc;
-            --color-white: #ffffff;
-            --color-green: #059669;
-            --color-red: #dc2626;
+            --color-bg: #ffffff;
+            --color-bg-secondary: #f8f9fa;
+            --color-bg-tertiary: #edebeb;
+            --color-text: #333333;
+            --color-text-secondary: #666666;
+            --color-text-muted: #999999;
+            --color-border: #e1e5e9;
+            --color-border-light: #f0f0f0;
+            --color-primary: #0066cc;
+            --color-primary-hover: #0052a3;
+            --color-success: #22c55e;
+            --color-warning: #f59e0b;
+            --color-danger: #ef4444;
+            --sidebar-width: 280px;
+            --header-height: 64px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --border-radius-lg: 12px;
         }
         
         * {
@@ -26,615 +40,751 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--color-light);
-            color: var(--color-navy);
+            background: var(--color-bg);
+            color: var(--color-text);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-        
+
+        /* Header */
         .header {
-            background: var(--color-white);
-            border-bottom: 1px solid #e2e8f0;
-            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
         }
         
-        .header-content {
+        .header-left {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 16px;
         }
         
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--color-text);
             text-decoration: none;
-            color: inherit;
         }
         
         .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-slate) 100%);
-            border-radius: 8px;
+            width: 32px;
+            height: 32px;
+            background: var(--color-primary);
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 700;
-            font-size: 1.125rem;
+            font-weight: 800;
+            font-size: 14px;
         }
         
-        .logo-text {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--color-navy);
-        }
-        
-        .nav-links {
+        .breadcrumb {
             display: flex;
-            gap: 1.5rem;
+            align-items: center;
+            gap: 8px;
+            margin-left: 32px;
         }
         
-        .nav-link {
-            color: var(--color-blue);
+        .breadcrumb-item {
+            color: var(--color-text-secondary);
             text-decoration: none;
+            font-size: 14px;
             font-weight: 500;
+            transition: all 0.2s ease;
         }
         
-        .hero {
-            background: var(--color-white);
-            padding: 3rem 0;
-            border-bottom: 1px solid #e2e8f0;
+        .breadcrumb-item:hover {
+            color: var(--color-primary);
         }
         
-        .hero-content {
+        .breadcrumb-separator {
+            color: var(--color-text-muted);
+            font-size: 14px;
+        }
+        
+        .header-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .back-btn {
+            padding: 8px 16px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-btn:hover {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: var(--header-height);
+            padding: 32px;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Tool Header */
+        .tool-header {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-lg);
+            padding: 32px;
+            margin-bottom: 32px;
             display: grid;
             grid-template-columns: 1fr auto;
-            gap: 3rem;
+            gap: 32px;
             align-items: center;
         }
         
-        .hero-info h1 {
+        .tool-info h1 {
             font-size: 3rem;
-            font-weight: 800;
-            color: var(--color-navy);
-            margin-bottom: 0.5rem;
+            font-weight: 900;
+            color: var(--color-text);
+            margin-bottom: 8px;
         }
         
-        .hero-company {
-            font-size: 1.125rem;
-            color: var(--color-gray);
-            margin-bottom: 1rem;
+        .tool-company {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            font-weight: 600;
+            margin-bottom: 16px;
         }
         
-        .hero-description {
+        .tool-description {
             font-size: 1.125rem;
-            color: var(--color-gray);
+            color: var(--color-text-secondary);
             line-height: 1.6;
-            max-width: 600px;
+            max-width: 800px;
         }
         
-        .hero-actions {
+        .tool-actions {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 12px;
             min-width: 200px;
         }
         
         .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
             text-decoration: none;
             font-weight: 600;
             text-align: center;
             transition: all 0.2s ease;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .btn-primary {
-            background: var(--color-blue);
+            background: var(--color-primary);
             color: white;
+            border: 1px solid var(--color-primary);
         }
         
         .btn-primary:hover {
-            background: #1d4ed8;
+            background: var(--color-primary-hover);
+            border-color: var(--color-primary-hover);
         }
         
         .btn-secondary {
-            background: var(--color-white);
-            color: var(--color-blue);
-            border: 1px solid var(--color-blue);
+            background: var(--color-bg);
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border);
         }
         
         .btn-secondary:hover {
-            background: #eff6ff;
+            background: var(--color-bg-secondary);
+            color: var(--color-text);
         }
-        
-        .main-content {
+
+        /* Content Grid */
+        .content-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-            margin: 3rem 0;
+            gap: 32px;
         }
         
         .content-section {
-            background: var(--color-white);
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-lg);
+            padding: 24px;
+            margin-bottom: 24px;
         }
         
         .section-title {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            color: var(--color-navy);
-            margin-bottom: 1.5rem;
+            color: var(--color-text);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
+        .section-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--color-primary);
         }
-        
-        .feature-item {
-            padding: 1rem;
-            background: #f8fafc;
-            border-radius: 8px;
-            border-left: 4px solid var(--color-blue);
-        }
-        
-        .feature-title {
-            font-weight: 600;
-            color: var(--color-navy);
-            margin-bottom: 0.25rem;
-        }
-        
+
+        /* Metrics Grid */
         .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
         }
         
         .metric-card {
-            padding: 1.5rem;
-            background: #f8fafc;
-            border-radius: 8px;
+            padding: 20px;
+            background: var(--color-bg-secondary);
+            border-radius: var(--border-radius);
             text-align: center;
+            transition: all 0.2s ease;
+        }
+        
+        .metric-card:hover {
+            background: var(--color-bg-tertiary);
+            transform: translateY(-2px);
         }
         
         .metric-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-navy);
-            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--color-text);
+            margin-bottom: 4px;
         }
         
         .metric-label {
             font-size: 0.875rem;
-            color: var(--color-gray);
+            color: var(--color-text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
         }
         
+        .feature-item {
+            padding: 12px 16px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            transition: all 0.2s ease;
+        }
+        
+        .feature-item:hover {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        /* Enterprise Customers */
         .enterprise-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
         }
         
         .enterprise-item {
-            padding: 1rem;
-            background: #f8fafc;
-            border-radius: 8px;
+            padding: 12px 16px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
             text-align: center;
             font-weight: 600;
-            color: var(--color-navy);
+            color: var(--color-text);
+            font-size: 14px;
+            transition: all 0.2s ease;
         }
         
+        .enterprise-item:hover {
+            background: var(--color-success);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Testimonials */
         .testimonial {
-            padding: 1.5rem;
-            background: #eff6ff;
-            border-radius: 8px;
-            border-left: 4px solid var(--color-blue);
-            margin-bottom: 1rem;
+            padding: 20px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-primary);
+            border-radius: var(--border-radius);
+            margin-bottom: 16px;
         }
         
         .testimonial-text {
             font-style: italic;
-            color: var(--color-slate);
-            margin-bottom: 0.5rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.5;
         }
         
         .testimonial-author {
             font-size: 0.875rem;
             font-weight: 600;
-            color: var(--color-blue);
+            color: var(--color-primary);
+        }
+
+        /* Info Items */
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--color-border-light);
         }
         
-        .pricing-grid {
-            display: grid;
-            gap: 1rem;
+        .info-item:last-child {
+            border-bottom: none;
         }
         
+        .info-label {
+            font-weight: 600;
+            color: var(--color-text);
+            font-size: 14px;
+        }
+        
+        .info-value {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Pricing */
         .pricing-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem;
-            background: #f8fafc;
-            border-radius: 8px;
+            padding: 16px;
+            background: var(--color-bg-secondary);
+            border-radius: var(--border-radius);
+            margin-bottom: 12px;
         }
         
         .pricing-plan {
             font-weight: 600;
-            color: var(--color-navy);
+            color: var(--color-text);
         }
         
         .pricing-cost {
             font-weight: 700;
-            color: var(--color-green);
+            color: var(--color-success);
+        }
+
+        /* News Items */
+        .news-item {
+            padding: 16px;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            margin-bottom: 12px;
+            transition: all 0.2s ease;
         }
         
-        .news-item {
-            padding: 1rem;
-            background: #f8fafc;
-            border-radius: 8px;
-            margin-bottom: 1rem;
+        .news-item:hover {
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-1px);
         }
         
         .news-title {
             font-weight: 600;
-            color: var(--color-navy);
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
+            color: var(--color-text);
+            margin-bottom: 8px;
+            font-size: 14px;
+            line-height: 1.4;
         }
         
         .news-meta {
-            font-size: 0.75rem;
-            color: var(--color-gray);
+            font-size: 12px;
+            color: var(--color-text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
+
+        /* Responsive */
         @media (max-width: 1024px) {
-            .main-content {
+            .content-grid {
                 grid-template-columns: 1fr;
             }
             
-            .hero-content {
+            .tool-header {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
         }
         
         @media (max-width: 768px) {
-            .hero-info h1 {
+            .main-content {
+                padding: 16px;
+            }
+            
+            .tool-info h1 {
                 font-size: 2rem;
             }
             
             .metrics-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .breadcrumb {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <a href="../index.html" class="logo">
-                    <div class="logo-icon">AI</div>
-                    <div class="logo-text">Market Intelligence</div>
-                </a>
-                <div class="nav-links">
-                    <a href="index.html" class="nav-link">Tools Directory</a>
-                    <a href="../index.html" class="nav-link">← Dashboard</a>
-                </div>
-            </div>
+        <div class="header-left">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">AI</div>
+                AI Developer Tools
+            </a>
+            <nav class="breadcrumb">
+                <a href="../index.html" class="breadcrumb-item">Dashboard</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">Cursor</span>
+            </nav>
+        </div>
+        <div class="header-right">
+            <a href="../index.html" class="back-btn">
+                <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i>
+                Back to Dashboard
+            </a>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-info">
-                    <h1>Claude Code</h1>
-                    <div class="hero-company">Anthropic • Anthropic PBC</div>
-                    <div class="hero-description">
-                        Claude Code is an AI-powered coding assistant developed by Anthropic, designed to enhance developer productivity by integrating into modern workflows and IDEs. It helps developers with tasks such as code completion, refactoring, bug fixing, code analysis, and AI-paired programming.
-                    </div>
-                </div>
-                <div class="hero-actions">
-                    <a href="https://claude.ai/" target="_blank" class="btn btn-primary">Visit Website</a>
-                    <a href="https://github.com/anthropics/claude-code" target="_blank" class="btn btn-secondary">View on GitHub</a>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Tool Header -->
+        <div class="tool-header">
+            <div class="tool-info">
+                <h1>Cursor</h1>
+                <div class="tool-company">Anysphere Inc. • Series C • $10B Valuation</div>
+                <div class="tool-description">
+                    Cursor is an AI-powered code editor designed to make developers extraordinarily productive. It integrates AI capabilities directly into the coding environment, offering features like intelligent code completion, natural language editing, and codebase understanding. It enables 'vibe coding', a new approach to software development that leverages AI assistance.
                 </div>
             </div>
+            <div class="tool-actions">
+                <a href="https://www.cursor.com/" target="_blank" class="btn btn-primary">
+                    <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+                    Visit Website
+                </a>
+                <a href="https://github.com/getcursor/cursor" target="_blank" class="btn btn-secondary">
+                    <i data-lucide="github" style="width: 16px; height: 16px;"></i>
+                    View on GitHub
+                </a>
+                <a href="https://www.cursor.com/blog" target="_blank" class="btn btn-secondary">
+                    <i data-lucide="rss" style="width: 16px; height: 16px;"></i>
+                    Blog
+                </a>
+            </div>
         </div>
-    </section>
 
-    <div class="container">
-        <div class="main-content">
+        <!-- Content Grid -->
+        <div class="content-grid">
+            <!-- Main Column -->
             <div class="main-column">
                 <!-- Key Metrics -->
                 <div class="content-section">
-                    <h2 class="section-title">Business Metrics</h2>
+                    <h2 class="section-title">
+                        <i data-lucide="bar-chart-3" class="section-icon"></i>
+                        Key Metrics
+                    </h2>
                     <div class="metrics-grid">
-                        
-                        
                         <div class="metric-card">
-                            <div class="metric-value">1</div>
+                            <div class="metric-value">$10B</div>
+                            <div class="metric-label">Valuation</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">$1.1B</div>
+                            <div class="metric-label">Total Funding</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">30K</div>
+                            <div class="metric-label">GitHub Stars</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">12</div>
                             <div class="metric-label">Enterprise Customers</div>
                         </div>
                         <div class="metric-card">
                             <div class="metric-value">18</div>
-                            <div class="metric-label">Features</div>
+                            <div class="metric-label">Core Features</div>
                         </div>
-                        
                         <div class="metric-card">
-                            <div class="metric-value">22</div>
+                            <div class="metric-value">26</div>
                             <div class="metric-label">Reddit Mentions</div>
                         </div>
-                        
-                        
                     </div>
                 </div>
 
-                <!-- Features -->
-                
+                <!-- Features & Capabilities -->
                 <div class="content-section">
-                    <h2 class="section-title">Features & Capabilities</h2>
+                    <h2 class="section-title">
+                        <i data-lucide="zap" class="section-icon"></i>
+                        Features & Capabilities (18)
+                    </h2>
                     <div class="features-grid">
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">AI-powered code completion</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">Code refactoring</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">Bug detection and fixing</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">Large codebase analysis</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">Natural language code generation</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">Code review capabilities</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">Support for multiple programming languages</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">Test case creation</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">API mocking</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">Complex task handling</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">Planning capabilities</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">VS Code extension integration</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">Remote MCP server support</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">Command-line interface</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">SDK for TypeScript and Python</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">AI-paired programming capabilities</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">Debugging assistance</div>
-                            </div>
-                        
-                            <div class="feature-item">
-                                <div class="feature-title">Content optimization for SEO</div>
-                            </div>
-                        
+                        <div class="feature-item">Intelligent code completion</div>
+                        <div class="feature-item">Natural language editing</div>
+                        <div class="feature-item">Codebase understanding</div>
+                        <div class="feature-item">Multi-line code suggestions</div>
+                        <div class="feature-item">Automatic code refactoring</div>
+                        <div class="feature-item">Privacy mode</div>
+                        <div class="feature-item">Customizable with extensions</div>
+                        <div class="feature-item">AI-powered code editing</div>
+                        <div class="feature-item">Web and mobile support</div>
+                        <div class="feature-item">Character Prefix Conditioning</div>
+                        <div class="feature-item">Shadow Workspaces</div>
+                        <div class="feature-item">BugBot for code review</div>
+                        <div class="feature-item">Mobile app for remote access</div>
+                        <div class="feature-item">GitHub PR integration</div>
+                        <div class="feature-item">Memories feature</div>
+                        <div class="feature-item">One-click MCP setup</div>
+                        <div class="feature-item">Jupyter support</div>
+                        <div class="feature-item">Background Agent</div>
                     </div>
                 </div>
-                
 
-                <!-- Unique Differentiators -->
-                
+                <!-- Competitive Advantages -->
                 <div class="content-section">
-                    <h2 class="section-title">Competitive Advantages</h2>
-                    
-                        <div class="feature-item" style="margin-bottom: 1rem;">
-                            <div class="feature-title">Can handle more complex tasks in a single prompt</div>
-                        </div>
-                    
-                        <div class="feature-item" style="margin-bottom: 1rem;">
-                            <div class="feature-title">Better planning capabilities</div>
-                        </div>
-                    
-                        <div class="feature-item" style="margin-bottom: 1rem;">
-                            <div class="feature-title">No 25-query limit</div>
-                        </div>
-                    
-                        <div class="feature-item" style="margin-bottom: 1rem;">
-                            <div class="feature-title">Remote MCP server support</div>
-                        </div>
-                    
-                        <div class="feature-item" style="margin-bottom: 1rem;">
-                            <div class="feature-title">Integration into modern developer workflows</div>
-                        </div>
-                    
-                        <div class="feature-item" style="margin-bottom: 1rem;">
-                            <div class="feature-title">AI-paired programming capabilities</div>
-                        </div>
-                    
+                    <h2 class="section-title">
+                        <i data-lucide="award" class="section-icon"></i>
+                        Competitive Advantages
+                    </h2>
+                    <div class="features-grid">
+                        <div class="feature-item">Seamless AI integration into code editor</div>
+                        <div class="feature-item">Edit entire classes with simple prompts</div>
+                        <div class="feature-item">Multi-line code predictions</div>
+                        <div class="feature-item">Large codebase handling</div>
+                        <div class="feature-item">Mobile app for remote access</div>
+                    </div>
                 </div>
-                
 
-                <!-- Enterprise Adoption -->
-                
+                <!-- Enterprise Customers -->
                 <div class="content-section">
-                    <h2 class="section-title">Enterprise Customers (1)</h2>
+                    <h2 class="section-title">
+                        <i data-lucide="building-2" class="section-icon"></i>
+                        Enterprise Customers (12)
+                    </h2>
                     <div class="enterprise-grid">
-                        
-                            <div class="enterprise-item">Cloudflare</div>
-                        
+                        <div class="enterprise-item">Johnson & Johnson</div>
+                        <div class="enterprise-item">Stripe</div>
+                        <div class="enterprise-item">Samsung</div>
+                        <div class="enterprise-item">Rippling</div>
+                        <div class="enterprise-item">Perplexity</div>
+                        <div class="enterprise-item">Ramp</div>
+                        <div class="enterprise-item">Shopify</div>
+                        <div class="enterprise-item">US Foods</div>
+                        <div class="enterprise-item">MercadoLibre</div>
+                        <div class="enterprise-item">Vercel</div>
+                        <div class="enterprise-item">Prisma</div>
+                        <div class="enterprise-item">Amazon</div>
                     </div>
                 </div>
-                
 
                 <!-- Customer Testimonials -->
-                
-
-                <!-- Market Position -->
-                
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <i data-lucide="quote" class="section-icon"></i>
+                        Customer Testimonials
+                    </h2>
+                    <div class="testimonial">
+                        <div class="testimonial-text">"Cursor is at least a 2x improvement over Copilot. It's amazing having an AI pair programmer, and is an incredible accelerator for me and my team."</div>
+                        <div class="testimonial-author">— Ben Bernard, Instacart</div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-text">"The Cursor tab completion while coding is occasionally so magic it defies reality - about ~25% of the time it is anticipating exactly what I want to do."</div>
+                        <div class="testimonial-author">— Kevin Whinnery, OpenAI</div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-text">"Cursor is hands down my biggest workflow improvement in years."</div>
+                        <div class="testimonial-author">— Sawyer Hood, Figma</div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-text">"I love writing code and Cursor is a necessity. Cursor is steps ahead of my brain, proposing multi-line edits so I type 'tab' more than anything else."</div>
+                        <div class="testimonial-author">— Andrew Milich, Notion</div>
+                    </div>
+                </div>
             </div>
 
+            <!-- Sidebar -->
             <div class="sidebar">
-                <!-- Company Info -->
+                <!-- Company Information -->
                 <div class="content-section">
-                    <h3 class="section-title">Company Information</h3>
-                    <div style="space-y: 1rem;">
-                        <div style="margin-bottom: 1rem;">
-                            <div style="font-weight: 600; color: var(--color-navy);">Legal Name</div>
-                            <div style="color: var(--color-gray);">Anthropic PBC</div>
-                        </div>
-                        
-                        <div style="margin-bottom: 1rem;">
-                            <div style="font-weight: 600; color: var(--color-navy);">Business Model</div>
-                            <div style="color: var(--color-gray);">Subscription-based</div>
-                        </div>
-                        
-                        
-                        
+                    <h3 class="section-title">
+                        <i data-lucide="info" class="section-icon"></i>
+                        Company Information
+                    </h3>
+                    <div class="info-item">
+                        <div class="info-label">Legal Name</div>
+                        <div class="info-value">Anysphere Inc.</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Business Model</div>
+                        <div class="info-value">Freemium with paid plans</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Company Stage</div>
+                        <div class="info-value">Series C</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Last Funding</div>
+                        <div class="info-value">June 5, 2025</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Category</div>
+                        <div class="info-value">AI IDE</div>
                     </div>
                 </div>
 
-                <!-- Funding Rounds -->
-                
+                <!-- Funding History -->
+                <div class="content-section">
+                    <h3 class="section-title">
+                        <i data-lucide="trending-up" class="section-icon"></i>
+                        Funding History
+                    </h3>
+                    <div class="pricing-item">
+                        <div class="pricing-plan">Series A</div>
+                        <div class="pricing-cost">$60M</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div class="pricing-plan">Series B</div>
+                        <div class="pricing-cost">$105M</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div class="pricing-plan">Series C</div>
+                        <div class="pricing-cost">$900M</div>
+                    </div>
+                </div>
 
                 <!-- Pricing -->
-                
                 <div class="content-section">
-                    <h3 class="section-title">Pricing</h3>
-                    <div class="pricing-grid">
-                        
-                            <div class="pricing-item">
-                                <div class="pricing-plan">Max</div>
-                                <div class="pricing-cost">null</div>
-                            </div>
-                        
-                            <div class="pricing-item">
-                                <div class="pricing-plan">Pro</div>
-                                <div class="pricing-cost">null</div>
-                            </div>
-                        
-                            <div class="pricing-item">
-                                <div class="pricing-plan">Claude Pro MAX</div>
-                                <div class="pricing-cost">$200 / month</div>
-                            </div>
-                        
+                    <h3 class="section-title">
+                        <i data-lucide="dollar-sign" class="section-icon"></i>
+                        Pricing Plans
+                    </h3>
+                    <div class="pricing-item">
+                        <div class="pricing-plan">Ultra Plan</div>
+                        <div class="pricing-cost">$200/mo</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div class="pricing-plan">Student Plan</div>
+                        <div class="pricing-cost">Free for 1 year</div>
                     </div>
                 </div>
-                
 
                 <!-- Technical Details -->
                 <div class="content-section">
-                    <h3 class="section-title">Technical Details</h3>
-                    <div style="space-y: 1rem;">
-                        
-                        <div style="margin-bottom: 1rem;">
-                            <div style="font-weight: 600; color: var(--color-navy);">Category</div>
-                            <div style="color: var(--color-gray);">AI ASSISTANT</div>
-                        </div>
-                        
-                        
-                        <div style="margin-bottom: 1rem;">
-                            <div style="font-weight: 600; color: var(--color-navy);">Deployment</div>
-                            <div style="color: var(--color-gray);">VS Code Extension, CLI, SDK</div>
-                        </div>
-                        
-                        
-                        <div style="margin-bottom: 1rem;">
-                            <div style="font-weight: 600; color: var(--color-navy);">Languages</div>
-                            <div style="color: var(--color-gray);">Python, JavaScript, Rust, TypeScript</div>
-                        </div>
-                        
-                        
+                    <h3 class="section-title">
+                        <i data-lucide="settings" class="section-icon"></i>
+                        Technical Details
+                    </h3>
+                    <div class="info-item">
+                        <div class="info-label">Deployment</div>
+                        <div class="info-value">Desktop, Web, Mobile</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Languages</div>
+                        <div class="info-value">Python, JavaScript, React, Node.js</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Update Frequency</div>
+                        <div class="info-value">Every couple of weeks</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Market Position</div>
+                        <div class="info-value">Advanced alternative to GitHub Copilot</div>
                     </div>
                 </div>
 
                 <!-- Recent News -->
-                
                 <div class="content-section">
-                    <h3 class="section-title">Recent News</h3>
-                    
-                        <div class="news-item">
-                            <div class="news-title">Claude Code for VSCode</div>
-                            <div class="news-meta">Visualstudio.com • 6/23/2025</div>
+                    <h3 class="section-title">
+                        <i data-lucide="newspaper" class="section-icon"></i>
+                        Recent News
+                    </h3>
+                    <div class="news-item">
+                        <div class="news-title">Sundar Pichai is vibe coding. 'It feels so delightful to be a coder.'</div>
+                        <div class="news-meta">
+                            <span>Business Insider</span>
+                            <span>6/5/2025</span>
                         </div>
-                    
-                        <div class="news-item">
-                            <div class="news-title">Claude Code Is My Computer</div>
-                            <div class="news-meta">Steipete.me • 6/3/2025</div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-title">Big Tech is vibe coding with these winning AI startups</div>
+                        <div class="news-meta">
+                            <span>Business Insider</span>
+                            <span>6/6/2025</span>
                         </div>
-                    
-                        <div class="news-item">
-                            <div class="news-title">Remote MCP Support in Claude Code</div>
-                            <div class="news-meta">Anthropic.com • 6/18/2025</div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-title">Cursor 1.0</div>
+                        <div class="news-meta">
+                            <span>Cursor.com</span>
+                            <span>6/4/2025</span>
                         </div>
-                    
-                        <div class="news-item">
-                            <div class="news-title">I let Claude Code write an entire book</div>
-                            <div class="news-meta">Github.com • 5/30/2025</div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-title">Tech companies have a new hiring requirement: vibe coding</div>
+                        <div class="news-meta">
+                            <span>Business Insider</span>
+                            <span>6/10/2025</span>
                         </div>
-                    
-                        <div class="news-item">
-                            <div class="news-title">Show HN: Claude Composer</div>
-                            <div class="news-meta">Github.com • 6/5/2025</div>
-                        </div>
-                    
-                </div>
-                
-
-                <!-- Official Links -->
-                <div class="content-section">
-                    <h3 class="section-title">Official Links</h3>
-                    <div style="space-y: 0.5rem;">
-                        <a href="https://claude.ai/" target="_blank" class="btn btn-secondary" style="display: block; margin-bottom: 0.5rem;">Website</a>
-                        <a href="https://github.com/anthropics/claude-code" target="_blank" class="btn btn-secondary" style="display: block; margin-bottom: 0.5rem;">GitHub</a>
-                        
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
