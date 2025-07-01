@@ -5,191 +5,1086 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Intelligence Platform | Executive Dashboard</title>
     <meta name="description" content="Comprehensive intelligence on AI developer tools and market trends for executive decision-making">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'executive': {
-                            50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 300: '#cbd5e1', 
-                            400: '#94a3b8', 500: '#64748b', 600: '#475569', 700: '#334155', 
-                            800: '#1e293b', 900: '#0f172a'
-                        },
-                        'accent': {
-                            50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 
-                            400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 
-                            800: '#1e40af', 900: '#1e3a8a'
-                        }
-                    },
-                    fontFamily: {
-                        'executive': ['Inter', 'system-ui', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .executive-card { @apply bg-white shadow-lg rounded-lg border border-executive-200 hover:shadow-xl transition-shadow duration-200; }
-        .executive-heading { @apply text-executive-900 font-bold tracking-tight; }
-        .executive-subheading { @apply text-executive-700 font-semibold; }
-        .executive-text { @apply text-executive-600 leading-relaxed; }
-        .metric-card { @apply bg-white shadow-lg rounded-lg border border-executive-200 p-6 text-center; }
-        .metric-value { @apply text-3xl font-bold text-executive-900 mb-2; }
-        .metric-label { @apply text-sm font-medium text-executive-600 uppercase tracking-wide; }
-        .category-badge { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent-100 text-accent-800; }
-        .funding-badge { @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800; }
-        .valuation-badge { @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800; }
-        .dashboard-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .metric-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        * { font-family: 'Inter', system-ui, sans-serif; }
+        
+        .executive-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 25%, #6366f1 50%, #8b5cf6 75%, #a855f7 100%);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .metric-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .tool-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #6366f1;
+        }
+        
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #a855f7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .tool-card:hover::before {
+            opacity: 1;
+        }
+        
+        .valuation-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .funding-badge {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .category-badge {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            font-weight: 500;
+        }
+        
+        .feature-tag {
+            background: #f3f4f6;
+            color: #374151;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+            border: 1px solid #d1d5db;
+        }
+        
+        .news-item {
+            border-left: 4px solid #6366f1;
+            background: #f8fafc;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .executive-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .grid-executive {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+        
+        .metric-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        
+        @media (max-width: 768px) {
+            .grid-executive { grid-template-columns: 1fr; }
+            .metric-grid { grid-template-columns: repeat(2, 1fr); }
+        }
     </style>
 </head>
-<body class="bg-executive-50 font-executive">
-    <div class="min-h-screen">
-        <!-- Navigation -->
-        <nav class="bg-white shadow-lg border-b border-executive-200 sticky top-0 z-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16">
-                    <div class="flex items-center">
-                        <div class="w-8 h-8 bg-accent-600 rounded-lg flex items-center justify-center mr-3">
-                            <span class="text-white font-bold text-sm">AI</span>
-                        </div>
-                        <span class="text-xl font-bold text-executive-900">Intelligence Platform</span>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="executive-nav sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center mr-3">
+                        <span class="text-white font-bold text-lg">AI</span>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold text-gray-900">AI Intelligence Platform</span>
+                        <div class="text-xs text-gray-600">Executive Dashboard</div>
                     </div>
                 </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">Last Updated: 6/30/2025</span>
+                </div>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <!-- Hero Section -->
-        <section class="dashboard-header text-white py-16 px-4">
-            <div class="max-w-7xl mx-auto text-center">
-                <h1 class="text-5xl font-bold mb-4">AI Intelligence Platform</h1>
-                <p class="text-xl text-white opacity-90 max-w-3xl mx-auto">
-                    Comprehensive market intelligence on AI developer tools. 
-                    Data-driven insights for strategic decision making.
-                </p>
+    <!-- Hero Section -->
+    <section class="executive-gradient text-white py-20 px-4">
+        <div class="max-w-7xl mx-auto text-center animate-fade-in">
+            <h1 class="text-6xl font-bold mb-6">AI Developer Tools Market Intelligence</h1>
+            <p class="text-xl text-blue-100 max-w-4xl mx-auto mb-8">
+                Comprehensive analysis of 9 leading AI development tools with $1.1B in tracked funding across 5 market categories
+            </p>
+            <div class="flex justify-center space-x-6">
+                <div class="text-center">
+                    <div class="text-3xl font-bold">9</div>
+                    <div class="text-blue-200">Tools Analyzed</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold">$1.1B</div>
+                    <div class="text-blue-200">Total Funding</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold">5</div>
+                    <div class="text-blue-200">Categories</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 py-12">
+        <!-- Executive Summary -->
+        <section class="mb-16 animate-fade-in">
+            <h2 class="text-4xl font-bold text-gray-900 mb-8 text-center">Executive Summary</h2>
+            
+            <div class="metric-grid mb-12">
+                
+        <div class="metric-card rounded-xl p-6 text-center">
+            <div class="text-4xl font-bold text-gray-900 mb-2">9</div>
+            <div class="text-sm font-medium text-gray-600 uppercase tracking-wide">AI Tools Tracked</div>
+            <div class="text-xs text-gray-500 mt-2">Comprehensive market coverage</div>
+        </div>
+        <div class="metric-card rounded-xl p-6 text-center">
+            <div class="text-4xl font-bold text-gray-900 mb-2">$1.1B</div>
+            <div class="text-sm font-medium text-gray-600 uppercase tracking-wide">Total Funding</div>
+            <div class="text-xs text-gray-500 mt-2">Across all tracked companies</div>
+        </div>
+        <div class="metric-card rounded-xl p-6 text-center">
+            <div class="text-4xl font-bold text-gray-900 mb-2">5</div>
+            <div class="text-sm font-medium text-gray-600 uppercase tracking-wide">Market Categories</div>
+            <div class="text-xs text-gray-500 mt-2">Tool classification segments</div>
+        </div>
+        <div class="metric-card rounded-xl p-6 text-center">
+            <div class="text-4xl font-bold text-gray-900 mb-2">$10.0B</div>
+            <div class="text-sm font-medium text-gray-600 uppercase tracking-wide">Top Valuation</div>
+            <div class="text-xs text-gray-500 mt-2">Cursor</div>
+        </div>
+    
+            </div>
+
+            <div class="glass-card rounded-2xl p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Key Market Insights</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-4">Strategic Opportunities</h4>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start"><span class="text-blue-600 font-bold mr-2">•</span>AI coding tools achieving billion-dollar valuations in record time</li>
+                            <li class="flex items-start"><span class="text-blue-600 font-bold mr-2">•</span>Enterprise adoption accelerating across Fortune 500 companies</li>
+                            <li class="flex items-start"><span class="text-blue-600 font-bold mr-2">•</span>Strong developer community engagement driving organic growth</li>
+                            <li class="flex items-start"><span class="text-blue-600 font-bold mr-2">•</span>Multiple distinct market segments emerging with unique value propositions</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-4">Risk Considerations</h4>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start"><span class="text-red-500 font-bold mr-2">•</span>High valuations may outpace revenue generation capabilities</li>
+                            <li class="flex items-start"><span class="text-red-500 font-bold mr-2">•</span>Competitive pressure from tech giants (Microsoft, Google)</li>
+                            <li class="flex items-start"><span class="text-red-500 font-bold mr-2">•</span>Rapid technology evolution creating disruption risk</li>
+                            <li class="flex items-start"><span class="text-red-500 font-bold mr-2">•</span>Regulatory uncertainty around AI development tools</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <div class="max-w-7xl mx-auto px-4 py-12">
-            <!-- Executive Summary -->
-            <section class="mb-12">
-                <div class="text-center mb-8">
-                    <h2 class="text-3xl executive-heading mb-4">Executive Summary</h2>
-                    <p class="text-lg executive-text max-w-3xl mx-auto">
-                        Current state of the AI developer tools market based on comprehensive intelligence 
-                        gathering across multiple data sources.
-                    </p>
-                </div>
+        <!-- Market Leaders -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 mb-8 text-center">Market Leaders</h2>
+            <div class="grid-executive">
                 
-                <div class="metric-grid">
-                    <div class="metric-card">
-                        <div class="metric-value">9</div>
-                        <div class="metric-label">AI Tools Tracked</div>
-                        <p class="text-sm text-executive-500 mt-2">Comprehensive market coverage</p>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">$1.1B</div>
-                        <div class="metric-label">Total Funding</div>
-                        <p class="text-sm text-executive-500 mt-2">Across all tracked companies</p>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">5</div>
-                        <div class="metric-label">Market Categories</div>
-                        <p class="text-sm text-executive-500 mt-2">Tool classification segments</p>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">$10B</div>
-                        <div class="metric-label">Market Leader</div>
-                        <p class="text-sm text-executive-500 mt-2">Cursor valuation</p>
-                    </div>
-                </div>
-
-                <div class="mt-8 p-6 bg-accent-50 border border-accent-200 rounded-lg">
-                    <h3 class="text-lg font-semibold text-accent-900 mb-2">Key Insights</h3>
-                    <ul class="text-executive-700 space-y-2">
-                        <li>• AI coding tools represent a rapidly growing market segment with significant venture investment</li>
-                        <li>• Market leaders have achieved multi-billion dollar valuations in record time</li>
-                        <li>• Strong community engagement and enterprise adoption driving growth</li>
-                        <li>• Diverse technology approaches across categories from IDEs to code completion</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Market Leaders -->
-            <section class="mb-12">
-                <h2 class="text-3xl executive-heading mb-8">Market Leaders</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="market-leaders">
-                    <!-- Will be populated by JavaScript -->
-                </div>
-            </section>
-
-            <!-- Recent Intelligence -->
-            <section class="mb-12">
-                <h2 class="text-3xl executive-heading mb-8">Recent Intelligence</h2>
-                <div class="executive-card p-6">
-                    <h3 class="text-xl executive-subheading mb-4">Key Market Developments</h3>
-                    <div class="space-y-4">
-                        <div class="border-b border-executive-200 pb-4">
-                            <h4 class="text-lg font-medium text-executive-900 mb-2">
-                                "Vibe Coding" Emerges as Industry Trend
-                            </h4>
-                            <p class="text-executive-600 text-sm">AI-powered coding tools enabling intuitive, natural language programming workflows gaining mainstream adoption</p>
-                        </div>
-                        <div class="border-b border-executive-200 pb-4">
-                            <h4 class="text-lg font-medium text-executive-900 mb-2">
-                                Enterprise Adoption Accelerating
-                            </h4>
-                            <p class="text-executive-600 text-sm">Major corporations including Amazon, Stripe, and Samsung integrating AI coding tools into development workflows</p>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-medium text-executive-900 mb-2">
-                                Significant Funding Rounds Completed
-                            </h4>
-                            <p class="text-executive-600 text-sm">Multiple companies achieving billion-dollar valuations with Series C funding rounds exceeding $900M</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Footer -->
-        <footer class="bg-executive-900 text-white py-8 px-4">
-            <div class="max-w-7xl mx-auto text-center">
-                <p class="text-executive-300">
-                    AI Intelligence Platform • Updated: ${new Date().toLocaleDateString()}
-                </p>
-                <p class="text-executive-400 text-sm mt-2">
-                    Professional market intelligence for strategic decision making
-                </p>
-            </div>
-        </footer>
-    </div>
-
-    <script>
-        // Load and display market leaders
-        const marketLeaders = [
-            { name: "Cursor", company: "Anysphere", valuation: "$10B", category: "AI IDE" },
-            { name: "Replit", company: "Replit", valuation: "$3B", category: "Cloud IDE" },
-            { name: "GitHub Copilot", company: "Microsoft", category: "Code Completion" }
-        ];
-
-        const container = document.getElementById('market-leaders');
-        marketLeaders.forEach(tool => {
-            const card = document.createElement('div');
-            card.className = 'executive-card p-6';
-            card.innerHTML = `
+            <div class="tool-card rounded-xl p-6 h-full">
                 <div class="flex items-start justify-between mb-4">
                     <div>
-                        <h3 class="text-lg font-semibold text-executive-900">${tool.name}</h3>
-                        <p class="text-sm text-executive-600">${tool.company}</p>
+                        <h3 class="text-xl font-bold text-gray-900">Cursor</h3>
+                        <p class="text-gray-600">Anysphere</p>
+                        <p class="text-sm text-gray-500">Anysphere Inc.</p>
                     </div>
-                    <span class="category-badge">${tool.category}</span>
+                    <div class="flex flex-col items-end space-y-2">
+                        <span class="category-badge px-3 py-1 rounded-full text-xs">AI IDE</span>
+                        <span class="valuation-badge px-3 py-1 rounded-full text-xs">$10 billion</span>
+                    </div>
                 </div>
-                <div class="valuation-badge">${tool.valuation}</div>
-            `;
-            container.appendChild(card);
+
+                <p class="text-gray-700 mb-4 text-sm leading-relaxed">Cursor is an AI-powered code editor designed to make developers extraordinarily productive. It integrates AI capabilities directly into the coding environment, offering features like intelligent code completion, natural language editing, and codebase understanding. It enables 'vibe coding', a new approach to software development that leverages AI assistance.</p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Key Features</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">Intelligent code completion</span><span class="feature-tag">Natural language editing</span><span class="feature-tag">Codebase understanding</span><span class="feature-tag">Multi-line code suggestions</span><span class="feature-tag">Automatic code refactoring</span><span class="feature-tag">Privacy mode</span>
+                        <span class="feature-tag">+12 more</span>
+                    </div>
+                </div>
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Pricing</h4>
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs">
+                                <span class="text-gray-600">Ultra Plan:</span>
+                                <span class="font-medium">$200 / mo</span>
+                            </div><div class="flex justify-between text-xs">
+                                <span class="text-gray-600">Student Plan:</span>
+                                <span class="font-medium">Free for 1 year</span>
+                            </div>
+                    </div>
+                </div>
+                
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Enterprise Users (12)</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">Johnson & Johnson</span><span class="feature-tag">Stripe</span><span class="feature-tag">Samsung</span><span class="feature-tag">Rippling</span>
+                        <span class="feature-tag">+8 more</span>
+                    </div>
+                </div>
+                
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Customer Feedback</h4>
+                    <blockquote class="text-xs text-gray-600 italic border-l-2 border-blue-500 pl-2">
+                        "Cursor is at least a 2x improvement over Copilot. It's amazing having an AI pair programmer, and is an incredible accele..."
+                    </blockquote>
+                </div>
+                
+
+                <div class="flex justify-between items-center pt-4 border-t border-gray-200 text-xs text-gray-500">
+                    <div>
+                        26 Reddit mentions
+                        
+                    </div>
+                    <span class="funding-badge px-2 py-1 rounded text-xs">$1065M funding</span>
+                </div>
+            </div>
+        
+            <div class="tool-card rounded-xl p-6 h-full">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">Claude Code</h3>
+                        <p class="text-gray-600">Anthropic</p>
+                        <p class="text-sm text-gray-500">Anthropic PBC</p>
+                    </div>
+                    <div class="flex flex-col items-end space-y-2">
+                        <span class="category-badge px-3 py-1 rounded-full text-xs">AI ASSISTANT</span>
+                        
+                    </div>
+                </div>
+
+                <p class="text-gray-700 mb-4 text-sm leading-relaxed">Claude Code is an AI-powered coding assistant developed by Anthropic, designed to enhance developer productivity by integrating into modern workflows and IDEs. It helps developers with tasks such as code completion, refactoring, bug fixing, code analysis, and AI-paired programming.</p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Key Features</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">AI-powered code completion</span><span class="feature-tag">Code refactoring</span><span class="feature-tag">Bug detection and fixing</span><span class="feature-tag">Large codebase analysis</span><span class="feature-tag">Natural language code generation</span><span class="feature-tag">Code review capabilities</span>
+                        <span class="feature-tag">+12 more</span>
+                    </div>
+                </div>
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Pricing</h4>
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs">
+                                <span class="text-gray-600">Max:</span>
+                                <span class="font-medium">null</span>
+                            </div><div class="flex justify-between text-xs">
+                                <span class="text-gray-600">Pro:</span>
+                                <span class="font-medium">null</span>
+                            </div>
+                    </div>
+                </div>
+                
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Enterprise Users (1)</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">Cloudflare</span>
+                        
+                    </div>
+                </div>
+                
+
+                
+
+                <div class="flex justify-between items-center pt-4 border-t border-gray-200 text-xs text-gray-500">
+                    <div>
+                        22 Reddit mentions
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="tool-card rounded-xl p-6 h-full">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">GitHub Copilot</h3>
+                        <p class="text-gray-600">Microsoft</p>
+                        <p class="text-sm text-gray-500">Microsoft Corporation</p>
+                    </div>
+                    <div class="flex flex-col items-end space-y-2">
+                        <span class="category-badge px-3 py-1 rounded-full text-xs">CODE COMPLETION</span>
+                        
+                    </div>
+                </div>
+
+                <p class="text-gray-700 mb-4 text-sm leading-relaxed">GitHub Copilot is an AI-powered coding assistant that provides contextualized assistance throughout the software development lifecycle, offering features like code completions, chat assistance, code explanations, and code suggestions to help developers write, review, and refactor code more efficiently.</p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Key Features</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">AI-powered code completion</span><span class="feature-tag">Chat assistance in IDE</span><span class="feature-tag">Code explanations</span><span class="feature-tag">Agent mode for handling open issues</span><span class="feature-tag">Next edit suggestions</span><span class="feature-tag">Code review</span>
+                        <span class="feature-tag">+10 more</span>
+                    </div>
+                </div>
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Pricing</h4>
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs">
+                                <span class="text-gray-600">Pro:</span>
+                                <span class="font-medium">[object Object]</span>
+                            </div><div class="flex justify-between text-xs">
+                                <span class="text-gray-600">Free:</span>
+                                <span class="font-medium">[object Object]</span>
+                            </div>
+                    </div>
+                </div>
+                
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Enterprise Users (7)</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">Coyote Logistics</span><span class="feature-tag">Duolingo</span><span class="feature-tag">General Motors</span><span class="feature-tag">Mercado Libre</span>
+                        <span class="feature-tag">+3 more</span>
+                    </div>
+                </div>
+                
+
+                
+
+                <div class="flex justify-between items-center pt-4 border-t border-gray-200 text-xs text-gray-500">
+                    <div>
+                        25 Reddit mentions
+                        • ⭐ 1,000
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="tool-card rounded-xl p-6 h-full">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">Replit</h3>
+                        <p class="text-gray-600">Replit</p>
+                        <p class="text-sm text-gray-500">Replit Inc.</p>
+                    </div>
+                    <div class="flex flex-col items-end space-y-2">
+                        <span class="category-badge px-3 py-1 rounded-full text-xs">CLOUD IDE</span>
+                        
+                    </div>
+                </div>
+
+                <p class="text-gray-700 mb-4 text-sm leading-relaxed">Replit is a collaborative browser-based IDE that allows users to create and deploy websites, applications, automations, internal tools, and data pipelines in any programming language. It features AI-powered coding assistance, including Replit Agent for autonomous coding tasks, and supports vibe coding techniques.</p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Key Features</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">AI-powered code generation and deployment</span><span class="feature-tag">Ready-to-use database</span><span class="feature-tag">User authentication (Replit Auth)</span><span class="feature-tag">Secure integrations with services like Stripe and OpenAI</span><span class="feature-tag">Vibe coding capabilities</span><span class="feature-tag">SSO for secure access</span>
+                        <span class="feature-tag">+10 more</span>
+                    </div>
+                </div>
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Pricing</h4>
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs">
+                                <span class="text-gray-600">Free:</span>
+                                <span class="font-medium">[object Object]</span>
+                            </div>
+                    </div>
+                </div>
+                
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Enterprise Users (11)</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">Google</span><span class="feature-tag">Anthropic</span><span class="feature-tag">Coinbase</span><span class="feature-tag">Hg Capital</span>
+                        <span class="feature-tag">+7 more</span>
+                    </div>
+                </div>
+                
+
+                
+
+                <div class="flex justify-between items-center pt-4 border-t border-gray-200 text-xs text-gray-500">
+                    <div>
+                        25 Reddit mentions
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="tool-card rounded-xl p-6 h-full">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">Augment</h3>
+                        <p class="text-gray-600">Augment</p>
+                        <p class="text-sm text-gray-500">Augment Code Inc.</p>
+                    </div>
+                    <div class="flex flex-col items-end space-y-2">
+                        <span class="category-badge px-3 py-1 rounded-full text-xs">AI ASSISTANT</span>
+                        
+                    </div>
+                </div>
+
+                <p class="text-gray-700 mb-4 text-sm leading-relaxed">Augment is an AI-powered coding assistant that helps developers code faster and better, offering features like autonomous coding agents, real-time codebase indexing, context-aware AI suggestions, code generation, chat assistance, and code review. It integrates with various IDEs and uses cutting-edge AI models to enhance human potential in software development tasks.</p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Key Features</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">Autonomous coding agents</span><span class="feature-tag">Context engine for codebase understanding</span><span class="feature-tag">Code completion</span><span class="feature-tag">Chat assistance</span><span class="feature-tag">Code review</span><span class="feature-tag">Smart apply for code suggestions</span>
+                        <span class="feature-tag">+17 more</span>
+                    </div>
+                </div>
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Pricing</h4>
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs">
+                                <span class="text-gray-600">Max:</span>
+                                <span class="font-medium">[object Object]</span>
+                            </div><div class="flex justify-between text-xs">
+                                <span class="text-gray-600">Pro:</span>
+                                <span class="font-medium">[object Object]</span>
+                            </div>
+                    </div>
+                </div>
+                
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Enterprise Users (3)</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">Collective</span><span class="feature-tag">Webflow</span><span class="feature-tag">GitHub</span>
+                        
+                    </div>
+                </div>
+                
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Customer Feedback</h4>
+                    <blockquote class="text-xs text-gray-600 italic border-l-2 border-blue-500 pl-2">
+                        "Augment Code is the rare platform that lives up to, and surpasses, AI hype. - Chintan Shah, VP Engineering at Collective"
+                    </blockquote>
+                </div>
+                
+
+                <div class="flex justify-between items-center pt-4 border-t border-gray-200 text-xs text-gray-500">
+                    <div>
+                        6 Reddit mentions
+                        
+                    </div>
+                    <span class="funding-badge px-2 py-1 rounded text-xs">$0M funding</span>
+                </div>
+            </div>
+        
+            <div class="tool-card rounded-xl p-6 h-full">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">Zed</h3>
+                        <p class="text-gray-600">Zed Industries</p>
+                        <p class="text-sm text-gray-500">Zed Industries Inc.</p>
+                    </div>
+                    <div class="flex flex-col items-end space-y-2">
+                        <span class="category-badge px-3 py-1 rounded-full text-xs">EDITOR</span>
+                        
+                    </div>
+                </div>
+
+                <p class="text-gray-700 mb-4 text-sm leading-relaxed">Zed is a high-performance, open-source, multiplayer code editor designed for collaboration and AI-assisted coding. Written from scratch in Rust, it efficiently leverages multiple CPU cores and GPU for fast performance, offering modern features like built-in debugger capabilities, syntax-aware editing, and agentic editing mode. It supports multiple programming languages and integrates various AI models for code assistance.</p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Key Features</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">High-performance editing</span><span class="feature-tag">AI-powered code generation and analysis</span><span class="feature-tag">Collaborative features (chat, notes, screen sharing)</span><span class="feature-tag">Debugger support</span><span class="feature-tag">Native Git support</span><span class="feature-tag">Edit prediction</span>
+                        <span class="feature-tag">+22 more</span>
+                    </div>
+                </div>
+
+                
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Enterprise Users (1)</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">Anthropic</span>
+                        
+                    </div>
+                </div>
+                
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Customer Feedback</h4>
+                    <blockquote class="text-xs text-gray-600 italic border-l-2 border-blue-500 pl-2">
+                        "I've had my mind blown using Zed with Claude 3.5 Sonnet. I wrote up a few sentences around a research idea and Claude 3...."
+                    </blockquote>
+                </div>
+                
+
+                <div class="flex justify-between items-center pt-4 border-t border-gray-200 text-xs text-gray-500">
+                    <div>
+                        25 Reddit mentions
+                        • ⭐ 60,702
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="tool-card rounded-xl p-6 h-full">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">CLIne</h3>
+                        <p class="text-gray-600">Cline Bot Inc.</p>
+                        <p class="text-sm text-gray-500">Cline Bot Inc.</p>
+                    </div>
+                    <div class="flex flex-col items-end space-y-2">
+                        <span class="category-badge px-3 py-1 rounded-full text-xs">EDITOR</span>
+                        
+                    </div>
+                </div>
+
+                <p class="text-gray-700 mb-4 text-sm leading-relaxed">Cline is an open-source, fully collaborative AI coding assistant that integrates directly into IDEs. It offers dual Plan/Act modes, autonomous coding, context management, and integration with various AI models to enhance software development workflows.</p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Key Features</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">AI-powered code generation and analysis</span><span class="feature-tag">Collaborative planning and coding</span><span class="feature-tag">Integration with multiple IDEs</span><span class="feature-tag">MCP Servers integration</span><span class="feature-tag">Automatic issue detection and fixing</span><span class="feature-tag">Checkpoint system for version control</span>
+                        <span class="feature-tag">+28 more</span>
+                    </div>
+                </div>
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Pricing</h4>
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs">
+                                <span class="text-gray-600">token-based:</span>
+                                <span class="font-medium">Transparent token-based pricing approach</span>
+                            </div>
+                    </div>
+                </div>
+                
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Enterprise Users (1)</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">Cleat Street</span>
+                        
+                    </div>
+                </div>
+                
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Customer Feedback</h4>
+                    <blockquote class="text-xs text-gray-600 italic border-l-2 border-blue-500 pl-2">
+                        "One of the most important extensions for any IDE out there - has been a game changer for how I work over the past few mo..."
+                    </blockquote>
+                </div>
+                
+
+                <div class="flex justify-between items-center pt-4 border-t border-gray-200 text-xs text-gray-500">
+                    <div>
+                        25 Reddit mentions
+                        • ⭐ 46,700
+                    </div>
+                    <span class="funding-badge px-2 py-1 rounded text-xs">$NaNM funding</span>
+                </div>
+            </div>
+        
+            <div class="tool-card rounded-xl p-6 h-full">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">Windsurf</h3>
+                        <p class="text-gray-600">Codeium.</p>
+                        <p class="text-sm text-gray-500">OpenAI</p>
+                    </div>
+                    <div class="flex flex-col items-end space-y-2">
+                        <span class="category-badge px-3 py-1 rounded-full text-xs">EDITOR</span>
+                        <span class="valuation-badge px-3 py-1 rounded-full text-xs">$3 billion</span>
+                    </div>
+                </div>
+
+                <p class="text-gray-700 mb-4 text-sm leading-relaxed">Windsurf is a purpose-built AI-powered IDE that offers features like Cascade for deep codebase understanding, full repo-aware chat with multi-file edits, blazing fast Autocomplete, Supercomplete for predicting next intent, and various AI-powered capabilities to streamline the development workflow.</p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Key Features</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">Cascade AI-powered chat</span><span class="feature-tag">Windsurf Tab</span><span class="feature-tag">Blazing fast Autocomplete</span><span class="feature-tag">Supercomplete for predicting next intent</span><span class="feature-tag">Command for larger file diffs and modifications</span><span class="feature-tag">Memories</span>
+                        <span class="feature-tag">+34 more</span>
+                    </div>
+                </div>
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Pricing</h4>
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs">
+                                <span class="text-gray-600">Pro:</span>
+                                <span class="font-medium">[object Object]</span>
+                            </div><div class="flex justify-between text-xs">
+                                <span class="text-gray-600">Free:</span>
+                                <span class="font-medium">[object Object]</span>
+                            </div>
+                    </div>
+                </div>
+                
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Enterprise Users (2)</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">Y Combinator</span><span class="feature-tag">athenahealth</span>
+                        
+                    </div>
+                </div>
+                
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Customer Feedback</h4>
+                    <blockquote class="text-xs text-gray-600 italic border-l-2 border-blue-500 pl-2">
+                        "Windsurf is so much better than Cursor. It just makes the steps easier, like creating new folders within the flow. I lik..."
+                    </blockquote>
+                </div>
+                
+
+                <div class="flex justify-between items-center pt-4 border-t border-gray-200 text-xs text-gray-500">
+                    <div>
+                        25 Reddit mentions
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="tool-card rounded-xl p-6 h-full">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">Roo Code</h3>
+                        <p class="text-gray-600">Community</p>
+                        <p class="text-sm text-gray-500">null</p>
+                    </div>
+                    <div class="flex flex-col items-end space-y-2">
+                        <span class="category-badge px-3 py-1 rounded-full text-xs">EDITOR</span>
+                        
+                    </div>
+                </div>
+
+                <p class="text-gray-700 mb-4 text-sm leading-relaxed">Roo Code (formerly Roo Cline) is an AI-powered autonomous coding agent that lives in your editor. It's a fork of Cline with additional experimental features, offering comprehensive file management, command execution, browser automation, and integration with multiple AI models. It provides features for creating and running entire workflows using prompts to large language models, with capabilities like intelligent context condensing, fast edits, and orchestration with large context windows.</p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Key Features</h4>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="feature-tag">Code mode for writing code and executing tasks</span><span class="feature-tag">Architect mode for high-level technical design and system architecture</span><span class="feature-tag">Ask mode for querying about the codebase or technical concepts</span><span class="feature-tag">Integration with multiple API providers and AI models</span><span class="feature-tag">Terminal command execution</span><span class="feature-tag">File creation and editing</span>
+                        <span class="feature-tag">+32 more</span>
+                    </div>
+                </div>
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Pricing</h4>
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs">
+                                <span class="text-gray-600">Starter:</span>
+                                <span class="font-medium">[object Object]</span>
+                            </div>
+                    </div>
+                </div>
+                
+
+                
+
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Customer Feedback</h4>
+                    <blockquote class="text-xs text-gray-600 italic border-l-2 border-blue-500 pl-2">
+                        "I like the forked version of Cline, "Roo Cline" much better. It does updates to code without requiring a confirmation fo..."
+                    </blockquote>
+                </div>
+                
+
+                <div class="flex justify-between items-center pt-4 border-t border-gray-200 text-xs text-gray-500">
+                    <div>
+                        23 Reddit mentions
+                        • ⭐ 41
+                    </div>
+                    
+                </div>
+            </div>
+        
+            </div>
+        </section>
+
+        <!-- Market Analysis Charts -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 mb-8 text-center">Market Analysis</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="chart-container">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Funding by Category</h3>
+                    <canvas id="fundingChart" width="400" height="300"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Tool Distribution</h3>
+                    <canvas id="categoryChart" width="400" height="300"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Intelligence -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 mb-8 text-center">Recent Market Intelligence</h2>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Latest News & Developments</h3>
+                    
+        <div class="news-item">
+            <h4 class="font-semibold text-gray-900 text-sm mb-1">Copilot Chat in VS Code is now open source</h4>
+            <div class="flex justify-between items-center text-xs text-gray-600">
+                <span>Github.com • GitHub Copilot</span>
+                <span>6/27/2025</span>
+            </div>
+        </div>
+    
+        <div class="news-item">
+            <h4 class="font-semibold text-gray-900 text-sm mb-1">We bought a rental property instead of a 'starter home.' It pays for itself, and we use it whenever we want.</h4>
+            <div class="flex justify-between items-center text-xs text-gray-600">
+                <span>Business Insider • CLIne</span>
+                <span>6/23/2025</span>
+            </div>
+        </div>
+    
+        <div class="news-item">
+            <h4 class="font-semibold text-gray-900 text-sm mb-1">Claude Code for VSCode</h4>
+            <div class="flex justify-between items-center text-xs text-gray-600">
+                <span>Visualstudio.com • Claude Code</span>
+                <span>6/23/2025</span>
+            </div>
+        </div>
+    
+        <div class="news-item">
+            <h4 class="font-semibold text-gray-900 text-sm mb-1">The Zed Debugger Is Here</h4>
+            <div class="flex justify-between items-center text-xs text-gray-600">
+                <span>Zed.dev • Zed</span>
+                <span>6/18/2025</span>
+            </div>
+        </div>
+    
+        <div class="news-item">
+            <h4 class="font-semibold text-gray-900 text-sm mb-1">Remote MCP Support in Claude Code</h4>
+            <div class="flex justify-between items-center text-xs text-gray-600">
+                <span>Anthropic.com • Claude Code</span>
+                <span>6/18/2025</span>
+            </div>
+        </div>
+    
+                </div>
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Market Trends</h3>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                            <h4 class="font-semibold text-blue-900">"Vibe Coding" Revolution</h4>
+                            <p class="text-blue-800 text-sm">AI-powered natural language programming becoming mainstream development approach</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                            <h4 class="font-semibold text-green-900">Enterprise Integration</h4>
+                            <p class="text-green-800 text-sm">Major corporations adopting AI coding tools for development workflows</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                            <h4 class="font-semibold text-purple-900">Funding Acceleration</h4>
+                            <p class="text-purple-800 text-sm">Record-breaking funding rounds with billion-dollar valuations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Analysis -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 mb-8 text-center">Investment Landscape</h2>
+            <div class="glass-card rounded-2xl p-8">
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Valuation Leaders</h3>
+                        
+        <div class="space-y-3">
+            
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-6 h-6 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                            1
+                        </div>
+                        <span class="font-medium text-gray-900 text-sm">Cursor</span>
+                    </div>
+                    <span class="text-sm font-bold text-green-600">$10.0B</span>
+                </div>
+            
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-6 h-6 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                            2
+                        </div>
+                        <span class="font-medium text-gray-900 text-sm">Windsurf</span>
+                    </div>
+                    <span class="text-sm font-bold text-green-600">$3.0B</span>
+                </div>
+            
+        </div>
+    
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Community Engagement</h3>
+                        
+        <div class="space-y-3">
+            
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium text-gray-900 text-sm">Zed</span>
+                    <div class="text-xs text-gray-600">
+                        25 mentions
+                        • ⭐ 62023
+                    </div>
+                </div>
+            
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium text-gray-900 text-sm">CLIne</span>
+                    <div class="text-xs text-gray-600">
+                        25 mentions
+                        • ⭐ 46717
+                    </div>
+                </div>
+            
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium text-gray-900 text-sm">Cursor</span>
+                    <div class="text-xs text-gray-600">
+                        26 mentions
+                        • ⭐ 30561
+                    </div>
+                </div>
+            
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium text-gray-900 text-sm">Claude Code</span>
+                    <div class="text-xs text-gray-600">
+                        22 mentions
+                        • ⭐ 16576
+                    </div>
+                </div>
+            
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium text-gray-900 text-sm">GitHub Copilot</span>
+                    <div class="text-xs text-gray-600">
+                        25 mentions
+                        
+                    </div>
+                </div>
+            
+        </div>
+    
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Market Categories</h3>
+                        
+        <div class="space-y-3">
+            
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <span class="font-medium text-gray-900 text-sm">AI IDE</span>
+                        <span class="text-sm font-bold text-blue-600">1 tools</span>
+                    </div>
+                
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <span class="font-medium text-gray-900 text-sm">AI ASSISTANT</span>
+                        <span class="text-sm font-bold text-blue-600">2 tools</span>
+                    </div>
+                
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <span class="font-medium text-gray-900 text-sm">CODE COMPLETION</span>
+                        <span class="text-sm font-bold text-blue-600">1 tools</span>
+                    </div>
+                
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <span class="font-medium text-gray-900 text-sm">CLOUD IDE</span>
+                        <span class="text-sm font-bold text-blue-600">1 tools</span>
+                    </div>
+                
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <span class="font-medium text-gray-900 text-sm">EDITOR</span>
+                        <span class="text-sm font-bold text-blue-600">4 tools</span>
+                    </div>
+                
+        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="mb-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="text-white font-bold text-xl">AI</span>
+                </div>
+                <h3 class="text-xl font-bold">AI Intelligence Platform</h3>
+            </div>
+            <p class="text-gray-400 mb-2">Professional market intelligence for strategic decision making</p>
+            <p class="text-gray-500 text-sm">Last updated: 6/30/2025 • Data sources: GitHub, News, Community, Financial</p>
+        </div>
+    </footer>
+
+    <script>
+        // Chart data
+        const fundingData = {"AI_IDE":1065000000,"AI_ASSISTANT":227};
+        const categoryData = [{"category":"AI_IDE","count":1},{"category":"AI_ASSISTANT","count":2},{"category":"CODE_COMPLETION","count":1},{"category":"CLOUD_IDE","count":1},{"category":"EDITOR","count":4}];
+
+        // Initialize charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Funding by Category Chart
+            const fundingCtx = document.getElementById('fundingChart').getContext('2d');
+            new Chart(fundingCtx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(fundingData).map(cat => cat.replace('_', ' ')),
+                    datasets: [{
+                        label: 'Funding (Millions USD)',
+                        data: Object.values(fundingData).map(val => val / 1000000),
+                        backgroundColor: 'rgba(99, 102, 241, 0.8)',
+                        borderColor: 'rgba(99, 102, 241, 1)',
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Funding (Millions USD)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Category Distribution Chart
+            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+            new Chart(categoryCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: categoryData.map(item => item.category.replace('_', ' ')),
+                    datasets: [{
+                        data: categoryData.map(item => item.count),
+                        backgroundColor: [
+                            'rgba(99, 102, 241, 0.8)',
+                            'rgba(139, 92, 246, 0.8)',
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(245, 158, 11, 0.8)'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
         });
     </script>
 </body>
