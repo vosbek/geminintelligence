@@ -453,14 +453,29 @@
         /* Compare Checkbox */
         .compare-checkbox-container {
             position: absolute;
-            top: 16px;
-            right: 16px;
+            top: 20px;
+            right: 20px;
             z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        
+        .compare-checkbox-container:hover {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: var(--shadow-md);
         }
         
         .compare-checkbox {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border: 2px solid var(--color-border);
             border-radius: 4px;
             background: var(--color-bg);
@@ -481,12 +496,20 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: white;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: bold;
         }
         
         .compare-checkbox:hover {
             border-color: var(--color-primary);
+        }
+        
+        .compare-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            user-select: none;
         }
 
         /* Compare Section */
@@ -924,6 +947,7 @@
             <div class="tool-card" id="cursor" data-tool="cursor">
                 <div class="compare-checkbox-container">
                     <div class="compare-checkbox" data-tool="cursor"></div>
+                    <span class="compare-label">Compare</span>
                 </div>
                 <div class="tool-header">
                     <div class="tool-info">
@@ -982,6 +1006,7 @@
             <div class="tool-card" id="claude-code" data-tool="claude-code">
                 <div class="compare-checkbox-container">
                     <div class="compare-checkbox" data-tool="claude-code"></div>
+                    <span class="compare-label">Compare</span>
                 </div>
                 <div class="tool-header">
                     <div class="tool-info">
@@ -1039,6 +1064,7 @@
             <div class="tool-card" id="github-copilot" data-tool="github-copilot">
                 <div class="compare-checkbox-container">
                     <div class="compare-checkbox" data-tool="github-copilot"></div>
+                    <span class="compare-label">Compare</span>
                 </div>
                 <div class="tool-header">
                     <div class="tool-info">
@@ -1095,6 +1121,7 @@
             <div class="tool-card" id="replit" data-tool="replit">
                 <div class="compare-checkbox-container">
                     <div class="compare-checkbox" data-tool="replit"></div>
+                    <span class="compare-label">Compare</span>
                 </div>
                 <div class="tool-header">
                     <div class="tool-info">
@@ -1152,6 +1179,7 @@
             <div class="tool-card" id="augment" data-tool="augment">
                 <div class="compare-checkbox-container">
                     <div class="compare-checkbox" data-tool="augment"></div>
+                    <span class="compare-label">Compare</span>
                 </div>
                 <div class="tool-header">
                     <div class="tool-info">
@@ -1209,6 +1237,7 @@
             <div class="tool-card" id="zed" data-tool="zed">
                 <div class="compare-checkbox-container">
                     <div class="compare-checkbox" data-tool="zed"></div>
+                    <span class="compare-label">Compare</span>
                 </div>
                 <div class="tool-header">
                     <div class="tool-info">
@@ -1266,6 +1295,7 @@
             <div class="tool-card" id="cline" data-tool="cline">
                 <div class="compare-checkbox-container">
                     <div class="compare-checkbox" data-tool="cline"></div>
+                    <span class="compare-label">Compare</span>
                 </div>
                 <div class="tool-header">
                     <div class="tool-info">
@@ -1323,6 +1353,7 @@
             <div class="tool-card" id="windsurf" data-tool="windsurf">
                 <div class="compare-checkbox-container">
                     <div class="compare-checkbox" data-tool="windsurf"></div>
+                    <span class="compare-label">Compare</span>
                 </div>
                 <div class="tool-header">
                     <div class="tool-info">
@@ -1379,6 +1410,7 @@
             <div class="tool-card" id="roo-code" data-tool="roo-code">
                 <div class="compare-checkbox-container">
                     <div class="compare-checkbox" data-tool="roo-code"></div>
+                    <span class="compare-label">Compare</span>
                 </div>
                 <div class="tool-header">
                     <div class="tool-info">
