@@ -5,8 +5,7 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/gemini' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/gemini/' : ''
+  distDir: '../docs'
 }
 
 module.exports = nextConfig

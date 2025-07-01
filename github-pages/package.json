@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run build:data && next build && next export",
-    "build:github": "npm run build:data && next build && next export && touch out/.nojekyll",
+    "build": "npm run build:data && next build",
+    "build:docs": "npm run build:data && next build && touch ../docs/.nojekyll",
     "build:data": "node scripts/build-data.js",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "npm run build:github",
-    "serve": "npx serve out"
+    "deploy": "npm run build:docs",
+    "serve": "npx serve ../docs"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.0",
