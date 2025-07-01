@@ -31,13 +31,15 @@ export default function EnterprisePositionSection({ data }: EnterprisePositionSe
         ...(snapshot.technical_details?.pros_and_cons?.pros || [])
       ].slice(0, 3).join(', ');
 
-      const autoTargetEnterprises = snapshot.community_metrics?.list_of_companies_using_tool?.length > 0 
-        ? `Used by ${snapshot.community_metrics.list_of_companies_using_tool.length} companies including: ${snapshot.community_metrics.list_of_companies_using_tool.slice(0, 5).join(', ')}`
+      const companiesList = snapshot.community_metrics?.list_of_companies_using_tool;
+      const autoTargetEnterprises = companiesList && companiesList.length > 0
+        ? `Used by ${companiesList.length} companies including: ${companiesList.slice(0, 5).join(', ')}`
         : '';
 
+      const securityFeaturesList = snapshot.technical_details?.security_and_privacy_features;
       const autoImplementationComplexity = [
         snapshot.technical_details?.enterprise_capabilities ? "Enterprise features available" : "",
-        snapshot.technical_details?.security_features?.length ? `Security: ${snapshot.technical_details.security_features.slice(0, 2).join(', ')}` : "",
+        securityFeaturesList?.length ? `Security: ${securityFeaturesList.slice(0, 2).join(', ')}` : "",
       ].filter(Boolean).join('. ');
 
       const autoStrategicNotes = [

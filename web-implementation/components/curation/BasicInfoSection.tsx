@@ -31,20 +31,53 @@ export default function BasicInfoSection({ data }: BasicInfoSectionProps) {
 
   const displayData = curatedBasicInfo || basicInfo;
 
+  const handleSave = async (sectionData: any) => {
+    try {
+      const response = await fetch(`/api/tool/${tool.id}/curate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          section_name: 'basic_info',
+          curated_content: sectionData,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save data');
+      }
+
+      // Optionally, refresh data or show a success message
+      console.log('Saved successfully!');
+      alert('Your changes have been saved!');
+      // Here you might want to refetch the data to show the new "curated" source
+      setEditMode(false);
+    } catch (error) {
+      console.error('Save error:', error);
+      alert('Error saving changes. Please try again.');
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-semibold text-gray-900">Basic Information</h2>
         <button
-          onClick={() => setEditMode(!editMode)}
+          onClick={() => {
+            if (editMode) {
+              // This button's logic is now primarily to exit edit mode,
+              // as saving is handled by the EditableField component itself.
+              // Or, if we want a single save button, we'd trigger handleSave here.
+            }
+            setEditMode(!editMode)
+          }}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             editMode
-              ? 'bg-green-100 text-green-700 hover:bg-green-200'
+              ? 'bg-red-100 text-red-700 hover:bg-red-200'
               : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
           }`}
         >
-          {editMode ? 'Save Changes' : 'Edit Section'}
+          {editMode ? 'Cancel' : 'Edit Section'}
         </button>
       </div>
 
@@ -61,9 +94,9 @@ export default function BasicInfoSection({ data }: BasicInfoSectionProps) {
               type="textarea"
               placeholder="Enter tool description..."
               onSave={(value) => {
-                // Save to database - will implement API call
-                console.log('Saving description:', value);
+                handleSave({ ...displayData, description: value });
               }}
+              onCancel={() => setEditMode(false)}
             />
           ) : (
             <div className="bg-gray-50 rounded-md p-4">
@@ -85,19 +118,22 @@ export default function BasicInfoSection({ data }: BasicInfoSectionProps) {
               type="text"
               placeholder="e.g., AI_IDE, CODE_COMPLETION, CHAT_ASSISTANT"
               onSave={(value) => {
-                console.log('Saving category:', value);
+                handleSave({ ...displayData, category_classification: value });
               }}
+              onCancel={() => setEditMode(false)}
             />
           ) : (
             <div className="flex flex-wrap gap-2">
-              {displayData?.category_classification?.split(',').map((category: string, index: number) => (
-                <span
-                  key={index}
-                  className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                >
-                  {category.trim()}
-                </span>
-              )) || (
+              {displayData?.category_classification ? (
+                displayData.category_classification.split(',').map((category: string, index: number) => (
+                  <span
+                    key={index}
+                    className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                  >
+                    {category.trim()}
+                  </span>
+                ))
+              ) : (
                 <span className="text-gray-500 italic">No categories defined</span>
               )}
             </div>

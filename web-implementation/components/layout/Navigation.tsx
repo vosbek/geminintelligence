@@ -6,7 +6,8 @@ import { usePathname } from 'next/navigation';
 import { 
   ChartBarIcon, 
   CpuChipIcon, 
-  DocumentTextIcon 
+  DocumentTextIcon,
+  MagnifyingGlassIcon
 } from '@heroicons/react/24/outline';
 
 export default function Navigation() {
@@ -15,6 +16,7 @@ export default function Navigation() {
   const navigation = [
     { name: 'Dashboard', href: '/', icon: ChartBarIcon },
     { name: 'Tools', href: '/tools', icon: CpuChipIcon },
+    { name: 'Curator', href: '/curator', icon: MagnifyingGlassIcon },
     { name: 'Reports', href: '/reports', icon: DocumentTextIcon },
   ];
 

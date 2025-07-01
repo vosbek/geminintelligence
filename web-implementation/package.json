@@ -14,6 +14,7 @@
     "check-scrapers": "cd .. && python3 src/main.py || echo 'Python scraper available'",
     "run-scraper": "cd .. && python3 src/main.py",
     "setup-python": "cd .. && pip3 install -r requirements.txt",
+    "import-research": "cd .. && python3 database/import_company_research.py",
     "full-setup": "npm run setup-python && npm run fresh-install && npm run setup-db",
     "dev-with-scraper": "npm run dev & sleep 5 && npm run run-scraper"
   },

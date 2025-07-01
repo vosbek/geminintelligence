@@ -5,6 +5,9 @@ import { AITool } from '@/types/database';
 import AddToolForm from '@/components/forms/AddToolForm';
 import ScraperTrigger from '@/components/scraper/ScraperTrigger';
 
+// Force this page to be dynamically rendered, disabling caching
+export const dynamic = 'force-dynamic';
+
 export default async function ToolsPage() {
   const tools = await getAllTools() as AITool[];
 
@@ -65,13 +68,16 @@ export default async function ToolsPage() {
             <tbody className="bg-white divide-y divide-gray-200">
               {tools.map((tool) => (
                 <tr key={tool.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-4">
                     <div className="flex items-center">
-                      <div>
-                        <div className="text-sm font-medium text-gray-900">
+                      <div className="max-w-xs">
+                        <div className="text-sm font-medium text-gray-900 truncate">
                           {tool.name}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div 
+                          className="text-sm text-gray-500 truncate" 
+                          title={tool.description}
+                        >
                           {tool.description}
                         </div>
                       </div>

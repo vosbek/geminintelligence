@@ -13,7 +13,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     
     return new Promise<NextResponse>((resolve) => {
       // Run the Python scraper
-      const pythonProcess = spawn('python3', [pythonScript], {
+      const pythonProcess = spawn('python', [pythonScript], {
         cwd: projectRoot,
         env: { ...process.env },
         stdio: 'pipe'
@@ -73,7 +73,7 @@ export async function GET(): Promise<NextResponse> {
   try {
     // Check if Python environment is available
     return new Promise<NextResponse>((resolve) => {
-      const checkProcess = spawn('python3', ['--version'], {
+      const checkProcess = spawn('python', ['--version'], {
         stdio: 'pipe'
       });
 

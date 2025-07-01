@@ -7,7 +7,7 @@ const pool = new Pool({
   user: process.env.POSTGRES_USER || 'postgres',
   password: process.env.POSTGRES_PASSWORD,
   port: parseInt(process.env.POSTGRES_PORT || '5432'),
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  ssl: false,
 });
 
 export { pool };
@@ -29,28 +29,30 @@ export async function getAllTools() {
     SELECT 
       t.id,
       t.name,
-      t.description,
       t.github_url,
-      t.stock_symbol,
-      t.category,
-      t.company_name,
-      t.legal_company_name,
       t.status,
       t.run_status,
       t.last_run,
-      t.created_at,
-      t.updated_at,
+      -- Use the snapshot's description if available, otherwise the tool's description
+      COALESCE(ts.basic_info->>'description', t.description) as description,
+      -- The category and company name should come from the primary tool record
+      t.category,
+      t.company_name,
       ts.snapshot_date,
       ts.processing_status,
       CASE WHEN ts.basic_info IS NOT NULL THEN true ELSE false END as has_intelligence
     FROM ai_tools t
-    LEFT JOIN LATERAL (
-      SELECT snapshot_date, processing_status, basic_info FROM tool_snapshots 
-      WHERE tool_id = t.id 
-      ORDER BY snapshot_date DESC 
+    INNER JOIN LATERAL (
+      SELECT
+        snapshot_date,
+        processing_status,
+        basic_info
+      FROM tool_snapshots
+      WHERE tool_id = t.id
+      ORDER BY snapshot_date DESC
       LIMIT 1
     ) ts ON true
-    ORDER BY t.updated_at DESC
+    ORDER BY ts.snapshot_date DESC NULLS LAST, t.name ASC
   `);
   return result.rows;
 }
@@ -89,12 +91,50 @@ export async function getToolDetail(toolId: string) {
     LIMIT 1
   `, [toolId]);
 
+  const urlsResult = await query(`
+    SELECT url, url_type FROM tool_urls WHERE tool_id = $1 ORDER BY url_type
+  `, [toolId]);
+
+  const snapshots = await query(`
+    SELECT * FROM tool_snapshots 
+    WHERE tool_id = $1 
+    ORDER BY snapshot_date DESC
+  `, [toolId]);
+
+  if (snapshots.rows.length === 0) {
+    return null;
+  }
+
+  // Find the most recent snapshot
+  const latestSnapshot = snapshots.rows.reduce((latest, current) => {
+    return new Date(current.snapshot_date) > new Date(latest.snapshot_date) ? current : latest;
+  }, snapshots.rows[0]);
+
+  const tool = toolResult.rows[0];
+
+  // Ensure tool.resources is an array before concatenating
+  if (!tool.resources) {
+    tool.resources = [];
+  }
+  
+  // Add the youtube videos to the resources
+  if (latestSnapshot.community_metrics?.youtube_top_videos) {
+    tool.resources = tool.resources.concat(
+      latestSnapshot.community_metrics.youtube_top_videos.map((video: any) => ({
+        url: video.url,
+        url_type: 'YouTube Video',
+        title: video.title,
+      }))
+    );
+  }
+
   return {
-    tool: toolResult.rows[0],
-    snapshot: snapshotResult.rows[0] || null,
+    tool,
+    snapshot: latestSnapshot,
     screenshots: screenshotsResult.rows,
     curated_data: curatedResult.rows,
     enterprise_position: enterpriseResult.rows[0] || null,
+    urls: urlsResult.rows,
   };
 }
 
@@ -203,4 +243,174 @@ export async function generateEnterprisePosition(toolId: string) {
     implementation_complexity: implementationComplexity,
     strategic_notes: strategicNotes
   });
+}
+
+export async function saveCuratedSection(toolId: string, sectionName: string, curatedContent: any) {
+  const sql = `
+    INSERT INTO curated_data (tool_id, section_name, curated_content, last_updated)
+    VALUES ($1, $2, $3, NOW())
+    ON CONFLICT (tool_id, section_name) 
+    DO UPDATE SET 
+      curated_content = EXCLUDED.curated_content,
+      last_updated = NOW();
+  `;
+  const values = [toolId, sectionName, JSON.stringify(curatedContent)];
+  return query(sql, values);
+}
+
+// ===== CURATOR FUNCTIONS =====
+
+// Get all curated repositories  
+export async function getCuratedRepositories(limit?: number, offset?: number) {
+  let sql = `
+    SELECT 
+      cr.id,
+      cr.repo_name as name,
+      cr.repo_url as github_url,
+      cr.description,
+      cr.category,
+      cr.developer_relevance_score,
+      cr.utility_score,
+      cr.final_score,
+      cr.stars as star_count,
+      cr.forks as fork_count,
+      cr.last_commit_date,
+      cr.language,
+      cr.mcp_compatible,
+      cr.installation_method,
+      cr.analysis_date as discovered_at,
+      cr_run.run_date
+    FROM curated_repositories cr
+    LEFT JOIN curation_runs cr_run ON cr.curation_period_start = cr_run.period_start
+    ORDER BY cr.final_score DESC, cr.created_at DESC
+  `;
+  
+  const params = [];
+  if (limit) {
+    sql += ` LIMIT $${params.length + 1}`;
+    params.push(limit);
+  }
+  if (offset) {
+    sql += ` OFFSET $${params.length + 1}`;
+    params.push(offset);
+  }
+  
+  const result = await query(sql, params);
+  return result.rows;
+}
+
+// Get curator statistics
+export async function getCuratorStats() {
+  const totalRepos = await query('SELECT COUNT(*) as count FROM curated_repositories');
+  const totalRuns = await query('SELECT COUNT(*) as count FROM curation_runs WHERE run_status = \'completed\'');
+  const topCategory = await query(`
+    SELECT category, COUNT(*) as count 
+    FROM curated_repositories 
+    GROUP BY category 
+    ORDER BY count DESC 
+    LIMIT 1
+  `);
+  const avgScore = await query('SELECT AVG(final_score) as avg_score FROM curated_repositories');
+  const mcpCount = await query('SELECT COUNT(*) as count FROM curated_repositories WHERE mcp_compatible = true');
+  
+  return {
+    totalRepositories: parseInt(totalRepos.rows[0].count),
+    totalRuns: parseInt(totalRuns.rows[0].count),
+    topCategory: topCategory.rows[0] || { category: 'N/A', count: 0 },
+    averageScore: parseFloat(avgScore.rows[0].avg_score || 0),
+    mcpCompatibleCount: parseInt(mcpCount.rows[0].count)
+  };
+}
+
+// Get recent curation runs
+export async function getRecentCurationRuns(limit = 10) {
+  const result = await query(`
+    SELECT * FROM curation_runs 
+    ORDER BY run_date DESC 
+    LIMIT $1
+  `, [limit]);
+  return result.rows;
+}
+
+// Get repositories by category
+export async function getRepositoriesByCategory(category: string, limit = 20) {
+  const result = await query(`
+    SELECT 
+      id,
+      repo_name as name,
+      repo_url as github_url,
+      description,
+      category,
+      developer_relevance_score,
+      utility_score,
+      final_score,
+      stars as star_count,
+      forks as fork_count,
+      last_commit_date,
+      language,
+      mcp_compatible,
+      installation_method,
+      analysis_date as discovered_at
+    FROM curated_repositories 
+    WHERE category = $1 
+    ORDER BY final_score DESC 
+    LIMIT $2
+  `, [category, limit]);
+  return result.rows;
+}
+
+// Get top repositories by score
+export async function getTopRepositories(limit = 10) {
+  const result = await query(`
+    SELECT 
+      id,
+      repo_name as name,
+      repo_url as github_url,
+      description,
+      category,
+      developer_relevance_score,
+      utility_score,
+      final_score,
+      stars as star_count,
+      forks as fork_count,
+      last_commit_date,
+      language,
+      mcp_compatible,
+      installation_method,
+      analysis_date as discovered_at
+    FROM curated_repositories 
+    ORDER BY final_score DESC 
+    LIMIT $1
+  `, [limit]);
+  return result.rows;
+}
+
+// Search repositories
+export async function searchRepositories(searchTerm: string, limit = 20) {
+  const result = await query(`
+    SELECT 
+      id,
+      repo_name as name,
+      repo_url as github_url,
+      description,
+      category,
+      developer_relevance_score,
+      utility_score,
+      final_score,
+      stars as star_count,
+      forks as fork_count,
+      last_commit_date,
+      language,
+      mcp_compatible,
+      installation_method,
+      analysis_date as discovered_at
+    FROM curated_repositories 
+    WHERE 
+      repo_name ILIKE $1 OR 
+      description ILIKE $1 OR 
+      category ILIKE $1
+    ORDER BY final_score DESC 
+    LIMIT $2
+  `, [`%${searchTerm}%`, limit]);
+  return result.rows;
 }

@@ -1,0 +1,155 @@
+[
+  {
+    "tool_name": "Cursor",
+    "company_info": {
+      "name": "Anysphere",
+      "legal_name": "Anysphere Inc.",
+      "website": "https://cursor.com",
+      "description": "The AI Code Editor.",
+      "founded_year": null,
+      "founders": [],
+      "location": "",
+      "employee_count": null,
+      "funding_rounds": [],
+      "total_funding_usd": null,
+      "estimated_revenue_usd": null,
+      "key_people": []
+    }
+  },
+  {
+    "tool_name": "Claude Code",
+    "company_info": {
+      "name": "Anthropic",
+      "legal_name": "Anthropic PBC",
+      "website": "https://claude.ai",
+      "description": "A family of foundational AI models that can be used in a variety of applications.",
+      "founded_year": null,
+      "founders": [],
+      "location": "",
+      "employee_count": null,
+      "funding_rounds": [],
+      "total_funding_usd": null,
+      "estimated_revenue_usd": null,
+      "key_people": []
+    }
+  },
+  {
+    "tool_name": "GitHub Copilot",
+    "company_info": {
+      "name": "Microsoft",
+      "legal_name": "Microsoft Corporation",
+      "website": "https://github.com/features/copilot",
+      "description": "Your AI pair programmer.",
+      "founded_year": null,
+      "founders": [],
+      "location": "",
+      "employee_count": null,
+      "funding_rounds": [],
+      "total_funding_usd": null,
+      "estimated_revenue_usd": null,
+      "key_people": []
+    }
+  },
+  {
+    "tool_name": "Replit",
+    "company_info": {
+      "name": "Replit",
+      "legal_name": "Replit Inc.",
+      "website": "https://replit.com",
+      "description": "A collaborative browser-based IDE.",
+      "founded_year": null,
+      "founders": [],
+      "location": "",
+      "employee_count": null,
+      "funding_rounds": [],
+      "total_funding_usd": null,
+      "estimated_revenue_usd": null,
+      "key_people": []
+    }
+  },
+  {
+    "tool_name": "Augment",
+    "company_info": {
+      "name": "Augment",
+      "legal_name": "Augment Code Inc.",
+      "website": "https://www.augmentcode.com",
+      "description": "Your AI coding partner that helps you code faster and better.",
+      "founded_year": null,
+      "founders": [],
+      "location": "",
+      "employee_count": null,
+      "funding_rounds": [],
+      "total_funding_usd": null,
+      "estimated_revenue_usd": null,
+      "key_people": []
+    }
+  },
+  {
+    "tool_name": "Zed",
+    "company_info": {
+      "name": "Zed Industries",
+      "legal_name": "Zed Industries Inc.",
+      "website": "https://zed.dev",
+      "description": "A high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.",
+      "founded_year": null,
+      "founders": [],
+      "location": "",
+      "employee_count": null,
+      "funding_rounds": [],
+      "total_funding_usd": null,
+      "estimated_revenue_usd": null,
+      "key_people": []
+    }
+  },
+  {
+    "tool_name": "CLIne",
+    "company_info": {
+      "name": "Cline Bot Inc.",
+      "legal_name": "Cline Bot Inc.",
+      "website": "https://cline.bot",
+      "description": "Cline is an open-source AI coding assistant with dual Plan/Act modes.",
+      "founded_year": null,
+      "founders": [],
+      "location": "",
+      "employee_count": null,
+      "funding_rounds": [],
+      "total_funding_usd": null,
+      "estimated_revenue_usd": null,
+      "key_people": []
+    }
+  },
+  {
+    "tool_name": "Windsurf",
+    "company_info": {
+      "name": "Codeium",
+      "legal_name": "OpenAI",
+      "website": "https://windsurf.com",
+      "description": "The new purpose-built IDE to harness magic.",
+      "founded_year": null,
+      "founders": [],
+      "location": "",
+      "employee_count": null,
+      "funding_rounds": [],
+      "total_funding_usd": null,
+      "estimated_revenue_usd": null,
+      "key_people": []
+    }
+  },
+  {
+    "tool_name": "Roo Code",
+    "company_info": {
+      "name": "Community",
+      "legal_name": null,
+      "website": "https://roocline.dev",
+      "description": "Roo Code is an AI-powered autonomous coding agent that lives in your editor.",
+      "founded_year": null,
+      "founders": [],
+      "location": "",
+      "employee_count": null,
+      "funding_rounds": [],
+      "total_funding_usd": null,
+      "estimated_revenue_usd": null,
+      "key_people": []
+    }
+  }
+] 

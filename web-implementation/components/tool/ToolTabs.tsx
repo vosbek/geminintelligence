@@ -11,6 +11,7 @@ import CommunityMetricsSection from '@/components/curation/CommunityMetricsSecti
 import ScreenshotsSection from '@/components/curation/ScreenshotsSection';
 import EnterprisePositionSection from '@/components/curation/EnterprisePositionSection';
 import RawDataSection from '@/components/curation/RawDataSection';
+import ResourcesSection from '@/components/curation/ResourcesSection';
 
 interface ToolTabsProps {
   data: ToolDetailData;
@@ -23,6 +24,7 @@ const tabs = [
   { name: 'Community Metrics', id: 'community' },
   { name: 'Screenshots', id: 'screenshots' },
   { name: 'Enterprise Position', id: 'enterprise' },
+  { name: 'Resources', id: 'resources' },
   { name: 'Raw Data', id: 'raw' },
 ];
 
@@ -43,6 +45,8 @@ export default function ToolTabs({ data }: ToolTabsProps) {
         return <ScreenshotsSection data={data} />;
       case 'enterprise':
         return <EnterprisePositionSection data={data} />;
+      case 'resources':
+        return <ResourcesSection data={data} />;
       case 'raw':
         return <RawDataSection data={data} />;
       default:

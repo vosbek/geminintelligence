@@ -34,7 +34,7 @@ class ScraperMixin:
         try:
             # Prepare scrape parameters, starting with defaults.
             scrape_params = {
-                'only_main_content': True,
+                'only_main_content': True
             }
 
             if stealth:
@@ -53,21 +53,23 @@ class ScraperMixin:
             )
 
             # Use the Firecrawl SDK to scrape the URL, unpacking the parameters.
-            # Parameters like 'waitFor' and 'headers' are passed as top-level arguments.
             scrape_result = self.firecrawl_app.scrape_url(url, **scrape_params)
 
-            if not scrape_result or not scrape_result.markdown:
+            if not scrape_result or not hasattr(scrape_result, 'markdown') or not scrape_result.markdown:
                 logging.warning(f"Firecrawl returned no content for {url}")
-                return {"error": "No content found"}
+                return {"error": "No content found", "content": ""}
             
             # The SDK returns an object with attributes
             return {
                 "content": scrape_result.markdown,
-                "metadata": scrape_result.metadata
+                "metadata": scrape_result.metadata if hasattr(scrape_result, 'metadata') else {}
             }
+        except requests.exceptions.RequestException as e:
+            logging.error(f"A network error occurred while scraping {url}: {e}", exc_info=False)
+            return {"error": f"Network error: {e}", "content": ""}
         except Exception as e:
             logging.error(f"Failed to scrape {url} via Firecrawl SDK: {e}", exc_info=True)
-            return {"error": str(e)}
+            return {"error": str(e), "content": ""}
 
     @tool()
     def github_analyzer(self, repo_url: str) -> dict:
@@ -661,116 +663,90 @@ class ScraperMixin:
     @tool()
     def producthunt_searcher(self, tool_name: str) -> dict:
         """
-        Searches ProductHunt for products related to a specific tool using multiple search strategies.
+        Searches for a tool on Product Hunt using their GraphQL API.
         :param tool_name: The name of the tool to search for.
-        :return: A dictionary containing search results from ProductHunt.
+        :return: A dictionary containing a list of matching products.
         """
         logging.info(f"Searching ProductHunt for: {tool_name}")
-        
         if not self.producthunt_api_token:
-            logging.warning("No ProductHunt API token provided. Skipping.")
-            return {"error": "ProductHunt API token not provided."}
+            logging.error("PRODUCTHUNT_API_TOKEN not found in environment variables.")
+            return {"error": "API key not configured."}
 
-        headers = {
-            "Authorization": f"Bearer {self.producthunt_api_token}",
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        }
-
-        all_products = []
+        api_url = "https://api.producthunt.com/v2/api/graphql"
         
-        # Strategy: Search in relevant topics and filter results locally
-        topics_to_search = ["developer-tools", "artificial-intelligence", "productivity", "tech", "api-tools"]
-        search_variations = list(set([ # Use set to avoid duplicate searches
-            tool_name,
-            tool_name.lower(),
-            tool_name.replace(" ", ""),
-            tool_name.replace("-", " "),
-            tool_name.split()[0] if " " in tool_name else tool_name
-        ]))
-
-        for topic in topics_to_search:
-            try:
-                topic_query = """
-                query PostsByTopic($topic: String!, $first: Int!) {
-                  posts(topic: $topic, first: $first) {
-                    edges {
-                      node {
-                        id
-                        name
-                        tagline
-                        description
-                        url
-                        website
-                        commentsCount
-                        votesCount
-                        createdAt
-                        featuredAt
-                        reviewsCount
-                        reviewsRating
-                      }
-                    }
-                  }
-                }
-                """
-                
-                variables = {"topic": topic, "first": 50}
-                response = requests.post(
-                    "https://api.producthunt.com/v2/api/graphql",
-                    json={"query": topic_query, "variables": variables},
-                    headers=headers,
-                    timeout=20
-                )
-                response.raise_for_status()
-                data = response.json()
-
-                if "errors" in data:
-                    logging.warning(f"ProductHunt API returned errors for topic '{topic}': {data['errors']}")
-                    continue
-
-                posts_data = data.get("data", {}).get("posts", {})
-                for edge in posts_data.get("edges", []):
-                    node = edge.get("node", {})
-                    if node:
-                        name = node.get("name", "").lower()
-                        tagline = node.get("tagline", "").lower()
-                        
-                        # More flexible matching for topic search
-                        for search_term in search_variations:
-                            if (search_term in name or search_term in tagline):
-                                all_products.append(node)
-                                break # Avoid adding the same product multiple times
-
-            except (requests.RequestException, ValueError) as e:
-                logging.warning(f"Failed ProductHunt topic search for '{topic}': {e}")
-                continue
-
-        # Deduplicate results based on product ID
-        unique_products = {}
-        for product in all_products:
-            product_id = product.get("id")
-            if product_id and product_id not in unique_products:
-                unique_products[product_id] = product
-
-        # Sort by votes count (descending) and limit results
-        sorted_products = sorted(
-            unique_products.values(), 
-            key=lambda x: x.get("votesCount", 0), 
-            reverse=True
-        )[:10]
-
-        logging.info(f"Found {len(sorted_products)} ProductHunt results for {tool_name}")
-
-        return {
-            "products_found": len(sorted_products),
-            "search_results": sorted_products,
-            "search_strategies_used": ["topic_search"]
+        headers = {
+            'Authorization': f'Bearer {self.producthunt_api_token}',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
         }
+
+        # GraphQL query to search for posts
+        graphql_query = {
+            "query": """
+                query($query: String!) {
+                    search(query: $query) {
+                        posts {
+                            edges {
+                                node {
+                                    id
+                                    name
+                                    tagline
+                                    url
+                                    votesCount
+                                }
+                            }
+                        }
+                    }
+                }
+            """,
+            "variables": {
+                "query": tool_name
+            }
+        }
+
+        try:
+            response = requests.post(
+                api_url, 
+                headers=headers, 
+                json=graphql_query,
+                timeout=20
+            )
+            response.raise_for_status()
+            data = response.json()
+
+            if 'errors' in data:
+                error_message = data['errors'][0]['message']
+                logging.error(f"ProductHunt API returned an error: {error_message}")
+                return {"error": error_message}
+            
+            posts = data.get('data', {}).get('search', {}).get('posts', {}).get('edges', [])
+            
+            if not posts:
+                logging.info(f"Found 0 ProductHunt results for {tool_name}")
+                return {"products": []}
+
+            # Extract relevant information from each post
+            products_found = [
+                {
+                    "name": edge.get('node', {}).get('name'),
+                    "tagline": edge.get('node', {}).get('tagline'),
+                    "url": edge.get('node', {}).get('url'),
+                    "votes_count": edge.get('node', {}).get('votesCount')
+                }
+                for edge in posts
+            ]
+            
+            logging.info(f"Found {len(products_found)} ProductHunt results for {tool_name}")
+            return {"products": products_found}
+
+        except requests.RequestException as e:
+            logging.error(f"ProductHunt search failed: {e}", exc_info=False)
+            return {"error": str(e)}
 
     @tool()
     def devto_searcher(self, tool_name: str) -> dict:
         """
-        Searches Dev.to for articles mentioning a specific tool using the public API.
+        Searches for articles on Dev.to related to a specific tool.
         :param tool_name: The name of the tool to search for.
         :return: A dictionary containing search results from Dev.to.
         """
@@ -1229,4 +1205,56 @@ class ScraperMixin:
 
     def _make_request(self, url: str, headers: dict = None, params: dict = None) -> requests.Response:
         """Centralized request-making method."""
-        # ... existing code ...
+        return requests.get(url, headers=headers, params=params, timeout=10)
+
+    @tool()
+    def youtube_searcher(self, tool_name: str) -> dict:
+        """
+        Searches YouTube for videos related to a tool name.
+        :param tool_name: The name of the tool to search for.
+        :return: A dictionary containing search results.
+        """
+        logging.info(f"Searching YouTube for: {tool_name}")
+        api_key = os.getenv('YOUTUBE_API_KEY')
+        if not api_key:
+            logging.error("YOUTUBE_API_KEY environment variable not set. Skipping YouTube search.")
+            return {"error": "YouTube API key not configured", "videos": []}
+
+        search_query = f'"{tool_name}" programming OR "{tool_name}" review OR "{tool_name}" tutorial'
+        
+        url = "https://www.googleapis.com/youtube/v3/search"
+        params = {
+            "part": "snippet",
+            "q": search_query,
+            "key": api_key,
+            "maxResults": 10,
+            "type": "video",
+            "relevanceLanguage": "en"
+        }
+        
+        try:
+            response = self._make_request(url, params=params)
+            response.raise_for_status()
+            search_data = response.json()
+            
+            videos = []
+            if 'items' in search_data:
+                for item in search_data['items']:
+                    video_id = item['id']['videoId']
+                    snippet = item['snippet']
+                    videos.append({
+                        'title': snippet['title'],
+                        'description': snippet['description'],
+                        'channelTitle': snippet['channelTitle'],
+                        'publishedAt': snippet['publishedAt'],
+                        'url': f'https://www.youtube.com/watch?v={video_id}'
+                    })
+            
+            return {"videos": videos, "video_count": len(videos)}
+
+        except requests.exceptions.HTTPError as e:
+            logging.error(f"Failed to search YouTube for {tool_name}: {e}")
+            return {"error": str(e), "status_code": e.response.status_code, "response_text": e.response.text, "videos": []}
+        except Exception as e:
+            logging.error(f"An unexpected error occurred during YouTube search for {tool_name}: {e}")
+            return {"error": str(e), "videos": []}

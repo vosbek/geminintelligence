@@ -1,10 +1,38 @@
 'use client';
 import { ToolDetailData } from '@/types/database';
+import { useState } from 'react';
+import EditableField from './EditableField';
 
 export default function CompanyInfoSection({ data }: { data: ToolDetailData }) {
-  const companyInfo = data.snapshot?.company_info;
+  const { tool, snapshot, curated_data } = data;
+  const companyInfo = snapshot?.company_info;
   
-  if (!companyInfo) {
+  const curatedCompanyInfo = curated_data.find(c => c.section_name === 'company_info')?.curated_content;
+  const displayData = curatedCompanyInfo || companyInfo;
+
+  const [editMode, setEditMode] = useState(false);
+
+  const handleSave = async (sectionData: any) => {
+    try {
+      const response = await fetch(`/api/tool/${tool.id}/curate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          section_name: 'company_info',
+          curated_content: sectionData,
+        }),
+      });
+      if (!response.ok) throw new Error('Failed to save');
+      alert('Company info saved!');
+      setEditMode(false);
+      // You might want to refresh the page data here
+    } catch (error) {
+      console.error(error);
+      alert('Error saving company info');
+    }
+  };
+  
+  if (!displayData) {
     return (
       <div className="space-y-6">
         <h2 className="text-xl font-semibold">Company Information</h2>
@@ -17,148 +45,204 @@ export default function CompanyInfoSection({ data }: { data: ToolDetailData }) {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-semibold">Company Information</h2>
+       <div className="flex justify-between items-center">
+        <h2 className="text-xl font-semibold">Company Information</h2>
+        <button
+          onClick={() => setEditMode(!editMode)}
+          className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+            editMode
+              ? 'bg-red-100 text-red-700 hover:bg-red-200'
+              : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+          }`}
+        >
+          {editMode ? 'Cancel' : 'Edit Section'}
+        </button>
+      </div>
       
       {/* Company Basics */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white rounded-lg border p-4">
           <h3 className="font-medium text-gray-900 mb-3">Company Details</h3>
           <div className="space-y-2">
-            {companyInfo.founding_date && (
-              <div className="flex justify-between">
-                <span className="text-gray-600">Founded:</span>
-                <span className="font-medium">{new Date(companyInfo.founding_date).getFullYear()}</span>
-              </div>
-            )}
-            {companyInfo.valuation && (
-              <div className="flex justify-between">
-                <span className="text-gray-600">Valuation:</span>
-                <span className="font-medium text-green-600">${companyInfo.valuation}</span>
-              </div>
-            )}
-            {companyInfo.employee_count && (
-              <div className="flex justify-between">
+            <div className="flex justify-between">
+              <span className="text-gray-600">Founded:</span>
+              {editMode ? (
+                <EditableField
+                  value={displayData.founding_date ? new Date(displayData.founding_date).getFullYear().toString() : ''}
+                  type="text"
+                  onSave={(value) => handleSave({ ...displayData, founding_date: `${value}-01-01` })}
+                />
+              ) : (
+                <span className="font-medium">{displayData.founding_date ? new Date(displayData.founding_date).getFullYear() : 'N/A'}</span>
+              )}
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Valuation:</span>
+               {editMode ? (
+                <EditableField
+                  value={displayData.valuation || ''}
+                  type="text"
+                  onSave={(value) => handleSave({ ...displayData, valuation: value })}
+                />
+              ) : (
+                <span className="font-medium text-green-600">${displayData.valuation}</span>
+              )}
+            </div>
+            <div className="flex justify-between">
                 <span className="text-gray-600">Employees:</span>
-                <span className="font-medium">{companyInfo.employee_count.toLocaleString()}</span>
-              </div>
-            )}
-            {companyInfo.headquarters_location && (
-              <div className="flex justify-between">
-                <span className="text-gray-600">Location:</span>
-                <span className="font-medium">{companyInfo.headquarters_location}</span>
-              </div>
-            )}
+                {editMode ? (
+                    <EditableField
+                    value={displayData.employee_count?.toLocaleString() || ''}
+                    type="text"
+                    onSave={(value) => handleSave({ ...displayData, employee_count: Number(value.replace(/,/g, '')) })}
+                    />
+                ) : (
+                    <span className="font-medium">{displayData.employee_count?.toLocaleString() || 'N/A'}</span>
+                )}
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Location:</span>
+              {editMode ? (
+                <EditableField
+                  value={displayData.headquarters_location || ''}
+                  type="text"
+                  onSave={(value) => handleSave({ ...displayData, headquarters_location: value })}
+                />
+              ) : (
+                <span className="font-medium">{displayData.headquarters_location}</span>
+              )}
+            </div>
           </div>
         </div>
 
         <div className="bg-white rounded-lg border p-4">
           <h3 className="font-medium text-gray-900 mb-3">Market Info</h3>
           <div className="space-y-2">
-            {companyInfo.market_cap && (
-              <div className="flex justify-between">
+            <div className="flex justify-between">
                 <span className="text-gray-600">Market Cap:</span>
-                <span className="font-medium">{companyInfo.market_cap}</span>
-              </div>
-            )}
-            {companyInfo.stock_price && (
-              <div className="flex justify-between">
+                {editMode ? <EditableField value={displayData.market_cap || ''} type="text" onSave={(value) => handleSave({ ...displayData, market_cap: value })} /> : <span className="font-medium">{displayData.market_cap || 'N/A'}</span>}
+            </div>
+            <div className="flex justify-between">
                 <span className="text-gray-600">Stock Price:</span>
-                <span className="font-medium">${companyInfo.stock_price}</span>
-              </div>
-            )}
-            {companyInfo.news_mentions && (
-              <div className="flex justify-between">
+                {editMode ? <EditableField value={displayData.stock_price || ''} type="text" onSave={(value) => handleSave({ ...displayData, stock_price: value })} /> : <span className="font-medium">${displayData.stock_price || 'N/A'}</span>}
+            </div>
+            <div className="flex justify-between">
                 <span className="text-gray-600">News Mentions:</span>
-                <span className="font-medium">{companyInfo.news_mentions.toLocaleString()}</span>
-              </div>
-            )}
-            {companyInfo.annual_recurring_revenue && (
-              <div className="flex justify-between">
+                {editMode ? <EditableField value={displayData.news_mentions?.toLocaleString() || ''} type="text" onSave={(value) => handleSave({ ...displayData, news_mentions: Number(value.replace(/,/g, '')) })} /> : <span className="font-medium">{displayData.news_mentions?.toLocaleString() || 'N/A'}</span>}
+            </div>
+            <div className="flex justify-between">
                 <span className="text-gray-600">ARR:</span>
-                <span className="font-medium text-blue-600">{companyInfo.annual_recurring_revenue}</span>
-              </div>
-            )}
+                {editMode ? <EditableField value={displayData.annual_recurring_revenue || ''} type="text" onSave={(value) => handleSave({ ...displayData, annual_recurring_revenue: value })} /> : <span className="font-medium text-blue-600">{displayData.annual_recurring_revenue || 'N/A'}</span>}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Funding Information */}
-      {companyInfo.funding_rounds && companyInfo.funding_rounds.length > 0 && (
+      {editMode ? (
         <div className="bg-white rounded-lg border p-4">
-          <h3 className="font-medium text-gray-900 mb-4">Funding History</h3>
-          <div className="space-y-3">
-            {companyInfo.funding_rounds.map((round, index) => (
-              <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
-                <span className="font-medium text-gray-900">{round.round}</span>
-                <span className="text-green-600 font-medium">${round.amount}</span>
-              </div>
-            ))}
-          </div>
+            <h3 className="font-medium text-gray-900 mb-4">Funding History</h3>
+            <EditableField type="array" value={displayData.funding_rounds?.map((r: any) => `${r.round}: $${r.amount}`) || []} onSave={(values: string[]) => {
+                const funding_rounds = values.map(v => {
+                    const [round, amount] = v.split(': $');
+                    return { round, amount };
+                });
+                handleSave({ ...displayData, funding_rounds });
+            }} />
         </div>
+      ) : (
+        displayData.funding_rounds && displayData.funding_rounds.length > 0 && (
+            <div className="bg-white rounded-lg border p-4">
+            <h3 className="font-medium text-gray-900 mb-4">Funding History</h3>
+            <div className="space-y-3">
+                {displayData.funding_rounds.map((round: any, index: number) => (
+                <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
+                    <span className="font-medium text-gray-900">{round.round}</span>
+                    <span className="text-green-600 font-medium">${round.amount}</span>
+                </div>
+                ))}
+            </div>
+            </div>
+        )
       )}
 
       {/* Key People */}
-      {companyInfo.key_executives && companyInfo.key_executives.length > 0 && (
+       {editMode ? (
         <div className="bg-white rounded-lg border p-4">
-          <h3 className="font-medium text-gray-900 mb-4">Key Executives</h3>
-          <div className="space-y-2">
-            {companyInfo.key_executives.map((executive, index) => (
-              <div key={index} className="text-gray-700">
-                {executive}
-              </div>
-            ))}
-          </div>
+            <h3 className="font-medium text-gray-900 mb-4">Key Executives</h3>
+            <EditableField type="array" value={displayData.key_executives || []} onSave={(values) => handleSave({ ...displayData, key_executives: values })} />
         </div>
+       ) : (
+        displayData.key_executives && displayData.key_executives.length > 0 && (
+            <div className="bg-white rounded-lg border p-4">
+            <h3 className="font-medium text-gray-900 mb-4">Key Executives</h3>
+            <div className="space-y-2">
+                {displayData.key_executives.map((executive: string, index: number) => (
+                <div key={index} className="text-gray-700">
+                    {executive}
+                </div>
+                ))}
+            </div>
+            </div>
+        )
       )}
 
       {/* Investors & Partners */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {companyInfo.major_investors && companyInfo.major_investors.length > 0 && (
-          <div className="bg-white rounded-lg border p-4">
-            <h3 className="font-medium text-gray-900 mb-4">Major Investors</h3>
-            <div className="space-y-2">
-              {companyInfo.major_investors.map((investor, index) => (
-                <div key={index} className="text-gray-700 text-sm">
-                  {investor}
-                </div>
-              ))}
+        {editMode ? (
+            <div className="bg-white rounded-lg border p-4">
+                <h3 className="font-medium text-gray-900 mb-4">Major Investors</h3>
+                <EditableField type="array" value={displayData.major_investors || []} onSave={(values) => handleSave({ ...displayData, major_investors: values })} />
             </div>
-          </div>
+        ) : (
+            displayData.major_investors && displayData.major_investors.length > 0 && (
+            <div className="bg-white rounded-lg border p-4">
+                <h3 className="font-medium text-gray-900 mb-4">Major Investors</h3>
+                <div className="space-y-2">
+                {displayData.major_investors.map((investor: string, index: number) => (
+                    <div key={index} className="text-gray-700 text-sm">
+                    {investor}
+                    </div>
+                ))}
+                </div>
+            </div>
+            )
         )}
 
-        {companyInfo.strategic_partnerships && companyInfo.strategic_partnerships.length > 0 && (
-          <div className="bg-white rounded-lg border p-4">
-            <h3 className="font-medium text-gray-900 mb-4">Strategic Partnerships</h3>
-            <div className="space-y-2">
-              {companyInfo.strategic_partnerships.map((partnership, index) => (
-                <div key={index} className="text-gray-700 text-sm">
-                  {partnership}
-                </div>
-              ))}
+        {editMode ? (
+            <div className="bg-white rounded-lg border p-4">
+                <h3 className="font-medium text-gray-900 mb-4">Strategic Partnerships</h3>
+                <EditableField type="array" value={displayData.strategic_partnerships || []} onSave={(values) => handleSave({ ...displayData, strategic_partnerships: values })} />
             </div>
-          </div>
+        ) : (
+            displayData.strategic_partnerships && displayData.strategic_partnerships.length > 0 && (
+            <div className="bg-white rounded-lg border p-4">
+                <h3 className="font-medium text-gray-900 mb-4">Strategic Partnerships</h3>
+                <div className="space-y-2">
+                {displayData.strategic_partnerships.map((partnership: string, index: number) => (
+                    <div key={index} className="text-gray-700 text-sm">
+                    {partnership}
+                    </div>
+                ))}
+                </div>
+            </div>
+            )
         )}
       </div>
 
       {/* Additional Info */}
-      {(companyInfo.business_model || companyInfo.company_stage) && (
-        <div className="bg-gray-50 rounded-lg p-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {companyInfo.business_model && (
-              <div>
+      <div className="bg-gray-50 rounded-lg p-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
                 <span className="text-gray-600 text-sm">Business Model:</span>
-                <div className="font-medium">{companyInfo.business_model}</div>
-              </div>
-            )}
-            {companyInfo.company_stage && (
-              <div>
+                {editMode ? <EditableField value={displayData.business_model || ''} type="textarea" onSave={(value) => handleSave({ ...displayData, business_model: value })} /> : <div className="font-medium">{displayData.business_model || 'N/A'}</div>}
+            </div>
+            <div>
                 <span className="text-gray-600 text-sm">Company Stage:</span>
-                <div className="font-medium">{companyInfo.company_stage}</div>
-              </div>
-            )}
-          </div>
+                {editMode ? <EditableField value={displayData.company_stage || ''} type="text" onSave={(value) => handleSave({ ...displayData, company_stage: value })} /> : <div className="font-medium">{displayData.company_stage || 'N/A'}</div>}
+            </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

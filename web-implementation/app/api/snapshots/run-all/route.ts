@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     
     // Start the scraper process in the background
     // Note: This assumes your scraper is in the parent directory
-    const scraperCommand = `cd .. && python3 -m src.main --all-tools`;
+    const scraperCommand = `cd .. && python -m src.main --all-tools`;
     
     console.log(`📊 Running scrapers for ${tools.length} tools...`);
     console.log(`Command: ${scraperCommand}`);

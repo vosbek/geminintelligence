@@ -33,7 +33,7 @@ export async function POST(
     `, [toolId]);
     
     // Start the scraper process for this specific tool
-    const scraperCommand = `cd .. && python3 -m src.main --tool-id ${toolId}`;
+    const scraperCommand = `cd .. && python -m src.main --tool-id ${toolId}`;
     
     console.log(`Command: ${scraperCommand}`);
     

@@ -21,7 +21,17 @@ export interface BasicInfo {
   category_classification: string;
 }
 
-export interface TechnicalDetails {
+export type TechnicalDetails = {
+  supported_languages?: string[];
+  frameworks_and_libraries?: string[];
+  ides?: string[];
+  model_integration_capabilities?: string;
+  context_window_size?: number;
+  code_quality_and_analysis?: string;
+  security_and_privacy_features?: string[];
+  deployment_options?: string[];
+  api_access?: boolean;
+  data_sources?: string[];
   feature_list: string[];
   technology_stack: string[];
   pricing_model: Record<string, any>;
@@ -63,7 +73,7 @@ export interface CompanyInfo {
   business_model?: string;
 }
 
-export interface CommunityMetrics {
+export type CommunityMetrics = {
   github_stars?: number;
   github_forks?: number;
   github_last_commit_date?: string;
@@ -71,15 +81,19 @@ export interface CommunityMetrics {
   reddit_sentiment_score?: number;
   hacker_news_mentions_count?: number;
   stackoverflow_questions_count?: number;
-  producthunt_ranking?: number;
   devto_articles_count?: number;
   npm_packages_count?: number;
-  npm_weekly_downloads?: number;
   pypi_packages_count?: number;
-  medium_articles_count?: number;
-  list_of_companies_using_tool: string[];
+  npm_weekly_downloads?: number;
+  youtube_mention_count?: number;
+  youtube_tutorial_count?: number;
+  youtube_sentiment?: number;
+  youtube_top_videos?: { title: string, url: string, publishedAt: string }[];
+  list_of_companies_using_tool?: string[];
+  testimonials?: string[];
+  producthunt_ranking?: number;
   case_studies?: string[];
-  testimonials: string[];
+  medium_articles_count?: number;
 }
 
 export interface ToolSnapshot {
@@ -126,10 +140,58 @@ export interface EnterprisePosition {
   updated_at: string;
 }
 
+export interface ToolURL {
+  url: string;
+  url_type: string;
+}
+
 export interface ToolDetailData {
   tool: AITool;
   snapshot?: ToolSnapshot;
   screenshots: Screenshot[];
   curated_data: CuratedData[];
   enterprise_position?: EnterprisePosition;
+  urls: ToolURL[];
+}
+
+// Curator-specific types
+export interface CuratedRepository {
+  id: number;
+  name: string;
+  github_url: string;
+  description: string;
+  category: string;
+  developer_relevance_score: number;
+  utility_score: number;
+  final_score: number;
+  star_count: number;
+  fork_count: number;
+  last_commit_date: string;
+  language: string;
+  mcp_compatible: boolean;
+  installation_method: string;
+  analysis_data: Record<string, any>;
+  discovered_at: string;
+  curation_run_id?: number;
+}
+
+export interface CurationRun {
+  id: number;
+  run_date: string;
+  repositories_analyzed: number;
+  repositories_curated: number;
+  min_stars: number;
+  days_back: number;
+  search_queries: string[];
+  completed: boolean;
+  duration_seconds?: number;
+  error_message?: string;
+}
+
+export interface CuratorConfig {
+  minStars: number;
+  daysBack: number;
+  developerRelevanceThreshold: number;
+  utilityThreshold: number;
+  debug: boolean;
 }

@@ -1,0 +1,184 @@
+=========================================
+==========      AI TOOLS      ===========
+=========================================
+
+--- Tool ID: 1 ---
+{
+  "id": 1,
+  "name": "Cursor",
+  "category": "AI_IDE",
+  "company_name": "Anysphere",
+  "run_status": "success",
+  "last_run": "2025-06-30 20:33:52.785188"
+}
+
+--- Tool ID: 2 ---
+{
+  "id": 2,
+  "name": "Claude Code",
+  "category": "AI_ASSISTANT",
+  "company_name": "Anthropic",
+  "run_status": "success",
+  "last_run": "2025-06-30 20:35:28.124171"
+}
+
+--- Tool ID: 3 ---
+{
+  "id": 3,
+  "name": "GitHub Copilot",
+  "category": "CODE_COMPLETION",
+  "company_name": "Microsoft",
+  "run_status": "success",
+  "last_run": "2025-06-30 20:38:42.103247"
+}
+
+--- Tool ID: 4 ---
+{
+  "id": 4,
+  "name": "Replit",
+  "category": "CLOUD_IDE",
+  "company_name": "Replit",
+  "run_status": "success",
+  "last_run": "2025-06-30 20:40:35.648784"
+}
+
+--- Tool ID: 5 ---
+{
+  "id": 5,
+  "name": "Augment",
+  "category": "AI_ASSISTANT",
+  "company_name": "Augment",
+  "run_status": "success",
+  "last_run": "2025-06-30 20:43:04.151870"
+}
+
+--- Tool ID: 6 ---
+{
+  "id": 6,
+  "name": "Zed",
+  "category": "EDITOR",
+  "company_name": "Zed Industries",
+  "run_status": "success",
+  "last_run": "2025-06-30 20:46:53.134958"
+}
+
+--- Tool ID: 7 ---
+{
+  "id": 7,
+  "name": "CLIne",
+  "category": "EDITOR",
+  "company_name": "Cline Bot Inc.",
+  "run_status": "success",
+  "last_run": "2025-06-30 20:50:57.531432"
+}
+
+--- Tool ID: 8 ---
+{
+  "id": 8,
+  "name": "Windsurf",
+  "category": "EDITOR",
+  "company_name": "Codeium.",
+  "run_status": "success",
+  "last_run": "2025-06-30 20:54:51.014167"
+}
+
+--- Tool ID: 9 ---
+{
+  "id": 9,
+  "name": "Roo Code",
+  "category": "EDITOR",
+  "company_name": "Community",
+  "run_status": "success",
+  "last_run": "2025-06-30 20:58:12.567028"
+}
+
+
+
+=========================================
+========    TOOL SNAPSHOTS     ========
+=========================================
+
+--- Snapshot for Tool ID: 1 ---
+{
+  "id": 1,
+  "tool_id": 1,
+  "snapshot_date": "2025-06-30 20:33:52.760604",
+  "processing_status": "processing",
+  "basic_info": {
+    "description": null,
+    "category_classification": null
+  },
+  "technical_details": {
+    "ides": [],
+    "api_access": null,
+    "feature_list": [],
+    "pricing_model": {},
+    "version_history": [],
+    "comparable_tools": [],
+    "technology_stack": [],
+    "update_frequency": null,
+    "security_features": [],
+    "deployment_options": [],
+    "market_positioning": null,
+    "context_window_size": null,
+    "roadmap_information": null,
+    "supported_languages": [],
+    "scalability_features": [],
+    "unique_differentiators": [],
+    "enterprise_capabilities": null,
+    "frameworks_and_libraries": [],
+    "integration_capabilities": [],
+    "code_quality_and_analysis": null,
+    "compliance_certifications": [],
+    "security_and_privacy_features": [],
+    "model_integration_capabilities": null
+  },
+  "company_info": {
+    "valuation": null,
+    "market_cap": null,
+    "stock_price": null,
+    "case_studies": [],
+    "testimonials": [],
+    "company_stage": null,
+    "founding_date": null,
+    "news_mentions": null,
+    "business_model": null,
+    "employee_count": null,
+    "funding_rounds": [],
+    "key_executives": [],
+    "parent_company": null,
+    "company_website": null,
+    "major_investors": [],
+    "revenue_estimate": null,
+    "last_funding_date": null,
+    "total_funding_amount": null,
+    "website_traffic_rank": null,
+    "employee_count_source": null,
+    "headquarters_location": null,
+    "strategic_partnerships": [],
+    "annual_recurring_revenue": null,
+    "list_of_companies_using_tool": []
+  },
+  "community_metrics": {
+    "case_studies": [],
+    "github_forks": null,
+    "github_stars": null,
+    "testimonials": [],
+    "reddit_mentions": null,
+    "youtube_sentiment": null,
+    "npm_packages_count": null,
+    "youtube_top_videos": [],
+    "producthunt_ranking": null,
+    "pypi_packages_count": null,
+    "devto_articles_count": null,
+    "npm_weekly_downloads": null,
+    "medium_articles_count": null,
+    "youtube_mention_count": null,
+    "reddit_sentiment_score": null,
+    "youtube_tutorial_count": null,
+    "github_last_commit_date": null,
+    "hacker_news_mentions_count": null,
+    "list_of_companies_using_tool": [],
+    "stackoverflow_questions_count": null
+  }
+}

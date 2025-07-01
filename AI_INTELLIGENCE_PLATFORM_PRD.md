@@ -8,7 +8,7 @@
 **Last Updated**: June 27, 2025  
 
 ### Mission Statement
-Build a production-ready, database-driven system that automatically collects, processes, and curates intelligence about AI developer tools from 11 different data sources using advanced LLM processing to provide comprehensive competitive intelligence.
+Build a production-ready, database-driven system that automatically collects, processes, and curates intelligence about AI developer tools from 12 different data sources using advanced LLM processing to provide comprehensive competitive intelligence.
 
 ---
 
@@ -21,7 +21,7 @@ Build a production-ready, database-driven system that automatically collects, pr
 4. **Scalable Architecture**: Support addition of new tools and data sources without system redesign
 
 ### Success Metrics
-- **Data Coverage**: 11/11 data sources operational and providing relevant intelligence
+- **Data Coverage**: 12/12 data sources operational and providing relevant intelligence
 - **Intelligence Quality**: 95%+ of tool snapshots contain structured, actionable intelligence (not null/empty)
 - **System Reliability**: 99%+ uptime with graceful degradation when individual APIs fail
 - **Processing Accuracy**: 90%+ relevance score for collected package and community data
@@ -50,9 +50,9 @@ Build a production-ready, database-driven system that automatically collects, pr
 
 ## 📊 Data Sources Specification
 
-### Target: 11 Comprehensive Data Sources
+### Target: 12 Comprehensive Data Sources
 
-#### Web & Community Intelligence (6 sources)
+#### Web & Community Intelligence (7 sources)
 1. **Website Content** (Firecrawl API)
    - Primary website scraping with markdown conversion
    - Data: Main content, features, pricing, company information
@@ -61,42 +61,46 @@ Build a production-ready, database-driven system that automatically collects, pr
    - Repository metrics and development activity  
    - Data: Stars, forks, issues, commit activity, topics, contributors, releases
 
-3. **Reddit Discussions** (PRAW)
+3. **YouTube Content** (YouTube Data API v3)
+   - Community tutorials, reviews, and feature demonstrations
+   - Data: Video counts, top video titles, URLs, channel names, publish dates
+
+4. **Reddit Discussions** (PRAW)
    - Community sentiment across 7 AI subreddits
    - Data: Post titles, scores, URLs, self-text, community sentiment
 
-4. **HackerNews** (Algolia HN Search API)
+5. **HackerNews** (Algolia HN Search API)
    - Technical community discussions and trending stories
    - Data: Story titles, points, comments, URLs, creation dates
 
-5. **StackOverflow** (Stack Exchange API)
+6. **StackOverflow** (Stack Exchange API)
    - Developer questions and technical adoption metrics
    - Data: Question titles, scores, view counts, answer counts, tags
 
-6. **Dev.to** (Public API)
+7. **Dev.to** (Public API)
    - Technical articles and tutorials from developer community
    - Data: Article titles, URLs, reactions, comments, reading time, tags
 
 #### Package Ecosystem Intelligence (2 sources)
-7. **NPM Registry** (NPM Registry API)
+8. **NPM Registry** (NPM Registry API)
    - JavaScript/Node.js package adoption and download metrics
    - Data: Package names, versions, descriptions, weekly downloads
 
-8. **PyPI Registry** (PyPI JSON API)
+9. **PyPI Registry** (PyPI JSON API)
    - Python package ecosystem and library usage
    - Data: Package info, versions, descriptions, authors, upload times
 
 #### Media & Market Intelligence (2 sources)
-9. **News Articles** (NewsAPI.org)
-   - Comprehensive news coverage and media mentions
-   - Data: Article titles, sources, URLs, publication dates, content previews
+10. **News Articles** (NewsAPI.org)
+    - Comprehensive news coverage and media mentions
+    - Data: Article titles, sources, URLs, publication dates, content previews
 
-10. **Medium** (RSS + API)
+11. **Medium** (RSS + API)
     - Technical thought leadership and company blog content
     - Data: Article mentions from major tech publications
 
 #### Financial Intelligence (1 source)
-11. **Stock Data** (Alpha Vantage API)
+12. **Stock Data** (Alpha Vantage API)
     - Financial metrics for publicly traded companies
     - Data: Stock prices, volumes, trading days, change percentages
 
@@ -111,7 +115,7 @@ Build a production-ready, database-driven system that automatically collects, pr
 - **Optimization**: Configured for maximum detail extraction
 
 ### Processing Workflow
-1. **Data Collection**: Execute all 11 scrapers in parallel for target tool
+1. **Data Collection**: Execute all 12 scrapers in parallel for target tool
 2. **Raw Data Compilation**: Aggregate all source data into comprehensive payload
 3. **LLM Analysis**: Process through Claude with detailed prompt including all data sources + JSON schema
 4. **Structured Output**: Parse JSON response into Pydantic models
@@ -147,6 +151,7 @@ Build a production-ready, database-driven system that automatically collects, pr
     "github_forks": 100,
     "reddit_mentions": 50,
     "npm_weekly_downloads": 1000,
+    "youtube_video_count": 20,
     "list_of_companies_using_tool": ["companies"],
     "case_studies": ["URLs and titles"],
     "testimonials": ["user quotes"]
@@ -160,13 +165,13 @@ Build a production-ready, database-driven system that automatically collects, pr
 
 ### Phase 1: Core Infrastructure ✅ COMPLETE
 - [x] Database schema with JSONB support
-- [x] 11 data source scrapers implemented
+- [x] 12 data source scrapers implemented
 - [x] Strands agent integration with Claude 3.5 Sonnet
 - [x] Pydantic models for structured data validation
 - [x] Error handling and logging infrastructure
 
 ### Phase 2: Data Quality & Processing ✅ COMPLETE  
-- [x] **CRITICAL FIX**: LLM prompt includes all 11 data sources + JSON schema
+- [x] **CRITICAL FIX**: LLM prompt includes all 12 data sources + JSON schema
 - [x] **CRITICAL FIX**: Package search relevance filtering (PyPI/NPM)
 - [x] Enhanced GitHub integration with comprehensive metrics
 - [x] Improved Dev.to scraper with multi-strategy search
@@ -175,7 +180,7 @@ Build a production-ready, database-driven system that automatically collects, pr
 ### Phase 3: Validation & Testing 🔄 IN PROGRESS
 - [ ] **HIGH PRIORITY**: Test all fixes on AWS-enabled machine
 - [ ] **HIGH PRIORITY**: Verify structured intelligence extraction works end-to-end
-- [ ] **HIGH PRIORITY**: Validate data quality across all 11 sources
+- [ ] **HIGH PRIORITY**: Validate data quality across all 12 sources
 - [ ] Medium API partnership workaround implementation
 - [ ] Automated data validation pipeline
 
@@ -222,10 +227,10 @@ Build a production-ready, database-driven system that automatically collects, pr
 - **Storage**: SSD recommended for database performance
 
 ### API Dependencies
-- **Core APIs**: Firecrawl, GitHub, NewsAPI, Alpha Vantage, ProductHunt
+- **Core APIs**: Firecrawl, GitHub, NewsAPI, Alpha Vantage, ProductHunt, YouTube
 - **Reddit**: OAuth2 client credentials
 - **AWS Bedrock**: Model access for Claude 3.5 Sonnet
-- **Public APIs**: HackerNews (Algolia), StackOverflow, Dev.to, NPM, PyPI
+- **Public APIs**: HackerNews (StackOverflow), Dev.to, NPM, PyPI
 
 ---
 
@@ -249,7 +254,7 @@ Build a production-ready, database-driven system that automatically collects, pr
 
 ### Immediate Actions (Week 1)
 1. **Test Core Fixes**: Validate LLM processing and data quality improvements
-2. **Performance Validation**: Ensure all 11 data sources provide quality intelligence
+2. **Performance Validation**: Ensure all 12 data sources provide quality intelligence
 3. **Documentation**: Update operational procedures and troubleshooting guides
 
 ### Short Term (Month 1)
@@ -267,7 +272,7 @@ Build a production-ready, database-driven system that automatically collects, pr
 ## 📝 Success Criteria
 
 ### Technical KPIs
-- **Data Coverage**: 11/11 data sources operational ✅
+- **Data Coverage**: 12/12 data sources operational ✅
 - **System Reliability**: Robust error handling with graceful degradation ✅  
 - **Code Quality**: Modular architecture with clean separation ✅
 - **Performance**: Optimized LLM configuration for comprehensive analysis ✅
@@ -279,6 +284,6 @@ Build a production-ready, database-driven system that automatically collects, pr
 - **Maintainability**: Clean codebase enabling rapid development ✅
 
 ### Definition of Done
-✅ **COMPLETE**: Core infrastructure with 11 functional data sources  
+✅ **COMPLETE**: Core infrastructure with 12 functional data sources  
 🔄 **IN PROGRESS**: Quality validation and end-to-end testing  
 📋 **PLANNED**: Web interface and advanced analytics features
